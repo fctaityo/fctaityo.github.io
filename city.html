@@ -38,6 +38,40 @@ body{
   white-space:nowrap;
 }
 
+/* ===== 中央モード表示 ===== */
+.mode-indicator{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:13px;
+  letter-spacing:2px;
+  padding:6px 14px;
+  border:1px solid #333;
+  background:#0f0f0f;
+  color:#aaa;
+}
+
+/* RPG */
+body.mode-rpg .mode-indicator{
+  color:#ffb8a8;
+  border-color:#7a3b2b;
+  box-shadow:0 0 12px rgba(255,120,80,0.35);
+}
+
+/* AI */
+body.mode-ai .mode-indicator{
+  color:#8ec5ff;
+  border-color:#2b4d7a;
+  box-shadow:0 0 12px rgba(100,160,255,0.35);
+}
+
+/* VR */
+body.mode-vr .mode-indicator{
+  color:#8fffd0;
+  border-color:#1f6b4d;
+  box-shadow:0 0 12px rgba(80,255,180,0.35);
+}
+
 /* 右ナビ */
 .nav{
   display:flex;
@@ -102,19 +136,25 @@ body.mode-ai{
   background:#0b1020;
   color:#cfe3ff;
 }
-body.mode-ai .panel{ border-color:#2b4d7a; }
+body.mode-ai .panel{
+  border-color:#2b4d7a;
+}
 
 body.mode-vr{
   background:#061a14;
   color:#bfffe5;
 }
-body.mode-vr .panel{ border-color:#1f6b4d; }
+body.mode-vr .panel{
+  border-color:#1f6b4d;
+}
 
 body.mode-rpg{
   background:#1a0f0f;
   color:#ffe0c8;
 }
-body.mode-rpg .panel{ border-color:#7a3b2b; }
+body.mode-rpg .panel{
+  border-color:#7a3b2b;
+}
 
 </style>
 </head>
@@ -125,6 +165,11 @@ body.mode-rpg .panel{ border-color:#7a3b2b; }
 
   <div class="logo" onclick="location.href='index.html'">
     FCTAITYO CITY
+  </div>
+
+  <!-- ★現在モード表示 -->
+  <div class="mode-indicator" id="modeIndicator">
+    SYSTEM MODE
   </div>
 
   <div class="nav">
@@ -171,6 +216,7 @@ const cityType = params.get("city") || "cyber";
 
 /* ===== ナビ発光制御 ===== */
 function setActiveNav(m){
+
   document.getElementById("nav-rpg").classList.remove("active");
   document.getElementById("nav-ai").classList.remove("active");
   document.getElementById("nav-vr").classList.remove("active");
@@ -178,7 +224,30 @@ function setActiveNav(m){
   document.getElementById("nav-" + m).classList.add("active");
 }
 
+/* ===== モード表示 ===== */
+function setModeIndicator(m){
+
+  let text = "SYSTEM MODE";
+
+  switch(m){
+    case "rpg":
+      text = "RPG MODE ACTIVE";
+      break;
+
+    case "ai":
+      text = "AI MODE ACTIVE";
+      break;
+
+    case "vr":
+      text = "VR MODE ACTIVE";
+      break;
+  }
+
+  document.getElementById("modeIndicator").innerText = text;
+}
+
 setActiveNav(mode);
+setModeIndicator(mode);
 
 document.body.classList.add("mode-" + mode);
 
@@ -218,10 +287,15 @@ function startVRLog(type){
     const log = list[i % list.length];
     const time = new Date().toLocaleTimeString();
 
-    document.getElementById("vrOut").innerText +=
-`\n[${time}] ${log}`;
+    const vrOut = document.getElementById("vrOut");
+
+    vrOut.innerText += `\n[${time}] ${log}`;
+
+    /* ★自動スクロール */
+    vrOut.scrollTop = vrOut.scrollHeight;
 
     i++;
+
   }, 2000);
 }
 
@@ -236,15 +310,19 @@ function setCity(type){
   let aiResult = "";
 
   switch(type){
+
     case "cyber":
       aiResult = "NEON HIGH-DENSITY CITY GENERATED";
       break;
+
     case "real":
       aiResult = "REALISTIC URBAN STRUCTURE GENERATED";
       break;
+
     case "mixed":
       aiResult = "HYBRID CITY STRUCTURE GENERATED";
       break;
+
     default:
       aiResult = "UNKNOWN CITY STATE";
   }
