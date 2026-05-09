@@ -155,43 +155,56 @@ async function selectCity(key){
 }
 
 /* =========================
-   STATE FETCH（唯一の真実）
+   STATE FETCH
 ========================= */
 async function refreshState(){
 
   try{
     const res = await fetch(API + "/state");
-    const state = await res.json();
+    const data = await res.json();
+
+    const memSize =
+      data.memorySize ??
+      data.debug?.memorySize ??
+      "unknown";
+
+    const lastSync =
+      data.lastSync ?? "N/A";
+
+    const recent =
+      data.recentMemory ?? "NO DATA";
+
+    const profile = data.profile || {};
 
     document.getElementById("stateView").innerText =
 `◆ SERVER CONTROLLED CITY
 
 CURRENT CITY:
-${state.city}
+${data.city || "unknown"}
 
 STATUS:
 ACTIVE NODE STREAM
 
 LAST SYNC:
-${state.lastSync || "N/A"}
+${lastSync}
 
 MEMORY SIZE:
-${state.memorySize}
+${memSize}
 
 RECENT MEMORY:
-${state.recentMemory || "NO DATA"}
+${recent}
 
 PROFILE:
-${state.profile?.state || ""}
+${profile.state || ""}
 
 BEHAVIOR:
-${state.profile?.behavior || ""}
+${profile.behavior || ""}
 
 SOURCE: /state
 `;
 
     document.getElementById("syncState").innerText =
-`SYNC: ${state.city} / MEM:${state.memorySize}`;
+`SYNC: ${data.city || "?"} / MEM:${memSize}`;
 
   }catch(e){
     addLog("STATE ERROR: " + e.message);
@@ -204,11 +217,9 @@ SOURCE: /state
 function addLog(text){
 
   const el = document.getElementById("logBox");
-
   const time = new Date().toLocaleTimeString();
 
   el.innerText += `[${time}] ${text}\n`;
-
   el.scrollTop = el.scrollHeight;
 }
 
