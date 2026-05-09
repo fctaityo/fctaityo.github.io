@@ -30,7 +30,6 @@ body{
   box-sizing:border-box;
 }
 
-/* 左ロゴ */
 .logo{
   font-weight:bold;
   letter-spacing:2px;
@@ -38,46 +37,26 @@ body{
   white-space:nowrap;
 }
 
-/* ===== 中央モード表示 ===== */
+/* ===== MODE ===== */
 .mode-indicator{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
   font-size:13px;
-  letter-spacing:2px;
   padding:6px 14px;
   border:1px solid #333;
   background:#0f0f0f;
   color:#aaa;
 }
 
-/* RPG */
-body.mode-rpg .mode-indicator{
-  color:#ffb8a8;
-  border-color:#7a3b2b;
-  box-shadow:0 0 12px rgba(255,120,80,0.35);
-}
+body.mode-rpg .mode-indicator{ color:#ffb8a8; border-color:#7a3b2b; }
+body.mode-ai .mode-indicator{ color:#8ec5ff; border-color:#2b4d7a; }
+body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
 
-/* AI */
-body.mode-ai .mode-indicator{
-  color:#8ec5ff;
-  border-color:#2b4d7a;
-  box-shadow:0 0 12px rgba(100,160,255,0.35);
-}
-
-/* VR */
-body.mode-vr .mode-indicator{
-  color:#8fffd0;
-  border-color:#1f6b4d;
-  box-shadow:0 0 12px rgba(80,255,180,0.35);
-}
-
-/* 右ナビ */
+/* ===== NAV ===== */
 .nav{
   display:flex;
   gap:10px;
-  align-items:center;
-  white-space:nowrap;
 }
 
 .nav a{
@@ -86,17 +65,9 @@ body.mode-vr .mode-indicator{
   font-size:13px;
   padding:6px 10px;
   border:1px solid #333;
-  transition:0.2s;
 }
 
-/* ★アクティブ発光 */
-.nav a.active{
-  color:#fff;
-  border-color:#8d5cff;
-  box-shadow:0 0 10px rgba(141,92,255,0.6);
-}
-
-/* ===== メインレイアウト ===== */
+/* ===== LAYOUT ===== */
 .wrap{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
@@ -110,13 +81,7 @@ body.mode-vr .mode-indicator{
   overflow:auto;
 }
 
-h2{
-  font-size:18px;
-  margin-bottom:10px;
-}
-
 button{
-  display:block;
   margin:10px 0;
   padding:10px;
   background:#222;
@@ -130,36 +95,15 @@ pre{
   color:#aaa;
 }
 
-/* ★VRログ専用スクロール */
-#vrOut{
-  height:calc(100vh - 180px);
-  overflow-y:auto;
-}
-
-/* ===== MODE THEME ===== */
-
-body.mode-ai{
-  background:#0b1020;
-  color:#cfe3ff;
-}
-body.mode-ai .panel{
-  border-color:#2b4d7a;
-}
-
-body.mode-vr{
-  background:#061a14;
-  color:#bfffe5;
-}
-body.mode-vr .panel{
-  border-color:#1f6b4d;
-}
-
-body.mode-rpg{
-  background:#1a0f0f;
-  color:#ffe0c8;
-}
-body.mode-rpg .panel{
-  border-color:#7a3b2b;
+/* ===== MEMO UI ===== */
+textarea{
+  width:100%;
+  height:120px;
+  margin-top:15px;
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+  padding:10px;
 }
 
 </style>
@@ -173,15 +117,12 @@ body.mode-rpg .panel{
     FCTAITYO CITY
   </div>
 
-  <!-- ★現在モード表示 -->
-  <div class="mode-indicator" id="modeIndicator">
-    SYSTEM MODE
-  </div>
+  <div class="mode-indicator" id="modeIndicator">MODE</div>
 
   <div class="nav">
-    <a id="nav-rpg" href="city.html?mode=rpg">RPG MODE</a>
-    <a id="nav-ai" href="city.html?mode=ai">AI MODE</a>
-    <a id="nav-vr" href="city.html?mode=vr">VR MODE</a>
+    <a href="city.html?mode=rpg">RPG</a>
+    <a href="city.html?mode=ai">AI</a>
+    <a href="city.html?mode=vr">VR</a>
   </div>
 
 </div>
@@ -197,17 +138,23 @@ body.mode-rpg .panel{
 <button onclick="setCity('mixed')">MIX CITY</button>
 
 <pre id="rpgOut"></pre>
+
+<!-- ★メモ機能 -->
+<textarea id="rpgMemo" placeholder="RPGメモを書く"></textarea>
+<button onclick="saveMemo()">SAVE</button>
+<button onclick="loadMemo()">LOAD</button>
+
 </div>
 
 <!-- AI -->
 <div class="panel">
-<h2>🟦 AI NODE / GENERATION</h2>
+<h2>🟦 AI NODE</h2>
 <pre id="aiOut"></pre>
 </div>
 
 <!-- VR -->
 <div class="panel">
-<h2>🟩 VR NODE / OBSERVATION</h2>
+<h2>🟩 VR NODE</h2>
 <pre id="vrOut"></pre>
 </div>
 
@@ -216,143 +163,40 @@ body.mode-rpg .panel{
 <script>
 
 const params = new URLSearchParams(location.search);
-
 const mode = params.get("mode") || "rpg";
 const cityType = params.get("city") || "cyber";
 
-/* ===== ナビ発光制御 ===== */
-function setActiveNav(m){
-
-  document.getElementById("nav-rpg").classList.remove("active");
-  document.getElementById("nav-ai").classList.remove("active");
-  document.getElementById("nav-vr").classList.remove("active");
-
-  document.getElementById("nav-" + m).classList.add("active");
-}
-
-/* ===== モード表示 ===== */
-function setModeIndicator(m){
-
-  let text = "SYSTEM MODE";
-
-  switch(m){
-    case "rpg":
-      text = "RPG MODE ACTIVE";
-      break;
-
-    case "ai":
-      text = "AI MODE ACTIVE";
-      break;
-
-    case "vr":
-      text = "VR MODE ACTIVE";
-      break;
-  }
-
-  document.getElementById("modeIndicator").innerText = text;
-}
-
-setActiveNav(mode);
-setModeIndicator(mode);
-
 document.body.classList.add("mode-" + mode);
-
-let vrInterval = null;
-let vrActive = false;
-let cityState = "cyber";
-
-function startVRLog(type){
-
-  if(!vrActive) return;
-
-  clearInterval(vrInterval);
-
-  const logs = {
-    cyber: [
-      "neon signal fluctuation detected",
-      "urban network density rising",
-      "cyber district pulse unstable"
-    ],
-    real: [
-      "traffic flow stabilizing",
-      "population distribution normalized",
-      "infrastructure load balanced"
-    ],
-    mixed: [
-      "hybrid zone synchronization active",
-      "dual-layer city pattern detected",
-      "environmental mismatch corrected"
-    ]
-  };
-
-  const list = logs[type] || logs.cyber;
-  let i = 0;
-
-  vrInterval = setInterval(() => {
-
-    const log = list[i % list.length];
-    const time = new Date().toLocaleTimeString();
-
-    const vrOut = document.getElementById("vrOut");
-
-    vrOut.innerText += `\n[${time}] ${log}`;
-
-    /* ★自動スクロール */
-    vrOut.scrollTop = vrOut.scrollHeight;
-
-    i++;
-
-  }, 2000);
-}
+document.getElementById("modeIndicator").innerText = mode.toUpperCase() + " MODE";
 
 function setCity(type){
 
-  cityState = type;
-
   document.getElementById("rpgOut").innerText =
-`CURRENT DESIGN:
-→ ${type.toUpperCase()} CITY`;
-
-  let aiResult = "";
-
-  switch(type){
-
-    case "cyber":
-      aiResult = "NEON HIGH-DENSITY CITY GENERATED";
-      break;
-
-    case "real":
-      aiResult = "REALISTIC URBAN STRUCTURE GENERATED";
-      break;
-
-    case "mixed":
-      aiResult = "HYBRID CITY STRUCTURE GENERATED";
-      break;
-
-    default:
-      aiResult = "UNKNOWN CITY STATE";
-  }
+`CITY:
+→ ${type.toUpperCase()}`;
 
   document.getElementById("aiOut").innerText =
-`STATUS: RUNNING
-
-OUTPUT:
-${aiResult}`;
+`AI OUTPUT:
+${type} processed`;
 
   document.getElementById("vrOut").innerText =
-`OBSERVATION LOG
-
-CITY TYPE: ${type}
---- LIVE FEED START ---`;
-
-  vrActive = (mode === "vr");
-
-  if(vrActive){
-    startVRLog(type);
-  } else {
-    clearInterval(vrInterval);
-  }
+`VR LOG:
+tracking ${type}`;
 }
+
+/* ===== MEMO ===== */
+function saveMemo(){
+  localStorage.setItem("rpgMemo",
+    document.getElementById("rpgMemo").value
+  );
+}
+
+function loadMemo(){
+  document.getElementById("rpgMemo").value =
+    localStorage.getItem("rpgMemo") || "";
+}
+
+loadMemo();
 
 setCity(cityType);
 
