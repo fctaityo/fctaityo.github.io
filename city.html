@@ -10,6 +10,7 @@ body{
   background:#0a0a0a;
   color:#fff;
   font-family:sans-serif;
+  overflow-x:hidden; /* ★横はみ出し完全防止 */
 }
 
 /* ===== TOP BAR ===== */
@@ -40,20 +41,23 @@ body{
 /* 右ナビ */
 .nav{
   display:flex;
-  gap:12px;
+  gap:10px;
   align-items:center;
   flex-shrink:0;
   white-space:nowrap;
+  max-width:60%;
+  overflow:hidden;
 }
 
 .nav a{
   color:#fff;
   text-decoration:none;
-  font-size:14px;
-  padding:6px 10px;
+  font-size:13px;
+  padding:6px 8px;
   border:1px solid #333;
   transition:0.2s;
   white-space:nowrap;
+  flex-shrink:0;
 }
 
 .nav a:hover{
