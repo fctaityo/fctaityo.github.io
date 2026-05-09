@@ -1,0 +1,663 @@
+# ECHOES MALL - ショッピングサイト トップページ（HTML + CSS）
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECHOES MALL</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #f4f5f7;
+      color: #222;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1500px;
+      margin: auto;
+    }
+
+    /* Header */
+
+    header {
+      background: #0e0f14;
+      color: white;
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #7c5cff;
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 700px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 55px 16px 25px;
+      font-size: 1rem;
+    }
+
+    .search-box button {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: #7c5cff;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .header-menu {
+      display: flex;
+      gap: 25px;
+      font-size: 0.95rem;
+    }
+
+    /* Navigation */
+
+    nav {
+      background: white;
+      border-bottom: 1px solid #e2e2e2;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      padding: 18px 0;
+      overflow-x: auto;
+    }
+
+    .nav-inner a {
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: 2fr 0.7fr;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .hero-main {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      min-height: 550px;
+      background:
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.35)),
+        url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1600&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: end;
+      padding: 50px;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: #8f65ff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #e6e6e6;
+    }
+
+    .hero button {
+      border: none;
+      background: white;
+      color: #111;
+      padding: 16px 30px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .hero-side {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .side-card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .side-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .point {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #8a5fff;
+    }
+
+    .sale-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .sale-item img {
+      width: 110px;
+      border-radius: 18px;
+    }
+
+    .price {
+      color: #ff2c66;
+      font-weight: 900;
+      font-size: 1.4rem;
+    }
+
+    /* Categories */
+
+    .categories {
+      margin-top: 30px;
+      background: white;
+      border-radius: 30px;
+      padding: 25px;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 20px;
+    }
+
+    .cat-item {
+      text-align: center;
+      padding: 20px 10px;
+      border-radius: 20px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .cat-item:hover {
+      background: #f2eeff;
+      transform: translateY(-3px);
+    }
+
+    .cat-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #8d66ff, #6d47f5);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: auto auto 15px;
+    }
+
+    /* Products */
+
+    .section-title {
+      margin: 45px 0 25px;
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: 0.25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-image {
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 22px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #8f65ff;
+      color: white;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      color: #ff2c66;
+      font-weight: 900;
+    }
+
+    footer {
+      margin-top: 80px;
+      background: #0e0f14;
+      color: white;
+      padding: 60px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .footer-grid h4 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-grid ul {
+      list-style: none;
+    }
+
+    .footer-grid li {
+      margin-bottom: 12px;
+      color: #bbb;
+    }
+
+    @media (max-width: 1200px) {
+      .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .categories {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-direction: column;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        padding: 30px;
+      }
+
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <div class="logo">ECHOES <span>MALL</span></div>
+
+      <div class="search-box">
+        <input type="text" placeholder="キーワード・商品名で探す">
+        <button>🔍</button>
+      </div>
+
+      <div class="header-menu">
+        <a href="#">ログイン</a>
+        <a href="#">お気に入り</a>
+        <a href="#">カート</a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#">カテゴリー</a>
+      <a href="#">新着</a>
+      <a href="#">ランキング</a>
+      <a href="#">セール</a>
+      <a href="#">特集</a>
+      <a href="#">ブランド</a>
+      <a href="#">ガジェット</a>
+      <a href="#">ファッション</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <section class="hero">
+
+      <div class="hero-main">
+        <div class="hero-content">
+          <div class="hero-tag">特集</div>
+          <h1>ユキと巡る<br>ミナトシティ特集</h1>
+          <p>
+            サイバーパンク都市をイメージした、
+            近未来アニメファッション＆限定アイテム。
+          </p>
+          <button>特集ページを見る</button>
+        </div>
+      </div>
+
+      <div class="hero-side">
+
+        <div class="side-card">
+          <h3>新規会員登録で</h3>
+          <div class="point">500</div>
+          <p>ポイントプレゼント！</p>
+        </div>
+
+        <div class="side-card">
+          <h3>本日限定タイムセール</h3>
+
+          <div class="sale-item">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="">
+
+            <div>
+              <p>エコーズ ランナーX1</p>
+              <div class="price">¥4,980</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="categories">
+
+      <div class="cat-item">
+        <div class="cat-icon">👕</div>
+        <p>ファッション</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">🎧</div>
+        <p>ガジェット</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">🎮</div>
+        <p>ゲーム</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">💄</div>
+        <p>コスメ</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">👜</div>
+        <p>雑貨</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">⌚</div>
+        <p>アクセサリー</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">📱</div>
+        <p>スマホ</p>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-icon">🎁</div>
+        <p>ギフト</p>
+      </div>
+
+    </section>
+
+    <h2 class="section-title">注目アイテム</h2>
+
+    <section class="product-grid">
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1200&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="product-info">
+          <div class="badge">NEW</div>
+          <div class="product-title">ユキモデル ジャケット</div>
+          <div class="product-price">¥12,800</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="product-info">
+          <div class="badge">SALE</div>
+          <div class="product-title">ハイカットスニーカー X1</div>
+          <div class="product-price">¥9,800</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="product-info">
+          <div class="badge">HOT</div>
+          <div class="product-title">ゲーミングヘッドセット</div>
+          <div class="product-price">¥7,980</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="product-info">
+          <div class="badge">NEW</div>
+          <div class="product-title">シティユース バックパック</div>
+          <div class="product-price">¥6,480</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" alt="">
+        </div>
+
+        <div class="product-info">
+          <div class="badge">LIMITED</div>
+          <div class="product-title">アニメスタイル アクセセット</div>
+          <div class="product-price">¥4,280</div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+
+      <div>
+        <h4>ECHOES MALL</h4>
+        <ul>
+          <li>会社情報</li>
+          <li>採用情報</li>
+          <li>ニュース</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>サポート</h4>
+        <ul>
+          <li>お問い合わせ</li>
+          <li>配送について</li>
+          <li>返品・交換</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>ガイド</h4>
+        <ul>
+          <li>初めての方へ</li>
+          <li>会員登録</li>
+          <li>利用規約</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>SNS</h4>
+        <ul>
+          <li>X / Twitter</li>
+          <li>Instagram</li>
+          <li>YouTube</li>
+        </ul>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
+```
+
+## ポイント
+
+* 1ファイルだけで動く構成
+* レスポンシブ対応
+* 近未来アニメ系ECデザイン
+* CSS込みなのでそのまま保存して動作可能
+* `index.html` として保存すればOK
+* 画像URLを差し替えればオリジナル化可能
+
+## 次にできること
+
+* React / Next.js 化
+* Tailwind CSS 化
+* 商品カルーセル追加
+* ログイン画面実装
+* カート機能
+* Firebase連携
+* BOOTH風UI化
+* アニメ調3D背景動画化
+* ダークモード切替
