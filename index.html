@@ -56,7 +56,7 @@ header{
   padding:18px 0;
 }
 
-/* ロゴ（左上＝ホーム） */
+/* ロゴ */
 .logo{
   font-family:'Orbitron';
   letter-spacing:5px;
@@ -65,9 +65,11 @@ header{
   cursor:pointer;
 }
 
-.logo span{color:var(--main);}
+.logo span{
+  color:var(--main);
+}
 
-/* ===== NAV（右上操作UI） ===== */
+/* ===== NAV ===== */
 
 nav{
   display:flex;
@@ -108,7 +110,7 @@ nav a:hover{
   margin-top:10px;
 }
 
-/* ===== NODE GRID ===== */
+/* ===== GRID ===== */
 
 .grid{
   display:grid;
@@ -129,6 +131,7 @@ nav a:hover{
 .node:hover{
   transform:translateY(-6px);
   border-color:var(--main);
+  box-shadow:0 0 30px rgba(141,92,255,0.15);
 }
 
 .node-img{
@@ -144,6 +147,7 @@ nav a:hover{
 
 .node h3{
   margin-bottom:6px;
+  font-size:1.3rem;
 }
 
 .node p{
@@ -174,13 +178,14 @@ nav a:hover{
 .panel h2{
   font-family:'Orbitron';
   margin-bottom:20px;
+  font-size:2rem;
 }
 
 .panel pre{
   white-space:pre-wrap;
   color:#ddd;
-  font-size:0.9rem;
-  line-height:1.7;
+  font-size:0.95rem;
+  line-height:1.8;
 }
 
 .close{
@@ -189,6 +194,25 @@ nav a:hover{
   right:15px;
   cursor:pointer;
   color:#aaa;
+  font-size:1.2rem;
+}
+
+.enter-btn{
+  margin-top:24px;
+  width:100%;
+  padding:14px;
+  background:#181818;
+  color:#fff;
+  border:1px solid #333;
+  cursor:pointer;
+  font-family:'Orbitron';
+  letter-spacing:2px;
+  transition:0.2s;
+}
+
+.enter-btn:hover{
+  border-color:var(--main);
+  box-shadow:0 0 20px rgba(141,92,255,0.3);
 }
 
 </style>
@@ -199,12 +223,10 @@ nav a:hover{
 <header>
 <div class="container header-inner">
 
-  <!-- 左上：ホーム -->
   <div class="logo" onclick="location.href='index.html'">
     FCTAITYO <span>CITY</span>
   </div>
 
-  <!-- 右上：ノード操作UI -->
   <nav>
     <a href="city.html?mode=rpg">RPG NODE</a>
     <a href="city.html?mode=ai">AI NODE</a>
@@ -217,33 +239,52 @@ nav a:hover{
 <main class="container">
 
 <section class="hero">
+
   <h1>NODE SYSTEM CITY</h1>
-  <p>クリックで都市ノードを開くインタラクティブUI</p>
+  <p>クリックで都市ノードへアクセス</p>
 
   <div class="grid">
 
+    <!-- RPG -->
     <div class="node" onclick="openNode('rpg')">
-      <div class="node-img" style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop');"></div>
+
+      <div class="node-img"
+      style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
       <div class="node-body">
         <h3>不存在RPG計画</h3>
-        <p>都市型オープンワールド設計</p>
+        <p>世界構築 / 都市設計 / シナリオ管理</p>
       </div>
+
     </div>
 
-    <div class="node" onclick="location.href='city.html?mode=ai'">
-      <div class="node-img" style="background-image:url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1400&auto=format&fit=crop');"></div>
+    <!-- AI -->
+    <div class="node" onclick="openNode('ai')">
+
+      <div class="node-img"
+      style="background-image:url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
       <div class="node-body">
         <h3>AI NODE</h3>
-        <p>都市生成エンジン / UI実験区画</p>
+        <p>生成エンジン / 実験区画 / SYSTEM CORE</p>
       </div>
+
     </div>
 
+    <!-- VR -->
     <div class="node" onclick="openNode('vr')">
-      <div class="node-img" style="background-image:url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1400&auto=format&fit=crop');"></div>
+
+      <div class="node-img"
+      style="background-image:url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
       <div class="node-body">
         <h3>VR NODE</h3>
-        <p>非言語コミュニケーション解析</p>
+        <p>観測ログ / 非言語解析 / SOCIAL SCAN</p>
       </div>
+
     </div>
 
   </div>
@@ -253,12 +294,18 @@ nav a:hover{
 </main>
 
 <!-- PANEL -->
+
 <div class="panel" id="panel">
 
-<div class="close" onclick="closePanel()">✕</div>
+  <div class="close" onclick="closePanel()">✕</div>
 
-<h2 id="panelTitle"></h2>
-<pre id="panelBody"></pre>
+  <h2 id="panelTitle"></h2>
+
+  <pre id="panelBody"></pre>
+
+  <button class="enter-btn" id="enterBtn">
+    ENTER NODE
+  </button>
 
 </div>
 
@@ -266,69 +313,84 @@ nav a:hover{
 
 const data = {
 
-rpg: {
+rpg:{
 title:"不存在RPG計画",
 body:`
 ■ ROLE
-都市型オープンワールド設計区画
+WORLD DESIGN SYSTEM
 
 ■ FUNCTION
 - 世界観構築
-- UI設計
-- 架空都市シナリオ生成
+- 都市設計
+- NPC構造管理
+- クエスト設計
 
 ■ STATUS
 ARCHITECT MODE ACTIVE
-`
+`,
+link:"city.html?mode=rpg"
 },
 
-ai: {
+ai:{
 title:"AI NODE",
 body:`
 ■ STATUS
-RUNNING: CITY GENERATION CORE
+RUNNING : CITY GENERATION CORE
 
 ■ ROLE
-都市構造生成エンジン
+SYSTEM CONTROL LAYER
 
 ■ FUNCTION
-- プロンプト生成ログ
-- UIレイアウト実験
-- 仮想都市設計
+- PROMPT LAB
+- IMAGE PIPELINE
+- CITY GENERATOR
+- NEURAL TEST
 
 ■ OUTPUT
-・デジタル都市構造案
-・広告UIプロトタイプ
-・架空空間設計ログ
-`
+・仮想都市生成
+・UI実験
+・広告構造生成
+`,
+link:"city.html?mode=ai"
 },
 
-vr: {
+vr:{
 title:"VR NODE",
 body:`
 ■ ROLE
-非言語コミュニケーション解析
+OBSERVATION SYSTEM
 
 ■ FUNCTION
-- VRCログ分析
-- 人間関係パターン観測
-- 行動データ収集
+- LIVE SOCIAL SCAN
+- VRC ANALYSIS
+- EMOTION TRACE
+- INSTANCE MONITOR
 
 ■ STATUS
 OBSERVATION MODE ACTIVE
-`
+`,
+link:"city.html?mode=vr"
 }
 
 };
 
 function openNode(key){
-document.getElementById("panel").classList.add("active");
-document.getElementById("panelTitle").innerText = data[key].title;
-document.getElementById("panelBody").innerText = data[key].body;
+
+  document.getElementById("panel").classList.add("active");
+
+  document.getElementById("panelTitle").innerText =
+  data[key].title;
+
+  document.getElementById("panelBody").innerText =
+  data[key].body;
+
+  document.getElementById("enterBtn").onclick = () => {
+    location.href = data[key].link;
+  };
 }
 
 function closePanel(){
-document.getElementById("panel").classList.remove("active");
+  document.getElementById("panel").classList.remove("active");
 }
 
 </script>
