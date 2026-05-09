@@ -119,6 +119,13 @@ BEHAVIOR:
 // 初期状態
 setCity("cyber");
 
+const params = new URLSearchParams(window.location.search);
+const mode = params.get("mode");
+
+if(mode){
+  setCity(mode);
+}
+
 </script>
 
 </body>
