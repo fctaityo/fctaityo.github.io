@@ -8,7 +8,7 @@
 body{
   margin:0;
   background:#0a0a0a;
-  color:#fff;
+  color:#ddd;
   font-family:sans-serif;
   overflow-x:hidden;
 }
@@ -79,11 +79,6 @@ textarea{
 }
 
 /* ===== SIMPLE THEME ===== */
-body{
-  background:#0a0a0a;
-  color:#ddd;
-}
-
 .panel{
   border-color:#333;
 }
@@ -134,22 +129,37 @@ body{
 
 const MEMO_KEY = "memo_rpg";
 
-/* =========================
-   VR LOG CORE（修正ポイント）
-========================= */
+/* ★VRログ永続キー */
+const VR_KEY = "vr_history";
 
+/* ===== VR LOG CORE（永続化版） ===== */
 function pushVRLog(text){
-  const vr = document.getElementById("vrOut");
-  const time = new Date().toLocaleTimeString();
 
-  // ★修正：上書きしない（リセット禁止）
-  vr.innerText += `\n[${time}] ${text}`;
+  const time = new Date().toLocaleTimeString();
+  const entry = `[${time}] ${text}`;
+
+  // 既存ログ取得
+  let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
+
+  // 追加
+  logs.push(entry);
+
+  // 保存
+  localStorage.setItem(VR_KEY, JSON.stringify(logs));
+
+  // 表示更新
+  renderVR();
 }
 
-/* =========================
-   CITY FLOW
-========================= */
+/* ===== VR描画 ===== */
+function renderVR(){
+  const vr = document.getElementById("vrOut");
+  const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
+  vr.innerText = "VR HISTORY\n----------------\n" + logs.join("\n");
+}
+
+/* ===== CITY FLOW ===== */
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -161,18 +171,12 @@ function setCity(type){
 INPUT: ${type}
 OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
 
-  // ★修正：ここでリセットしない
-  // document.getElementById("vrOut").innerText = ...
-
   pushVRLog(`RPG input: ${type}`);
   pushVRLog(`AI transformed: ${type}`);
   pushVRLog(`SYSTEM updated`);
 }
 
-/* =========================
-   MEMO
-========================= */
-
+/* ===== MEMO ===== */
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
@@ -187,11 +191,9 @@ function loadMemo(){
   pushVRLog("memo loaded");
 }
 
-/* =========================
-   INIT
-========================= */
-
+/* ===== INIT ===== */
 loadMemo();
+renderVR();
 setCity("cyber");
 
 </script>
