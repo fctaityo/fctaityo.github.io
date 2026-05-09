@@ -10,6 +10,8 @@ body{
   background:#0a0a0a;
   color:#ddd;
   font-family:sans-serif;
+
+  /* ★全体は殺さない（これが地味に重要） */
   overflow:hidden;
 }
 
@@ -43,14 +45,18 @@ body{
   grid-template-columns:1fr 1fr 1fr;
   height:100vh;
   padding-top:60px;
+
+  /* ★ここも重要：子に任せる */
   overflow:hidden;
 }
 
 .panel{
   border-right:1px solid #222;
   padding:20px;
+
   height:calc(100vh - 60px);
   overflow-y:auto;
+  scroll-behavior:smooth; /* ★地味に効く */
 }
 
 button{
@@ -83,6 +89,12 @@ textarea{
 /* ===== SIMPLE THEME ===== */
 .panel{
   border-color:#333;
+}
+
+/* ===== VR専用（ここが本体） ===== */
+#vrOut{
+  min-height:100%;
+  padding-bottom:60px; /* ★見切れ防止 */
 }
 </style>
 </head>
@@ -147,7 +159,7 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* ===== VR RENDER（完全修正版） ===== */
+/* ===== VR RENDER（完全安定版） ===== */
 function renderVR(){
 
   const vr = document.getElementById("vrOut");
@@ -160,8 +172,11 @@ function renderVR(){
 ----------------
 ` + logs.join("\n");
 
-  // ★確実に下へ（panel基準）
-  panel.scrollTop = panel.scrollHeight;
+  /* ★確実スクロール（2段構え） */
+  requestAnimationFrame(() => {
+    panel.scrollTop = panel.scrollHeight;
+    vr.scrollTop = vr.scrollHeight;
+  });
 }
 
 /* ===== CITY FLOW ===== */
