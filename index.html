@@ -14,7 +14,6 @@
   --bg:#0a0a0a;
   --line:rgba(255,255,255,0.08);
   --text:#f5f5f5;
-  --main:#8d5cff;
   --cyber:#00e5ff;
   --real:#7CFF6B;
   --mix:#ff4fd8;
@@ -26,31 +25,6 @@ body{
   font-family:'Noto Sans JP',sans-serif;
   overflow:hidden;
 }
-
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-
-.header-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 0;
-}
-
-.logo{
-  font-family:'Orbitron';
-  letter-spacing:4px;
-  font-size:2rem;
-  cursor:pointer;
-}
-
-.logo span{color:var(--main);}
 
 .container{
   width:92%;
@@ -96,16 +70,14 @@ header{
 .title{
   font-family:'Orbitron';
   margin-bottom:15px;
-  font-size:1.5rem;
 }
 
 .stateBox{
   white-space:pre-wrap;
   line-height:1.8;
-  font-size:0.95rem;
-  color:#ddd;
   border-top:1px solid var(--line);
   padding-top:15px;
+  color:#ddd;
 }
 
 .sync{
@@ -120,29 +92,23 @@ header{
   color:#888;
   border-top:1px solid var(--line);
   padding-top:10px;
-  max-height:200px;
-  overflow:auto;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="container header-inner">
-  <div class="logo">FCTAITYO <span>CITY</span></div>
-</div>
-</header>
-
 <div class="container main">
 
 <!-- LEFT -->
 <div class="selectPanel">
+
   <button class="cityBtn" onclick="selectCity('cyber')">CYBER CITY</button>
   <button class="cityBtn" onclick="selectCity('real')">REAL CITY</button>
   <button class="cityBtn" onclick="selectCity('mixed')">MIX CITY</button>
 
   <div class="sync" id="syncState">SYNC: waiting...</div>
+
 </div>
 
 <!-- RIGHT -->
@@ -162,20 +128,15 @@ header{
 
 const API = "http://localhost:3000";
 
-let current = null;
-
 /* =========================
    CITY SELECT
 ========================= */
 async function selectCity(key){
 
-  current = key;
-
   addLog("CITY REQUEST: " + key);
 
   try{
-
-    const res = await fetch(API + "/chat", {
+    await fetch(API + "/chat", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({
@@ -184,14 +145,9 @@ async function selectCity(key){
       })
     });
 
-    const chat = await res.json();
+    await refreshState();
 
-    const stateRes = await fetch(API + "/state");
-    const state = await stateRes.json();
-
-    render(state, chat);
-
-    addLog("SERVER CONFIRMED: " + state.city);
+    addLog("SERVER CONFIRMED: " + key);
 
   }catch(e){
     addLog("SYNC ERROR: " + e.message);
@@ -199,11 +155,15 @@ async function selectCity(key){
 }
 
 /* =========================
-   RENDER（ここが本体）
+   STATE FETCH（唯一の真実）
 ========================= */
-function render(state, chat){
+async function refreshState(){
 
-  document.getElementById("stateView").innerText =
+  try{
+    const res = await fetch(API + "/state");
+    const state = await res.json();
+
+    document.getElementById("stateView").innerText =
 `◆ SERVER CONTROLLED CITY
 
 CURRENT CITY:
@@ -227,43 +187,35 @@ ${state.profile?.state || ""}
 BEHAVIOR:
 ${state.profile?.behavior || ""}
 
-----------------------
-SOURCE: SERVER STATE (/state)
+SOURCE: /state
 `;
 
-  document.getElementById("syncState").innerText =
+    document.getElementById("syncState").innerText =
 `SYNC: ${state.city} / MEM:${state.memorySize}`;
+
+  }catch(e){
+    addLog("STATE ERROR: " + e.message);
+  }
 }
 
 /* =========================
    LOG
 ========================= */
 function addLog(text){
+
   const el = document.getElementById("logBox");
+
   const time = new Date().toLocaleTimeString();
+
   el.innerText += `[${time}] ${text}\n`;
+
   el.scrollTop = el.scrollHeight;
 }
 
 /* =========================
-   POLLING
+   LOOP
 ========================= */
-async function fetchState(){
-
-  try{
-    const res = await fetch(API + "/state");
-    const state = await res.json();
-
-    document.getElementById("syncState").innerText =
-`SYNC: ${state.city} / LIVE`;
-
-  }catch(e){
-    document.getElementById("syncState").innerText =
-"SYNC ERROR";
-  }
-}
-
-setInterval(fetchState, 2000);
+setInterval(refreshState, 2000);
 
 </script>
 
