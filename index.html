@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FCTAITYO // PERSONAL PORTAL</title>
+  <title>FCTAITYO CITY // DIGITAL URBAN SYSTEM</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -19,671 +17,161 @@
     }
 
     :root {
-      --bg: #090909;
-      --bg2: #111;
-      --line: rgba(255,255,255,0.08);
+      --bg: #07070a;
       --text: #f5f5f5;
       --sub: #aaa;
       --main: #8d5cff;
       --main2: #4b8dff;
-      --danger: #ff3566;
+      --line: rgba(255,255,255,0.08);
     }
 
-    body {
-      background:
-        radial-gradient(circle at top left, rgba(141,92,255,0.18), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 25%),
-        var(--bg);
+    body.city {
+      background: radial-gradient(circle at top left, rgba(141,92,255,0.15), transparent 40%),
+                  radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 35%),
+                  var(--bg);
       color: var(--text);
       font-family: 'Noto Sans JP', sans-serif;
       overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .skybox {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle, #0b0b10, #000);
+      z-index: -2;
     }
 
-    .container {
-      width: 92%;
-      max-width: 1450px;
-      margin: auto;
+    .city-map {
+      scroll-snap-type: y mandatory;
     }
 
-    /* ===================================== */
-    /* Header */
-    /* ===================================== */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(12px);
-      background: rgba(10,10,10,0.7);
+    .district {
+      min-height: 100vh;
+      padding: 120px 8%;
+      scroll-snap-align: start;
+      position: relative;
       border-bottom: 1px solid var(--line);
     }
 
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 0;
-    }
-
-    .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: 3px;
-    }
-
-    .logo span {
-      color: var(--main);
-    }
-
-    nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95rem;
-    }
-
-    nav a {
-      color: #ccc;
-      transition: 0.2s;
-    }
-
-    nav a:hover {
-      color: white;
-    }
-
-    /* ===================================== */
-    /* Hero */
-    /* ===================================== */
-
-    .hero {
-      min-height: 90vh;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: center;
-      gap: 50px;
-      position: relative;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-    }
-
-    .hero-text {
-      position: relative;
-      z-index: 1;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(141,92,255,0.15);
-      border: 1px solid rgba(141,92,255,0.4);
-      color: #d8cbff;
-      font-size: 0.9rem;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: 25px;
-    }
-
-    .hero h1 span {
-      color: var(--main);
-    }
-
-    .hero p {
-      color: var(--sub);
-      line-height: 2;
-      max-width: 700px;
-      font-size: 1.05rem;
-    }
-
-    .hero-buttons {
-      margin-top: 40px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 16px 30px;
-      border-radius: 16px;
-      font-weight: bold;
-      border: 1px solid var(--line);
-      transition: 0.25s;
-    }
-
-    .btn-main {
-      background: linear-gradient(135deg, var(--main), var(--main2));
-    }
-
-    .btn-sub {
-      background: rgba(255,255,255,0.04);
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* ===================================== */
-    /* Hero Card */
-    /* ===================================== */
-
-    .hero-card {
-      position: relative;
-      z-index: 1;
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      border: 1px solid var(--line);
-      border-radius: 35px;
-      overflow: hidden;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
-    }
-
-    .hero-image {
-      height: 650px;
-      background:
-        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.45)),
-        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1400&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .ui-box {
-      position: absolute;
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .ui-top {
+    /* HUD */
+    .ui-overlay {
+      position: fixed;
       top: 20px;
-      left: 20px;
-      width: 220px;
-    }
-
-    .ui-bottom {
-      bottom: 20px;
       right: 20px;
-      width: 260px;
-    }
-
-    .ui-title {
-      color: white;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .ui-sub {
+      z-index: 999;
+      font-size: 12px;
       color: #bbb;
-      font-size: 0.9rem;
-      line-height: 1.7;
+      background: rgba(0,0,0,0.4);
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
     }
 
-    /* ===================================== */
-    /* Sections */
-    /* ===================================== */
-
-    section {
-      margin-top: 110px;
+    /* HERO / CORE */
+    .hero-zone h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
+      margin-bottom: 20px;
     }
 
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      margin-bottom: 40px;
-      gap: 20px;
+    .hero-zone span {
+      color: var(--main);
     }
 
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 900;
-    }
-
-    .section-sub {
-      color: var(--sub);
-      max-width: 700px;
-      line-height: 1.8;
-    }
-
-    /* ===================================== */
-    /* Cards */
-    /* ===================================== */
-
-    .grid-3 {
+    /* GRID */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--line);
-      border-radius: 30px;
-      overflow: hidden;
-      transition: 0.25s;
+      border-radius: 20px;
+      padding: 24px;
+      transition: 0.2s;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      border-color: rgba(141,92,255,0.45);
+      border-color: rgba(141,92,255,0.4);
     }
 
-    .card-image {
-      height: 260px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .card-body {
-      padding: 30px;
-    }
-
-    .card-tag {
+    .tag {
+      font-size: 12px;
+      color: #ccc;
+      margin-bottom: 10px;
       display: inline-block;
-      background: rgba(141,92,255,0.16);
-      border: 1px solid rgba(141,92,255,0.35);
-      padding: 6px 12px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.8rem;
-      margin-bottom: 18px;
-      color: #ddd;
+      background: rgba(141,92,255,0.15);
     }
-
-    .card-title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .card-text {
-      color: #aaa;
-      line-height: 1.9;
-      font-size: 0.95rem;
-    }
-
-    /* ===================================== */
-    /* Terminal */
-    /* ===================================== */
-
-    .terminal {
-      background: #050505;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 40px;
-      font-family: monospace;
-      margin-top: 50px;
-      overflow-x: auto;
-    }
-
-    .terminal-line {
-      margin-bottom: 14px;
-      color: #ddd;
-    }
-
-    .terminal-line span {
-      color: #65ff98;
-    }
-
-    /* ===================================== */
-    /* Footer */
-    /* ===================================== */
-
-    footer {
-      margin-top: 140px;
-      border-top: 1px solid var(--line);
-      padding: 60px 0;
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-    }
-
-    .footer-text {
-      color: #777;
-      font-size: 0.9rem;
-    }
-
-    /* ===================================== */
-    /* Responsive */
-    /* ===================================== */
-
-    @media (max-width: 1100px) {
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 60px;
-      }
-
-      .hero h1 {
-        font-size: 3.5rem;
-      }
-
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-    @media (max-width: 700px) {
-
-      nav {
-        display: none;
-      }
-
-      .hero h1 {
-        font-size: 2.6rem;
-      }
-
-      .hero-image {
-        height: 450px;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        align-items: start;
-      }
-
-    }
-
   </style>
-
 </head>
-<body>
 
-  <!-- HEADER -->
+<body class="city">
 
-  <header>
-    <div class="container header-inner">
+  <div class="skybox"></div>
 
-  <div class="logo">
-    FCT<span>AITYO</span>
+  <div class="ui-overlay">
+    FCTAITYO CITY // NODE ACTIVE
   </div>
 
-  <nav>
-    <a href="#projects">PROJECTS</a>
-    <a href="#world">WORLD</a>
-    <a href="#labs">LABS</a>
-    <a href="#links">LINKS</a>
-  </nav>
+  <main class="city-map">
 
-</div>
+    <!-- CORE DISTRICT -->
+    <section class="district hero-zone">
+      <h1>FCTAITYO<br><span>DIGITAL CITY</span></h1>
+      <p>
+        この都市はAI・VRC・架空世界・Web実験によって構築されたデジタル都市システム。
+        スクロールは移動、セクションは地区として機能する。
+      </p>
+    </section>
 
-  </header>
+    <!-- CREATOR DISTRICT -->
+    <section class="district">
+      <h2>CREATOR DISTRICT</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="tag">PROJECT NODE</div>
+          <h3>不存在RPG計画</h3>
+          <p>都市型オープンワールド設計</p>
+        </div>
 
-  <!-- HERO -->
+        <div class="card">
+          <div class="tag">AI NODE</div>
+          <h3>AIサイト実験</h3>
+          <p>生成Webシステム研究</p>
+        </div>
 
-  <main class="container">
-
-<section class="hero">
-
-  <div class="hero-text">
-
-    <div class="tag">
-      PERSONAL NETWORK // 2026
-    </div>
-
-    <h1>
-      FCTAITYO<br>
-      <span>DIGITAL PORTAL</span>
-    </h1>
-
-    <p>
-      AI・VRC・ゲーム・架空ブランド・都市型サイバー世界観。
-      存在しないゲーム、存在しない企業、存在しない広告を本物っぽく構築する個人ポータル。
-      ここはショッピングサイトでもあり、実験場でもあり、インターネット上の仮想都市でもある。
-    </p>
-
-    <div class="hero-buttons">
-      <a href="#projects" class="btn btn-main">PROJECTS</a>
-      <a href="#labs" class="btn btn-sub">AI LABS</a>
-    </div>
-
-  </div>
-
-  <div class="hero-card">
-
-    <div class="hero-image">
-
-      <div class="ui-box ui-top">
-        <div class="ui-title">SYSTEM STATUS</div>
-        <div class="ui-sub">
-          AI GENERATION : ONLINE<br>
-          WORLD BUILDING : ACTIVE<br>
-          NETWORK STATUS : CONNECTED
+        <div class="card">
+          <div class="tag">VR NODE</div>
+          <h3>VR SOCIAL LOG</h3>
+          <p>非言語コミュニケーション解析</p>
         </div>
       </div>
+    </section>
 
-      <div class="ui-box ui-bottom">
-        <div class="ui-title">LATEST UPDATE</div>
-        <div class="ui-sub">
-          - OPEN WORLD UI TEST<br>
-          - PERSONAL EC DESIGN<br>
-          - VIRTUAL CITY PROJECT
-        </div>
-      </div>
+    <!-- LAB DISTRICT -->
+    <section class="district">
+      <h2>CORE SYSTEM LAB</h2>
+      <p>
+        AI生成・都市構造・データ観測・UI実験を行う中枢区画。
+      </p>
+    </section>
 
-    </div>
-
-  </div>
-
-</section>
-
-<!-- PROJECTS -->
-
-<section id="projects">
-
-  <div class="section-head">
-    <div>
-      <div class="section-title">PROJECTS</div>
-    </div>
-
-    <div class="section-sub">
-      AI生成・Web構築・架空ブランド設計・ゲーム風UIなど、
-      現在進行中のプロジェクト群。
-    </div>
-  </div>
-
-  <div class="grid-3">
-
-    <div class="card">
-
-      <div class="card-image"
-        style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop');">
-      </div>
-
-      <div class="card-body">
-        <div class="card-tag">OPEN WORLD</div>
-        <div class="card-title">不存在RPG計画</div>
-        <div class="card-text">
-          都市型3Dアニメ調オープンワールドRPGを想定した世界観構築。
-          UI・広告・ショップ・キャラクター設定まで統合。
-        </div>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-image"
-        style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop');">
-      </div>
-
-      <div class="card-body">
-        <div class="card-tag">AI × WEB</div>
-        <div class="card-title">AIサイト実験室</div>
-        <div class="card-text">
-          ChatGPTや画像生成AIを用いた個人Webサイト自動生成。
-          AI時代の個人ブランド構築を研究。
-        </div>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-image"
-        style="background-image:url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1400&auto=format&fit=crop');">
-      </div>
-
-      <div class="card-body">
-        <div class="card-tag">VIRTUAL</div>
-        <div class="card-title">VR SOCIAL LOG</div>
-        <div class="card-text">
-          VR空間で発生する非言語コミュニケーションや距離感、
-          仮想人格の挙動を観測・記録。
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- LABS -->
-
-<section id="labs">
-
-  <div class="section-head">
-    <div>
-      <div class="section-title">AI LABS</div>
-    </div>
-
-    <div class="section-sub">
-      ローカルAI・画像生成・Web構築・仮想ブランド生成ログ。
-    </div>
-  </div>
-
-  <div class="terminal">
-
-    <div class="terminal-line">
-      <span>></span> booting FCTAITYO system...
-    </div>
-
-    <div class="terminal-line">
-      <span>></span> loading virtual city assets...
-    </div>
-
-    <div class="terminal-line">
-      <span>></span> AI image generation online.
-    </div>
-
-    <div class="terminal-line">
-      <span>></span> deploying github pages...
-    </div>
-
-    <div class="terminal-line">
-      <span>></span> connection established.
-    </div>
-
-  </div>
-
-</section>
-
-<!-- LINKS -->
-
-<section id="links">
-
-  <div class="section-head">
-    <div>
-      <div class="section-title">NETWORK</div>
-    </div>
-
-    <div class="section-sub">
-      各種リンク・SNS・実験サイト接続用。
-    </div>
-  </div>
-
-  <div class="grid-3">
-
-    <div class="card">
-      <div class="card-body">
-        <div class="card-tag">GITHUB</div>
-        <div class="card-title">SOURCE CODE</div>
-        <div class="card-text">
-          GitHub Pagesベースの個人Web開発。
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <div class="card-tag">X / SNS</div>
-        <div class="card-title">SOCIAL FEED</div>
-        <div class="card-text">
-          世界観・AIネタ・VRC関連ログを配信予定。
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-body">
-        <div class="card-tag">STORE</div>
-        <div class="card-title">VIRTUAL GOODS</div>
-        <div class="card-text">
-          将来的な個人EC・架空ブランド展開用エリア。
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</section>
+    <!-- NETWORK DISTRICT -->
+    <section class="district">
+      <h2>GATEWAY NETWORK</h2>
+      <p>
+        GitHub / SNS / 外部サービスへの接続ハブ。
+      </p>
+    </section>
 
   </main>
-
-  <!-- FOOTER -->
-
-  <footer>
-
-<div class="container footer-inner">
-
-  <div class="footer-logo">
-    FCTAITYO NETWORK
-  </div>
-
-  <div class="footer-text">
-    © 2026 FCTAITYO // PERSONAL DIGITAL SPACE
-  </div>
-
-</div>
-
-  </footer>
 
 </body>
 </html>
