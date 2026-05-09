@@ -160,7 +160,7 @@ async function chat(){
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         text,
-        city: currentCity   // 💣これが重要
+        city: currentCity
       })
     });
 
@@ -194,7 +194,7 @@ async function chat(){
 function showAI(input, reply){
 
   document.getElementById("aiOut").innerText =
-`CITY: ${currentCity.toUpperCase()}
+`WORLD: ${currentCity.toUpperCase()}
 
 YOU:
 ${input}
@@ -204,17 +204,35 @@ ${reply}`;
 }
 
 /* =========================
-   CITY SWITCH
+   CITY SWITCH (強化版)
 ========================= */
-function setCity(type){
+async function setCity(type){
 
-  currentCity = type; // 💣これ重要
+  currentCity = type;
 
   document.getElementById("rpgOut").innerText =
 `CITY:
 → ${type.toUpperCase()}`;
 
   log("[CITY SWITCH] " + type);
+
+  /* 💣サーバに通知（状態同期） */
+  try {
+    const res = await fetch("http://localhost:3000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: "__CITY_SYNC__",
+        city: currentCity
+      })
+    });
+
+    const data = await res.json();
+    log("[CITY SYNC SERVER] " + JSON.stringify(data.debug || {}));
+
+  } catch(e) {
+    log("[CITY SYNC ERROR] " + e.message);
+  }
 }
 
 /* =========================
