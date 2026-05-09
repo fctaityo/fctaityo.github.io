@@ -98,7 +98,7 @@ textarea{
 
 <div class="wrap">
 
-<!-- RPG / INPUT -->
+<!-- INPUT -->
 <div class="panel">
 <h2>🟥 RPG / INPUT</h2>
 
@@ -113,13 +113,13 @@ textarea{
 <button onclick="chat()">SEND</button>
 </div>
 
-<!-- AI / TRANSFORM -->
+<!-- AI -->
 <div class="panel">
 <h2>🟦 AI / TRANSFORM</h2>
 <pre id="aiOut"></pre>
 </div>
 
-<!-- VR / HISTORY -->
+<!-- VR LOG -->
 <div class="panel">
 <h2>🟩 VR / HISTORY</h2>
 <pre id="vrOut"></pre>
@@ -132,35 +132,64 @@ textarea{
 const VR_KEY = "vr_history";
 
 /* =========================
-   CHAT → NODE → OLLAMA
+   CHAT (DEBUG VERSION)
 ========================= */
 async function chat(){
 
   const text = document.getElementById("rpgMemo").value;
 
   if(!text.trim()){
-    pushVRLog("EMPTY INPUT");
+    log("[ERROR] EMPTY INPUT");
     return;
   }
 
-  const res = await fetch("http://localhost:3000/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text })
-  });
+  log("[INPUT] " + text);
 
-  const data = await res.json();
+  try{
 
-  const reply = data.reply || data.error || "[NO RESPONSE]";
+    log("[SERVER] sending request → Node");
+
+    const res = await fetch("http://localhost:3000/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text })
+    });
+
+    log("[SERVER] response received");
+
+    const data = await res.json();
+
+    if(data.error){
+      log("[ERROR] " + data.error);
+      showAI(text, data.error);
+      return;
+    }
+
+    log("[AI] response OK");
+
+    showAI(text, data.reply);
+
+    log("[AI LOG] " + data.reply);
+
+  }catch(e){
+
+    log("[ERROR] NETWORK: " + e.message);
+    showAI(text, "[NETWORK ERROR]");
+
+  }
+}
+
+/* =========================
+   AI DISPLAY
+========================= */
+function showAI(input, reply){
 
   document.getElementById("aiOut").innerText =
 `YOU:
-${text}
+${input}
 
 AI:
 ${reply}`;
-
-  pushVRLog(`CHAT: ${text} → ${reply}`);
 }
 
 /* =========================
@@ -172,13 +201,13 @@ function setCity(type){
 `CITY:
 → ${type.toUpperCase()}`;
 
-  pushVRLog(`CITY: ${type}`);
+  log("[CITY] " + type);
 }
 
 /* =========================
-   VR LOG
+   LOG SYSTEM
 ========================= */
-function pushVRLog(text){
+function log(text){
 
   const now = new Date();
   const entry = `[${now.toLocaleString()}] ${text}`;
