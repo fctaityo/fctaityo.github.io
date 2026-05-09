@@ -10,15 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     :root {
-      --bg:#090909;
-      --text:#f5f5f5;
-      --sub:#aaa;
-      --main:#8d5cff;
-      --main2:#4b8dff;
-      --line:rgba(255,255,255,0.08);
+      --bg: #090909;
+      --text: #f5f5f5;
+      --sub: #aaa;
+      --main: #8d5cff;
+      --main2: #4b8dff;
+      --line: rgba(255,255,255,0.08);
     }
 
     body {
@@ -26,125 +31,222 @@
         radial-gradient(circle at top left, rgba(141,92,255,0.18), transparent 30%),
         radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 25%),
         var(--bg);
-      color:var(--text);
-      font-family:'Noto Sans JP',sans-serif;
-      overflow-x:hidden;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
     }
 
-    .container{width:92%;max-width:1450px;margin:auto;}
+    a { color: inherit; text-decoration: none; }
 
-    header{
-      position:sticky;top:0;z-index:999;
-      backdrop-filter:blur(12px);
-      background:rgba(10,10,10,0.7);
-      border-bottom:1px solid var(--line);
+    .container {
+      width: 92%;
+      max-width: 1450px;
+      margin: auto;
     }
 
-    .header-inner{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+    /* ================= HEADER ================= */
 
-    .logo{font-family:'Orbitron';font-size:1.8rem;font-weight:800;letter-spacing:3px;}
-    .logo span{color:var(--main);}
-
-    nav{display:flex;gap:28px;font-size:0.95rem;}
-    nav a{color:#ccc;text-decoration:none;}
-
-    .hero{
-      min-height:90vh;
-      display:grid;
-      grid-template-columns:1.2fr 0.8fr;
-      gap:50px;
-      align-items:center;
-      position:relative;
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.7);
+      border-bottom: 1px solid var(--line);
     }
 
-    .hero::before{
-      content:"";
-      position:absolute;inset:0;
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-family: 'Orbitron';
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .logo span { color: var(--main); }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+    }
+
+    nav a { color: #ccc; }
+
+    /* ================= GLOBAL TYPO RESET ================= */
+
+    h1,h2,h3,p { margin: 0; }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+      position: relative;
+      padding: 40px 0;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.02)1px,transparent1px),
-        linear-gradient(90deg,rgba(255,255,255,0.02)1px,transparent1px);
-      background-size:40px 40px;
-      pointer-events:none;
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
     }
 
-    .hero-text{position:relative;z-index:1;}
+    .hero-text { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 18px; }
 
-    .tag{
-      display:inline-block;
-      padding:10px 18px;
-      border-radius:999px;
-      background:rgba(141,92,255,0.15);
-      border:1px solid rgba(141,92,255,0.4);
-      color:#d8cbff;
-      margin-bottom:25px;
+    .tag {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(141,92,255,0.15);
+      border: 1px solid rgba(141,92,255,0.4);
+      color: #d8cbff;
+      width: fit-content;
     }
 
-    .hero h1{font-family:'Orbitron';font-size:5rem;line-height:1;margin-bottom:25px;}
-    .hero h1 span{color:var(--main);}
-    .hero p{color:var(--sub);line-height:2;max-width:700px;}
-
-    .hero-card{
-      border:1px solid var(--line);
-      border-radius:35px;
-      overflow:hidden;
-      background:rgba(255,255,255,0.03);
+    .hero h1 {
+      font-family: 'Orbitron';
+      font-size: 5rem;
+      line-height: 1;
     }
 
-    .hero-image{
-      position:relative;
-      height:650px;
-      overflow:hidden;
+    .hero h1 span { color: var(--main); }
+
+    .hero p {
+      color: var(--sub);
+      line-height: 1.9;
+      max-width: 700px;
     }
 
-    .hero-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 35px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.03);
     }
 
-    .ui-box{
-      position:absolute;
-      background:rgba(0,0,0,0.65);
-      border:1px solid rgba(255,255,255,0.08);
-      backdrop-filter:blur(8px);
-      border-radius:18px;
-      padding:18px;
-      color:#fff;
+    .hero-image {
+      position: relative;
+      height: 650px;
     }
 
-    .ui-top{top:20px;left:20px;width:220px;}
-    .ui-bottom{bottom:20px;right:20px;width:260px;}
-
-    section{margin-top:110px;}
-
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
-
-    .card{
-      background:rgba(255,255,255,0.03);
-      border:1px solid var(--line);
-      border-radius:30px;
-      overflow:hidden;
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    .card-image{
-      height:240px;
-      background-size:cover;
-      background-position:center;
+    .ui-box {
+      position: absolute;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 16px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .card-body{padding:30px;}
+    .ui-top { top: 20px; left: 20px; width: 220px; }
+    .ui-bottom { bottom: 20px; right: 20px; width: 260px; }
 
-    .terminal{
-      background:#050505;
-      border:1px solid var(--line);
-      border-radius:28px;
-      padding:40px;
-      font-family:monospace;
+    /* ================= SECTIONS ================= */
+
+    section { margin-top: 90px; }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
     }
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+    }
+
+    .card-image {
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-title { font-weight: 700; font-size: 1.2rem; }
+    .card-text { color: var(--sub); line-height: 1.7; font-size: 0.95rem; }
+
+    /* ================= TERMINAL ================= */
+
+    .terminal {
+      background: #050505;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .terminal-line { color: #ddd; }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      margin-top: 120px;
+      border-top: 1px solid var(--line);
+      padding: 50px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-family: 'Orbitron';
+      letter-spacing: 2px;
+    }
+
+    .footer-text { color: #777; }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
   </style>
 </head>
-
 <body>
 
 <header>
@@ -165,12 +267,12 @@
   <div class="hero-text">
     <div class="tag">PERSONAL NETWORK // 2026</div>
     <h1>FCTAITYO<br><span>DIGITAL PORTAL</span></h1>
-    <p>AI・VRC・架空都市・Web実験の統合ポータル。</p>
+    <p>AI・VRC・都市シミュレーター型ポータル。仮想世界構築システム。</p>
   </div>
 
   <div class="hero-card">
     <div class="hero-image">
-      <img src="https://picsum.photos/seed/hero/1200/800" alt="hero" />
+      <img src="https://picsum.photos/seed/hero/1200/800" />
 
       <div class="ui-box ui-top">
         SYSTEM STATUS<br>ONLINE
@@ -185,35 +287,53 @@
 </section>
 
 <section id="projects">
+
   <div class="grid-3">
 
     <div class="card">
-      <div class="card-image" style="background-image:url('https://picsum.photos/seed/rpg/800/600');"></div>
-      <div class="card-body">不存在RPG計画</div>
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/rpg/800/600')"></div>
+      <div class="card-body">
+        <div class="card-title">不存在RPG計画</div>
+        <div class="card-text">都市型オープンワールド設計</div>
+      </div>
     </div>
 
     <div class="card">
-      <div class="card-image" style="background-image:url('https://picsum.photos/seed/ai/800/600');"></div>
-      <div class="card-body">AI実験室</div>
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/ai/800/600')"></div>
+      <div class="card-body">
+        <div class="card-title">AI NODE</div>
+        <div class="card-text">AIサイト実験室 / 生成Web研究</div>
+      </div>
     </div>
 
     <div class="card">
-      <div class="card-image" style="background-image:url('https://picsum.photos/seed/vrc/800/600');"></div>
-      <div class="card-body">VR LOG</div>
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/vrc/800/600')"></div>
+      <div class="card-body">
+        <div class="card-title">VR NODE</div>
+        <div class="card-text">VR SOCIAL LOG / 非言語解析</div>
+      </div>
     </div>
 
   </div>
+
 </section>
 
 <section id="labs">
   <div class="terminal">
-    booting system...<br>
-    city rendering...<br>
-    connection stable
+    <div class="terminal-line">booting system...</div>
+    <div class="terminal-line">initializing city UI...</div>
+    <div class="terminal-line">connection stable</div>
   </div>
 </section>
 
 </main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">FCTAITYO NETWORK</div>
+    <div class="footer-text">© 2026 PERSONAL DIGITAL SPACE</div>
+  </div>
+</footer>
 
 </body>
 </html>
