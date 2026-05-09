@@ -78,7 +78,7 @@ textarea{
   resize:none;
 }
 
-/* ===== SIMPLE THEME (固定色) ===== */
+/* ===== SIMPLE THEME ===== */
 body{
   background:#0a0a0a;
   color:#ddd;
@@ -87,18 +87,15 @@ body{
 .panel{
   border-color:#333;
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="topbar">
-
   <div class="logo" onclick="location.href='index.html'">
     FCTAITYO CITY
   </div>
-
 </div>
 
 <div class="wrap">
@@ -137,14 +134,22 @@ body{
 
 const MEMO_KEY = "memo_rpg";
 
-/* ===== VR LOG CORE ===== */
+/* =========================
+   VR LOG CORE（修正ポイント）
+========================= */
+
 function pushVRLog(text){
   const vr = document.getElementById("vrOut");
   const time = new Date().toLocaleTimeString();
+
+  // ★修正：上書きしない（リセット禁止）
   vr.innerText += `\n[${time}] ${text}`;
 }
 
-/* ===== CITY FLOW ===== */
+/* =========================
+   CITY FLOW
+========================= */
+
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -156,16 +161,18 @@ function setCity(type){
 INPUT: ${type}
 OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
 
-  document.getElementById("vrOut").innerText =
-`VR HISTORY
-----------------`;
+  // ★修正：ここでリセットしない
+  // document.getElementById("vrOut").innerText = ...
 
   pushVRLog(`RPG input: ${type}`);
   pushVRLog(`AI transformed: ${type}`);
   pushVRLog(`SYSTEM updated`);
 }
 
-/* ===== MEMO ===== */
+/* =========================
+   MEMO
+========================= */
+
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
@@ -179,6 +186,10 @@ function loadMemo(){
 
   pushVRLog("memo loaded");
 }
+
+/* =========================
+   INIT
+========================= */
 
 loadMemo();
 setCity("cyber");
