@@ -42,6 +42,37 @@ pre{
   white-space:pre-wrap;
   color:#aaa;
 }
+
+/* ===== MODE THEME ===== */
+
+body.mode-ai{
+  background:#0b1020;
+  color:#cfe3ff;
+}
+
+body.mode-ai .panel,
+body.mode-ai .panel{
+  border-color:#2b4d7a;
+}
+
+body.mode-vr{
+  background:#061a14;
+  color:#bfffe5;
+}
+
+body.mode-vr .panel{
+  border-color:#1f6b4d;
+}
+
+body.mode-rpg{
+  background:#1a0f0f;
+  color:#ffe0c8;
+}
+
+body.mode-rpg .panel{
+  border-color:#7a3b2b;
+}
+  
 </style>
 </head>
 
@@ -76,8 +107,17 @@ pre{
 
 <script>
 
+const modeTitle = {
+  ai: "AI NODE / GENERATION",
+  vr: "VR NODE / OBSERVATION",
+  rpg: "RPG NODE / WORLD DESIGN",
+  cyber: "CITY SYSTEM"
+};
+
 const params = new URLSearchParams(location.search);
 let mode = params.get("mode") || "cyber";
+
+document.body.classList.add("mode-" + mode);
 
 let cityState = "cyber";
 
