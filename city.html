@@ -48,14 +48,8 @@ body{
   border-right:1px solid #222;
   padding:20px;
   height:calc(100vh - 60px);
-  overflow:hidden; /* ★ここ重要：外は殺す */
-}
-
-.scroll{
-  height:100%;
   overflow-y:auto;
-  scroll-behavior:smooth;
-  padding-right:8px;
+  box-sizing:border-box;
 }
 
 button{
@@ -65,6 +59,11 @@ button{
   color:inherit;
   border:1px solid #444;
   cursor:pointer;
+}
+
+pre{
+  white-space:pre-wrap;
+  color:inherit;
 }
 
 textarea{
@@ -79,11 +78,9 @@ textarea{
   resize:none;
 }
 
-/* VR専用 */
-#vrText{
-  white-space:pre-wrap;
+#vrOut{
+  padding-bottom:40px;
 }
-
 </style>
 </head>
 
@@ -97,7 +94,6 @@ textarea{
 
 <div class="wrap">
 
-<!-- RPG -->
 <div class="panel">
 <h2>🟥 RPG / INPUT</h2>
 
@@ -112,20 +108,14 @@ textarea{
 <button onclick="loadMemo()">LOAD</button>
 </div>
 
-<!-- AI -->
 <div class="panel">
 <h2>🟦 AI / TRANSFORM</h2>
 <pre id="aiOut"></pre>
 </div>
 
-<!-- VR -->
-<div class="panel">
+<div class="panel" id="vrPanel">
 <h2>🟩 VR / HISTORY</h2>
-
-<div class="scroll" id="vrPanel">
-  <div id="vrText"></div>
-</div>
-
+<pre id="vrOut"></pre>
 </div>
 
 </div>
@@ -135,13 +125,13 @@ textarea{
 const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
+/* ===== LOG ===== */
 function pushVRLog(text){
 
   const time = new Date().toLocaleTimeString();
   const entry = `[${time}] ${text}`;
 
   let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
-
   logs.push(entry);
 
   localStorage.setItem(VR_KEY, JSON.stringify(logs));
@@ -149,10 +139,11 @@ function pushVRLog(text){
   renderVR();
 }
 
+/* ===== RENDER ===== */
 function renderVR(){
 
-  const vr = document.getElementById("vrText");
   const panel = document.getElementById("vrPanel");
+  const vr = document.getElementById("vrOut");
 
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
@@ -161,12 +152,12 @@ function renderVR(){
 ----------------
 ` + logs.join("\n");
 
-  /* ★確実に一箇所だけスクロール */
   requestAnimationFrame(() => {
     panel.scrollTop = panel.scrollHeight;
   });
 }
 
+/* ===== CITY ===== */
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -183,6 +174,7 @@ OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
   pushVRLog(`SYSTEM updated`);
 }
 
+/* ===== MEMO ===== */
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
@@ -195,6 +187,7 @@ function loadMemo(){
   pushVRLog("memo loaded");
 }
 
+/* ===== INIT ===== */
 loadMemo();
 renderVR();
 setCity("cyber");
