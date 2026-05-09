@@ -181,14 +181,11 @@ async function chat(){
 
     log("[AI LOG] " + data.reply);
 
-    /* 💣ここ追加：入力欄クリア */
     inputEl.value = "";
 
   }catch(e){
-
     log("[ERROR] NETWORK: " + e.message);
     showAI(text, "[NETWORK ERROR]");
-
   }
 }
 
@@ -208,7 +205,7 @@ ${reply}`;
 }
 
 /* =========================
-   CITY SWITCH (強化版)
+   CITY SWITCH
 ========================= */
 async function setCity(type){
 
@@ -239,7 +236,7 @@ async function setCity(type){
 }
 
 /* =========================
-   LOG SYSTEM
+   LOG SYSTEM（★修正ここ）
 ========================= */
 function log(text){
 
@@ -247,7 +244,11 @@ function log(text){
   const entry = `[${now.toLocaleString()}] ${text}`;
 
   let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
+
   logs.push(entry);
+
+  // ★重要：200件ローテーション（古い順に削除）
+  logs = logs.slice(-200);
 
   localStorage.setItem(VR_KEY, JSON.stringify(logs));
 
