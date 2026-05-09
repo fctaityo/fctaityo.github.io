@@ -63,6 +63,8 @@ button{
 pre{
   white-space:pre-wrap;
   color:inherit;
+  overflow-y:auto;
+  max-height:100%;
 }
 
 /* ===== MEMO ===== */
@@ -78,6 +80,7 @@ textarea{
   resize:none;
 }
 
+/* ===== SIMPLE THEME ===== */
 .panel{
   border-color:#333;
 }
@@ -129,10 +132,7 @@ textarea{
 const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
-/* =========================
-   VR LOG CORE（安定版）
-========================= */
-
+/* ===== VR LOG CORE ===== */
 function pushVRLog(text){
 
   const time = new Date().toLocaleTimeString();
@@ -147,7 +147,7 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* ===== VR描画（純粋表示） ===== */
+/* ===== VR RENDER（自動スクロール付き） ===== */
 function renderVR(){
 
   const vr = document.getElementById("vrOut");
@@ -157,12 +157,12 @@ function renderVR(){
 `VR HISTORY
 ----------------
 ` + logs.join("\n");
+
+  // ★重要：自動スクロール
+  vr.scrollTop = vr.scrollHeight;
 }
 
-/* =========================
-   CITY FLOW（修正ポイント）
-========================= */
-
+/* ===== CITY FLOW ===== */
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -174,16 +174,12 @@ function setCity(type){
 INPUT: ${type}
 OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
 
-  // ★ここ重要：初期化しない・上書きしない
   pushVRLog(`RPG input: ${type}`);
   pushVRLog(`AI transformed: ${type}`);
   pushVRLog(`SYSTEM updated`);
 }
 
-/* =========================
-   MEMO
-========================= */
-
+/* ===== MEMO ===== */
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
@@ -198,16 +194,11 @@ function loadMemo(){
   pushVRLog("memo loaded");
 }
 
-/* =========================
-   INIT（ここが超重要）
-========================= */
-
+/* ===== INIT（初期ログ汚さない版） ===== */
 loadMemo();
-
-/* ★ログを先に描画 */
 renderVR();
 
-/* ★初期CITYはログを汚さない */
+/* 初期表示だけ */
 document.getElementById("rpgOut").innerText =
 `CITY:
 → CYBER`;
