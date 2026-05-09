@@ -13,7 +13,6 @@ body{
   overflow:hidden;
 }
 
-/* topbar */
 .topbar{
   position:fixed;
   top:0;
@@ -34,7 +33,6 @@ body{
   letter-spacing:2px;
 }
 
-/* main */
 .wrap{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
@@ -51,13 +49,11 @@ body{
   box-sizing:border-box;
 }
 
-/* 見出し統一 */
 h2{
   font-size:18px;
   margin:0 0 10px 0;
 }
 
-/* button */
 button{
   margin:10px 0;
   padding:10px;
@@ -67,12 +63,10 @@ button{
   cursor:pointer;
 }
 
-/* pre */
 pre{
   white-space:pre-wrap;
 }
 
-/* textarea */
 textarea{
   width:100%;
   height:120px;
@@ -85,26 +79,10 @@ textarea{
   resize:none;
 }
 
-/* VR layout */
-#vrPanel{
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
-}
-
-.vrHeader{
-  flex:0 0 auto;
-  border-bottom:1px solid #222;
-  padding-bottom:10px;
-}
-
-/* ログ領域 */
+/* VR */
 #vrOut{
-  flex:1;
-  overflow-y:auto;
   padding-top:10px;
 }
-
 </style>
 </head>
 
@@ -127,8 +105,8 @@ textarea{
 <pre id="rpgOut"></pre>
 
 <textarea id="rpgMemo"></textarea>
-<button onclick="saveMemo()">SAVE</button>
-<button onclick="loadMemo()">LOAD</button>
+
+<button onclick="process()">TRANSLATE</button>
 </div>
 
 <!-- AI -->
@@ -138,34 +116,85 @@ textarea{
 </div>
 
 <!-- VR -->
-<div class="panel" id="vrPanel">
-
-<h2 class="vrHeader">🟩 VR / HISTORY</h2>
-
+<div class="panel">
+<h2>🟩 VR / HISTORY</h2>
 <pre id="vrOut"></pre>
-
 </div>
 
 </div>
 
 <script>
 
-const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
-/* =====================
-   VR LOG（日付入り）
-===================== */
+/* =========================
+   GEMINI TRANSLATE
+========================= */
+async function translate(text){
+
+  const res = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: `Translate to English:\n${text}`
+          }]
+        }]
+      })
+    }
+  );
+
+  const data = await res.json();
+
+  const output =
+    data.candidates?.[0]?.content?.parts?.[0]?.text || "[error]";
+
+  return { input: text, output };
+}
+
+/* =========================
+   PROCESS
+========================= */
+async function process(){
+
+  const text = document.getElementById("rpgMemo").value;
+
+  const result = await translate(text);
+
+  document.getElementById("aiOut").innerText =
+`TRANSLATION
+----------------
+${result.input}
+↓
+${result.output}`;
+
+  pushVRLog(`TRANSLATE: ${result.input} → ${result.output}`);
+}
+
+/* =========================
+   CITY
+========================= */
+function setCity(type){
+
+  document.getElementById("rpgOut").innerText =
+`CITY:
+→ ${type.toUpperCase()}`;
+
+  pushVRLog(`CITY: ${type}`);
+}
+
+/* =========================
+   VR LOG
+========================= */
 function pushVRLog(text){
 
   const now = new Date();
-
-  const date = now.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit'
-  });
-
+  const date = now.toLocaleDateString('ja-JP');
   const time = now.toLocaleTimeString();
 
   const entry = `[${date} ${time}] ${text}`;
@@ -178,50 +207,21 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* VR RENDER */
+/* =========================
+   VR RENDER
+========================= */
 function renderVR(){
 
   const vr = document.getElementById("vrOut");
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
-  vr.innerText = "----------------\n" + logs.join("\n");
+  vr.innerText = logs.join("\n");
 
   vr.scrollTop = vr.scrollHeight;
 }
 
-/* CITY */
-function setCity(type){
-
-  document.getElementById("rpgOut").innerText =
-`CITY:
-→ ${type.toUpperCase()}`;
-
-  document.getElementById("aiOut").innerText =
-`AI TRANSFORM:
-INPUT: ${type}
-OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
-
-  pushVRLog(`RPG input: ${type}`);
-  pushVRLog(`AI transformed: ${type}`);
-  pushVRLog(`SYSTEM updated`);
-}
-
-/* MEMO */
-function saveMemo(){
-  localStorage.setItem(MEMO_KEY, document.getElementById("rpgMemo").value);
-  pushVRLog("memo saved");
-}
-
-function loadMemo(){
-  document.getElementById("rpgMemo").value =
-    localStorage.getItem(MEMO_KEY) || "";
-  pushVRLog("memo loaded");
-}
-
 /* INIT */
-loadMemo();
 renderVR();
-setCity("cyber");
 
 </script>
 
