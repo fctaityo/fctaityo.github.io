@@ -12,10 +12,54 @@ body{
   font-family:sans-serif;
 }
 
+/* ===== TOP BAR（今回の追加準備） ===== */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  background:#111;
+  border-bottom:1px solid #222;
+  z-index:999;
+}
+
+/* 左ロゴ */
+.logo{
+  font-weight:bold;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+/* 右ナビ（仮） */
+.nav{
+  display:flex;
+  gap:15px;
+}
+
+.nav a{
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  padding:6px 10px;
+  border:1px solid #333;
+  transition:0.2s;
+}
+
+.nav a:hover{
+  border-color:#8d5cff;
+}
+
+/* ===== メインレイアウト ===== */
 .wrap{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   height:100vh;
+  padding-top:60px; /* ★TOPBAR分ずらす */
 }
 
 .panel{
@@ -74,6 +118,21 @@ body.mode-rpg .panel{
 
 <body>
 
+<!-- ★TOP BAR（追加済み） -->
+<div class="topbar">
+
+  <div class="logo" onclick="location.href='index.html'">
+    FCTAITYO CITY
+  </div>
+
+  <div class="nav">
+    <a href="city.html?mode=rpg">RPG NODE</a>
+    <a href="city.html?mode=ai">AI NODE</a>
+    <a href="city.html?mode=vr">VR NODE</a>
+  </div>
+
+</div>
+
 <div class="wrap">
 
 <!-- RPG -->
@@ -119,15 +178,14 @@ let vrActive = false;
 let cityState = "cyber";
 
 /* =========================
-   VR LOG SYSTEM（完全制御版）
+   VR LOG SYSTEM
 ========================= */
 
 function startVRLog(type){
 
-  if(!vrActive) return; // ★VRモード以外は絶対動かさない
+  if(!vrActive) return;
 
   clearInterval(vrInterval);
-  vrInterval = null;
 
   const logs = {
     cyber: [
@@ -170,12 +228,10 @@ function setCity(type){
 
   cityState = type;
 
-  /* RPG */
   document.getElementById("rpgOut").innerText =
 `CURRENT DESIGN:
 → ${type.toUpperCase()} CITY`;
 
-  /* AI */
   let aiResult = "";
 
   switch(type){
@@ -198,14 +254,12 @@ function setCity(type){
 OUTPUT:
 ${aiResult}`;
 
-  /* VR表示リセット */
   document.getElementById("vrOut").innerText =
 `OBSERVATION LOG
 
 CITY TYPE: ${type}
 --- LIVE FEED START ---`;
 
-  /* ★重要：VRモード判定をここで固定 */
   vrActive = (mode === "vr");
 
   if(vrActive){
