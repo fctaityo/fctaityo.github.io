@@ -13,6 +13,7 @@ body{
   overflow:hidden;
 }
 
+/* topbar */
 .topbar{
   position:fixed;
   top:0;
@@ -36,6 +37,7 @@ body{
   white-space:nowrap;
 }
 
+/* main */
 .wrap{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
@@ -52,6 +54,7 @@ body{
   box-sizing:border-box;
 }
 
+/* ボタン */
 button{
   margin:10px 0;
   padding:10px;
@@ -61,11 +64,13 @@ button{
   cursor:pointer;
 }
 
+/* テキスト */
 pre{
   white-space:pre-wrap;
   color:inherit;
 }
 
+/* textarea */
 textarea{
   width:100%;
   height:120px;
@@ -79,37 +84,42 @@ textarea{
 }
 
 /* =========================
-   VR HEADER（完全修正版）
+   見出しサイズ統一（重要）
 ========================= */
-.vrHeader{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:#0a0a0a;
-
-  /* ★高さ固定（これが重要） */
-  height:48px;
-  display:flex;
-  align-items:center;
-
-  padding:0 0 0 0;
-  margin:0;
-
-  border-bottom:1px solid #222;
-}
-
-/* h2デフォルト余白消し */
-.vrHeader h2{
-  margin:0;
-  font-size:1.2em;
+h2{
+  font-size:18px;
+  margin:0 0 10px 0;
 }
 
 /* =========================
-   VRログ（ヘッダー分の逃げ）
+   VR HEADER（完全固定版）
 ========================= */
-#vrOut{
-  padding-top:12px;
+.vrHeader{
+  position:fixed;
+  top:60px; /* topbarの下に固定 */
+  right:0;
+  width:33.333%;
+  height:48px;
+
+  display:flex;
+  align-items:center;
+
+  background:#0a0a0a;
+  border-bottom:1px solid #222;
+  z-index:20;
+  padding:0 20px;
   box-sizing:border-box;
+}
+
+/* VRログ領域（ヘッダー分を確実に除外） */
+#vrOut{
+  margin-top:48px; /* ヘッダー高さぶん確保 */
+  padding-top:10px;
+}
+
+/* VR panelだけ調整 */
+#vrPanel{
+  position:relative;
 }
 
 </style>
@@ -150,7 +160,7 @@ textarea{
 <div class="panel" id="vrPanel">
 
 <div class="vrHeader">
-  <h2>🟩 VR / HISTORY</h2>
+  🟩 VR / HISTORY
 </div>
 
 <pre id="vrOut"></pre>
@@ -181,7 +191,6 @@ function pushVRLog(text){
 /* ===== VR RENDER ===== */
 function renderVR(){
 
-  const panel = document.getElementById("vrPanel");
   const vr = document.getElementById("vrOut");
 
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
@@ -189,10 +198,6 @@ function renderVR(){
   vr.innerText =
 `----------------
 ` + logs.join("\n");
-
-  requestAnimationFrame(() => {
-    panel.scrollTop = panel.scrollHeight;
-  });
 }
 
 /* ===== CITY ===== */
