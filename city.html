@@ -50,7 +50,6 @@ body.mode-ai{
   background:#0b1020;
   color:#cfe3ff;
 }
-
 body.mode-ai .panel{
   border-color:#2b4d7a;
 }
@@ -59,7 +58,6 @@ body.mode-vr{
   background:#061a14;
   color:#bfffe5;
 }
-
 body.mode-vr .panel{
   border-color:#1f6b4d;
 }
@@ -68,7 +66,6 @@ body.mode-rpg{
   background:#1a0f0f;
   color:#ffe0c8;
 }
-
 body.mode-rpg .panel{
   border-color:#7a3b2b;
 }
@@ -107,7 +104,7 @@ body.mode-rpg .panel{
 <script>
 
 /* =========================
-   MODE & CITY 分離設計
+   INIT
 ========================= */
 
 const params = new URLSearchParams(location.search);
@@ -115,19 +112,22 @@ const params = new URLSearchParams(location.search);
 const mode = params.get("mode") || "rpg";
 const cityType = params.get("city") || "cyber";
 
-/* 見た目モード適用 */
 document.body.classList.add("mode-" + mode);
 
+let vrInterval = null;
+let vrActive = false;
 let cityState = "cyber";
-let vrInterval;
 
 /* =========================
-   VR LOG SYSTEM（安全版）
+   VR LOG SYSTEM（完全制御版）
 ========================= */
 
 function startVRLog(type){
 
+  if(!vrActive) return; // ★VRモード以外は絶対動かさない
+
   clearInterval(vrInterval);
+  vrInterval = null;
 
   const logs = {
     cyber: [
@@ -148,7 +148,6 @@ function startVRLog(type){
   };
 
   const list = logs[type] || logs.cyber;
-
   let i = 0;
 
   vrInterval = setInterval(() => {
@@ -199,21 +198,25 @@ function setCity(type){
 OUTPUT:
 ${aiResult}`;
 
-  /* VR RESET */
+  /* VR表示リセット */
   document.getElementById("vrOut").innerText =
 `OBSERVATION LOG
 
 CITY TYPE: ${type}
 --- LIVE FEED START ---`;
 
-  /* ★重要：VRモード時だけログ起動 */
-  if(mode === "vr"){
+  /* ★重要：VRモード判定をここで固定 */
+  vrActive = (mode === "vr");
+
+  if(vrActive){
     startVRLog(type);
+  } else {
+    clearInterval(vrInterval);
   }
 }
 
 /* =========================
-   INIT
+   START
 ========================= */
 
 setCity(cityType);
