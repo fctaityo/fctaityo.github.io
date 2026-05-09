@@ -78,21 +78,40 @@ textarea{
   resize:none;
 }
 
-/* ★VRヘッダ（修正） */
+/* =========================
+   VR HEADER（完全修正版）
+========================= */
 .vrHeader{
   position:sticky;
   top:0;
+  z-index:20;
   background:#0a0a0a;
-  padding:10px 0;
-  border-bottom:1px solid #222;
-  z-index:10;
+
+  /* ★高さ固定（これが重要） */
+  height:48px;
+  display:flex;
+  align-items:center;
+
+  padding:0 0 0 0;
   margin:0;
+
+  border-bottom:1px solid #222;
 }
 
-/* ★ログがヘッダに潜らないようにする */
-#vrOut{
-  padding-top:50px;
+/* h2デフォルト余白消し */
+.vrHeader h2{
+  margin:0;
+  font-size:1.2em;
 }
+
+/* =========================
+   VRログ（ヘッダー分の逃げ）
+========================= */
+#vrOut{
+  padding-top:12px;
+  box-sizing:border-box;
+}
+
 </style>
 </head>
 
@@ -130,7 +149,10 @@ textarea{
 <!-- VR -->
 <div class="panel" id="vrPanel">
 
-<h2 class="vrHeader">🟩 VR / HISTORY</h2>
+<div class="vrHeader">
+  <h2>🟩 VR / HISTORY</h2>
+</div>
+
 <pre id="vrOut"></pre>
 
 </div>
