@@ -28,15 +28,11 @@ body{
   box-sizing:border-box;
 }
 
-.logo{
-  font-weight:bold;
-  letter-spacing:2px;
-  cursor:pointer;
-}
-
 .logo a{
   color:inherit;
   text-decoration:none;
+  font-weight:bold;
+  letter-spacing:2px;
 }
 
 .wrap{
@@ -71,10 +67,6 @@ button{
   cursor:pointer;
 }
 
-pre{
-  white-space:pre-wrap;
-}
-
 textarea{
   width:100%;
   height:120px;
@@ -87,7 +79,6 @@ textarea{
   resize:none;
 }
 
-/* AI / VR スクロール安定化 */
 #aiOut, #vrOut{
   flex:1;
   overflow:auto;
@@ -115,7 +106,7 @@ textarea{
 <button onclick="setCity('real')">REAL CITY</button>
 <button onclick="setCity('mixed')">MIX CITY</button>
 
-<pre id="rpgOut"></pre>
+<div id="rpgOut"></div>
 
 <textarea id="rpgMemo"></textarea>
 
@@ -141,34 +132,28 @@ textarea{
 const VR_KEY = "vr_history";
 
 /* =========================
-   GEMINI TRANSLATE（安定版）
+   TRANSLATE (OpenAI仮接続版)
 ========================= */
 async function translate(text){
 
   try{
 
-    const res = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=YOUR_API_KEY",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type":"application/json"
-        },
-        body: JSON.stringify({
-          contents:[{
-            parts:[{
-              text:`Translate to English:\n${text}`
-            }]
-          }]
-        })
-      }
-    );
+    const res = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer YOUR_API_KEY_HERE" // ←ここだけ差し替え
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        input: `Translate to English:\n${text}`
+      })
+    });
 
     const data = await res.json();
 
-    console.log("Gemini response:", data);
+    console.log("API response:", data);
 
-    // ❗APIエラー明示化
     if(data.error){
       return {
         input:text,
@@ -176,9 +161,8 @@ async function translate(text){
       };
     }
 
-    // ❗安全取得
     const output =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      data?.output?.[0]?.content?.[0]?.text;
 
     return {
       input:text,
@@ -236,10 +220,7 @@ function setCity(type){
 function pushVRLog(text){
 
   const now = new Date();
-  const date = now.toLocaleDateString('ja-JP');
-  const time = now.toLocaleTimeString();
-
-  const entry = `[${date} ${time}] ${text}`;
+  const entry = `[${now.toLocaleString()}] ${text}`;
 
   let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
   logs.push(entry);
@@ -262,7 +243,6 @@ function renderVR(){
   vr.scrollTop = vr.scrollHeight;
 }
 
-/* INIT */
 renderVR();
 
 </script>
