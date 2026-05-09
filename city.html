@@ -12,7 +12,7 @@ body{
   font-family:sans-serif;
 }
 
-/* ===== TOP BAR（今回の追加準備） ===== */
+/* ===== TOP BAR ===== */
 .topbar{
   position:fixed;
   top:0;
@@ -26,6 +26,7 @@ body{
   background:#111;
   border-bottom:1px solid #222;
   z-index:999;
+  box-sizing:border-box;
 }
 
 /* 左ロゴ */
@@ -33,12 +34,16 @@ body{
   font-weight:bold;
   letter-spacing:2px;
   cursor:pointer;
+  white-space:nowrap;
 }
 
-/* 右ナビ（仮） */
+/* 右ナビ */
 .nav{
   display:flex;
-  gap:15px;
+  gap:12px;
+  align-items:center;
+  flex-shrink:0;
+  white-space:nowrap;
 }
 
 .nav a{
@@ -48,6 +53,7 @@ body{
   padding:6px 10px;
   border:1px solid #333;
   transition:0.2s;
+  white-space:nowrap;
 }
 
 .nav a:hover{
@@ -59,7 +65,7 @@ body{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   height:100vh;
-  padding-top:60px; /* ★TOPBAR分ずらす */
+  padding-top:60px;
 }
 
 .panel{
@@ -118,7 +124,7 @@ body.mode-rpg .panel{
 
 <body>
 
-<!-- ★TOP BAR（追加済み） -->
+<!-- TOP BAR -->
 <div class="topbar">
 
   <div class="logo" onclick="location.href='index.html'">
@@ -162,10 +168,6 @@ body.mode-rpg .panel{
 
 <script>
 
-/* =========================
-   INIT
-========================= */
-
 const params = new URLSearchParams(location.search);
 
 const mode = params.get("mode") || "rpg";
@@ -176,10 +178,6 @@ document.body.classList.add("mode-" + mode);
 let vrInterval = null;
 let vrActive = false;
 let cityState = "cyber";
-
-/* =========================
-   VR LOG SYSTEM
-========================= */
 
 function startVRLog(type){
 
@@ -219,10 +217,6 @@ function startVRLog(type){
     i++;
   }, 2000);
 }
-
-/* =========================
-   CITY SYSTEM
-========================= */
 
 function setCity(type){
 
@@ -268,10 +262,6 @@ CITY TYPE: ${type}
     clearInterval(vrInterval);
   }
 }
-
-/* =========================
-   START
-========================= */
 
 setCity(cityType);
 
