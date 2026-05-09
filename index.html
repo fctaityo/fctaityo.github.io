@@ -26,6 +26,52 @@ body{
   overflow:hidden;
 }
 
+/* =========================
+   HEADER ★復活
+========================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 0;
+}
+
+.logo{
+  font-family:'Orbitron';
+  letter-spacing:4px;
+  font-size:2rem;
+  cursor:pointer;
+}
+
+.logo span{
+  color:var(--mix);
+}
+
+nav a{
+  font-family:'Orbitron';
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
+  padding:8px 12px;
+  border:1px solid #333;
+}
+
+nav a:hover{
+  border-color:var(--cyber);
+}
+
+/* =========================
+   LAYOUT
+========================= */
 .container{
   width:92%;
   max-width:1400px;
@@ -40,6 +86,9 @@ body{
   padding-top:20px;
 }
 
+/* =========================
+   LEFT
+========================= */
 .selectPanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -59,6 +108,9 @@ body{
   cursor:pointer;
 }
 
+/* =========================
+   RIGHT
+========================= */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -98,6 +150,21 @@ body{
 
 <body>
 
+<!-- 🔥 HEADER復活 -->
+<header>
+  <div class="container header-inner">
+
+    <div class="logo" onclick="location.reload()">
+      FCTAITYO <span>CITY</span>
+    </div>
+
+    <nav>
+      <a href="city.html">NODE SYSTEM</a>
+    </nav>
+
+  </div>
+</header>
+
 <div class="container main">
 
 <!-- LEFT -->
@@ -128,9 +195,6 @@ body{
 
 const API = "http://localhost:3000";
 
-/* =========================
-   CITY SELECT
-========================= */
 async function selectCity(key){
 
   addLog("CITY REQUEST: " + key);
@@ -154,78 +218,53 @@ async function selectCity(key){
   }
 }
 
-/* =========================
-   STATE FETCH
-========================= */
 async function refreshState(){
 
   try{
     const res = await fetch(API + "/state");
     const data = await res.json();
 
-    const memSize =
-      data.memorySize ??
-      data.debug?.memorySize ??
-      "unknown";
-
-    const lastSync =
-      data.lastSync ?? "N/A";
-
-    const recent =
-      data.recentMemory ?? "NO DATA";
-
-    const profile = data.profile || {};
-
     document.getElementById("stateView").innerText =
 `◆ SERVER CONTROLLED CITY
 
 CURRENT CITY:
-${data.city || "unknown"}
+${data.city}
 
 STATUS:
 ACTIVE NODE STREAM
 
 LAST SYNC:
-${lastSync}
+${data.lastSync || "N/A"}
 
 MEMORY SIZE:
-${memSize}
+${data.memorySize ?? data.debug?.memorySize ?? "unknown"}
 
 RECENT MEMORY:
-${recent}
+${data.recentMemory || "NO DATA"}
 
 PROFILE:
-${profile.state || ""}
+${data.profile?.state || ""}
 
 BEHAVIOR:
-${profile.behavior || ""}
+${data.profile?.behavior || ""}
 
 SOURCE: /state
 `;
 
     document.getElementById("syncState").innerText =
-`SYNC: ${data.city || "?"} / MEM:${memSize}`;
+`SYNC: ${data.city} / MEM:${data.memorySize ?? "?"}`;
 
   }catch(e){
     addLog("STATE ERROR: " + e.message);
   }
 }
 
-/* =========================
-   LOG
-========================= */
 function addLog(text){
-
   const el = document.getElementById("logBox");
   const time = new Date().toLocaleTimeString();
-
   el.innerText += `[${time}] ${text}\n`;
-  el.scrollTop = el.scrollHeight;
 }
 
-/* =========================
-   LOOP
-========================= */
 setInterval(refreshState, 2000);
 
 </script>
