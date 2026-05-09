@@ -11,6 +11,7 @@ body{
   color:#fff;
   font-family:sans-serif;
   overflow-x:hidden;
+  transition:0.3s ease; /* ★モード変化を滑らかに */
 }
 
 /* ===== TOP BAR ===== */
@@ -37,7 +38,7 @@ body{
   white-space:nowrap;
 }
 
-/* ===== MODE ===== */
+/* ===== MODE INDICATOR ===== */
 .mode-indicator{
   position:absolute;
   left:50%;
@@ -47,11 +48,8 @@ body{
   border:1px solid #333;
   background:#0f0f0f;
   color:#aaa;
+  transition:0.3s;
 }
-
-body.mode-rpg .mode-indicator{ color:#ffb8a8; border-color:#7a3b2b; }
-body.mode-ai .mode-indicator{ color:#8ec5ff; border-color:#2b4d7a; }
-body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
 
 /* ===== NAV ===== */
 .nav{
@@ -79,31 +77,75 @@ body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
   border-right:1px solid #222;
   padding:20px;
   overflow:auto;
+  transition:0.3s;
 }
 
 button{
   margin:10px 0;
   padding:10px;
   background:#222;
-  color:#fff;
+  color:inherit;
   border:1px solid #444;
   cursor:pointer;
 }
 
 pre{
   white-space:pre-wrap;
-  color:#aaa;
+  color:inherit;
 }
 
-/* ===== MEMO UI ===== */
+/* ===== MEMO ===== */
 textarea{
   width:100%;
   height:120px;
   margin-top:15px;
   background:#111;
-  color:#fff;
+  color:inherit;
   border:1px solid #333;
   padding:10px;
+  box-sizing:border-box;
+  resize:none;
+}
+
+/* ===== MODE THEMES ===== */
+
+/* RPG */
+body.mode-rpg{
+  background:#1a0f0f;
+  color:#ffe0c8;
+}
+body.mode-rpg .mode-indicator{
+  color:#ffb8a8;
+  border-color:#7a3b2b;
+}
+body.mode-rpg .panel{
+  border-color:#7a3b2b;
+}
+
+/* AI */
+body.mode-ai{
+  background:#0b1020;
+  color:#cfe3ff;
+}
+body.mode-ai .mode-indicator{
+  color:#8ec5ff;
+  border-color:#2b4d7a;
+}
+body.mode-ai .panel{
+  border-color:#2b4d7a;
+}
+
+/* VR */
+body.mode-vr{
+  background:#061a14;
+  color:#bfffe5;
+}
+body.mode-vr .mode-indicator{
+  color:#8fffd0;
+  border-color:#1f6b4d;
+}
+body.mode-vr .panel{
+  border-color:#1f6b4d;
 }
 
 </style>
@@ -139,8 +181,7 @@ textarea{
 
 <pre id="rpgOut"></pre>
 
-<!-- ★メモ機能 -->
-<textarea id="rpgMemo" placeholder="RPGメモを書く"></textarea>
+<textarea id="rpgMemo" placeholder="RPGメモ"></textarea>
 <button onclick="saveMemo()">SAVE</button>
 <button onclick="loadMemo()">LOAD</button>
 
@@ -166,8 +207,10 @@ const params = new URLSearchParams(location.search);
 const mode = params.get("mode") || "rpg";
 const cityType = params.get("city") || "cyber";
 
+/* ===== MODE APPLY ===== */
 document.body.classList.add("mode-" + mode);
-document.getElementById("modeIndicator").innerText = mode.toUpperCase() + " MODE";
+document.getElementById("modeIndicator").innerText =
+mode.toUpperCase() + " MODE";
 
 function setCity(type){
 
@@ -197,7 +240,6 @@ function loadMemo(){
 }
 
 loadMemo();
-
 setCity(cityType);
 
 </script>
