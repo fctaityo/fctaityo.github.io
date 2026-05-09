@@ -11,178 +11,240 @@
 
   <style>
 
-    *{margin:0;padding:0;box-sizing:border-box;}
-
-    :root{
-      --bg:#090909;
-      --text:#f5f5f5;
-      --sub:#aaa;
-      --main:#8d5cff;
-      --main2:#4b8dff;
-      --line:rgba(255,255,255,0.08);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body{
+    :root {
+      --bg: #090909;
+      --text: #f5f5f5;
+      --sub: #aaa;
+      --main: #8d5cff;
+      --main2: #4b8dff;
+      --line: rgba(255,255,255,0.08);
+    }
+
+    body {
       background:
         radial-gradient(circle at top left, rgba(141,92,255,0.18), transparent 30%),
         radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 25%),
         var(--bg);
-      color:var(--text);
-      font-family:'Noto Sans JP',sans-serif;
-      overflow-x:hidden;
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      overflow-x: hidden;
     }
 
-    .container{width:92%;max-width:1450px;margin:auto;}
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 92%;
+      max-width: 1450px;
+      margin: auto;
+    }
 
     /* HEADER */
 
-    header{
-      position:sticky;top:0;z-index:999;
-      backdrop-filter:blur(12px);
-      background:rgba(10,10,10,0.7);
-      border-bottom:1px solid var(--line);
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.7);
+      border-bottom: 1px solid var(--line);
     }
 
-    .header-inner{
-      display:flex;justify-content:space-between;align-items:center;padding:20px 0;
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
     }
 
-    .logo{
-      font-family:'Orbitron';font-size:1.8rem;font-weight:800;letter-spacing:3px;
+    .logo {
+      font-family: 'Orbitron';
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
     }
 
-    .logo span{color:var(--main);}
+    .logo span { color: var(--main); }
 
-    nav{display:flex;gap:28px;}
-    nav a{color:#ccc;text-decoration:none;}
-
-    /* CITY GRID */
-
-    .city-grid{
-      display:grid;
-      grid-template-columns:1.2fr 1fr;
-      gap:40px;
-      margin-top:60px;
+    nav {
+      display: flex;
+      gap: 24px;
+      font-size: 0.95rem;
     }
 
-    .city-main{
-      display:flex;
-      flex-direction:column;
-      gap:20px;
+    nav a { color: #ccc; }
+
+    /* CITY LAYOUT */
+
+    .city {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      margin-top: 60px;
     }
 
-    .city-title{
-      font-family:'Orbitron';
-      font-size:3rem;
-      font-weight:800;
+    .title {
+      font-family: 'Orbitron';
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
-    .city-sub{
-      color:var(--sub);
-      line-height:1.8;
+    .sub {
+      color: var(--sub);
+      line-height: 1.8;
+      margin-bottom: 30px;
     }
 
-    .node-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:20px;
-      margin-top:20px;
+    /* NODES */
+
+    .node-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
     }
 
-    .node{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:18px;
-      background:rgba(255,255,255,0.03);
-      transition:0.2s;
+    .node {
+      border: 1px solid var(--line);
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .node:hover{
-      transform:translateY(-3px);
-      border-color:rgba(141,92,255,0.4);
+    .node:hover {
+      transform: translateY(-3px);
+      border-color: rgba(141,92,255,0.5);
     }
 
-    .node h3{
-      font-size:1.1rem;
-      margin-bottom:8px;
+    .node h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
     }
 
-    .node p{
-      font-size:0.9rem;
-      color:var(--sub);
-      line-height:1.6;
+    .node p {
+      font-size: 0.85rem;
+      color: var(--sub);
     }
 
-    /* VISUAL PANEL */
+    /* VISUAL */
 
-    .panel{
-      border:1px solid var(--line);
-      border-radius:28px;
-      overflow:hidden;
-      position:relative;
+    .panel {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      position: relative;
     }
 
-    .panel img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      height:520px;
+    .panel img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
     }
 
-    .overlay{
-      position:absolute;
-      bottom:20px;
-      left:20px;
-      background:rgba(0,0,0,0.6);
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      color:#fff;
+    .overlay {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+
+    /* NODE PANEL */
+
+    .node-panel {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: 380px;
+      height: 100vh;
+      background: rgba(10,10,10,0.95);
+      border-left: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease;
+      z-index: 9999;
+    }
+
+    .node-panel.active {
+      right: 0;
+    }
+
+    .node-panel-inner {
+      padding: 30px;
+    }
+
+    .node-panel-inner h2 {
+      font-family: 'Orbitron';
+      margin-bottom: 20px;
+    }
+
+    .node-panel-inner p {
+      color: var(--sub);
+      line-height: 1.8;
+    }
+
+    .close-btn {
+      margin-top: 30px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
     }
 
     /* LABS */
 
-    .labs{
-      margin-top:80px;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:30px;
-      font-family:monospace;
-      background:#050505;
+    .labs {
+      margin-top: 80px;
+      background: #050505;
+      border: 1px solid var(--line);
+      padding: 25px;
+      border-radius: 20px;
+      font-family: monospace;
     }
 
-    .line{color:#ddd;margin-bottom:10px;}
+    .line { margin-bottom: 10px; color: #ddd; }
 
     /* FOOTER */
 
-    footer{
-      margin-top:120px;
-      border-top:1px solid var(--line);
-      padding:50px 0;
+    footer {
+      margin-top: 120px;
+      border-top: 1px solid var(--line);
+      padding: 50px 0;
     }
 
-    .footer-inner{
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:20px;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    .footer-logo{
-      font-family:'Orbitron';
-      letter-spacing:2px;
+    .footer-logo {
+      font-family: 'Orbitron';
     }
 
-    .footer-text{color:#777;}
+    .footer-text {
+      color: #777;
+    }
 
     @media(max-width:900px){
-      .city-grid{grid-template-columns:1fr;}
+      .city { grid-template-columns: 1fr; }
     }
 
   </style>
 
 </head>
+
 <body>
 
 <header>
@@ -198,29 +260,27 @@
 
 <main class="container">
 
-<!-- CITY CORE -->
+<!-- CORE -->
 
-<section class="city-grid" id="core">
+<section class="city" id="core">
 
-  <div class="city-main">
+  <div>
 
-    <div class="city-title">CORE SYSTEM LAB</div>
-
-    <div class="city-sub">
+    <div class="title">CORE SYSTEM LAB</div>
+    <div class="sub">
       AI生成・都市構造・データ観測・UI実験を行う中枢区画。
-      FCTAITYO CITYのコアプロセスを管理するメインノード。
     </div>
 
     <div class="node-grid">
 
-      <div class="node">
+      <div class="node" onclick="openNode('rpg')">
         <h3>不存在RPG計画</h3>
-        <p>都市型オープンワールド設計区画</p>
+        <p>都市型オープンワールド設計</p>
       </div>
 
-      <div class="node">
+      <div class="node" onclick="openNode('ai')">
         <h3>AI NODE</h3>
-        <p>生成Web・AIサイト実験室</p>
+        <p>AIサイト実験室</p>
       </div>
 
     </div>
@@ -228,40 +288,38 @@
   </div>
 
   <div class="panel">
-    <img src="https://picsum.photos/seed/city/1200/800" />
-    <div class="overlay">CORE DISTRICT ACTIVE</div>
+    <img src="https://picsum.photos/seed/core/1200/800">
+    <div class="overlay">CORE DISTRICT</div>
   </div>
 
 </section>
 
 <!-- GATEWAY -->
 
-<section class="city-grid" id="gateway">
+<section class="city" id="gateway">
 
   <div class="panel">
-    <img src="https://picsum.photos/seed/gateway/1200/800" />
-    <div class="overlay">NETWORK HUB ONLINE</div>
+    <img src="https://picsum.photos/seed/gateway/1200/800">
+    <div class="overlay">GATEWAY NETWORK</div>
   </div>
 
-  <div class="city-main">
+  <div>
 
-    <div class="city-title">GATEWAY NETWORK</div>
-
-    <div class="city-sub">
-      GitHub / SNS / 外部サービスへの接続ハブ。
-      都市外部との通信を担うインターフェース領域。
+    <div class="title">GATEWAY NETWORK</div>
+    <div class="sub">
+      外部接続ハブ / SNS / GitHub / VRログ連携
     </div>
 
     <div class="node-grid">
 
-      <div class="node">
+      <div class="node" onclick="openNode('vr')">
         <h3>VR NODE</h3>
-        <p>VR SOCIAL LOG / 非言語解析</p>
+        <p>非言語コミュニケーション</p>
       </div>
 
       <div class="node">
         <h3>DATA LINK</h3>
-        <p>外部API・SNS連携システム</p>
+        <p>外部API接続</p>
       </div>
 
     </div>
@@ -273,19 +331,60 @@
 <!-- LABS -->
 
 <section class="labs" id="labs">
+
 <div class="line">booting FCTAITYO CITY...</div>
-<div class="line">core systems online</div>
-<div class="line">gateway sync complete</div>
+<div class="line">core system online</div>
+<div class="line">gateway sync active</div>
+
 </section>
 
 </main>
 
-<footer>
-  <div class="container footer-inner">
-    <div class="footer-logo">FCTAITYO CITY SYSTEM</div>
-    <div class="footer-text">© 2026 DIGITAL URBAN NETWORK</div>
+<!-- NODE PANEL -->
+
+<div id="nodePanel" class="node-panel">
+
+  <div class="node-panel-inner">
+
+    <h2 id="nodeTitle">TITLE</h2>
+    <p id="nodeDesc">DESCRIPTION</p>
+
+    <button class="close-btn" onclick="closeNode()">CLOSE</button>
+
   </div>
-</footer>
+
+</div>
+
+<!-- SCRIPT -->
+
+<script>
+
+const data = {
+  rpg: {
+    title: "不存在RPG計画",
+    desc: "都市型オープンワールド設計区画。仮想都市エンタメ中枢。"
+  },
+  ai: {
+    title: "AI NODE",
+    desc: "AIサイト実験室。生成Webと都市OS研究領域。"
+  },
+  vr: {
+    title: "VR NODE",
+    desc: "VR SOCIAL LOG。非言語コミュニケーション解析区画。"
+  }
+};
+
+function openNode(id){
+  document.getElementById("nodePanel").classList.add("active");
+  document.getElementById("nodeTitle").innerText = data[id].title;
+  document.getElementById("nodeDesc").innerText = data[id].desc;
+}
+
+function closeNode(){
+  document.getElementById("nodePanel").classList.remove("active");
+}
+
+</script>
 
 </body>
 </html>
