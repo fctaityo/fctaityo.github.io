@@ -11,7 +11,6 @@ body{
   color:#fff;
   font-family:sans-serif;
   overflow-x:hidden;
-  transition:0.3s ease;
 }
 
 /* ===== TOP BAR ===== */
@@ -36,32 +35,6 @@ body{
   letter-spacing:2px;
   cursor:pointer;
   white-space:nowrap;
-}
-
-/* ===== MODE INDICATOR ===== */
-.mode-indicator{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:13px;
-  padding:6px 14px;
-  border:1px solid #333;
-  background:#0f0f0f;
-  color:#aaa;
-}
-
-/* ===== NAV ===== */
-.nav{
-  display:flex;
-  gap:10px;
-}
-
-.nav a{
-  color:#aaa;
-  text-decoration:none;
-  font-size:13px;
-  padding:6px 10px;
-  border:1px solid #333;
 }
 
 /* ===== LAYOUT ===== */
@@ -105,18 +78,15 @@ textarea{
   resize:none;
 }
 
-/* ===== MODE THEMES ===== */
-body.mode-rpg{ background:#1a0f0f; color:#ffe0c8; }
-body.mode-ai{ background:#0b1020; color:#cfe3ff; }
-body.mode-vr{ background:#061a14; color:#bfffe5; }
+/* ===== SIMPLE THEME (固定色) ===== */
+body{
+  background:#0a0a0a;
+  color:#ddd;
+}
 
-body.mode-rpg .panel{ border-color:#7a3b2b; }
-body.mode-ai .panel{ border-color:#2b4d7a; }
-body.mode-vr .panel{ border-color:#1f6b4d; }
-
-body.mode-rpg .mode-indicator{ color:#ffb8a8; border-color:#7a3b2b; }
-body.mode-ai .mode-indicator{ color:#8ec5ff; border-color:#2b4d7a; }
-body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
+.panel{
+  border-color:#333;
+}
 
 </style>
 </head>
@@ -129,21 +99,13 @@ body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
     FCTAITYO CITY
   </div>
 
-  <div class="mode-indicator" id="modeIndicator">MODE</div>
-
-  <div class="nav">
-    <a href="city.html?mode=rpg">RPG</a>
-    <a href="city.html?mode=ai">AI</a>
-    <a href="city.html?mode=vr">VR</a>
-  </div>
-
 </div>
 
 <div class="wrap">
 
 <!-- RPG -->
 <div class="panel">
-<h2>🟥 RPG / DESIGN</h2>
+<h2>🟥 RPG / INPUT</h2>
 
 <button onclick="setCity('cyber')">CYBER CITY</button>
 <button onclick="setCity('real')">REAL CITY</button>
@@ -159,13 +121,13 @@ body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
 
 <!-- AI -->
 <div class="panel">
-<h2>🟦 AI NODE</h2>
+<h2>🟦 AI / TRANSFORM</h2>
 <pre id="aiOut"></pre>
 </div>
 
 <!-- VR -->
 <div class="panel">
-<h2>🟩 VR NODE / HISTORY</h2>
+<h2>🟩 VR / HISTORY</h2>
 <pre id="vrOut"></pre>
 </div>
 
@@ -173,30 +135,16 @@ body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
 
 <script>
 
-const params = new URLSearchParams(location.search);
-const mode = params.get("mode") || "rpg";
-const cityType = params.get("city") || "cyber";
+const MEMO_KEY = "memo_rpg";
 
-/* ===== MODE ===== */
-document.body.classList.add("mode-" + mode);
-document.getElementById("modeIndicator").innerText =
-mode.toUpperCase() + " MODE";
-
-/* ===== MEMO KEYS ===== */
-const MEMO_KEY = {
-  rpg: "memo_rpg",
-  ai: "memo_ai",
-  vr: "memo_vr"
-}[mode];
-
-/* ===== VR HISTORY CORE ===== */
+/* ===== VR LOG CORE ===== */
 function pushVRLog(text){
   const vr = document.getElementById("vrOut");
   const time = new Date().toLocaleTimeString();
   vr.innerText += `\n[${time}] ${text}`;
 }
 
-/* ===== CITY ===== */
+/* ===== CITY FLOW ===== */
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -204,17 +152,17 @@ function setCity(type){
 → ${type.toUpperCase()}`;
 
   document.getElementById("aiOut").innerText =
-`AI OUTPUT:
-${type} processed`;
+`AI TRANSFORM:
+INPUT: ${type}
+OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
 
   document.getElementById("vrOut").innerText =
 `VR HISTORY
 ----------------`;
 
-  /* ★ VRに記録 */
-  pushVRLog(`RPG: city changed to ${type}`);
-  pushVRLog(`AI: processing ${type}`);
-  pushVRLog(`SYSTEM: state updated`);
+  pushVRLog(`RPG input: ${type}`);
+  pushVRLog(`AI transformed: ${type}`);
+  pushVRLog(`SYSTEM updated`);
 }
 
 /* ===== MEMO ===== */
@@ -222,18 +170,18 @@ function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
 
-  pushVRLog("RPG: memo saved");
+  pushVRLog("memo saved");
 }
 
 function loadMemo(){
   document.getElementById("rpgMemo").value =
     localStorage.getItem(MEMO_KEY) || "";
 
-  pushVRLog("RPG: memo loaded");
+  pushVRLog("memo loaded");
 }
 
 loadMemo();
-setCity(cityType);
+setCity("cyber");
 
 </script>
 
