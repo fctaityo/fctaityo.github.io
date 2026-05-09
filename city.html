@@ -48,7 +48,6 @@ body{
   border:1px solid #333;
   background:#0f0f0f;
   color:#aaa;
-  transition:0.3s;
 }
 
 /* ===== NAV ===== */
@@ -107,35 +106,17 @@ textarea{
 }
 
 /* ===== MODE THEMES ===== */
-body.mode-rpg{
-  background:#1a0f0f;
-  color:#ffe0c8;
-}
-body.mode-ai{
-  background:#0b1020;
-  color:#cfe3ff;
-}
-body.mode-vr{
-  background:#061a14;
-  color:#bfffe5;
-}
+body.mode-rpg{ background:#1a0f0f; color:#ffe0c8; }
+body.mode-ai{ background:#0b1020; color:#cfe3ff; }
+body.mode-vr{ background:#061a14; color:#bfffe5; }
 
 body.mode-rpg .panel{ border-color:#7a3b2b; }
 body.mode-ai .panel{ border-color:#2b4d7a; }
 body.mode-vr .panel{ border-color:#1f6b4d; }
 
-body.mode-rpg .mode-indicator{
-  color:#ffb8a8;
-  border-color:#7a3b2b;
-}
-body.mode-ai .mode-indicator{
-  color:#8ec5ff;
-  border-color:#2b4d7a;
-}
-body.mode-vr .mode-indicator{
-  color:#8fffd0;
-  border-color:#1f6b4d;
-}
+body.mode-rpg .mode-indicator{ color:#ffb8a8; border-color:#7a3b2b; }
+body.mode-ai .mode-indicator{ color:#8ec5ff; border-color:#2b4d7a; }
+body.mode-vr .mode-indicator{ color:#8fffd0; border-color:#1f6b4d; }
 
 </style>
 </head>
@@ -184,7 +165,7 @@ body.mode-vr .mode-indicator{
 
 <!-- VR -->
 <div class="panel">
-<h2>🟩 VR NODE</h2>
+<h2>🟩 VR NODE / HISTORY</h2>
 <pre id="vrOut"></pre>
 </div>
 
@@ -201,12 +182,19 @@ document.body.classList.add("mode-" + mode);
 document.getElementById("modeIndicator").innerText =
 mode.toUpperCase() + " MODE";
 
-/* ===== MEMO KEYS（ここが本体修正） ===== */
+/* ===== MEMO KEYS ===== */
 const MEMO_KEY = {
   rpg: "memo_rpg",
   ai: "memo_ai",
   vr: "memo_vr"
 }[mode];
+
+/* ===== VR HISTORY CORE ===== */
+function pushVRLog(text){
+  const vr = document.getElementById("vrOut");
+  const time = new Date().toLocaleTimeString();
+  vr.innerText += `\n[${time}] ${text}`;
+}
 
 /* ===== CITY ===== */
 function setCity(type){
@@ -220,19 +208,28 @@ function setCity(type){
 ${type} processed`;
 
   document.getElementById("vrOut").innerText =
-`VR LOG:
-tracking ${type}`;
+`VR HISTORY
+----------------`;
+
+  /* ★ VRに記録 */
+  pushVRLog(`RPG: city changed to ${type}`);
+  pushVRLog(`AI: processing ${type}`);
+  pushVRLog(`SYSTEM: state updated`);
 }
 
 /* ===== MEMO ===== */
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
+
+  pushVRLog("RPG: memo saved");
 }
 
 function loadMemo(){
   document.getElementById("rpgMemo").value =
     localStorage.getItem(MEMO_KEY) || "";
+
+  pushVRLog("RPG: memo loaded");
 }
 
 loadMemo();
