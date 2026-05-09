@@ -8,18 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 :root{
   --bg:#0a0a0a;
   --line:rgba(255,255,255,0.08);
   --text:#f5f5f5;
-  --sub:#aaa;
   --main:#8d5cff;
   --cyber:#00e5ff;
   --real:#7CFF6B;
@@ -33,9 +27,6 @@ body{
   overflow:hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
 header{
   position:sticky;
   top:0;
@@ -59,28 +50,8 @@ header{
   cursor:pointer;
 }
 
-.logo span{
-  color:var(--main);
-}
+.logo span{color:var(--main);}
 
-nav a{
-  font-family:'Orbitron';
-  color:var(--text);
-  text-decoration:none;
-  font-size:14px;
-  padding:8px 12px;
-  border:1px solid #333;
-  transition:0.2s;
-}
-
-nav a:hover{
-  border-color:var(--main);
-  box-shadow:0 0 10px rgba(141,92,255,0.3);
-}
-
-/* =========================
-   LAYOUT
-========================= */
 .container{
   width:92%;
   max-width:1400px;
@@ -95,9 +66,6 @@ nav a:hover{
   padding-top:20px;
 }
 
-/* =========================
-   CENTER PANEL
-========================= */
 .selectPanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -114,23 +82,9 @@ nav a:hover{
   background:#151515;
   color:var(--text);
   font-family:'Orbitron';
-  letter-spacing:2px;
   cursor:pointer;
-  transition:0.2s;
 }
 
-.cityBtn:hover{
-  transform:translateY(-3px);
-  border-color:var(--main);
-}
-
-.cyber:hover{ border-color:var(--cyber); }
-.real:hover{ border-color:var(--real); }
-.mix:hover{ border-color:var(--mix); }
-
-/* =========================
-   RIGHT OBSERVER
-========================= */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -154,6 +108,12 @@ nav a:hover{
   padding-top:15px;
 }
 
+.sync{
+  margin-top:10px;
+  font-size:12px;
+  color:#777;
+}
+
 .log{
   margin-top:20px;
   font-size:0.8rem;
@@ -163,63 +123,26 @@ nav a:hover{
   max-height:200px;
   overflow:auto;
 }
-
-.badge{
-  display:inline-block;
-  padding:4px 10px;
-  border:1px solid #333;
-  margin-bottom:10px;
-  font-size:0.8rem;
-}
-
-.sync{
-  margin-top:10px;
-  font-size:12px;
-  color:#777;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="container header-inner">
-
-    <div class="logo" onclick="location.reload()">
-      FCTAITYO <span>CITY</span>
-    </div>
-
-    <nav>
-      <a href="city.html">NODE SYSTEM</a>
-    </nav>
-
-  </div>
+<div class="container header-inner">
+  <div class="logo">FCTAITYO <span>CITY</span></div>
+</div>
 </header>
 
 <div class="container main">
 
 <!-- LEFT -->
 <div class="selectPanel">
+  <button class="cityBtn" onclick="selectCity('cyber')">CYBER CITY</button>
+  <button class="cityBtn" onclick="selectCity('real')">REAL CITY</button>
+  <button class="cityBtn" onclick="selectCity('mixed')">MIX CITY</button>
 
-  <div class="badge">CITY SELECTOR</div>
-
-  <button class="cityBtn cyber" onclick="selectCity('cyber')">
-    CYBER CITY
-  </button>
-
-  <button class="cityBtn real" onclick="selectCity('real')">
-    REAL CITY
-  </button>
-
-  <button class="cityBtn mix" onclick="selectCity('mixed')">
-    MIX CITY
-  </button>
-
-  <div class="sync" id="syncState">
-    SYNC: waiting...
-  </div>
-
+  <div class="sync" id="syncState">SYNC: waiting...</div>
 </div>
 
 <!-- RIGHT -->
@@ -227,9 +150,7 @@ nav a:hover{
 
   <div class="title">CITY OBSERVER</div>
 
-  <div id="stateView" class="stateBox">
-CITYを選択してください
-  </div>
+  <div id="stateView" class="stateBox">CITYを選択してください</div>
 
   <div class="log" id="logBox"></div>
 
@@ -241,40 +162,16 @@ CITYを選択してください
 
 const API = "http://localhost:3000";
 
-const cityData = {
-  cyber:{
-    name:"CYBER CITY",
-    state:"SYSTEMIZED / LOW EMOTION",
-    behavior:"短文・機械応答",
-    memory:"圧縮・ログ優先",
-    color:"#00e5ff"
-  },
-  real:{
-    name:"REAL CITY",
-    state:"STABLE HUMAN MODE",
-    behavior:"自然対話・共感",
-    memory:"均衡保存",
-    color:"#7CFF6B"
-  },
-  mixed:{
-    name:"MIX CITY",
-    state:"UNSTABLE HYBRID",
-    behavior:"メタ・崩壊・揺らぎ",
-    memory:"断片化進行",
-    color:"#ff4fd8"
-  }
-};
-
 let current = null;
 
 /* =========================
-   CITY SELECT + SYNC
+   CITY SELECT
 ========================= */
 async function selectCity(key){
 
   current = key;
 
-  addLog("LOCAL SELECT: " + key);
+  addLog("CITY REQUEST: " + key);
 
   try{
 
@@ -287,11 +184,14 @@ async function selectCity(key){
       })
     });
 
-    const data = await res.json();
+    const chat = await res.json();
 
-    updateUI(key, data);
+    const stateRes = await fetch(API + "/state");
+    const state = await stateRes.json();
 
-    addLog("SERVER CITY: " + data.city);
+    render(state, chat);
+
+    addLog("SERVER CONFIRMED: " + state.city);
 
   }catch(e){
     addLog("SYNC ERROR: " + e.message);
@@ -299,67 +199,63 @@ async function selectCity(key){
 }
 
 /* =========================
-   UI UPDATE（MEMORY追加）
+   RENDER（ここが本体）
 ========================= */
-function updateUI(key, serverData){
-
-  const c = cityData[key];
+function render(state, chat){
 
   document.getElementById("stateView").innerText =
-`◆ ${c.name}
+`◆ SERVER CONTROLLED CITY
 
-STATE:
-${c.state}
+CURRENT CITY:
+${state.city}
 
-BEHAVIOR:
-${c.behavior}
-
-MEMORY:
-${c.memory}
-
-----------------------
-SERVER CONFIRM:
-CITY = ${serverData.city}
-MEMORY SIZE = ${serverData.debug?.memorySize}
-
-RECENT MEMORY:
-${serverData.debug?.recentMemory || "NO DATA"}
+STATUS:
+ACTIVE NODE STREAM
 
 LAST SYNC:
-${serverData.debug?.lastSync || "N/A"}
+${state.lastSync || "N/A"}
 
-SYNC OK
+MEMORY SIZE:
+${state.memorySize}
+
+RECENT MEMORY:
+${state.recentMemory || "NO DATA"}
+
+PROFILE:
+${state.profile?.state || ""}
+
+BEHAVIOR:
+${state.profile?.behavior || ""}
+
+----------------------
+SOURCE: SERVER STATE (/state)
 `;
 
   document.getElementById("syncState").innerText =
-`SYNC: ${serverData.city} / MEM:${serverData.debug?.memorySize}`;
+`SYNC: ${state.city} / MEM:${state.memorySize}`;
 }
 
 /* =========================
    LOG
 ========================= */
 function addLog(text){
-
   const el = document.getElementById("logBox");
-
   const time = new Date().toLocaleTimeString();
-
   el.innerText += `[${time}] ${text}\n`;
-
   el.scrollTop = el.scrollHeight;
 }
 
 /* =========================
-   LIVE STATE POLLING
+   POLLING
 ========================= */
 async function fetchState(){
 
   try{
     const res = await fetch(API + "/state");
-    const data = await res.json();
+    const state = await res.json();
 
     document.getElementById("syncState").innerText =
-`SYNC: ${data.city} / LIVE`;
+`SYNC: ${state.city} / LIVE`;
 
   }catch(e){
     document.getElementById("syncState").innerText =
