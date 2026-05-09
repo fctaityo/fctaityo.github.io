@@ -10,12 +10,9 @@ body{
   background:#0a0a0a;
   color:#ddd;
   font-family:sans-serif;
-
-  /* ★全体は殺さない（これが地味に重要） */
   overflow:hidden;
 }
 
-/* ===== TOP BAR ===== */
 .topbar{
   position:fixed;
   top:0;
@@ -39,24 +36,26 @@ body{
   white-space:nowrap;
 }
 
-/* ===== LAYOUT ===== */
 .wrap{
   display:grid;
   grid-template-columns:1fr 1fr 1fr;
   height:100vh;
   padding-top:60px;
-
-  /* ★ここも重要：子に任せる */
   overflow:hidden;
 }
 
 .panel{
   border-right:1px solid #222;
   padding:20px;
-
   height:calc(100vh - 60px);
+  overflow:hidden; /* ★ここ重要：外は殺す */
+}
+
+.scroll{
+  height:100%;
   overflow-y:auto;
-  scroll-behavior:smooth; /* ★地味に効く */
+  scroll-behavior:smooth;
+  padding-right:8px;
 }
 
 button{
@@ -68,12 +67,6 @@ button{
   cursor:pointer;
 }
 
-pre{
-  white-space:pre-wrap;
-  color:inherit;
-}
-
-/* ===== MEMO ===== */
 textarea{
   width:100%;
   height:120px;
@@ -86,16 +79,11 @@ textarea{
   resize:none;
 }
 
-/* ===== SIMPLE THEME ===== */
-.panel{
-  border-color:#333;
+/* VR専用 */
+#vrText{
+  white-space:pre-wrap;
 }
 
-/* ===== VR専用（ここが本体） ===== */
-#vrOut{
-  min-height:100%;
-  padding-bottom:60px; /* ★見切れ防止 */
-}
 </style>
 </head>
 
@@ -119,10 +107,9 @@ textarea{
 
 <pre id="rpgOut"></pre>
 
-<textarea id="rpgMemo" placeholder="RPGメモ"></textarea>
+<textarea id="rpgMemo"></textarea>
 <button onclick="saveMemo()">SAVE</button>
 <button onclick="loadMemo()">LOAD</button>
-
 </div>
 
 <!-- AI -->
@@ -132,9 +119,13 @@ textarea{
 </div>
 
 <!-- VR -->
-<div class="panel" id="vrPanel">
+<div class="panel">
 <h2>🟩 VR / HISTORY</h2>
-<pre id="vrOut"></pre>
+
+<div class="scroll" id="vrPanel">
+  <div id="vrText"></div>
+</div>
+
 </div>
 
 </div>
@@ -144,7 +135,6 @@ textarea{
 const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
-/* ===== VR LOG CORE ===== */
 function pushVRLog(text){
 
   const time = new Date().toLocaleTimeString();
@@ -159,10 +149,9 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* ===== VR RENDER（完全安定版） ===== */
 function renderVR(){
 
-  const vr = document.getElementById("vrOut");
+  const vr = document.getElementById("vrText");
   const panel = document.getElementById("vrPanel");
 
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
@@ -172,14 +161,12 @@ function renderVR(){
 ----------------
 ` + logs.join("\n");
 
-  /* ★確実スクロール（2段構え） */
+  /* ★確実に一箇所だけスクロール */
   requestAnimationFrame(() => {
     panel.scrollTop = panel.scrollHeight;
-    vr.scrollTop = vr.scrollHeight;
   });
 }
 
-/* ===== CITY FLOW ===== */
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -196,22 +183,18 @@ OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
   pushVRLog(`SYSTEM updated`);
 }
 
-/* ===== MEMO ===== */
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
-
   pushVRLog("memo saved");
 }
 
 function loadMemo(){
   document.getElementById("rpgMemo").value =
     localStorage.getItem(MEMO_KEY) || "";
-
   pushVRLog("memo loaded");
 }
 
-/* ===== INIT ===== */
 loadMemo();
 renderVR();
 setCity("cyber");
