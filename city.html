@@ -141,7 +141,8 @@ let currentCity = "real";
 ========================= */
 async function chat(){
 
-  const text = document.getElementById("rpgMemo").value;
+  const inputEl = document.getElementById("rpgMemo");
+  const text = inputEl.value;
 
   if(!text.trim()){
     log("[ERROR] EMPTY INPUT");
@@ -180,6 +181,9 @@ async function chat(){
 
     log("[AI LOG] " + data.reply);
 
+    /* 💣ここ追加：入力欄クリア */
+    inputEl.value = "";
+
   }catch(e){
 
     log("[ERROR] NETWORK: " + e.message);
@@ -216,7 +220,6 @@ async function setCity(type){
 
   log("[CITY SWITCH] " + type);
 
-  /* 💣サーバに通知（状態同期） */
   try {
     const res = await fetch("http://localhost:3000/chat", {
       method: "POST",
