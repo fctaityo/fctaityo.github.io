@@ -76,6 +76,9 @@ pre{
 
 <script>
 
+const params = new URLSearchParams(location.search);
+let mode = params.get("mode") || "cyber";
+
 let cityState = "cyber";
 
 function setCity(type){
@@ -117,7 +120,7 @@ BEHAVIOR:
 }
 
 // 初期状態
-setCity("cyber");
+setCity(mode);
 
 const params = new URLSearchParams(window.location.search);
 const mode = params.get("mode");
