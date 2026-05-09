@@ -72,7 +72,6 @@ body.mode-rpg{
 body.mode-rpg .panel{
   border-color:#7a3b2b;
 }
-
 </style>
 </head>
 
@@ -116,7 +115,7 @@ document.body.classList.add("mode-" + mode);
 let cityState = "cyber";
 let vrInterval;
 
-/* VRログ生成 */
+/* ===== VR LOG ===== */
 function startVRLog(type){
 
   clearInterval(vrInterval);
@@ -139,11 +138,13 @@ function startVRLog(type){
     ]
   };
 
+  const list = logs[type] || logs.cyber; // ★安全化
+
   let i = 0;
 
   vrInterval = setInterval(() => {
-    const log = logs[type][i % logs[type].length];
 
+    const log = list[i % list.length];
     const time = new Date().toLocaleTimeString();
 
     document.getElementById("vrOut").innerText +=
@@ -153,6 +154,7 @@ function startVRLog(type){
   }, 2000);
 }
 
+/* ===== CITY CHANGE ===== */
 function setCity(type){
 
   cityState = type;
@@ -165,14 +167,18 @@ function setCity(type){
   /* AI */
   let aiResult = "";
 
-  if(type === "cyber"){
-    aiResult = "NEON HIGH-DENSITY CITY GENERATED";
-  }
-  if(type === "real"){
-    aiResult = "REALISTIC URBAN STRUCTURE GENERATED";
-  }
-  if(type === "mixed"){
-    aiResult = "HYBRID CITY STRUCTURE GENERATED";
+  switch(type){
+    case "cyber":
+      aiResult = "NEON HIGH-DENSITY CITY GENERATED";
+      break;
+    case "real":
+      aiResult = "REALISTIC URBAN STRUCTURE GENERATED";
+      break;
+    case "mixed":
+      aiResult = "HYBRID CITY STRUCTURE GENERATED";
+      break;
+    default:
+      aiResult = "UNKNOWN CITY STATE";
   }
 
   document.getElementById("aiOut").innerText =
@@ -181,13 +187,14 @@ function setCity(type){
 OUTPUT:
 ${aiResult}`;
 
-  /* VR（初期ログ＋自動更新開始） */
+  /* VR RESET */
   document.getElementById("vrOut").innerText =
 `OBSERVATION LOG
 
 CITY TYPE: ${type}
 --- LIVE FEED START ---`;
 
+  /* VR START */
   startVRLog(type);
 }
 
