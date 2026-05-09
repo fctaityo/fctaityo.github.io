@@ -78,7 +78,6 @@ textarea{
   resize:none;
 }
 
-/* ===== SIMPLE THEME ===== */
 .panel{
   border-color:#333;
 }
@@ -128,38 +127,42 @@ textarea{
 <script>
 
 const MEMO_KEY = "memo_rpg";
-
-/* ★VRログ永続キー */
 const VR_KEY = "vr_history";
 
-/* ===== VR LOG CORE（永続化版） ===== */
+/* =========================
+   VR LOG CORE（安定版）
+========================= */
+
 function pushVRLog(text){
 
   const time = new Date().toLocaleTimeString();
   const entry = `[${time}] ${text}`;
 
-  // 既存ログ取得
   let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
-  // 追加
   logs.push(entry);
 
-  // 保存
   localStorage.setItem(VR_KEY, JSON.stringify(logs));
 
-  // 表示更新
   renderVR();
 }
 
-/* ===== VR描画 ===== */
+/* ===== VR描画（純粋表示） ===== */
 function renderVR(){
+
   const vr = document.getElementById("vrOut");
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
-  vr.innerText = "VR HISTORY\n----------------\n" + logs.join("\n");
+  vr.innerText =
+`VR HISTORY
+----------------
+` + logs.join("\n");
 }
 
-/* ===== CITY FLOW ===== */
+/* =========================
+   CITY FLOW（修正ポイント）
+========================= */
+
 function setCity(type){
 
   document.getElementById("rpgOut").innerText =
@@ -171,12 +174,16 @@ function setCity(type){
 INPUT: ${type}
 OUTPUT: ${type.toUpperCase()} SYSTEM MODEL`;
 
+  // ★ここ重要：初期化しない・上書きしない
   pushVRLog(`RPG input: ${type}`);
   pushVRLog(`AI transformed: ${type}`);
   pushVRLog(`SYSTEM updated`);
 }
 
-/* ===== MEMO ===== */
+/* =========================
+   MEMO
+========================= */
+
 function saveMemo(){
   const text = document.getElementById("rpgMemo").value;
   localStorage.setItem(MEMO_KEY, text);
@@ -191,10 +198,24 @@ function loadMemo(){
   pushVRLog("memo loaded");
 }
 
-/* ===== INIT ===== */
+/* =========================
+   INIT（ここが超重要）
+========================= */
+
 loadMemo();
+
+/* ★ログを先に描画 */
 renderVR();
-setCity("cyber");
+
+/* ★初期CITYはログを汚さない */
+document.getElementById("rpgOut").innerText =
+`CITY:
+→ CYBER`;
+
+document.getElementById("aiOut").innerText =
+`AI TRANSFORM:
+INPUT: cyber
+OUTPUT: CYBER SYSTEM MODEL`;
 
 </script>
 
