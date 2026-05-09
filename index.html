@@ -52,17 +52,45 @@ header{
 .header-inner{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:18px 0;
 }
 
+/* ロゴ（左上＝ホーム） */
 .logo{
   font-family:'Orbitron';
   letter-spacing:5px;
-  font-size: 4rem;
-  text-shadow: 0 0 18px rgba(141,92,255,0.6);
+  font-size:3.5rem;
+  text-shadow:0 0 18px rgba(141,92,255,0.6);
+  cursor:pointer;
 }
 
 .logo span{color:var(--main);}
+
+/* ===== NAV（右上操作UI） ===== */
+
+nav{
+  display:flex;
+  gap:18px;
+  align-items:center;
+}
+
+nav a{
+  font-family:'Orbitron';
+  font-size:16px;
+  letter-spacing:2px;
+  color:var(--text);
+  text-decoration:none;
+  padding:10px 14px;
+  border:1px solid transparent;
+  transition:0.2s;
+}
+
+nav a:hover{
+  border-color:var(--main);
+  transform:translateY(-2px);
+  text-shadow:0 0 10px rgba(141,92,255,0.6);
+}
 
 /* ===== HERO ===== */
 
@@ -80,7 +108,7 @@ header{
   margin-top:10px;
 }
 
-/* ===== NODE GRID (都市化復活版) ===== */
+/* ===== NODE GRID ===== */
 
 .grid{
   display:grid;
@@ -89,7 +117,6 @@ header{
   margin-top:40px;
 }
 
-/* ★都市カード化 */
 .node{
   border:1px solid var(--line);
   border-radius:16px;
@@ -104,7 +131,6 @@ header{
   border-color:var(--main);
 }
 
-/* ★画像エリア復活 */
 .node-img{
   height:160px;
   background-size:cover;
@@ -173,8 +199,12 @@ header{
 <header>
 <div class="container header-inner">
 
-  <div class="logo">FCTAITYO <span>CITY</span></div>
+  <!-- 左上：ホーム -->
+  <div class="logo" onclick="location.href='index.html'">
+    FCTAITYO <span>CITY</span>
+  </div>
 
+  <!-- 右上：ノード操作UI -->
   <nav>
     <a href="city.html?mode=rpg">RPG NODE</a>
     <a href="city.html?mode=ai">AI NODE</a>
