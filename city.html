@@ -98,7 +98,7 @@ textarea{
 
 <div class="wrap">
 
-<!-- RPG -->
+<!-- RPG / INPUT -->
 <div class="panel">
 <h2>🟥 RPG / INPUT</h2>
 
@@ -108,18 +108,18 @@ textarea{
 
 <div id="rpgOut"></div>
 
-<textarea id="rpgMemo"></textarea>
+<textarea id="rpgMemo" placeholder="ここに入力してAIと会話"></textarea>
 
-<button onclick="process()">TRANSLATE</button>
+<button onclick="chat()">SEND</button>
 </div>
 
-<!-- AI -->
+<!-- AI / TRANSFORM -->
 <div class="panel">
 <h2>🟦 AI / TRANSFORM</h2>
 <pre id="aiOut"></pre>
 </div>
 
-<!-- VR -->
+<!-- VR / HISTORY -->
 <div class="panel">
 <h2>🟩 VR / HISTORY</h2>
 <pre id="vrOut"></pre>
@@ -132,56 +132,9 @@ textarea{
 const VR_KEY = "vr_history";
 
 /* =========================
-   TRANSLATE (OpenAI仮接続版)
+   CHAT → NODE → OLLAMA
 ========================= */
-async function translate(text){
-
-  try{
-
-    const res = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer YOUR_API_KEY_HERE" // ←ここだけ差し替え
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        input: `Translate to English:\n${text}`
-      })
-    });
-
-    const data = await res.json();
-
-    console.log("API response:", data);
-
-    if(data.error){
-      return {
-        input:text,
-        output:`[API ERROR] ${data.error.message}`
-      };
-    }
-
-    const output =
-      data?.output?.[0]?.content?.[0]?.text;
-
-    return {
-      input:text,
-      output: output || "[NO RESPONSE]"
-    };
-
-  }catch(e){
-
-    return {
-      input:text,
-      output:`[NETWORK ERROR] ${e.message}`
-    };
-  }
-}
-
-/* =========================
-   PROCESS
-========================= */
-async function process(){
+async function chat(){
 
   const text = document.getElementById("rpgMemo").value;
 
@@ -190,16 +143,24 @@ async function process(){
     return;
   }
 
-  const result = await translate(text);
+  const res = await fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text })
+  });
+
+  const data = await res.json();
+
+  const reply = data.reply || data.error || "[NO RESPONSE]";
 
   document.getElementById("aiOut").innerText =
-`TRANSLATION
-----------------
-${result.input}
-↓
-${result.output}`;
+`YOU:
+${text}
 
-  pushVRLog(`TRANSLATE: ${result.input} → ${result.output}`);
+AI:
+${reply}`;
+
+  pushVRLog(`CHAT: ${text} → ${reply}`);
 }
 
 /* =========================
