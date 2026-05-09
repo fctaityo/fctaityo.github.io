@@ -1,663 +1,689 @@
-# ECHOES MALL - ショッピングサイト トップページ（HTML + CSS）
-
-```html
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ECHOES MALL</title>
+  <title>FCTAITYO // PERSONAL PORTAL</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #090909;
+      --bg2: #111;
+      --line: rgba(255,255,255,0.08);
+      --text: #f5f5f5;
+      --sub: #aaa;
+      --main: #8d5cff;
+      --main2: #4b8dff;
+      --danger: #ff3566;
+    }
+
     body {
+      background:
+        radial-gradient(circle at top left, rgba(141,92,255,0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
       font-family: 'Noto Sans JP', sans-serif;
-      background: #f4f5f7;
-      color: #222;
+      overflow-x: hidden;
     }
 
     a {
-      text-decoration: none;
       color: inherit;
-    }
-
-    img {
-      width: 100%;
-      display: block;
+      text-decoration: none;
     }
 
     .container {
-      width: 95%;
-      max-width: 1500px;
+      width: 92%;
+      max-width: 1450px;
       margin: auto;
     }
 
+    /* ===================================== */
     /* Header */
+    /* ===================================== */
 
     header {
-      background: #0e0f14;
-      color: white;
-      padding: 18px 0;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 999;
+      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.7);
+      border-bottom: 1px solid var(--line);
     }
 
     .header-inner {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      align-items: center;
+      padding: 20px 0;
     }
 
     .logo {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: 1px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 3px;
     }
 
     .logo span {
-      color: #7c5cff;
+      color: var(--main);
     }
 
-    .search-box {
-      flex: 1;
-      max-width: 700px;
-      position: relative;
-    }
-
-    .search-box input {
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 16px 55px 16px 25px;
-      font-size: 1rem;
-    }
-
-    .search-box button {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: none;
-      background: #7c5cff;
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .header-menu {
+    nav {
       display: flex;
-      gap: 25px;
+      gap: 28px;
       font-size: 0.95rem;
     }
 
-    /* Navigation */
-
-    nav {
-      background: white;
-      border-bottom: 1px solid #e2e2e2;
+    nav a {
+      color: #ccc;
+      transition: 0.2s;
     }
 
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      gap: 35px;
-      padding: 18px 0;
-      overflow-x: auto;
-    }
-
-    .nav-inner a {
-      white-space: nowrap;
-      font-weight: 500;
-    }
-
-    /* Hero */
-
-    .hero {
-      display: grid;
-      grid-template-columns: 2fr 0.7fr;
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .hero-main {
-      position: relative;
-      border-radius: 30px;
-      overflow: hidden;
-      min-height: 550px;
-      background:
-        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.35)),
-        url('https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=1600&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: end;
-      padding: 50px;
+    nav a:hover {
       color: white;
     }
 
-    .hero-content {
-      max-width: 600px;
+    /* ===================================== */
+    /* Hero */
+    /* ===================================== */
+
+    .hero {
+      min-height: 90vh;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 50px;
+      position: relative;
     }
 
-    .hero-tag {
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tag {
       display: inline-block;
-      background: #8f65ff;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 999px;
-      margin-bottom: 20px;
+      background: rgba(141,92,255,0.15);
+      border: 1px solid rgba(141,92,255,0.4);
+      color: #d8cbff;
       font-size: 0.9rem;
-      font-weight: bold;
+      margin-bottom: 25px;
     }
 
     .hero h1 {
-      font-size: 4rem;
-      line-height: 1.1;
-      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: var(--main);
     }
 
     .hero p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      color: #e6e6e6;
+      color: var(--sub);
+      line-height: 2;
+      max-width: 700px;
+      font-size: 1.05rem;
     }
 
-    .hero button {
-      border: none;
-      background: white;
-      color: #111;
+    .hero-buttons {
+      margin-top: 40px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
       padding: 16px 30px;
-      border-radius: 999px;
+      border-radius: 16px;
       font-weight: bold;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .hero-side {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .side-card {
-      background: white;
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    }
-
-    .side-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-    }
-
-    .point {
-      font-size: 4rem;
-      font-weight: 900;
-      color: #8a5fff;
-    }
-
-    .sale-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .sale-item img {
-      width: 110px;
-      border-radius: 18px;
-    }
-
-    .price {
-      color: #ff2c66;
-      font-weight: 900;
-      font-size: 1.4rem;
-    }
-
-    /* Categories */
-
-    .categories {
-      margin-top: 30px;
-      background: white;
-      border-radius: 30px;
-      padding: 25px;
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 20px;
-    }
-
-    .cat-item {
-      text-align: center;
-      padding: 20px 10px;
-      border-radius: 20px;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-
-    .cat-item:hover {
-      background: #f2eeff;
-      transform: translateY(-3px);
-    }
-
-    .cat-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #8d66ff, #6d47f5);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      margin: auto auto 15px;
-    }
-
-    /* Products */
-
-    .section-title {
-      margin: 45px 0 25px;
-      font-size: 2rem;
-      font-weight: 900;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 25px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid var(--line);
       transition: 0.25s;
     }
 
-    .product-card:hover {
-      transform: translateY(-5px);
+    .btn-main {
+      background: linear-gradient(135deg, var(--main), var(--main2));
     }
 
-    .product-image {
-      height: 280px;
+    .btn-sub {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ===================================== */
+    /* Hero Card */
+    /* ===================================== */
+
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 35px;
       overflow: hidden;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
     }
 
-    .product-image img {
-      height: 100%;
-      object-fit: cover;
+    .hero-image {
+      height: 650px;
+      background:
+        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.45)),
+        url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1400&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      position: relative;
     }
 
-    .product-info {
-      padding: 22px;
+    .ui-box {
+      position: absolute;
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 18px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: #8f65ff;
+    .ui-top {
+      top: 20px;
+      left: 20px;
+      width: 220px;
+    }
+
+    .ui-bottom {
+      bottom: 20px;
+      right: 20px;
+      width: 260px;
+    }
+
+    .ui-title {
       color: white;
-      font-size: 0.8rem;
-      margin-bottom: 12px;
-    }
-
-    .product-title {
-      font-size: 1.1rem;
       font-weight: bold;
-      margin-bottom: 12px;
-      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
-    .product-price {
-      font-size: 1.5rem;
-      color: #ff2c66;
+    .ui-sub {
+      color: #bbb;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* ===================================== */
+    /* Sections */
+    /* ===================================== */
+
+    section {
+      margin-top: 110px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 40px;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
       font-weight: 900;
     }
 
+    .section-sub {
+      color: var(--sub);
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    /* ===================================== */
+    /* Cards */
+    /* ===================================== */
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(141,92,255,0.45);
+    }
+
+    .card-image {
+      height: 260px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: rgba(141,92,255,0.16);
+      border: 1px solid rgba(141,92,255,0.35);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-bottom: 18px;
+      color: #ddd;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .card-text {
+      color: #aaa;
+      line-height: 1.9;
+      font-size: 0.95rem;
+    }
+
+    /* ===================================== */
+    /* Terminal */
+    /* ===================================== */
+
+    .terminal {
+      background: #050505;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 40px;
+      font-family: monospace;
+      margin-top: 50px;
+      overflow-x: auto;
+    }
+
+    .terminal-line {
+      margin-bottom: 14px;
+      color: #ddd;
+    }
+
+    .terminal-line span {
+      color: #65ff98;
+    }
+
+    /* ===================================== */
+    /* Footer */
+    /* ===================================== */
+
     footer {
-      margin-top: 80px;
-      background: #0e0f14;
-      color: white;
+      margin-top: 140px;
+      border-top: 1px solid var(--line);
       padding: 60px 0;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .footer-grid h4 {
-      margin-bottom: 20px;
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.2rem;
+      letter-spacing: 2px;
     }
 
-    .footer-grid ul {
-      list-style: none;
+    .footer-text {
+      color: #777;
+      font-size: 0.9rem;
     }
 
-    .footer-grid li {
-      margin-bottom: 12px;
-      color: #bbb;
-    }
+    /* ===================================== */
+    /* Responsive */
+    /* ===================================== */
 
-    @media (max-width: 1200px) {
-      .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    @media (max-width: 1100px) {
 
-      .categories {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
+        padding-top: 60px;
       }
 
       .hero h1 {
-        font-size: 2.8rem;
+        font-size: 3.5rem;
       }
 
-      .product-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .grid-3 {
+        grid-template-columns: 1fr;
       }
 
-      .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
-    @media (max-width: 600px) {
-      .header-inner {
+    @media (max-width: 700px) {
+
+      nav {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      .hero-image {
+        height: 450px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .footer-inner {
         flex-direction: column;
+        align-items: start;
       }
 
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-main {
-        padding: 30px;
-      }
-
-      .hero h1 {
-        font-size: 2.1rem;
-      }
     }
+
   </style>
+
 </head>
 <body>
 
+  <!-- HEADER -->
+
   <header>
     <div class="container header-inner">
-      <div class="logo">ECHOES <span>MALL</span></div>
 
-      <div class="search-box">
-        <input type="text" placeholder="キーワード・商品名で探す">
-        <button>🔍</button>
-      </div>
-
-      <div class="header-menu">
-        <a href="#">ログイン</a>
-        <a href="#">お気に入り</a>
-        <a href="#">カート</a>
-      </div>
-    </div>
-  </header>
+  <div class="logo">
+    FCT<span>AITYO</span>
+  </div>
 
   <nav>
-    <div class="container nav-inner">
-      <a href="#">カテゴリー</a>
-      <a href="#">新着</a>
-      <a href="#">ランキング</a>
-      <a href="#">セール</a>
-      <a href="#">特集</a>
-      <a href="#">ブランド</a>
-      <a href="#">ガジェット</a>
-      <a href="#">ファッション</a>
-    </div>
+    <a href="#projects">PROJECTS</a>
+    <a href="#world">WORLD</a>
+    <a href="#labs">LABS</a>
+    <a href="#links">LINKS</a>
   </nav>
+
+</div>
+
+  </header>
+
+  <!-- HERO -->
 
   <main class="container">
 
-    <section class="hero">
+<section class="hero">
 
-      <div class="hero-main">
-        <div class="hero-content">
-          <div class="hero-tag">特集</div>
-          <h1>ユキと巡る<br>ミナトシティ特集</h1>
-          <p>
-            サイバーパンク都市をイメージした、
-            近未来アニメファッション＆限定アイテム。
-          </p>
-          <button>特集ページを見る</button>
+  <div class="hero-text">
+
+    <div class="tag">
+      PERSONAL NETWORK // 2026
+    </div>
+
+    <h1>
+      FCTAITYO<br>
+      <span>DIGITAL PORTAL</span>
+    </h1>
+
+    <p>
+      AI・VRC・ゲーム・架空ブランド・都市型サイバー世界観。
+      存在しないゲーム、存在しない企業、存在しない広告を本物っぽく構築する個人ポータル。
+      ここはショッピングサイトでもあり、実験場でもあり、インターネット上の仮想都市でもある。
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-main">PROJECTS</a>
+      <a href="#labs" class="btn btn-sub">AI LABS</a>
+    </div>
+
+  </div>
+
+  <div class="hero-card">
+
+    <div class="hero-image">
+
+      <div class="ui-box ui-top">
+        <div class="ui-title">SYSTEM STATUS</div>
+        <div class="ui-sub">
+          AI GENERATION : ONLINE<br>
+          WORLD BUILDING : ACTIVE<br>
+          NETWORK STATUS : CONNECTED
         </div>
       </div>
 
-      <div class="hero-side">
-
-        <div class="side-card">
-          <h3>新規会員登録で</h3>
-          <div class="point">500</div>
-          <p>ポイントプレゼント！</p>
+      <div class="ui-box ui-bottom">
+        <div class="ui-title">LATEST UPDATE</div>
+        <div class="ui-sub">
+          - OPEN WORLD UI TEST<br>
+          - PERSONAL EC DESIGN<br>
+          - VIRTUAL CITY PROJECT
         </div>
-
-        <div class="side-card">
-          <h3>本日限定タイムセール</h3>
-
-          <div class="sale-item">
-            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" alt="">
-
-            <div>
-              <p>エコーズ ランナーX1</p>
-              <div class="price">¥4,980</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="categories">
-
-      <div class="cat-item">
-        <div class="cat-icon">👕</div>
-        <p>ファッション</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">🎧</div>
-        <p>ガジェット</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">🎮</div>
-        <p>ゲーム</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">💄</div>
-        <p>コスメ</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">👜</div>
-        <p>雑貨</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">⌚</div>
-        <p>アクセサリー</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">📱</div>
-        <p>スマホ</p>
-      </div>
-
-      <div class="cat-item">
-        <div class="cat-icon">🎁</div>
-        <p>ギフト</p>
-      </div>
-
-    </section>
-
-    <h2 class="section-title">注目アイテム</h2>
-
-    <section class="product-grid">
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1200&auto=format&fit=crop" alt="">
-        </div>
-
-        <div class="product-info">
-          <div class="badge">NEW</div>
-          <div class="product-title">ユキモデル ジャケット</div>
-          <div class="product-price">¥12,800</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop" alt="">
-        </div>
-
-        <div class="product-info">
-          <div class="badge">SALE</div>
-          <div class="product-title">ハイカットスニーカー X1</div>
-          <div class="product-price">¥9,800</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop" alt="">
-        </div>
-
-        <div class="product-info">
-          <div class="badge">HOT</div>
-          <div class="product-title">ゲーミングヘッドセット</div>
-          <div class="product-price">¥7,980</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop" alt="">
-        </div>
-
-        <div class="product-info">
-          <div class="badge">NEW</div>
-          <div class="product-title">シティユース バックパック</div>
-          <div class="product-price">¥6,480</div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" alt="">
-        </div>
-
-        <div class="product-info">
-          <div class="badge">LIMITED</div>
-          <div class="product-title">アニメスタイル アクセセット</div>
-          <div class="product-price">¥4,280</div>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container footer-grid">
-
-      <div>
-        <h4>ECHOES MALL</h4>
-        <ul>
-          <li>会社情報</li>
-          <li>採用情報</li>
-          <li>ニュース</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>サポート</h4>
-        <ul>
-          <li>お問い合わせ</li>
-          <li>配送について</li>
-          <li>返品・交換</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>ガイド</h4>
-        <ul>
-          <li>初めての方へ</li>
-          <li>会員登録</li>
-          <li>利用規約</li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>SNS</h4>
-        <ul>
-          <li>X / Twitter</li>
-          <li>Instagram</li>
-          <li>YouTube</li>
-        </ul>
       </div>
 
     </div>
+
+  </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">PROJECTS</div>
+    </div>
+
+    <div class="section-sub">
+      AI生成・Web構築・架空ブランド設計・ゲーム風UIなど、
+      現在進行中のプロジェクト群。
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="card">
+
+      <div class="card-image"
+        style="background-image:url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
+      <div class="card-body">
+        <div class="card-tag">OPEN WORLD</div>
+        <div class="card-title">不存在RPG計画</div>
+        <div class="card-text">
+          都市型3Dアニメ調オープンワールドRPGを想定した世界観構築。
+          UI・広告・ショップ・キャラクター設定まで統合。
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-image"
+        style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
+      <div class="card-body">
+        <div class="card-tag">AI × WEB</div>
+        <div class="card-title">AIサイト実験室</div>
+        <div class="card-text">
+          ChatGPTや画像生成AIを用いた個人Webサイト自動生成。
+          AI時代の個人ブランド構築を研究。
+        </div>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-image"
+        style="background-image:url('https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1400&auto=format&fit=crop');">
+      </div>
+
+      <div class="card-body">
+        <div class="card-tag">VIRTUAL</div>
+        <div class="card-title">VR SOCIAL LOG</div>
+        <div class="card-text">
+          VR空間で発生する非言語コミュニケーションや距離感、
+          仮想人格の挙動を観測・記録。
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LABS -->
+
+<section id="labs">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">AI LABS</div>
+    </div>
+
+    <div class="section-sub">
+      ローカルAI・画像生成・Web構築・仮想ブランド生成ログ。
+    </div>
+  </div>
+
+  <div class="terminal">
+
+    <div class="terminal-line">
+      <span>></span> booting FCTAITYO system...
+    </div>
+
+    <div class="terminal-line">
+      <span>></span> loading virtual city assets...
+    </div>
+
+    <div class="terminal-line">
+      <span>></span> AI image generation online.
+    </div>
+
+    <div class="terminal-line">
+      <span>></span> deploying github pages...
+    </div>
+
+    <div class="terminal-line">
+      <span>></span> connection established.
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LINKS -->
+
+<section id="links">
+
+  <div class="section-head">
+    <div>
+      <div class="section-title">NETWORK</div>
+    </div>
+
+    <div class="section-sub">
+      各種リンク・SNS・実験サイト接続用。
+    </div>
+  </div>
+
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-tag">GITHUB</div>
+        <div class="card-title">SOURCE CODE</div>
+        <div class="card-text">
+          GitHub Pagesベースの個人Web開発。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-tag">X / SNS</div>
+        <div class="card-title">SOCIAL FEED</div>
+        <div class="card-text">
+          世界観・AIネタ・VRC関連ログを配信予定。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-tag">STORE</div>
+        <div class="card-title">VIRTUAL GOODS</div>
+        <div class="card-text">
+          将来的な個人EC・架空ブランド展開用エリア。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+<div class="container footer-inner">
+
+  <div class="footer-logo">
+    FCTAITYO NETWORK
+  </div>
+
+  <div class="footer-text">
+    © 2026 FCTAITYO // PERSONAL DIGITAL SPACE
+  </div>
+
+</div>
+
   </footer>
 
 </body>
 </html>
-```
-
-## ポイント
-
-* 1ファイルだけで動く構成
-* レスポンシブ対応
-* 近未来アニメ系ECデザイン
-* CSS込みなのでそのまま保存して動作可能
-* `index.html` として保存すればOK
-* 画像URLを差し替えればオリジナル化可能
-
-## 次にできること
-
-* React / Next.js 化
-* Tailwind CSS 化
-* 商品カルーセル追加
-* ログイン画面実装
-* カート機能
-* Firebase連携
-* BOOTH風UI化
-* アニメ調3D背景動画化
-* ダークモード切替
