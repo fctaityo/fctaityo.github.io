@@ -10,7 +10,7 @@ body{
   background:#0a0a0a;
   color:#fff;
   font-family:sans-serif;
-  overflow-x:hidden; /* ★横はみ出し完全防止 */
+  overflow-x:hidden;
 }
 
 /* ===== TOP BAR ===== */
@@ -43,25 +43,23 @@ body{
   display:flex;
   gap:10px;
   align-items:center;
-  flex-shrink:0;
   white-space:nowrap;
-  max-width:60%;
-  overflow:hidden;
 }
 
 .nav a{
-  color:#fff;
+  color:#aaa;
   text-decoration:none;
   font-size:13px;
-  padding:6px 8px;
+  padding:6px 10px;
   border:1px solid #333;
   transition:0.2s;
-  white-space:nowrap;
-  flex-shrink:0;
 }
 
-.nav a:hover{
+/* ★アクティブ発光 */
+.nav a.active{
+  color:#fff;
   border-color:#8d5cff;
+  box-shadow:0 0 10px rgba(141,92,255,0.6);
 }
 
 /* ===== メインレイアウト ===== */
@@ -104,31 +102,25 @@ body.mode-ai{
   background:#0b1020;
   color:#cfe3ff;
 }
-body.mode-ai .panel{
-  border-color:#2b4d7a;
-}
+body.mode-ai .panel{ border-color:#2b4d7a; }
 
 body.mode-vr{
   background:#061a14;
   color:#bfffe5;
 }
-body.mode-vr .panel{
-  border-color:#1f6b4d;
-}
+body.mode-vr .panel{ border-color:#1f6b4d; }
 
 body.mode-rpg{
   background:#1a0f0f;
   color:#ffe0c8;
 }
-body.mode-rpg .panel{
-  border-color:#7a3b2b;
-}
+body.mode-rpg .panel{ border-color:#7a3b2b; }
+
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
 
   <div class="logo" onclick="location.href='index.html'">
@@ -136,9 +128,9 @@ body.mode-rpg .panel{
   </div>
 
   <div class="nav">
-    <a href="city.html?mode=rpg">RPG NODE</a>
-    <a href="city.html?mode=ai">AI NODE</a>
-    <a href="city.html?mode=vr">VR NODE</a>
+    <a id="nav-rpg" href="city.html?mode=rpg">RPG NODE</a>
+    <a id="nav-ai" href="city.html?mode=ai">AI NODE</a>
+    <a id="nav-vr" href="city.html?mode=vr">VR NODE</a>
   </div>
 
 </div>
@@ -176,6 +168,17 @@ const params = new URLSearchParams(location.search);
 
 const mode = params.get("mode") || "rpg";
 const cityType = params.get("city") || "cyber";
+
+/* ===== ナビ発光制御 ===== */
+function setActiveNav(m){
+  document.getElementById("nav-rpg").classList.remove("active");
+  document.getElementById("nav-ai").classList.remove("active");
+  document.getElementById("nav-vr").classList.remove("active");
+
+  document.getElementById("nav-" + m).classList.add("active");
+}
+
+setActiveNav(mode);
 
 document.body.classList.add("mode-" + mode);
 
