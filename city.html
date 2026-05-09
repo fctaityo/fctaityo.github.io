@@ -51,13 +51,13 @@ body{
   box-sizing:border-box;
 }
 
-/* 見出し完全統一 */
+/* 見出し統一 */
 h2{
   font-size:18px;
   margin:0 0 10px 0;
 }
 
-/* ボタン */
+/* button */
 button{
   margin:10px 0;
   padding:10px;
@@ -67,7 +67,7 @@ button{
   cursor:pointer;
 }
 
-/* テキスト */
+/* pre */
 pre{
   white-space:pre-wrap;
 }
@@ -85,23 +85,20 @@ textarea{
   resize:none;
 }
 
-/* =========================
-   VRだけ完全分離設計
-========================= */
+/* VR layout */
 #vrPanel{
   display:flex;
   flex-direction:column;
-  overflow:hidden; /* 外スクロール禁止 */
+  overflow:hidden;
 }
 
-/* ヘッダーは通常フロー */
 .vrHeader{
   flex:0 0 auto;
   border-bottom:1px solid #222;
   padding-bottom:10px;
 }
 
-/* ログ領域だけスクロール */
+/* ログ領域 */
 #vrOut{
   flex:1;
   overflow-y:auto;
@@ -156,19 +153,34 @@ textarea{
 const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
-/* VR LOG */
+/* =====================
+   VR LOG（日付入り）
+===================== */
 function pushVRLog(text){
-  const time = new Date().toLocaleTimeString();
-  let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
-  logs.push(`[${time}] ${text}`);
+  const now = new Date();
+
+  const date = now.toLocaleDateString('ja-JP', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
+  const time = now.toLocaleTimeString();
+
+  const entry = `[${date} ${time}] ${text}`;
+
+  let logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
+  logs.push(entry);
+
   localStorage.setItem(VR_KEY, JSON.stringify(logs));
 
   renderVR();
 }
 
-/* RENDER */
+/* VR RENDER */
 function renderVR(){
+
   const vr = document.getElementById("vrOut");
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
@@ -179,6 +191,7 @@ function renderVR(){
 
 /* CITY */
 function setCity(type){
+
   document.getElementById("rpgOut").innerText =
 `CITY:
 → ${type.toUpperCase()}`;
