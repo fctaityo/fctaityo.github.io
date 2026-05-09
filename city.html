@@ -106,16 +106,25 @@ body.mode-rpg .panel{
 
 <script>
 
-const params = new URLSearchParams(location.search);
-const mode = params.get("mode") || "cyber";
+/* =========================
+   MODE & CITY 分離設計
+========================= */
 
-/* mode適用 */
+const params = new URLSearchParams(location.search);
+
+const mode = params.get("mode") || "rpg";
+const cityType = params.get("city") || "cyber";
+
+/* 見た目モード適用 */
 document.body.classList.add("mode-" + mode);
 
 let cityState = "cyber";
 let vrInterval;
 
-/* ===== VR LOG ===== */
+/* =========================
+   VR LOG SYSTEM（安全版）
+========================= */
+
 function startVRLog(type){
 
   clearInterval(vrInterval);
@@ -138,7 +147,7 @@ function startVRLog(type){
     ]
   };
 
-  const list = logs[type] || logs.cyber; // ★安全化
+  const list = logs[type] || logs.cyber;
 
   let i = 0;
 
@@ -154,7 +163,10 @@ function startVRLog(type){
   }, 2000);
 }
 
-/* ===== CITY CHANGE ===== */
+/* =========================
+   CITY SYSTEM
+========================= */
+
 function setCity(type){
 
   cityState = type;
@@ -194,12 +206,17 @@ ${aiResult}`;
 CITY TYPE: ${type}
 --- LIVE FEED START ---`;
 
-  /* VR START */
-  startVRLog(type);
+  /* ★重要：VRモード時だけログ起動 */
+  if(mode === "vr"){
+    startVRLog(type);
+  }
 }
 
-/* 初期起動 */
-setCity(mode);
+/* =========================
+   INIT
+========================= */
+
+setCity(cityType);
 
 </script>
 
