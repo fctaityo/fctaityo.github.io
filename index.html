@@ -52,7 +52,6 @@ header{
   padding:18px 0;
 }
 
-/* ロゴ */
 .logo{
   font-family:'Orbitron';
   letter-spacing:4px;
@@ -64,7 +63,6 @@ header{
   color:var(--main);
 }
 
-/* ★追加：右上ナビ */
 nav a{
   font-family:'Orbitron';
   color:var(--text);
@@ -98,7 +96,7 @@ nav a:hover{
 }
 
 /* =========================
-   CENTER SELECT PANEL
+   CENTER PANEL
 ========================= */
 .selectPanel{
   border:1px solid var(--line);
@@ -131,7 +129,7 @@ nav a:hover{
 .mix:hover{ border-color:var(--mix); }
 
 /* =========================
-   RIGHT OBSERVER PANEL
+   RIGHT OBSERVER
 ========================= */
 .observePanel{
   border:1px solid var(--line);
@@ -174,6 +172,12 @@ nav a:hover{
   font-size:0.8rem;
 }
 
+.sync{
+  margin-top:10px;
+  font-size:12px;
+  color:#777;
+}
+
 </style>
 </head>
 
@@ -186,7 +190,6 @@ nav a:hover{
       FCTAITYO <span>CITY</span>
     </div>
 
-    <!-- ★復活：NODE SYSTEMリンク -->
     <nav>
       <a href="city.html">NODE SYSTEM</a>
     </nav>
@@ -213,8 +216,8 @@ nav a:hover{
     MIX CITY
   </button>
 
-  <div style="margin-top:20px; color:#888; font-size:12px;">
-    ※クリックで右側に状態が表示されます
+  <div class="sync" id="syncState">
+    SYNC: waiting...
   </div>
 
 </div>
@@ -235,6 +238,8 @@ CITYを選択してください
 </div>
 
 <script>
+
+const API = "http://localhost:3000";
 
 const cityData = {
   cyber:{
@@ -262,9 +267,41 @@ const cityData = {
 
 let current = null;
 
-function selectCity(key){
+/* =========================
+   CITY SELECT + SEND TO SERVER
+========================= */
+async function selectCity(key){
 
   current = key;
+
+  addLog("LOCAL SELECT: " + key);
+
+  try{
+
+    const res = await fetch(API + "/chat", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({
+        text:"__CITY_SYNC__",
+        city:key
+      })
+    });
+
+    const data = await res.json();
+
+    addLog("SERVER CITY: " + data.city);
+
+    updateUI(key, data);
+
+  }catch(e){
+    addLog("SYNC ERROR: " + e.message);
+  }
+}
+
+/* =========================
+   UI UPDATE
+========================= */
+function updateUI(key, serverData){
 
   const c = cityData[key];
 
@@ -280,16 +317,23 @@ ${c.behavior}
 MEMORY:
 ${c.memory}
 
-COLOR SIGNATURE:
+COLOR:
 ${c.color}
 
 ----------------------
-[OBSERVATION ACTIVE]
+SERVER CONFIRM:
+CITY = ${serverData.city}
+MEMORY = ${serverData.debug?.memorySize}
+SYNC OK
 `;
 
-  addLog("SELECTED: " + key.toUpperCase());
+  document.getElementById("syncState").innerText =
+`SYNC: ${serverData.city} / MEM:${serverData.debug?.memorySize}`;
 }
 
+/* =========================
+   LOG
+========================= */
 function addLog(text){
 
   const el = document.getElementById("logBox");
@@ -300,6 +344,26 @@ function addLog(text){
 
   el.scrollTop = el.scrollHeight;
 }
+
+/* =========================
+   LIVE STATE POLLING（監視）
+========================= */
+async function fetchState(){
+
+  try{
+    const res = await fetch(API + "/state");
+    const data = await res.json();
+
+    document.getElementById("syncState").innerText =
+`SYNC: ${data.city} / LIVE`;
+
+  }catch(e){
+    document.getElementById("syncState").innerText =
+"SYNC ERROR";
+  }
+}
+
+setInterval(fetchState, 2000);
 
 </script>
 
