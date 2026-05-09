@@ -154,8 +154,6 @@ async function chat(){
 
   try{
 
-    log("[SERVER] sending request → Node");
-
     const res = await fetch("http://localhost:3000/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -164,8 +162,6 @@ async function chat(){
         city: currentCity
       })
     });
-
-    log("[SERVER] response received");
 
     const data = await res.json();
 
@@ -176,9 +172,7 @@ async function chat(){
     }
 
     log("[AI] response OK");
-
     showAI(text, data.reply);
-
     log("[AI LOG] " + data.reply);
 
     inputEl.value = "";
@@ -205,9 +199,9 @@ ${reply}`;
 }
 
 /* =========================
-   CITY SWITCH
+   CITY SWITCH（修正ポイント）
 ========================= */
-async function setCity(type){
+function setCity(type){
 
   currentCity = type;
 
@@ -217,26 +211,12 @@ async function setCity(type){
 
   log("[CITY SWITCH] " + type);
 
-  try {
-    const res = await fetch("http://localhost:3000/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: "__CITY_SYNC__",
-        city: currentCity
-      })
-    });
-
-    const data = await res.json();
-    log("[CITY SYNC SERVER] " + JSON.stringify(data.debug || {}));
-
-  } catch(e) {
-    log("[CITY SYNC ERROR] " + e.message);
-  }
+  // ❌ サーバ通知しない（ここが修正本体）
+  // → chat汚染の原因を完全遮断
 }
 
 /* =========================
-   LOG SYSTEM（★修正ここ）
+   LOG SYSTEM
 ========================= */
 function log(text){
 
@@ -247,7 +227,6 @@ function log(text){
 
   logs.push(entry);
 
-  // ★重要：200件ローテーション（古い順に削除）
   logs = logs.slice(-200);
 
   localStorage.setItem(VR_KEY, JSON.stringify(logs));
