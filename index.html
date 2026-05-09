@@ -228,7 +228,7 @@ nav a:hover{
   <div class="title">CITY OBSERVER</div>
 
   <div id="stateView" class="stateBox">
-CITYを選択してください
+SERVER STATE LOADING...
   </div>
 
   <div class="log" id="logBox"></div>
@@ -241,40 +241,31 @@ CITYを選択してください
 
 const API = "http://localhost:3000";
 
-const cityData = {
-  cyber:{
-    name:"CYBER CITY",
-    state:"SYSTEMIZED / LOW EMOTION",
-    behavior:"短文・機械応答",
-    memory:"圧縮・ログ優先",
-    color:"#00e5ff"
-  },
-  real:{
-    name:"REAL CITY",
-    state:"STABLE HUMAN MODE",
-    behavior:"自然対話・共感",
-    memory:"均衡保存",
-    color:"#7CFF6B"
-  },
-  mixed:{
-    name:"MIX CITY",
-    state:"UNSTABLE HYBRID",
-    behavior:"メタ・崩壊・揺らぎ",
-    memory:"断片化進行",
-    color:"#ff4fd8"
-  }
-};
-
-let current = null;
+let serverState = null;
 
 /* =========================
-   CITY SELECT + SEND TO SERVER
+   FETCH SERVER STATE
+========================= */
+async function loadState(){
+  try{
+    const res = await fetch(API + "/state");
+    serverState = await res.json();
+
+    document.getElementById("syncState").innerText =
+`SYNC: ${serverState.city} / LIVE`;
+
+  }catch(e){
+    document.getElementById("syncState").innerText =
+"SYNC ERROR";
+  }
+}
+
+/* =========================
+   SELECT CITY (SYNC ONLY)
 ========================= */
 async function selectCity(key){
 
-  current = key;
-
-  addLog("LOCAL SELECT: " + key);
+  addLog("CITY REQUEST: " + key);
 
   try{
 
@@ -289,9 +280,10 @@ async function selectCity(key){
 
     const data = await res.json();
 
-    addLog("SERVER CITY: " + data.city);
+    addLog("SERVER CONFIRMED: " + data.city);
 
-    updateUI(key, data);
+    await loadState();
+    renderState();
 
   }catch(e){
     addLog("SYNC ERROR: " + e.message);
@@ -299,36 +291,30 @@ async function selectCity(key){
 }
 
 /* =========================
-   UI UPDATE
+   RENDER STATE (REAL DATA ONLY)
 ========================= */
-function updateUI(key, serverData){
+function renderState(){
 
-  const c = cityData[key];
+  if(!serverState) return;
+
+  const mem = serverState.lastSync
+    ? `LAST SYNC: ${serverState.lastSync}`
+    : "LAST SYNC: none";
 
   document.getElementById("stateView").innerText =
-`◆ ${c.name}
+`◆ SERVER CONTROLLED CITY
 
-STATE:
-${c.state}
+CURRENT CITY:
+${serverState.city.toUpperCase()}
 
-BEHAVIOR:
-${c.behavior}
+STATUS:
+ACTIVE NODE STREAM
 
-MEMORY:
-${c.memory}
-
-COLOR:
-${c.color}
+${mem}
 
 ----------------------
-SERVER CONFIRM:
-CITY = ${serverData.city}
-MEMORY = ${serverData.debug?.memorySize}
-SYNC OK
+SOURCE: SERVER STATE (/state)
 `;
-
-  document.getElementById("syncState").innerText =
-`SYNC: ${serverData.city} / MEM:${serverData.debug?.memorySize}`;
 }
 
 /* =========================
@@ -346,24 +332,14 @@ function addLog(text){
 }
 
 /* =========================
-   LIVE STATE POLLING（監視）
+   LOOP
 ========================= */
-async function fetchState(){
+setInterval(async ()=>{
+  await loadState();
+  renderState();
+}, 2000);
 
-  try{
-    const res = await fetch(API + "/state");
-    const data = await res.json();
-
-    document.getElementById("syncState").innerText =
-`SYNC: ${data.city} / LIVE`;
-
-  }catch(e){
-    document.getElementById("syncState").innerText =
-"SYNC ERROR";
-  }
-}
-
-setInterval(fetchState, 2000);
+loadState();
 
 </script>
 
