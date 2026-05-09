@@ -3,183 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FCTAITYO CITY // DIGITAL URBAN SYSTEM</title>
+  <title>FCTAITYO // PERSONAL PORTAL</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     :root {
-      --bg: #07070a;
-      --text: #f5f5f5;
-      --sub: #aaa;
-      --main: #8d5cff;
-      --main2: #4b8dff;
-      --line: rgba(255,255,255,0.08);
+      --bg:#090909;
+      --text:#f5f5f5;
+      --sub:#aaa;
+      --main:#8d5cff;
+      --main2:#4b8dff;
+      --line:rgba(255,255,255,0.08);
     }
 
-    body.city {
-      background: radial-gradient(circle at top left, rgba(141,92,255,0.15), transparent 40%),
-                  radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 35%),
-                  var(--bg);
-      color: var(--text);
-      font-family: 'Noto Sans JP', sans-serif;
-      overflow-x: hidden;
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(141,92,255,0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(75,141,255,0.12), transparent 25%),
+        var(--bg);
+      color:var(--text);
+      font-family:'Noto Sans JP',sans-serif;
+      overflow-x:hidden;
     }
 
-    .skybox {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle, #0b0b10, #000);
-      z-index: -2;
+    .container{width:92%;max-width:1450px;margin:auto;}
+
+    header{
+      position:sticky;top:0;z-index:999;
+      backdrop-filter:blur(12px);
+      background:rgba(10,10,10,0.7);
+      border-bottom:1px solid var(--line);
     }
 
-    .city-map {
-      scroll-snap-type: y mandatory;
+    .header-inner{display:flex;justify-content:space-between;align-items:center;padding:20px 0;}
+
+    .logo{font-family:'Orbitron';font-size:1.8rem;font-weight:800;letter-spacing:3px;}
+    .logo span{color:var(--main);}
+
+    nav{display:flex;gap:28px;font-size:0.95rem;}
+    nav a{color:#ccc;text-decoration:none;}
+
+    .hero{
+      min-height:90vh;
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:50px;
+      align-items:center;
+      position:relative;
     }
 
-    .district {
-      min-height: 100vh;
-      padding: 120px 8%;
-      scroll-snap-align: start;
-      position: relative;
-      border-bottom: 1px solid var(--line);
+    .hero::before{
+      content:"";
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02)1px,transparent1px),
+        linear-gradient(90deg,rgba(255,255,255,0.02)1px,transparent1px);
+      background-size:40px 40px;
+      pointer-events:none;
     }
 
-    .ui-overlay {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      font-size: 12px;
-      color: #bbb;
-      background: rgba(0,0,0,0.4);
-      padding: 10px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
+    .hero-text{position:relative;z-index:1;}
+
+    .tag{
+      display:inline-block;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(141,92,255,0.15);
+      border:1px solid rgba(141,92,255,0.4);
+      color:#d8cbff;
+      margin-bottom:25px;
     }
 
-    .hero-zone h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 4rem;
-      margin-bottom: 20px;
+    .hero h1{font-family:'Orbitron';font-size:5rem;line-height:1;margin-bottom:25px;}
+    .hero h1 span{color:var(--main);}
+    .hero p{color:var(--sub);line-height:2;max-width:700px;}
+
+    .hero-card{
+      border:1px solid var(--line);
+      border-radius:35px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.03);
     }
 
-    .hero-zone span {
-      color: var(--main);
+    .hero-image{
+      position:relative;
+      height:650px;
+      overflow:hidden;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
+    .hero-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    .card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 24px;
-      transition: 0.2s;
+    .ui-box{
+      position:absolute;
+      background:rgba(0,0,0,0.65);
+      border:1px solid rgba(255,255,255,0.08);
+      backdrop-filter:blur(8px);
+      border-radius:18px;
+      padding:18px;
+      color:#fff;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(141,92,255,0.4);
+    .ui-top{top:20px;left:20px;width:220px;}
+    .ui-bottom{bottom:20px;right:20px;width:260px;}
+
+    section{margin-top:110px;}
+
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+
+    .card{
+      background:rgba(255,255,255,0.03);
+      border:1px solid var(--line);
+      border-radius:30px;
+      overflow:hidden;
     }
 
-    .tag {
-      font-size: 12px;
-      color: #ccc;
-      margin-bottom: 10px;
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(141,92,255,0.15);
+    .card-image{
+      height:240px;
+      background-size:cover;
+      background-position:center;
     }
 
-    .card-image {
-      height: 180px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
+    .card-body{padding:30px;}
+
+    .terminal{
+      background:#050505;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:40px;
+      font-family:monospace;
     }
   </style>
 </head>
 
-<body class="city">
+<body>
 
-  <div class="skybox"></div>
+<header>
+  <div class="container header-inner">
+    <div class="logo">FCT<span>AITYO</span></div>
+    <nav>
+      <a href="#projects">PROJECTS</a>
+      <a href="#labs">LABS</a>
+      <a href="#links">LINKS</a>
+    </nav>
+  </div>
+</header>
 
-  <div class="ui-overlay">
-    FCTAITYO CITY // NODE ACTIVE
+<main class="container">
+
+<section class="hero">
+
+  <div class="hero-text">
+    <div class="tag">PERSONAL NETWORK // 2026</div>
+    <h1>FCTAITYO<br><span>DIGITAL PORTAL</span></h1>
+    <p>AI・VRC・架空都市・Web実験の統合ポータル。</p>
   </div>
 
-  <main class="city-map">
+  <div class="hero-card">
+    <div class="hero-image">
+      <img src="https://picsum.photos/seed/hero/1200/800" alt="hero" />
 
-    <section class="district hero-zone">
-      <h1>FCTAITYO<br><span>DIGITAL CITY</span></h1>
-      <p>
-        この都市はAI・VRC・架空世界・Web実験によって構築されたデジタル都市システム。
-        スクロールは移動、セクションは地区として機能する。
-      </p>
-    </section>
-
-    <section class="district">
-      <h2>CREATOR DISTRICT</h2>
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="card-image" style="background-image:url('https://picsum.photos/seed/rpg/800/600');"></div>
-          <div class="tag">PROJECT NODE</div>
-          <h3>不存在RPG計画</h3>
-          <p>都市型オープンワールド設計</p>
-        </div>
-
-        <div class="card">
-          <div class="card-image" style="background-image:url('https://picsum.photos/seed/ai/800/600');"></div>
-          <div class="tag">AI NODE</div>
-          <h3>AIサイト実験室</h3>
-          <p>生成Webシステム研究</p>
-        </div>
-
-        <div class="card">
-          <div class="card-image" style="background-image:url('https://picsum.photos/seed/vrc/800/600');"></div>
-          <div class="tag">VR NODE</div>
-          <h3>VR SOCIAL LOG</h3>
-          <p>非言語コミュニケーション解析</p>
-        </div>
-
+      <div class="ui-box ui-top">
+        SYSTEM STATUS<br>ONLINE
       </div>
-    </section>
 
-    <section class="district">
-      <h2>CORE SYSTEM LAB</h2>
-      <p>
-        AI生成・都市構造・データ観測・UI実験を行う中枢区画。
-      </p>
-    </section>
+      <div class="ui-box ui-bottom">
+        CITY NODE ACTIVE
+      </div>
+    </div>
+  </div>
 
-    <section class="district">
-      <h2>GATEWAY NETWORK</h2>
-      <p>
-        GitHub / SNS / 外部サービスへの接続ハブ。
-      </p>
-    </section>
+</section>
 
-  </main>
+<section id="projects">
+  <div class="grid-3">
+
+    <div class="card">
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/rpg/800/600');"></div>
+      <div class="card-body">不存在RPG計画</div>
+    </div>
+
+    <div class="card">
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/ai/800/600');"></div>
+      <div class="card-body">AI実験室</div>
+    </div>
+
+    <div class="card">
+      <div class="card-image" style="background-image:url('https://picsum.photos/seed/vrc/800/600');"></div>
+      <div class="card-body">VR LOG</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="labs">
+  <div class="terminal">
+    booting system...<br>
+    city rendering...<br>
+    connection stable
+  </div>
+</section>
+
+</main>
 
 </body>
 </html>
