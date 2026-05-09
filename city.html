@@ -10,7 +10,7 @@ body{
   background:#0a0a0a;
   color:#ddd;
   font-family:sans-serif;
-  overflow:hidden; /* ★全体スクロール殺す */
+  overflow:hidden;
 }
 
 /* ===== TOP BAR ===== */
@@ -43,14 +43,14 @@ body{
   grid-template-columns:1fr 1fr 1fr;
   height:100vh;
   padding-top:60px;
-  overflow:hidden; /* ★重要 */
+  overflow:hidden;
 }
 
 .panel{
   border-right:1px solid #222;
   padding:20px;
-  height:calc(100vh - 60px); /* ★ここ重要 */
-  overflow-y:auto; /* ★各ノード独立スクロール */
+  height:calc(100vh - 60px);
+  overflow-y:auto;
 }
 
 button{
@@ -120,7 +120,7 @@ textarea{
 </div>
 
 <!-- VR -->
-<div class="panel">
+<div class="panel" id="vrPanel">
 <h2>🟩 VR / HISTORY</h2>
 <pre id="vrOut"></pre>
 </div>
@@ -147,10 +147,12 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* ===== VR RENDER ===== */
+/* ===== VR RENDER（完全修正版） ===== */
 function renderVR(){
 
   const vr = document.getElementById("vrOut");
+  const panel = document.getElementById("vrPanel");
+
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
   vr.innerText =
@@ -158,8 +160,8 @@ function renderVR(){
 ----------------
 ` + logs.join("\n");
 
-  // ★自動スクロール（重要）
-  vr.scrollTop = vr.scrollHeight;
+  // ★確実に下へ（panel基準）
+  panel.scrollTop = panel.scrollHeight;
 }
 
 /* ===== CITY FLOW ===== */
