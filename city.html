@@ -132,7 +132,12 @@ textarea{
 const VR_KEY = "vr_history";
 
 /* =========================
-   CHAT (DEBUG VERSION)
+   CITY STATE
+========================= */
+let currentCity = "real";
+
+/* =========================
+   CHAT
 ========================= */
 async function chat(){
 
@@ -144,6 +149,7 @@ async function chat(){
   }
 
   log("[INPUT] " + text);
+  log("[CITY SEND] " + currentCity);
 
   try{
 
@@ -152,7 +158,10 @@ async function chat(){
     const res = await fetch("http://localhost:3000/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text })
+      body: JSON.stringify({
+        text,
+        city: currentCity   // 💣これが重要
+      })
     });
 
     log("[SERVER] response received");
@@ -185,7 +194,9 @@ async function chat(){
 function showAI(input, reply){
 
   document.getElementById("aiOut").innerText =
-`YOU:
+`CITY: ${currentCity.toUpperCase()}
+
+YOU:
 ${input}
 
 AI:
@@ -193,15 +204,17 @@ ${reply}`;
 }
 
 /* =========================
-   CITY
+   CITY SWITCH
 ========================= */
 function setCity(type){
+
+  currentCity = type; // 💣これ重要
 
   document.getElementById("rpgOut").innerText =
 `CITY:
 → ${type.toUpperCase()}`;
 
-  log("[CITY] " + type);
+  log("[CITY SWITCH] " + type);
 }
 
 /* =========================
