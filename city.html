@@ -50,7 +50,6 @@ body.mode-ai{
   color:#cfe3ff;
 }
 
-body.mode-ai .panel,
 body.mode-ai .panel{
   border-color:#2b4d7a;
 }
@@ -72,7 +71,7 @@ body.mode-rpg{
 body.mode-rpg .panel{
   border-color:#7a3b2b;
 }
-  
+
 </style>
 </head>
 
@@ -107,16 +106,10 @@ body.mode-rpg .panel{
 
 <script>
 
-const modeTitle = {
-  ai: "AI NODE / GENERATION",
-  vr: "VR NODE / OBSERVATION",
-  rpg: "RPG NODE / WORLD DESIGN",
-  cyber: "CITY SYSTEM"
-};
-
 const params = new URLSearchParams(location.search);
-let mode = params.get("mode") || "cyber";
+const mode = params.get("mode") || "cyber";
 
+/* mode適用（見た目変更） */
 document.body.classList.add("mode-" + mode);
 
 let cityState = "cyber";
@@ -124,12 +117,10 @@ let cityState = "cyber";
 function setCity(type){
   cityState = type;
 
-  // RPG出力
   document.getElementById("rpgOut").innerText =
 `CURRENT DESIGN:
 → ${type.toUpperCase()} CITY`;
 
-  // AI生成（疑似）
   let aiResult = "";
 
   if(type === "cyber"){
@@ -148,7 +139,6 @@ function setCity(type){
 OUTPUT:
 ${aiResult}`;
 
-  // VR観測（結果反映）
   document.getElementById("vrOut").innerText =
 `OBSERVATION LOG
 
@@ -159,15 +149,8 @@ BEHAVIOR:
 - environmental tone updated`;
 }
 
-// 初期状態
+/* 初期起動（URLモード反映） */
 setCity(mode);
-
-const params = new URLSearchParams(window.location.search);
-const mode = params.get("mode");
-
-if(mode){
-  setCity(mode);
-}
 
 </script>
 
