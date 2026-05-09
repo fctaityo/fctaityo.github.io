@@ -78,8 +78,14 @@ textarea{
   resize:none;
 }
 
-#vrOut{
-  padding-bottom:40px;
+/* ★VRヘッダ固定 */
+.vrHeader{
+  position:sticky;
+  top:0;
+  background:#0a0a0a;
+  padding:10px 0;
+  border-bottom:1px solid #222;
+  z-index:10;
 }
 </style>
 </head>
@@ -94,6 +100,7 @@ textarea{
 
 <div class="wrap">
 
+<!-- RPG -->
 <div class="panel">
 <h2>🟥 RPG / INPUT</h2>
 
@@ -108,14 +115,18 @@ textarea{
 <button onclick="loadMemo()">LOAD</button>
 </div>
 
+<!-- AI -->
 <div class="panel">
 <h2>🟦 AI / TRANSFORM</h2>
 <pre id="aiOut"></pre>
 </div>
 
+<!-- VR -->
 <div class="panel" id="vrPanel">
-<h2>🟩 VR / HISTORY</h2>
+
+<div class="vrHeader">🟩 VR / HISTORY</div>
 <pre id="vrOut"></pre>
+
 </div>
 
 </div>
@@ -125,7 +136,7 @@ textarea{
 const MEMO_KEY = "memo_rpg";
 const VR_KEY = "vr_history";
 
-/* ===== LOG ===== */
+/* ===== VR LOG ===== */
 function pushVRLog(text){
 
   const time = new Date().toLocaleTimeString();
@@ -139,7 +150,7 @@ function pushVRLog(text){
   renderVR();
 }
 
-/* ===== RENDER ===== */
+/* ===== VR RENDER ===== */
 function renderVR(){
 
   const panel = document.getElementById("vrPanel");
@@ -148,8 +159,7 @@ function renderVR(){
   const logs = JSON.parse(localStorage.getItem(VR_KEY) || "[]");
 
   vr.innerText =
-`VR HISTORY
-----------------
+`----------------
 ` + logs.join("\n");
 
   requestAnimationFrame(() => {
