@@ -21,6 +21,7 @@ body{
 .panel{
   border-right:1px solid #222;
   padding:20px;
+  overflow:auto;
 }
 
 h2{
@@ -109,18 +110,59 @@ body.mode-rpg .panel{
 const params = new URLSearchParams(location.search);
 const mode = params.get("mode") || "cyber";
 
-/* mode適用（見た目変更） */
+/* mode適用 */
 document.body.classList.add("mode-" + mode);
 
 let cityState = "cyber";
+let vrInterval;
+
+/* VRログ生成 */
+function startVRLog(type){
+
+  clearInterval(vrInterval);
+
+  const logs = {
+    cyber: [
+      "neon signal fluctuation detected",
+      "urban network density rising",
+      "cyber district pulse unstable"
+    ],
+    real: [
+      "traffic flow stabilizing",
+      "population distribution normalized",
+      "infrastructure load balanced"
+    ],
+    mixed: [
+      "hybrid zone synchronization active",
+      "dual-layer city pattern detected",
+      "environmental mismatch corrected"
+    ]
+  };
+
+  let i = 0;
+
+  vrInterval = setInterval(() => {
+    const log = logs[type][i % logs[type].length];
+
+    const time = new Date().toLocaleTimeString();
+
+    document.getElementById("vrOut").innerText +=
+`\n[${time}] ${log}`;
+
+    i++;
+  }, 2000);
+}
 
 function setCity(type){
+
   cityState = type;
 
+  /* RPG */
   document.getElementById("rpgOut").innerText =
 `CURRENT DESIGN:
 → ${type.toUpperCase()} CITY`;
 
+  /* AI */
   let aiResult = "";
 
   if(type === "cyber"){
@@ -139,17 +181,17 @@ function setCity(type){
 OUTPUT:
 ${aiResult}`;
 
+  /* VR（初期ログ＋自動更新開始） */
   document.getElementById("vrOut").innerText =
 `OBSERVATION LOG
 
 CITY TYPE: ${type}
-BEHAVIOR:
-- population shift detected
-- communication density changed
-- environmental tone updated`;
+--- LIVE FEED START ---`;
+
+  startVRLog(type);
 }
 
-/* 初期起動（URLモード反映） */
+/* 初期起動 */
 setCity(mode);
 
 </script>
