@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>FCTAITYO CITY - MINI SYSTEM</title>
+
+<style>
+body{
+  margin:0;
+  background:#0a0a0a;
+  color:#fff;
+  font-family:sans-serif;
+}
+
+.wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  height:100vh;
+}
+
+.panel{
+  border-right:1px solid #222;
+  padding:20px;
+}
+
+h2{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+button{
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  background:#222;
+  color:#fff;
+  border:1px solid #444;
+  cursor:pointer;
+}
+
+pre{
+  white-space:pre-wrap;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- RPG -->
+<div class="panel">
+<h2>🟥 RPG / DESIGN</h2>
+
+<button onclick="setCity('cyber')">CYBER CITY</button>
+<button onclick="setCity('real')">REAL CITY</button>
+<button onclick="setCity('mixed')">MIX CITY</button>
+
+<pre id="rpgOut"></pre>
+</div>
+
+<!-- AI -->
+<div class="panel">
+<h2>🟦 AI NODE / GENERATION</h2>
+<pre id="aiOut"></pre>
+</div>
+
+<!-- VR -->
+<div class="panel">
+<h2>🟩 VR NODE / OBSERVATION</h2>
+<pre id="vrOut"></pre>
+</div>
+
+</div>
+
+<script>
+
+let cityState = "cyber";
+
+function setCity(type){
+  cityState = type;
+
+  // RPG出力
+  document.getElementById("rpgOut").innerText =
+`CURRENT DESIGN:
+→ ${type.toUpperCase()} CITY`;
+
+  // AI生成（疑似）
+  let aiResult = "";
+
+  if(type === "cyber"){
+    aiResult = "NEON HIGH-DENSITY CITY GENERATED";
+  }
+  if(type === "real"){
+    aiResult = "REALISTIC URBAN STRUCTURE GENERATED";
+  }
+  if(type === "mixed"){
+    aiResult = "HYBRID CITY STRUCTURE GENERATED";
+  }
+
+  document.getElementById("aiOut").innerText =
+`STATUS: RUNNING
+
+OUTPUT:
+${aiResult}`;
+
+  // VR観測（結果反映）
+  document.getElementById("vrOut").innerText =
+`OBSERVATION LOG
+
+CITY TYPE: ${type}
+BEHAVIOR:
+- population shift detected
+- communication density changed
+- environmental tone updated`;
+}
+
+// 初期状態
+setCity("cyber");
+
+</script>
+
+</body>
+</html>
