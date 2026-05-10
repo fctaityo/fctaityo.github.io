@@ -14,7 +14,6 @@
   --bg:#0a0a0a;
   --line:rgba(255,255,255,0.08);
   --text:#f5f5f5;
-  /* 動的に変わるメインカラー */
   --accent:#ff4fd8; 
 }
 
@@ -23,7 +22,7 @@ body{
   color:var(--text);
   font-family:'Noto Sans JP',sans-serif;
   overflow:hidden;
-  transition: 0.5s ease; /* 背景や全体の雰囲気の変化を滑らかに */
+  transition: 0.5s ease;
 }
 
 header{
@@ -122,6 +121,7 @@ header{
   outline: none;
   border-radius: 4px;
   transition: 0.3s;
+  resize: none;
 }
 #chatInput:focus{ border-color: var(--accent); box-shadow: 0 0 5px var(--accent); }
 
@@ -145,7 +145,7 @@ header{
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-top: 2px solid var(--accent); /* 上部にアクセントライン */
+  border-top: 2px solid var(--accent);
   transition: 0.5s;
 }
 
@@ -223,18 +223,19 @@ header{
 </div>
 
 <script>
+// --- CONFIGURATION ---
 const API = "http://localhost:3000";
 let currentCity = "real";
 
-// 都市ごとのカラー設定
 const cityColors = {
-  cyber: "#00e5ff", // シアン
-  real: "#7CFF6B",  // グリーン
-  mixed: "#ff4fd8"  // マゼンタ
+  cyber: "#00e5ff",
+  real: "#7CFF6B",
+  mixed: "#ff4fd8"
 };
 
+// --- INITIALIZE ---
 window.addEventListener('DOMContentLoaded', () => {
-  selectCity('real'); // 初期設定
+  selectCity('real');
   updateNews();
   
   document.getElementById("chatInput").addEventListener("keydown", e => {
@@ -245,15 +246,56 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// --- FUNCTIONS ---
 async function selectCity(key){
   currentCity = key;
   
-  // --- 色の切り替え処理 ---
   const accentColor = cityColors[key];
   document.documentElement.style.setProperty('--accent', accentColor);
   document.getElementById('logo-city').innerText = key.toUpperCase() + " CITY";
-  // -----------------------
 
-  addLog("MODE_SWITCH: " + key);
+  // UI状態の更新
+  document.querySelectorAll('.cityBtn').forEach(btn => btn.classList.remove('active'));
+  const targetBtn = document.getElementById('btn-' + key);
+  if(targetBtn) targetBtn.classList.add('active');
+
+  document.getElementById('syncState').innerText = "SYNC: ACTIVE";
+  document.getElementById('stateView').innerText = `${key.toUpperCase()} モードへ切り替え完了。観測を開始します。`;
   
-  document.querySelectorAll('.
+  addLog("MODE_SWITCH: " + key);
+}
+
+function addLog(msg) {
+  const logBox = document.getElementById('logBox');
+  const now = new Date().toLocaleTimeString();
+  logBox.innerText += `[${now}] ${msg}\n`;
+  const area = document.getElementById('logScrollArea');
+  area.scrollTop = area.scrollHeight;
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if(!msg) return;
+
+  addLog("SEND_REQUEST: " + msg.substring(0, 20) + "...");
+  input.value = "";
+
+  // ダミーの応答処理（API接続がない場合を想定）
+  setTimeout(() => {
+    document.getElementById('memoryView').innerText = `LAST_INTERVENTION: ${msg}\nSTATUS: PROCESSED IN ${currentCity}`;
+    addLog("SERVER_ACK: SUCCESS");
+  }, 500);
+}
+
+async function updateNews() {
+  document.getElementById('newsDisplay').innerText = "Fetching latest global data...";
+  setTimeout(() => {
+    document.getElementById('newsDisplay').innerText = "No major anomalies detected in the current timeline.";
+    document.getElementById('apiCounter').innerText = "API: 24/100";
+    addLog("NEWS_REFRESH: COMPLETED");
+  }, 800);
+}
+</script>
+</body>
+</html>
