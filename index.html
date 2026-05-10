@@ -99,7 +99,6 @@ nav a{
   border-color: var(--mix);
 }
 
-/* --- 右側パネル全体の構造 --- */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -109,7 +108,6 @@ nav a{
   overflow: hidden;
 }
 
-/* 上部：固定ステータスエリア */
 .statusSection {
   padding: 20px;
   border-bottom: 1px solid var(--line);
@@ -117,9 +115,8 @@ nav a{
   background: rgba(255, 255, 255, 0.01);
 }
 
-/* 記憶エリアとログエリアの共通設定 */
 .scrollSection {
-  flex: 1; /* 残りのスペースを均等に分ける(50:50) */
+  flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -130,7 +127,6 @@ nav a{
   border-bottom: none;
 }
 
-/* 各エリア内部のタイトル */
 .sectionTitle {
   padding: 10px 20px 5px 20px;
   font-family: 'Orbitron';
@@ -140,10 +136,9 @@ nav a{
   background: rgba(0,0,0,0.2);
 }
 
-/* 実際のスクロール領域 */
 .scrollContent {
   flex-grow: 1;
-  overflow-y: scroll; /* スクロールバーを常に表示させて幅を揃える */
+  overflow-y: scroll;
   padding: 0 20px 20px 20px;
   background: rgba(0,0,0,0.2);
   scroll-behavior: smooth;
@@ -164,7 +159,6 @@ nav a{
   font-size: 0.8rem;
 }
 
-/* 記憶表示の文字装飾 */
 .memoryDisplay {
   font-size: 0.75rem;
   color: #bbb;
@@ -198,6 +192,7 @@ nav a{
   color: #aaa;
   line-height: 1.5;
   min-height: 3em;
+  word-break: break-all;
 }
 
 .refresh-btn {
@@ -216,7 +211,6 @@ nav a{
   border-color: var(--text);
 }
 
-/* ログの文字装飾 */
 .log{
   font-size:0.7rem;
   color:#555;
@@ -225,7 +219,6 @@ nav a{
   white-space: pre-wrap;
 }
 
-/* スクロールバーのデザイン(サイバーパンク風) */
 .scrollContent::-webkit-scrollbar { width: 6px; }
 .scrollContent::-webkit-scrollbar-track { background: transparent; }
 .scrollContent::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
@@ -300,6 +293,7 @@ window.addEventListener('DOMContentLoaded', () => {
     scrollToBottom();
   }
   refreshState();
+  updateNews(); // 起動時にもニュースを読み込む
 });
 
 async function selectCity(key){
@@ -323,10 +317,17 @@ async function updateNews(){
   try {
     const res = await fetch(API + "/api/news");
     const data = await res.json();
-    newsEl.innerText = data.news;
-    addLog("NEWS FEED UPDATED: " + data.news.substring(0, 15) + "...");
+    
+    // データが存在するかチェック
+    if (data && data.news) {
+        newsEl.innerText = data.news;
+        addLog("NEWS FEED UPDATED: " + data.news.substring(0, 20) + "...");
+    } else {
+        newsEl.innerText = "NO NEWS DATA AVAILABLE";
+        addLog("NEWS ERROR: Received empty data from server");
+    }
   } catch(e) {
-    newsEl.innerText = "NEWS_OFFLINE";
+    newsEl.innerText = "OFFLINE_MODE";
     addLog("NEWS ERROR: " + e.message);
   }
 }
@@ -378,14 +379,8 @@ function addLog(text){
 
 function scrollToBottom() {
   const area = document.getElementById("logScrollArea");
-  area.scrollTop = area.scrollHeight;
+  if(area) area.scrollTop = area.scrollHeight;
 }
-
-window.clearLogs = () => {
-  localStorage.removeItem("observation_logs");
-  document.getElementById("logBox").innerText = "";
-  addLog("LOG_BUFFER_CLEARED");
-};
 
 setInterval(refreshState, 3000);
 </script>
