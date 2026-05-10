@@ -70,7 +70,7 @@ nav a{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:20px;
-  height:calc(100vh - 100px); /* ヘッダー分を考慮 */
+  height:calc(100vh - 100px);
   padding-top:20px;
 }
 
@@ -99,44 +99,57 @@ nav a{
   border-color: var(--mix);
 }
 
-/* --- 右側パネル全体の構造 --- */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
   background:#111;
   display: flex;
-  flex-direction: column; /* 縦に並べる */
-  overflow: hidden; /* 親パネル自体はスクロールさせない */
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* 上部：固定ステータスエリア */
+/* 上部：固定ステータスエリア（ここを少し広げました） */
 .statusSection {
   padding: 20px;
   border-bottom: 1px solid var(--line);
-  flex-shrink: 0; /* 縮ませない */
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.01);
 }
 
 /* 下部：独立スクロールログエリア */
 .logSection {
-  flex-grow: 1; /* 余ったスペースをすべて使う */
-  overflow-y: auto; /* ここだけスクロール */
+  flex-grow: 1;
+  overflow-y: auto;
   padding: 20px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
   scroll-behavior: smooth;
 }
 
 .title{
   font-family:'Orbitron';
-  margin-bottom:15px;
+  margin-bottom:12px;
   color: var(--mix);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
 }
 
 .stateBox{
   white-space:pre-wrap;
-  line-height:1.6;
+  line-height:1.5;
   color:#ddd;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+}
+
+/* 記憶表示エリアを少し区別するスタイル */
+.memoryDisplay {
+  margin-top: 10px;
+  padding: 10px;
+  background: rgba(0,0,0,0.4);
+  border-left: 2px solid var(--mix);
+  font-size: 0.75rem;
+  color: #bbb;
+  max-height: 120px;
+  overflow-y: auto;
 }
 
 .sync{
@@ -184,8 +197,8 @@ nav a{
 }
 
 .log{
-  font-size:0.75rem;
-  color:#666;
+  font-size:0.7rem;
+  color:#555;
   font-family: 'monospace';
   line-height: 1.4;
   white-space: pre-wrap;
@@ -229,10 +242,13 @@ nav a{
   <div class="statusSection">
     <div class="title">CITY_STATUS_OBSERVER</div>
     <div id="stateView" class="stateBox">CITYを選択してください</div>
+    
+    <div style="font-size: 0.7rem; color: var(--mix); margin-top: 15px; font-family: 'Orbitron';">RECENT_MEMORY_BUFFER</div>
+    <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
   </div>
 
   <div class="logSection" id="logScrollArea">
-    <div class="title" style="font-size: 0.7rem; opacity: 0.6;">SYSTEM_LOG_STREAM</div>
+    <div class="title" style="font-size: 0.65rem; opacity: 0.5;">SYSTEM_LOG_STREAM</div>
     <div class="log" id="logBox"></div>
   </div>
 </div>
@@ -274,7 +290,7 @@ async function updateNews(){
     const res = await fetch(API + "/api/news");
     const data = await res.json();
     newsEl.innerText = data.news;
-    addLog("NEWS FEED UPDATED: " + data.news.substring(0, 20) + "...");
+    addLog("NEWS FEED UPDATED: " + data.news.substring(0, 15) + "...");
   } catch(e) {
     newsEl.innerText = "NEWS_OFFLINE";
     addLog("NEWS ERROR: " + e.message);
@@ -299,13 +315,17 @@ async function refreshState(){
 
 function renderState(data){
   const el = document.getElementById("stateView");
+  const memEl = document.getElementById("memoryView");
+
   el.innerText =
 `CURRENT CITY: ${data.city.toUpperCase()}
 STATUS: ACTIVE_NODE
 LAST SYNC: ${data.lastSync ? new Date(data.lastSync).toLocaleTimeString() : "N/A"}
 MEMORY: ${data.memorySize ?? 0} units
-PROFILE: ${data.profile?.state || "N/A"}
 BEHAVIOR: ${data.profile?.behavior || "N/A"}`;
+
+  // 会話履歴を独立した枠に表示
+  memEl.innerText = data.recentMemory || "NO_MEMORY_DATA";
 }
 
 function addLog(text){
