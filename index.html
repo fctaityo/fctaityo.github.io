@@ -107,6 +107,12 @@ header{
   transition: 0.5s;
 }
 
+.news-label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #chatInput{
   background: #000;
   border: 1px solid #333;
@@ -185,9 +191,12 @@ header{
   </div>
 
   <div class="newsSection">
-    <div class="news-label">
+    <div class="news-label-container">
       <span class="chat-label">WORLD_NEWS_FEED</span>
-      <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
+      <div>
+        <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
+        <span id="apiCounter" style="font-size: 8px; color: #555; margin-left: 8px; font-family: 'Orbitron'; vertical-align: middle;">API: --/100</span>
+      </div>
     </div>
     <div id="newsDisplay">Waiting for sync...</div>
   </div>
@@ -247,79 +256,4 @@ async function selectCity(key){
 
   addLog("MODE_SWITCH: " + key);
   
-  document.querySelectorAll('.cityBtn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btn-' + key).classList.add('active');
-
-  try {
-    await fetch(API + "/chat", {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ text:"__CITY_SYNC__", city:key })
-    });
-    refreshState();
-  } catch(e) { addLog("SYNC_ERROR: " + e.message); }
-}
-
-async function sendMessage() {
-  const input = document.getElementById("chatInput");
-  const text = input.value.trim();
-  if(!text) return;
-
-  addLog("INTERVENTION: " + text.substring(0,15) + "...");
-  input.value = "";
-  input.disabled = true;
-
-  try {
-    await fetch(API + "/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: text, city: currentCity })
-    });
-    addLog("RESPONSE_RECEIVED");
-    refreshState();
-  } catch(e) {
-    addLog("COMM_ERROR: " + e.message);
-  } finally {
-    input.disabled = false;
-    input.focus();
-  }
-}
-
-async function updateNews(){
-  const newsEl = document.getElementById("newsDisplay");
-  newsEl.innerText = "FETCHING...";
-  try {
-    const res = await fetch(API + "/api/news");
-    const data = await res.json();
-    newsEl.innerText = data.news || "NO_DATA";
-    addLog("NEWS_UPDATED");
-  } catch(e) { newsEl.innerText = "OFFLINE"; }
-}
-
-async function refreshState(){
-  try{
-    const res = await fetch(API + "/state");
-    const data = await res.json();
-    
-    document.getElementById("stateView").innerText = 
-      `CITY: ${data.city.toUpperCase()} | STATUS: ONLINE | MEM: ${data.memorySize} units`;
-    document.getElementById("memoryView").innerText = data.recentMemory || "WAITING...";
-    document.getElementById("syncState").innerText = `SYNC: ${data.city} / MEM:${data.memorySize}`;
-    
-    const memArea = document.getElementById("memoryScrollArea");
-    memArea.scrollTop = memArea.scrollHeight;
-  }catch(e){ console.error(e); }
-}
-
-function addLog(text){
-  const el = document.getElementById("logBox");
-  const time = new Date().toLocaleTimeString();
-  el.innerText += `[${time}] ${text}\n`;
-  document.getElementById("logScrollArea").scrollTop = el.scrollHeight;
-}
-
-setInterval(refreshState, 5000);
-</script>
-
-</body>
-</html>
+  document.querySelectorAll('.
