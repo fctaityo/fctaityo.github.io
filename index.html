@@ -67,7 +67,6 @@ header{
   padding-top:20px;
 }
 
-/* LEFT PANEL */
 .leftPanel{ display:flex; flex-direction:column; gap:15px; }
 
 .controlSection, .chatSection, .newsSection{
@@ -137,7 +136,6 @@ header{
   transition: 0.5s;
 }
 
-/* RIGHT PANEL */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -153,7 +151,7 @@ header{
 .scrollSection { flex: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom: 1px solid var(--line); }
 .scrollContent { flex-grow: 1; overflow-y: scroll; padding: 0 20px 20px 20px; background: rgba(0,0,0,0.2); }
 .stateBox{ white-space:pre-wrap; line-height:1.5; color:#ddd; font-size: 0.8rem; }
-.memoryDisplay { font-size: 0.8rem; color: #bbb; white-space: pre-wrap; line-height: 1.6; }
+.memoryDisplay { font-size: 0.8rem; color: #bbb; white-space: pre-wrap; line-height: 1.6; font-family: monospace; }
 .log{ font-size:0.7rem; color:#555; font-family: 'monospace'; line-height: 1.4; white-space: pre-wrap; }
 
 #newsDisplay { font-size: 11px; color: #aaa; line-height: 1.5; }
@@ -162,7 +160,6 @@ header{
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
 </style>
 </head>
 <body>
@@ -174,56 +171,53 @@ header{
 </header>
 
 <div class="container main">
+  <div class="leftPanel">
+    <div class="controlSection">
+      <div class="chat-label">SELECT_CITY_MODE</div>
+      <button class="cityBtn" id="btn-cyber" onclick="selectCity('cyber')">CYBER CITY</button>
+      <button class="cityBtn" id="btn-real" onclick="selectCity('real')">REAL CITY</button>
+      <button class="cityBtn" id="btn-mixed" onclick="selectCity('mixed')">MIX CITY</button>
+      <div id="syncState" style="font-size:10px; color:#555; font-family:'Orbitron';">SYNC: WAITING...</div>
+    </div>
 
-<div class="leftPanel">
-  <div class="controlSection">
-    <div class="chat-label">SELECT_CITY_MODE</div>
-    <button class="cityBtn" id="btn-cyber" onclick="selectCity('cyber')">CYBER CITY</button>
-    <button class="cityBtn" id="btn-real" onclick="selectCity('real')">REAL CITY</button>
-    <button class="cityBtn" id="btn-mixed" onclick="selectCity('mixed')">MIX CITY</button>
-    <div id="syncState" style="font-size:10px; color:#555; font-family:'Orbitron';">SYNC: WAITING...</div>
+    <div class="chatSection">
+      <div class="chat-label">INTERVENTION_INPUT</div>
+      <textarea id="chatInput" rows="4" placeholder="メッセージを入力して介入..."></textarea>
+      <button class="sendBtn" id="sendBtn" onclick="sendMessage()">EXECUTE_SEND</button>
+    </div>
+
+    <div class="newsSection">
+      <div class="news-label-container">
+        <span class="chat-label">WORLD_NEWS_FEED</span>
+        <div>
+          <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
+          <span id="apiCounter" style="font-size: 8px; color: #555; margin-left: 8px; font-family: 'Orbitron'; vertical-align: middle;">API: --/100</span>
+        </div>
+      </div>
+      <div id="newsDisplay">システム待機中...</div>
+    </div>
   </div>
 
-  <div class="chatSection">
-    <div class="chat-label">INTERVENTION_INPUT</div>
-    <textarea id="chatInput" rows="4" placeholder="メッセージを入力して介入..."></textarea>
-    <button class="sendBtn" id="sendBtn" onclick="sendMessage()">EXECUTE_SEND</button>
-  </div>
-
-  <div class="newsSection">
-    <div class="news-label-container">
-      <span class="chat-label">WORLD_NEWS_FEED</span>
-      <div>
-        <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
-        <span id="apiCounter" style="font-size: 8px; color: #555; margin-left: 8px; font-family: 'Orbitron'; vertical-align: middle;">API: --/100</span>
+  <div class="observePanel">
+    <div class="statusSection">
+      <div id="stateView" class="stateBox">CITYを選択してください</div>
+    </div>
+    <div class="scrollSection">
+      <div class="sectionTitle">RECENT_MEMORY_BUFFER</div>
+      <div class="scrollContent" id="memoryScrollArea">
+        <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
       </div>
     </div>
-    <div id="newsDisplay">Waiting for sync...</div>
-  </div>
-</div>
-
-<div class="observePanel">
-  <div class="statusSection">
-    <div id="stateView" class="stateBox">CITYを選択してください</div>
-  </div>
-  <div class="scrollSection">
-    <div class="sectionTitle">RECENT_MEMORY_BUFFER</div>
-    <div class="scrollContent" id="memoryScrollArea">
-      <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
+    <div class="scrollSection">
+      <div class="sectionTitle">SYSTEM_LOG_STREAM</div>
+      <div class="scrollContent" id="logScrollArea">
+        <div class="log" id="logBox"></div>
+      </div>
     </div>
   </div>
-  <div class="scrollSection">
-    <div class="sectionTitle">SYSTEM_LOG_STREAM</div>
-    <div class="scrollContent" id="logScrollArea">
-      <div class="log" id="logBox"></div>
-    </div>
-  </div>
-</div>
-
 </div>
 
 <script>
-// --- CONFIGURATION ---
 const API = "http://localhost:3000";
 let currentCity = "real";
 
@@ -233,11 +227,14 @@ const cityColors = {
   mixed: "#ff4fd8"
 };
 
-// --- INITIALIZE ---
 window.addEventListener('DOMContentLoaded', () => {
   selectCity('real');
-  updateNews();
   
+  // 5秒おきにサーバーの /state を確認して同期
+  setInterval(syncServerState, 5000);
+  syncServerState();
+  updateNews();
+
   document.getElementById("chatInput").addEventListener("keydown", e => {
     if(e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -246,23 +243,85 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// --- FUNCTIONS ---
 async function selectCity(key){
   currentCity = key;
-  
   const accentColor = cityColors[key];
   document.documentElement.style.setProperty('--accent', accentColor);
   document.getElementById('logo-city').innerText = key.toUpperCase() + " CITY";
 
-  // UI状態の更新
   document.querySelectorAll('.cityBtn').forEach(btn => btn.classList.remove('active'));
   const targetBtn = document.getElementById('btn-' + key);
   if(targetBtn) targetBtn.classList.add('active');
 
-  document.getElementById('syncState').innerText = "SYNC: ACTIVE";
-  document.getElementById('stateView').innerText = `${key.toUpperCase()} モードへ切り替え完了。観測を開始します。`;
-  
   addLog("MODE_SWITCH: " + key);
+  
+  // サーバー側の state.city を更新するための空リクエスト
+  try {
+    await fetch(`${API}/chat`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ text: "__CITY_SYNC__", city: key })
+    });
+  } catch(e) {
+    addLog("SYNC_ERROR: 都市の切り替えをサーバーに通知できませんでした");
+  }
+}
+
+async function syncServerState() {
+  try {
+    const res = await fetch(`${API}/state`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    
+    // サーバーから取得した最近の履歴を表示
+    document.getElementById('memoryView').innerText = data.recentMemory || "NO_DATA_SYNCED";
+    document.getElementById('syncState').innerText = `SYNC: ACTIVE (MEM:${data.memorySize})`;
+    document.getElementById('apiCounter').innerText = `API: ${data.apiStats.count}/${data.apiStats.limit}`;
+  } catch (e) {
+    document.getElementById('syncState').innerText = "SYNC: ERROR (OFFLINE)";
+  }
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if(!msg) return;
+
+  addLog("USER_INTERVENTION: " + msg);
+  input.value = "";
+  document.getElementById('stateView').innerText = "SYSTEM THINKING...";
+
+  try {
+    const res = await fetch(`${API}/chat`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ text: msg, city: currentCity })
+    });
+    const data = await res.json();
+    
+    document.getElementById('stateView').innerText = data.reply;
+    addLog("AI_SYNC: SUCCESS");
+    syncServerState(); 
+  } catch (e) {
+    addLog("ERROR: CONNECTION FAILED");
+    document.getElementById('stateView').innerText = "サーバーからの応答がありません。";
+  }
+}
+
+async function updateNews() {
+  const newsDisplay = document.getElementById('newsDisplay');
+  newsDisplay.innerText = "同期中...";
+
+  try {
+    const res = await fetch(`${API}/api/news`);
+    const data = await res.json();
+    newsDisplay.innerText = data.news;
+    document.getElementById('apiCounter').innerText = `API: ${data.apiStats.count}/${data.apiStats.limit}`;
+    addLog("NEWS_SYNC: OK");
+  } catch (e) {
+    newsDisplay.innerText = "ニュースの取得に失敗しました。";
+    addLog("NEWS_SYNC: FAIL");
+  }
 }
 
 function addLog(msg) {
@@ -271,30 +330,6 @@ function addLog(msg) {
   logBox.innerText += `[${now}] ${msg}\n`;
   const area = document.getElementById('logScrollArea');
   area.scrollTop = area.scrollHeight;
-}
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addLog("SEND_REQUEST: " + msg.substring(0, 20) + "...");
-  input.value = "";
-
-  // ダミーの応答処理（API接続がない場合を想定）
-  setTimeout(() => {
-    document.getElementById('memoryView').innerText = `LAST_INTERVENTION: ${msg}\nSTATUS: PROCESSED IN ${currentCity}`;
-    addLog("SERVER_ACK: SUCCESS");
-  }, 500);
-}
-
-async function updateNews() {
-  document.getElementById('newsDisplay').innerText = "Fetching latest global data...";
-  setTimeout(() => {
-    document.getElementById('newsDisplay').innerText = "No major anomalies detected in the current timeline.";
-    document.getElementById('apiCounter').innerText = "API: 24/100";
-    addLog("NEWS_REFRESH: COMPLETED");
-  }, 800);
 }
 </script>
 </body>
