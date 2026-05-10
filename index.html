@@ -91,6 +91,12 @@ nav a{
   color:var(--text);
   font-family:'Orbitron';
   cursor:pointer;
+  transition: 0.3s;
+}
+
+.cityBtn:hover{
+  background: #222;
+  border-color: var(--mix);
 }
 
 .observePanel{
@@ -118,6 +124,45 @@ nav a{
   margin-top:10px;
   font-size:12px;
   color:#777;
+}
+
+/* --- New News Section --- */
+.news-container {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px dashed #333;
+}
+
+.news-label {
+  font-family: 'Orbitron';
+  font-size: 10px;
+  color: var(--mix);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#newsDisplay {
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.5;
+  min-height: 3em;
+}
+
+.refresh-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #444;
+  color: #777;
+  font-size: 10px;
+  font-family: 'Orbitron';
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.refresh-btn:hover {
+  color: var(--text);
+  border-color: var(--text);
 }
 
 .log{
@@ -154,6 +199,14 @@ nav a{
 
   <div class="sync" id="syncState">SYNC: waiting...</div>
 
+  <div class="news-container">
+    <div class="news-label">
+      <span>WORLD_NEWS_FEED</span>
+      <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
+    </div>
+    <div id="newsDisplay">Initializing stream...</div>
+  </div>
+
 </div>
 
 <div class="observePanel">
@@ -171,19 +224,13 @@ nav a{
 <script>
 
 const API = "http://localhost:3000";
-
-/* =========================
-   STATE LOCK（競合防止）
-========================= */
 let refreshing = false;
 
 /* =========================
    CITY SELECT
 ========================= */
 async function selectCity(key){
-
   addLog("CITY REQUEST: " + key);
-
   try{
     await fetch(API + "/chat", {
       method:"POST",
@@ -193,33 +240,42 @@ async function selectCity(key){
         city:key
       })
     });
-
     await refreshState();
-
     addLog("SERVER CONFIRMED: " + key);
-
   }catch(e){
     addLog("SYNC ERROR: " + e.message);
   }
 }
 
 /* =========================
-   STATE FETCH（競合防止付き）
+   NEWS UPDATE
+========================= */
+async function updateNews(){
+  const newsEl = document.getElementById("newsDisplay");
+  newsEl.innerText = "FETCHING LATEST LOGS...";
+  try {
+    const res = await fetch(API + "/api/news");
+    const data = await res.json();
+    newsEl.innerText = data.news;
+    addLog("NEWS FEED UPDATED");
+  } catch(e) {
+    newsEl.innerText = "NEWS_OFFLINE";
+    addLog("NEWS ERROR: " + e.message);
+  }
+}
+
+/* =========================
+   STATE FETCH
 ========================= */
 async function refreshState(){
-
   if (refreshing) return;
   refreshing = true;
-
   try{
     const res = await fetch(API + "/state");
     const data = await res.json();
-
     renderState(data);
-
     document.getElementById("syncState").innerText =
       `SYNC: ${data.city} / MEM:${data.memorySize ?? "?"}`;
-
   }catch(e){
     addLog("STATE ERROR: " + e.message);
   } finally {
@@ -228,12 +284,10 @@ async function refreshState(){
 }
 
 /* =========================
-   RENDER（完全上書き）
+   RENDER
 ========================= */
 function renderState(data){
-
   const el = document.getElementById("stateView");
-
   el.innerText =
 `◆ SERVER CONTROLLED CITY
 
@@ -261,21 +315,18 @@ ${data.profile?.behavior || ""}
 SOURCE: /state`;
 }
 
-/* =========================
-   LOG
-========================= */
 function addLog(text){
   const el = document.getElementById("logBox");
   const time = new Date().toLocaleTimeString();
   el.innerText += `[${time}] ${text}\n`;
 }
 
-/* =========================
-   LOOP（軽量化）
-========================= */
+// LOOP
 setInterval(refreshState, 3000);
 
+// INITIALIZE
 refreshState();
+updateNews(); // 初回ニュース取得
 
 </script>
 
