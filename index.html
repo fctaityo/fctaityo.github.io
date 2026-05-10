@@ -99,6 +99,7 @@ nav a{
   border-color: var(--mix);
 }
 
+/* --- 右側パネル全体の構造 --- */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -108,7 +109,7 @@ nav a{
   overflow: hidden;
 }
 
-/* 上部：固定ステータスエリア（ここを少し広げました） */
+/* 上部：固定ステータスエリア */
 .statusSection {
   padding: 20px;
   border-bottom: 1px solid var(--line);
@@ -116,12 +117,35 @@ nav a{
   background: rgba(255, 255, 255, 0.01);
 }
 
-/* 下部：独立スクロールログエリア */
-.logSection {
+/* 記憶エリアとログエリアの共通設定 */
+.scrollSection {
+  flex: 1; /* 残りのスペースを均等に分ける(50:50) */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.scrollSection:last-child {
+  border-bottom: none;
+}
+
+/* 各エリア内部のタイトル */
+.sectionTitle {
+  padding: 10px 20px 5px 20px;
+  font-family: 'Orbitron';
+  font-size: 0.7rem;
+  color: var(--mix);
+  letter-spacing: 1px;
+  background: rgba(0,0,0,0.2);
+}
+
+/* 実際のスクロール領域 */
+.scrollContent {
   flex-grow: 1;
-  overflow-y: auto;
-  padding: 20px;
-  background: rgba(0,0,0,0.3);
+  overflow-y: scroll; /* スクロールバーを常に表示させて幅を揃える */
+  padding: 0 20px 20px 20px;
+  background: rgba(0,0,0,0.2);
   scroll-behavior: smooth;
 }
 
@@ -140,16 +164,12 @@ nav a{
   font-size: 0.8rem;
 }
 
-/* 記憶表示エリアを少し区別するスタイル */
+/* 記憶表示の文字装飾 */
 .memoryDisplay {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(0,0,0,0.4);
-  border-left: 2px solid var(--mix);
   font-size: 0.75rem;
   color: #bbb;
-  max-height: 120px;
-  overflow-y: auto;
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 
 .sync{
@@ -196,6 +216,7 @@ nav a{
   border-color: var(--text);
 }
 
+/* ログの文字装飾 */
 .log{
   font-size:0.7rem;
   color:#555;
@@ -203,6 +224,13 @@ nav a{
   line-height: 1.4;
   white-space: pre-wrap;
 }
+
+/* スクロールバーのデザイン(サイバーパンク風) */
+.scrollContent::-webkit-scrollbar { width: 6px; }
+.scrollContent::-webkit-scrollbar-track { background: transparent; }
+.scrollContent::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+.scrollContent::-webkit-scrollbar-thumb:hover { background: var(--mix); }
+
 </style>
 </head>
 
@@ -242,14 +270,20 @@ nav a{
   <div class="statusSection">
     <div class="title">CITY_STATUS_OBSERVER</div>
     <div id="stateView" class="stateBox">CITYを選択してください</div>
-    
-    <div style="font-size: 0.7rem; color: var(--mix); margin-top: 15px; font-family: 'Orbitron';">RECENT_MEMORY_BUFFER</div>
-    <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
   </div>
 
-  <div class="logSection" id="logScrollArea">
-    <div class="title" style="font-size: 0.65rem; opacity: 0.5;">SYSTEM_LOG_STREAM</div>
-    <div class="log" id="logBox"></div>
+  <div class="scrollSection">
+    <div class="sectionTitle">RECENT_MEMORY_BUFFER</div>
+    <div class="scrollContent" id="memoryScrollArea">
+      <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
+    </div>
+  </div>
+
+  <div class="scrollSection">
+    <div class="sectionTitle">SYSTEM_LOG_STREAM</div>
+    <div class="scrollContent" id="logScrollArea">
+      <div class="log" id="logBox"></div>
+    </div>
   </div>
 </div>
 
@@ -324,7 +358,6 @@ LAST SYNC: ${data.lastSync ? new Date(data.lastSync).toLocaleTimeString() : "N/A
 MEMORY: ${data.memorySize ?? 0} units
 BEHAVIOR: ${data.profile?.behavior || "N/A"}`;
 
-  // 会話履歴を独立した枠に表示
   memEl.innerText = data.recentMemory || "NO_MEMORY_DATA";
 }
 
