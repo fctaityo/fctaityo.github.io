@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FCTAITYO CITY // OBSERVATION NODE</title>
+<title>FCTAITYO CITY // INTEGRATED NODE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -48,17 +48,7 @@ header{
   font-size:2rem;
   cursor:pointer;
 }
-
 .logo span{ color:var(--mix); }
-
-nav a{
-  font-family:'Orbitron';
-  color:var(--text);
-  text-decoration:none;
-  font-size:14px;
-  padding:8px 12px;
-  border:1px solid #333;
-}
 
 .container{
   width:92%;
@@ -68,37 +58,93 @@ nav a{
 
 .main{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:380px 1fr;
   gap:20px;
   height:calc(100vh - 100px);
   padding-top:20px;
 }
 
-.selectPanel{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
+/* LEFT PANEL (INPUT & CONTROL) */
+.leftPanel{
   display:flex;
   flex-direction:column;
   gap:15px;
+}
+
+.controlSection{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
   background:rgba(255,255,255,0.02);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
 .cityBtn{
-  padding:18px;
+  padding:12px;
   border:1px solid #333;
   background:#151515;
   color:var(--text);
   font-family:'Orbitron';
   cursor:pointer;
   transition: 0.3s;
+  font-size: 0.8rem;
 }
-
 .cityBtn:hover{
   background: #222;
   border-color: var(--mix);
 }
+.cityBtn.active{
+  border-color: var(--mix);
+  background: rgba(255, 79, 216, 0.1);
+}
 
+/* CHAT INPUT AREA */
+.chatSection{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  background:rgba(255,255,255,0.03);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.chat-label{
+  font-family: 'Orbitron';
+  font-size: 0.7rem;
+  color: var(--mix);
+  letter-spacing: 1px;
+}
+
+#chatInput{
+  background: #000;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  border-radius: 4px;
+}
+#chatInput:focus{ border-color: var(--mix); }
+
+.sendBtn{
+  background: var(--mix);
+  color: #000;
+  border: none;
+  padding: 8px;
+  font-family: 'Orbitron';
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.sendBtn:hover{ opacity: 0.8; }
+
+/* RIGHT PANEL (OBSERVATION) */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -111,7 +157,6 @@ nav a{
 .statusSection {
   padding: 20px;
   border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
   background: rgba(255, 255, 255, 0.01);
 }
 
@@ -123,16 +168,11 @@ nav a{
   border-bottom: 1px solid var(--line);
 }
 
-.scrollSection:last-child {
-  border-bottom: none;
-}
-
 .sectionTitle {
   padding: 10px 20px 5px 20px;
   font-family: 'Orbitron';
   font-size: 0.7rem;
   color: var(--mix);
-  letter-spacing: 1px;
   background: rgba(0,0,0,0.2);
 }
 
@@ -141,43 +181,19 @@ nav a{
   overflow-y: scroll;
   padding: 0 20px 20px 20px;
   background: rgba(0,0,0,0.2);
-  scroll-behavior: smooth;
 }
 
-.title{
-  font-family:'Orbitron';
-  margin-bottom:12px;
-  color: var(--mix);
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-}
+.stateBox{ white-space:pre-wrap; line-height:1.5; color:#ddd; font-size: 0.8rem; }
+.memoryDisplay { font-size: 0.8rem; color: #bbb; white-space: pre-wrap; line-height: 1.6; }
+.log{ font-size:0.7rem; color:#555; font-family: 'monospace'; line-height: 1.4; white-space: pre-wrap; }
 
-.stateBox{
-  white-space:pre-wrap;
-  line-height:1.5;
-  color:#ddd;
-  font-size: 0.8rem;
+/* NEWS AREA */
+.newsSection{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:15px;
+  background:rgba(0,0,0,0.4);
 }
-
-.memoryDisplay {
-  font-size: 0.75rem;
-  color: #bbb;
-  white-space: pre-wrap;
-  line-height: 1.6;
-}
-
-.sync{
-  margin-top:10px;
-  font-size:12px;
-  color:#777;
-}
-
-.news-container {
-  margin-top: auto;
-  padding-top: 15px;
-  border-top: 1px dashed #333;
-}
-
 .news-label {
   font-family: 'Orbitron';
   font-size: 10px;
@@ -186,82 +202,52 @@ nav a{
   display: flex;
   justify-content: space-between;
 }
+#newsDisplay { font-size: 11px; color: #aaa; line-height: 1.5; min-height: 3em; }
+.refresh-btn { background: transparent; border: 1px solid #444; color: #777; font-size: 8px; cursor: pointer; }
 
-#newsDisplay {
-  font-size: 11px;
-  color: #aaa;
-  line-height: 1.5;
-  min-height: 3em;
-  word-break: break-all;
-}
-
-.refresh-btn {
-  margin-top: 10px;
-  background: transparent;
-  border: 1px solid #444;
-  color: #777;
-  font-size: 10px;
-  font-family: 'Orbitron';
-  padding: 4px 8px;
-  cursor: pointer;
-}
-
-.refresh-btn:hover {
-  color: var(--text);
-  border-color: var(--text);
-}
-
-.log{
-  font-size:0.7rem;
-  color:#555;
-  font-family: 'monospace';
-  line-height: 1.4;
-  white-space: pre-wrap;
-}
-
-.scrollContent::-webkit-scrollbar { width: 6px; }
-.scrollContent::-webkit-scrollbar-track { background: transparent; }
-.scrollContent::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-.scrollContent::-webkit-scrollbar-thumb:hover { background: var(--mix); }
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--mix); }
 
 </style>
 </head>
-
 <body>
 
 <header>
   <div class="container header-inner">
-    <div class="logo" onclick="location.reload()">
-      FCTAITYO <span>CITY</span>
-    </div>
-
-    <nav>
-      <a href="city.html">NODE SYSTEM</a>
-    </nav>
+    <div class="logo" onclick="location.reload()">FCTAITYO <span>CITY</span></div>
   </div>
 </header>
 
 <div class="container main">
 
-<div class="selectPanel">
-  <button class="cityBtn" onclick="selectCity('cyber')">CYBER CITY</button>
-  <button class="cityBtn" onclick="selectCity('real')">REAL CITY</button>
-  <button class="cityBtn" onclick="selectCity('mixed')">MIX CITY</button>
+<div class="leftPanel">
+  <div class="controlSection">
+    <div class="chat-label">SELECT_CITY_MODE</div>
+    <button class="cityBtn" id="btn-cyber" onclick="selectCity('cyber')">CYBER CITY</button>
+    <button class="cityBtn" id="btn-real" onclick="selectCity('real')">REAL CITY</button>
+    <button class="cityBtn" id="btn-mixed" onclick="selectCity('mixed')">MIX CITY</button>
+    <div id="syncState" style="font-size:10px; color:#555; font-family:'Orbitron';">SYNC: WAITING...</div>
+  </div>
 
-  <div class="sync" id="syncState">SYNC: waiting...</div>
+  <div class="chatSection">
+    <div class="chat-label">INTERVENTION_INPUT</div>
+    <textarea id="chatInput" rows="4" placeholder="メッセージを入力して介入..."></textarea>
+    <button class="sendBtn" onclick="sendMessage()">EXECUTE_SEND</button>
+  </div>
 
-  <div class="news-container">
+  <div class="newsSection">
     <div class="news-label">
       <span>WORLD_NEWS_FEED</span>
       <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
     </div>
-    <div id="newsDisplay">Waiting for manual sync...</div>
+    <div id="newsDisplay">Waiting for sync...</div>
   </div>
 </div>
 
 <div class="observePanel">
   <div class="statusSection">
-    <div class="title">CITY_STATUS_OBSERVER</div>
     <div id="stateView" class="stateBox">CITYを選択してください</div>
   </div>
 
@@ -284,105 +270,100 @@ nav a{
 
 <script>
 const API = "http://localhost:3000";
-let refreshing = false;
+let currentCity = "real";
 
 window.addEventListener('DOMContentLoaded', () => {
-  const savedLogs = localStorage.getItem("observation_logs");
-  if (savedLogs) {
-    document.getElementById("logBox").innerText = savedLogs;
-    scrollToBottom();
-  }
   refreshState();
-  updateNews(); // 起動時にもニュースを読み込む
+  updateNews();
+  
+  // Enterキーで送信 (Shift+Enterで改行)
+  document.getElementById("chatInput").addEventListener("keydown", e => {
+    if(e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
 });
 
 async function selectCity(key){
-  addLog("CITY REQUEST: " + key);
-  try{
+  currentCity = key;
+  addLog("MODE_SWITCH: " + key);
+  
+  document.querySelectorAll('.cityBtn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + key).classList.add('active');
+
+  try {
     await fetch(API + "/chat", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ text:"__CITY_SYNC__", city:key })
     });
-    await refreshState();
-    addLog("SERVER CONFIRMED: " + key);
-  }catch(e){
-    addLog("SYNC ERROR: " + e.message);
+    refreshState();
+  } catch(e) { addLog("SYNC_ERROR: " + e.message); }
+}
+
+async function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if(!text) return;
+
+  addLog("INTERVENTION: " + text.substring(0,15) + "...");
+  input.value = "";
+  input.disabled = true;
+
+  try {
+    await fetch(API + "/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text, city: currentCity })
+    });
+    addLog("RESPONSE_RECEIVED");
+    refreshState();
+  } catch(e) {
+    addLog("COMM_ERROR: " + e.message);
+  } finally {
+    input.disabled = false;
+    input.focus();
   }
 }
 
 async function updateNews(){
   const newsEl = document.getElementById("newsDisplay");
-  newsEl.innerText = "FETCHING LATEST LOGS...";
+  newsEl.innerText = "FETCHING...";
   try {
     const res = await fetch(API + "/api/news");
     const data = await res.json();
-    
-    // データが存在するかチェック
-    if (data && data.news) {
-        newsEl.innerText = data.news;
-        addLog("NEWS FEED UPDATED: " + data.news.substring(0, 20) + "...");
-    } else {
-        newsEl.innerText = "NO NEWS DATA AVAILABLE";
-        addLog("NEWS ERROR: Received empty data from server");
-    }
-  } catch(e) {
-    newsEl.innerText = "OFFLINE_MODE";
-    addLog("NEWS ERROR: " + e.message);
-  }
+    newsEl.innerText = data.news || "NO_DATA";
+    addLog("NEWS_UPDATED");
+  } catch(e) { newsEl.innerText = "OFFLINE"; }
 }
 
 async function refreshState(){
-  if (refreshing) return;
-  refreshing = true;
   try{
     const res = await fetch(API + "/state");
     const data = await res.json();
-    renderState(data);
-    document.getElementById("syncState").innerText =
-      `SYNC: ${data.city} / MEM:${data.memorySize ?? "?"}`;
-  }catch(e){
-    console.error("State Fetch Error:", e);
-  } finally {
-    refreshing = false;
-  }
-}
-
-function renderState(data){
-  const el = document.getElementById("stateView");
-  const memEl = document.getElementById("memoryView");
-
-  el.innerText =
-`CURRENT CITY: ${data.city.toUpperCase()}
-STATUS: ACTIVE_NODE
-LAST SYNC: ${data.lastSync ? new Date(data.lastSync).toLocaleTimeString() : "N/A"}
-MEMORY: ${data.memorySize ?? 0} units
-BEHAVIOR: ${data.profile?.behavior || "N/A"}`;
-
-  memEl.innerText = data.recentMemory || "NO_MEMORY_DATA";
+    
+    // UI更新
+    document.getElementById("stateView").innerText = 
+      `CITY: ${data.city.toUpperCase()} | STATUS: ONLINE | MEM: ${data.memorySize} units`;
+    document.getElementById("memoryView").innerText = data.recentMemory || "WAITING...";
+    document.getElementById("syncState").innerText = `SYNC: ${data.city} / MEM:${data.memorySize}`;
+    
+    // スクロールを一番下へ
+    const memArea = document.getElementById("memoryScrollArea");
+    memArea.scrollTop = memArea.scrollHeight;
+  }catch(e){ console.error(e); }
 }
 
 function addLog(text){
   const el = document.getElementById("logBox");
   const time = new Date().toLocaleTimeString();
-  const logLine = `[${time}] ${text}\n`;
-  
-  el.innerText += logLine;
-  
-  let logs = localStorage.getItem("observation_logs") || "";
-  logs += logLine;
-  if(logs.length > 5000) logs = logs.substring(logs.length - 5000);
-  localStorage.setItem("observation_logs", logs);
-  
-  scrollToBottom();
+  el.innerText += `[${time}] ${text}\n`;
+  document.getElementById("logScrollArea").scrollTop = el.scrollHeight;
 }
 
-function scrollToBottom() {
-  const area = document.getElementById("logScrollArea");
-  if(area) area.scrollTop = area.scrollHeight;
-}
-
-setInterval(refreshState, 3000);
+// 5秒ごとに状態を自動更新
+setInterval(refreshState, 5000);
 </script>
 
 </body>
