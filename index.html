@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FCTAITYO CITY // INTEGRATED NODE</title>
+<title>FCTAITYO CITY // DYNAMIC NODE</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 
@@ -14,9 +14,8 @@
   --bg:#0a0a0a;
   --line:rgba(255,255,255,0.08);
   --text:#f5f5f5;
-  --cyber:#00e5ff;
-  --real:#7CFF6B;
-  --mix:#ff4fd8;
+  /* 動的に変わるメインカラー */
+  --accent:#ff4fd8; 
 }
 
 body{
@@ -24,6 +23,7 @@ body{
   color:var(--text);
   font-family:'Noto Sans JP',sans-serif;
   overflow:hidden;
+  transition: 0.5s ease; /* 背景や全体の雰囲気の変化を滑らかに */
 }
 
 header{
@@ -48,7 +48,11 @@ header{
   font-size:2rem;
   cursor:pointer;
 }
-.logo span{ color:var(--mix); }
+.logo span{ 
+    color:var(--accent); 
+    transition: 0.5s;
+    text-shadow: 0 0 10px var(--accent);
+}
 
 .container{
   width:92%;
@@ -64,14 +68,10 @@ header{
   padding-top:20px;
 }
 
-/* LEFT PANEL (INPUT & CONTROL) */
-.leftPanel{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
+/* LEFT PANEL */
+.leftPanel{ display:flex; flex-direction:column; gap:15px; }
 
-.controlSection{
+.controlSection, .chatSection, .newsSection{
   border:1px solid var(--line);
   border-radius:14px;
   padding:20px;
@@ -79,6 +79,7 @@ header{
   display:flex;
   flex-direction:column;
   gap:10px;
+  transition: 0.3s;
 }
 
 .cityBtn{
@@ -91,31 +92,19 @@ header{
   transition: 0.3s;
   font-size: 0.8rem;
 }
-.cityBtn:hover{
-  background: #222;
-  border-color: var(--mix);
-}
+.cityBtn:hover{ border-color: var(--accent); }
 .cityBtn.active{
-  border-color: var(--mix);
-  background: rgba(255, 79, 216, 0.1);
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.05);
+  box-shadow: inset 0 0 10px var(--accent);
 }
 
-/* CHAT INPUT AREA */
-.chatSection{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
-  background:rgba(255,255,255,0.03);
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.chat-label{
+.chat-label, .sectionTitle {
   font-family: 'Orbitron';
   font-size: 0.7rem;
-  color: var(--mix);
+  color: var(--accent);
   letter-spacing: 1px;
+  transition: 0.5s;
 }
 
 #chatInput{
@@ -124,15 +113,14 @@ header{
   color: #fff;
   padding: 12px;
   font-size: 0.9rem;
-  font-family: inherit;
-  resize: none;
   outline: none;
   border-radius: 4px;
+  transition: 0.3s;
 }
-#chatInput:focus{ border-color: var(--mix); }
+#chatInput:focus{ border-color: var(--accent); box-shadow: 0 0 5px var(--accent); }
 
 .sendBtn{
-  background: var(--mix);
+  background: var(--accent);
   color: #000;
   border: none;
   padding: 8px;
@@ -140,11 +128,10 @@ header{
   font-weight: bold;
   cursor: pointer;
   border-radius: 4px;
-  transition: 0.2s;
+  transition: 0.5s;
 }
-.sendBtn:hover{ opacity: 0.8; }
 
-/* RIGHT PANEL (OBSERVATION) */
+/* RIGHT PANEL */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
@@ -152,63 +139,23 @@ header{
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border-top: 2px solid var(--accent); /* 上部にアクセントライン */
+  transition: 0.5s;
 }
 
-.statusSection {
-  padding: 20px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.01);
-}
-
-.scrollSection {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-}
-
-.sectionTitle {
-  padding: 10px 20px 5px 20px;
-  font-family: 'Orbitron';
-  font-size: 0.7rem;
-  color: var(--mix);
-  background: rgba(0,0,0,0.2);
-}
-
-.scrollContent {
-  flex-grow: 1;
-  overflow-y: scroll;
-  padding: 0 20px 20px 20px;
-  background: rgba(0,0,0,0.2);
-}
-
+.statusSection { padding: 20px; border-bottom: 1px solid var(--line); }
+.scrollSection { flex: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom: 1px solid var(--line); }
+.scrollContent { flex-grow: 1; overflow-y: scroll; padding: 0 20px 20px 20px; background: rgba(0,0,0,0.2); }
 .stateBox{ white-space:pre-wrap; line-height:1.5; color:#ddd; font-size: 0.8rem; }
 .memoryDisplay { font-size: 0.8rem; color: #bbb; white-space: pre-wrap; line-height: 1.6; }
 .log{ font-size:0.7rem; color:#555; font-family: 'monospace'; line-height: 1.4; white-space: pre-wrap; }
 
-/* NEWS AREA */
-.newsSection{
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:15px;
-  background:rgba(0,0,0,0.4);
-}
-.news-label {
-  font-family: 'Orbitron';
-  font-size: 10px;
-  color: var(--mix);
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-}
-#newsDisplay { font-size: 11px; color: #aaa; line-height: 1.5; min-height: 3em; }
+#newsDisplay { font-size: 11px; color: #aaa; line-height: 1.5; }
 .refresh-btn { background: transparent; border: 1px solid #444; color: #777; font-size: 8px; cursor: pointer; }
 
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--mix); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
 </style>
 </head>
@@ -216,7 +163,7 @@ header{
 
 <header>
   <div class="container header-inner">
-    <div class="logo" onclick="location.reload()">FCTAITYO <span>CITY</span></div>
+    <div class="logo" onclick="location.reload()">FCTAITYO <span id="logo-city">CITY</span></div>
   </div>
 </header>
 
@@ -234,12 +181,12 @@ header{
   <div class="chatSection">
     <div class="chat-label">INTERVENTION_INPUT</div>
     <textarea id="chatInput" rows="4" placeholder="メッセージを入力して介入..."></textarea>
-    <button class="sendBtn" onclick="sendMessage()">EXECUTE_SEND</button>
+    <button class="sendBtn" id="sendBtn" onclick="sendMessage()">EXECUTE_SEND</button>
   </div>
 
   <div class="newsSection">
     <div class="news-label">
-      <span>WORLD_NEWS_FEED</span>
+      <span class="chat-label">WORLD_NEWS_FEED</span>
       <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
     </div>
     <div id="newsDisplay">Waiting for sync...</div>
@@ -250,14 +197,12 @@ header{
   <div class="statusSection">
     <div id="stateView" class="stateBox">CITYを選択してください</div>
   </div>
-
   <div class="scrollSection">
     <div class="sectionTitle">RECENT_MEMORY_BUFFER</div>
     <div class="scrollContent" id="memoryScrollArea">
       <div id="memoryView" class="memoryDisplay">NO_DATA_SYNCED</div>
     </div>
   </div>
-
   <div class="scrollSection">
     <div class="sectionTitle">SYSTEM_LOG_STREAM</div>
     <div class="scrollContent" id="logScrollArea">
@@ -272,11 +217,17 @@ header{
 const API = "http://localhost:3000";
 let currentCity = "real";
 
+// 都市ごとのカラー設定
+const cityColors = {
+  cyber: "#00e5ff", // シアン
+  real: "#7CFF6B",  // グリーン
+  mixed: "#ff4fd8"  // マゼンタ
+};
+
 window.addEventListener('DOMContentLoaded', () => {
-  refreshState();
+  selectCity('real'); // 初期設定
   updateNews();
   
-  // Enterキーで送信 (Shift+Enterで改行)
   document.getElementById("chatInput").addEventListener("keydown", e => {
     if(e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -287,6 +238,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function selectCity(key){
   currentCity = key;
+  
+  // --- 色の切り替え処理 ---
+  const accentColor = cityColors[key];
+  document.documentElement.style.setProperty('--accent', accentColor);
+  document.getElementById('logo-city').innerText = key.toUpperCase() + " CITY";
+  // -----------------------
+
   addLog("MODE_SWITCH: " + key);
   
   document.querySelectorAll('.cityBtn').forEach(b => b.classList.remove('active'));
@@ -343,13 +301,11 @@ async function refreshState(){
     const res = await fetch(API + "/state");
     const data = await res.json();
     
-    // UI更新
     document.getElementById("stateView").innerText = 
       `CITY: ${data.city.toUpperCase()} | STATUS: ONLINE | MEM: ${data.memorySize} units`;
     document.getElementById("memoryView").innerText = data.recentMemory || "WAITING...";
     document.getElementById("syncState").innerText = `SYNC: ${data.city} / MEM:${data.memorySize}`;
     
-    // スクロールを一番下へ
     const memArea = document.getElementById("memoryScrollArea");
     memArea.scrollTop = memArea.scrollHeight;
   }catch(e){ console.error(e); }
@@ -362,7 +318,6 @@ function addLog(text){
   document.getElementById("logScrollArea").scrollTop = el.scrollHeight;
 }
 
-// 5秒ごとに状態を自動更新
 setInterval(refreshState, 5000);
 </script>
 
