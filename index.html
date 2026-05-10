@@ -104,7 +104,8 @@ nav a{
   border-radius:14px;
   padding:20px;
   background:#111;
-  overflow:auto;
+  overflow-y:auto; /* ログ増大に対応 */
+  scroll-behavior: smooth;
 }
 
 .title{
@@ -171,6 +172,7 @@ nav a{
   color:#888;
   border-top:1px solid var(--line);
   padding-top:10px;
+  white-space: pre-wrap; /* 改行を維持 */
 }
 </style>
 </head>
@@ -204,7 +206,7 @@ nav a{
       <span>WORLD_NEWS_FEED</span>
       <button class="refresh-btn" onclick="updateNews()">RELOAD</button>
     </div>
-    <div id="newsDisplay">Initializing stream...</div>
+    <div id="newsDisplay">Waiting for manual sync...</div>
   </div>
 
 </div>
@@ -225,6 +227,16 @@ nav a{
 
 const API = "http://localhost:3000";
 let refreshing = false;
+
+// 初期化時に保存されたログを復元
+window.addEventListener('DOMContentLoaded', () => {
+  const savedLogs = localStorage.getItem("observation_logs");
+  if (savedLogs) {
+    document.getElementById("logBox").innerText = savedLogs;
+    scrollToBottom();
+  }
+  refreshState();
+});
 
 /* =========================
    CITY SELECT
@@ -248,7 +260,7 @@ async function selectCity(key){
 }
 
 /* =========================
-   NEWS UPDATE
+   NEWS UPDATE (ボタン押下時のみ実行)
 ========================= */
 async function updateNews(){
   const newsEl = document.getElementById("newsDisplay");
@@ -257,7 +269,7 @@ async function updateNews(){
     const res = await fetch(API + "/api/news");
     const data = await res.json();
     newsEl.innerText = data.news;
-    addLog("NEWS FEED UPDATED");
+    addLog("NEWS FEED UPDATED: " + data.news.substring(0, 20) + "...");
   } catch(e) {
     newsEl.innerText = "NEWS_OFFLINE";
     addLog("NEWS ERROR: " + e.message);
@@ -277,14 +289,15 @@ async function refreshState(){
     document.getElementById("syncState").innerText =
       `SYNC: ${data.city} / MEM:${data.memorySize ?? "?"}`;
   }catch(e){
-    addLog("STATE ERROR: " + e.message);
+    console.error("State Fetch Error:", e);
+    // ログが埋まるのを防ぐため、ここでの addLog は行わない
   } finally {
     refreshing = false;
   }
 }
 
 /* =========================
-   RENDER
+   RENDER & LOGGING
 ========================= */
 function renderState(data){
   const el = document.getElementById("stateView");
@@ -318,15 +331,33 @@ SOURCE: /state`;
 function addLog(text){
   const el = document.getElementById("logBox");
   const time = new Date().toLocaleTimeString();
-  el.innerText += `[${time}] ${text}\n`;
+  const logLine = `[${time}] ${text}\n`;
+  
+  el.innerText += logLine;
+  
+  // localStorageに保存 (最大3000文字程度で古いものをカット)
+  let logs = localStorage.getItem("observation_logs") || "";
+  logs += logLine;
+  if(logs.length > 3000) logs = logs.substring(logs.length - 3000);
+  localStorage.setItem("observation_logs", logs);
+  
+  scrollToBottom();
 }
+
+function scrollToBottom() {
+  const panel = document.querySelector('.observePanel');
+  panel.scrollTop = panel.scrollHeight;
+}
+
+// ログ消去用ユーティリティ（コンソールから clearLogs() で実行可能）
+window.clearLogs = () => {
+  localStorage.removeItem("observation_logs");
+  document.getElementById("logBox").innerText = "";
+  addLog("LOG_BUFFER_CLEARED");
+};
 
 // LOOP
 setInterval(refreshState, 3000);
-
-// INITIALIZE
-refreshState();
-updateNews(); // 初回ニュース取得
 
 </script>
 
