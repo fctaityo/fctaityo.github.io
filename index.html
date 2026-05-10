@@ -70,7 +70,7 @@ nav a{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:20px;
-  height:calc(100vh - 80px);
+  height:calc(100vh - 100px); /* ヘッダー分を考慮 */
   padding-top:20px;
 }
 
@@ -99,26 +99,44 @@ nav a{
   border-color: var(--mix);
 }
 
+/* --- 右側パネル全体の構造 --- */
 .observePanel{
   border:1px solid var(--line);
   border-radius:14px;
-  padding:20px;
   background:#111;
-  overflow-y:auto; /* ログ増大に対応 */
+  display: flex;
+  flex-direction: column; /* 縦に並べる */
+  overflow: hidden; /* 親パネル自体はスクロールさせない */
+}
+
+/* 上部：固定ステータスエリア */
+.statusSection {
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0; /* 縮ませない */
+}
+
+/* 下部：独立スクロールログエリア */
+.logSection {
+  flex-grow: 1; /* 余ったスペースをすべて使う */
+  overflow-y: auto; /* ここだけスクロール */
+  padding: 20px;
+  background: rgba(0,0,0,0.2);
   scroll-behavior: smooth;
 }
 
 .title{
   font-family:'Orbitron';
   margin-bottom:15px;
+  color: var(--mix);
+  font-size: 0.9rem;
 }
 
 .stateBox{
   white-space:pre-wrap;
-  line-height:1.8;
-  border-top:1px solid var(--line);
-  padding-top:15px;
+  line-height:1.6;
   color:#ddd;
+  font-size: 0.85rem;
 }
 
 .sync{
@@ -127,7 +145,6 @@ nav a{
   color:#777;
 }
 
-/* --- New News Section --- */
 .news-container {
   margin-top: auto;
   padding-top: 15px;
@@ -167,12 +184,11 @@ nav a{
 }
 
 .log{
-  margin-top:20px;
-  font-size:0.8rem;
-  color:#888;
-  border-top:1px solid var(--line);
-  padding-top:10px;
-  white-space: pre-wrap; /* 改行を維持 */
+  font-size:0.75rem;
+  color:#666;
+  font-family: 'monospace';
+  line-height: 1.4;
+  white-space: pre-wrap;
 }
 </style>
 </head>
@@ -194,7 +210,6 @@ nav a{
 <div class="container main">
 
 <div class="selectPanel">
-
   <button class="cityBtn" onclick="selectCity('cyber')">CYBER CITY</button>
   <button class="cityBtn" onclick="selectCity('real')">REAL CITY</button>
   <button class="cityBtn" onclick="selectCity('mixed')">MIX CITY</button>
@@ -208,27 +223,26 @@ nav a{
     </div>
     <div id="newsDisplay">Waiting for manual sync...</div>
   </div>
-
 </div>
 
 <div class="observePanel">
+  <div class="statusSection">
+    <div class="title">CITY_STATUS_OBSERVER</div>
+    <div id="stateView" class="stateBox">CITYを選択してください</div>
+  </div>
 
-  <div class="title">CITY OBSERVER</div>
-
-  <div id="stateView" class="stateBox">CITYを選択してください</div>
-
-  <div class="log" id="logBox"></div>
-
+  <div class="logSection" id="logScrollArea">
+    <div class="title" style="font-size: 0.7rem; opacity: 0.6;">SYSTEM_LOG_STREAM</div>
+    <div class="log" id="logBox"></div>
+  </div>
 </div>
 
 </div>
 
 <script>
-
 const API = "http://localhost:3000";
 let refreshing = false;
 
-// 初期化時に保存されたログを復元
 window.addEventListener('DOMContentLoaded', () => {
   const savedLogs = localStorage.getItem("observation_logs");
   if (savedLogs) {
@@ -238,19 +252,13 @@ window.addEventListener('DOMContentLoaded', () => {
   refreshState();
 });
 
-/* =========================
-   CITY SELECT
-========================= */
 async function selectCity(key){
   addLog("CITY REQUEST: " + key);
   try{
     await fetch(API + "/chat", {
       method:"POST",
       headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({
-        text:"__CITY_SYNC__",
-        city:key
-      })
+      body: JSON.stringify({ text:"__CITY_SYNC__", city:key })
     });
     await refreshState();
     addLog("SERVER CONFIRMED: " + key);
@@ -259,9 +267,6 @@ async function selectCity(key){
   }
 }
 
-/* =========================
-   NEWS UPDATE (ボタン押下時のみ実行)
-========================= */
 async function updateNews(){
   const newsEl = document.getElementById("newsDisplay");
   newsEl.innerText = "FETCHING LATEST LOGS...";
@@ -276,9 +281,6 @@ async function updateNews(){
   }
 }
 
-/* =========================
-   STATE FETCH
-========================= */
 async function refreshState(){
   if (refreshing) return;
   refreshing = true;
@@ -290,42 +292,20 @@ async function refreshState(){
       `SYNC: ${data.city} / MEM:${data.memorySize ?? "?"}`;
   }catch(e){
     console.error("State Fetch Error:", e);
-    // ログが埋まるのを防ぐため、ここでの addLog は行わない
   } finally {
     refreshing = false;
   }
 }
 
-/* =========================
-   RENDER & LOGGING
-========================= */
 function renderState(data){
   const el = document.getElementById("stateView");
   el.innerText =
-`◆ SERVER CONTROLLED CITY
-
-CURRENT CITY:
-${data.city}
-
-STATUS:
-ACTIVE NODE STREAM
-
-LAST SYNC:
-${data.lastSync || "N/A"}
-
-MEMORY SIZE:
-${data.memorySize ?? "unknown"}
-
-RECENT MEMORY:
-${data.recentMemory || "NO DATA"}
-
-PROFILE:
-${data.profile?.state || ""}
-
-BEHAVIOR:
-${data.profile?.behavior || ""}
-
-SOURCE: /state`;
+`CURRENT CITY: ${data.city.toUpperCase()}
+STATUS: ACTIVE_NODE
+LAST SYNC: ${data.lastSync ? new Date(data.lastSync).toLocaleTimeString() : "N/A"}
+MEMORY: ${data.memorySize ?? 0} units
+PROFILE: ${data.profile?.state || "N/A"}
+BEHAVIOR: ${data.profile?.behavior || "N/A"}`;
 }
 
 function addLog(text){
@@ -335,30 +315,26 @@ function addLog(text){
   
   el.innerText += logLine;
   
-  // localStorageに保存 (最大3000文字程度で古いものをカット)
   let logs = localStorage.getItem("observation_logs") || "";
   logs += logLine;
-  if(logs.length > 3000) logs = logs.substring(logs.length - 3000);
+  if(logs.length > 5000) logs = logs.substring(logs.length - 5000);
   localStorage.setItem("observation_logs", logs);
   
   scrollToBottom();
 }
 
 function scrollToBottom() {
-  const panel = document.querySelector('.observePanel');
-  panel.scrollTop = panel.scrollHeight;
+  const area = document.getElementById("logScrollArea");
+  area.scrollTop = area.scrollHeight;
 }
 
-// ログ消去用ユーティリティ（コンソールから clearLogs() で実行可能）
 window.clearLogs = () => {
   localStorage.removeItem("observation_logs");
   document.getElementById("logBox").innerText = "";
   addLog("LOG_BUFFER_CLEARED");
 };
 
-// LOOP
 setInterval(refreshState, 3000);
-
 </script>
 
 </body>
