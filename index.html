@@ -230,7 +230,7 @@ const cityColors = {
 window.addEventListener('DOMContentLoaded', () => {
   selectCity('real');
   
-  // 5秒おきにサーバーの /state を確認して同期
+  // 5秒おきにサーバーの状態を同期
   setInterval(syncServerState, 5000);
   syncServerState();
   updateNews();
@@ -253,27 +253,30 @@ async function selectCity(key){
   const targetBtn = document.getElementById('btn-' + key);
   if(targetBtn) targetBtn.classList.add('active');
 
-  addLog("MODE_SWITCH: " + key);
+  const logPrefix = {
+    cyber: ">> [PROTOCOL_INIT]: ",
+    real: ">> [街の状態を確認]: ",
+    mixed: ">> [境界線が曖昧]: "
+  };
+  addLog(logPrefix[key] + key.toUpperCase() + " モード同期開始");
   
-  // サーバー側の state.city を更新するための空リクエスト
+  // サーバー側の state.city を更新。Llama3の人格を切り替える
   try {
     await fetch(`${API}/chat`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ text: "__CITY_SYNC__", city: key })
     });
+    document.getElementById('stateView').innerText = `${key.toUpperCase()} の周波数に同調しました。`;
   } catch(e) {
-    addLog("SYNC_ERROR: 都市の切り替えをサーバーに通知できませんでした");
+    addLog("SYNC_ERROR: 都市同期に失敗");
   }
 }
 
 async function syncServerState() {
   try {
     const res = await fetch(`${API}/state`);
-    if (!res.ok) throw new Error();
     const data = await res.json();
-    
-    // サーバーから取得した最近の履歴を表示
     document.getElementById('memoryView').innerText = data.recentMemory || "NO_DATA_SYNCED";
     document.getElementById('syncState').innerText = `SYNC: ACTIVE (MEM:${data.memorySize})`;
     document.getElementById('apiCounter').innerText = `API: ${data.apiStats.count}/${data.apiStats.limit}`;
@@ -287,9 +290,15 @@ async function sendMessage() {
   const msg = input.value.trim();
   if(!msg) return;
 
-  addLog("USER_INTERVENTION: " + msg);
+  addLog("INTERVENTION >> " + msg);
   input.value = "";
-  document.getElementById('stateView').innerText = "SYSTEM THINKING...";
+  
+  const waitingMsg = {
+    cyber: "演算中...",
+    real: "考え中...",
+    mixed: "意識を抽出中..."
+  };
+  document.getElementById('stateView').innerText = waitingMsg[currentCity] || "Wait...";
 
   try {
     const res = await fetch(`${API}/chat`, {
@@ -298,29 +307,25 @@ async function sendMessage() {
       body: JSON.stringify({ text: msg, city: currentCity })
     });
     const data = await res.json();
-    
     document.getElementById('stateView').innerText = data.reply;
     addLog("AI_SYNC: SUCCESS");
     syncServerState(); 
   } catch (e) {
-    addLog("ERROR: CONNECTION FAILED");
-    document.getElementById('stateView').innerText = "サーバーからの応答がありません。";
+    addLog("ERROR: NODE DISCONNECTED");
+    document.getElementById('stateView').innerText = "サーバー接続エラー。";
   }
 }
 
 async function updateNews() {
   const newsDisplay = document.getElementById('newsDisplay');
   newsDisplay.innerText = "同期中...";
-
   try {
     const res = await fetch(`${API}/api/news`);
     const data = await res.json();
     newsDisplay.innerText = data.news;
-    document.getElementById('apiCounter').innerText = `API: ${data.apiStats.count}/${data.apiStats.limit}`;
     addLog("NEWS_SYNC: OK");
   } catch (e) {
-    newsDisplay.innerText = "ニュースの取得に失敗しました。";
-    addLog("NEWS_SYNC: FAIL");
+    newsDisplay.innerText = "ニュース取得失敗。";
   }
 }
 
