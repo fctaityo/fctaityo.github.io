@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050914">
+  <meta name="description" content="Local AI Foundry 2026-07-17 Update — Research Retry、ADR、Error Catalog、Transport改善、公式サイトv2。">
+  <title>2026-07-17 Update — Local AI Foundry</title>
+  <style>
+    :root{--bg:#050914;--panel:#0c1626;--text:#eef6ff;--muted:#91a2ba;--cyan:#29d9ff;--line:rgba(117,183,255,.18)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(44,124,196,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(44,124,196,.05) 1px,transparent 1px);background-size:48px 48px}.shell{width:min(900px,calc(100% - 40px));margin:auto}.header{padding:30px 0;border-bottom:1px solid var(--line)}a{color:var(--cyan)}.back{text-decoration:none;font-size:12px;letter-spacing:.08em}.hero{padding:100px 0 50px}.kicker{font-size:11px;letter-spacing:.24em;color:var(--cyan);font-weight:800}.hero h1{font-size:clamp(44px,8vw,76px);line-height:1;margin:15px 0 25px;letter-spacing:-.05em}.lead{font-size:20px;color:#c3d0e2;max-width:720px}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.meta span{padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:10px}.content{padding:35px;background:linear-gradient(145deg,rgba(15,28,48,.94),rgba(7,14,26,.96));border:1px solid var(--line);border-radius:18px;margin-bottom:80px}.content h2{font-size:24px;margin:0 0 24px}.updates{list-style:none;padding:0;margin:0}.updates li{padding:18px 0 18px 34px;border-bottom:1px solid var(--line);position:relative}.updates li:last-child{border-bottom:0}.updates li:before{content:"";position:absolute;left:5px;top:31px;width:10px;height:2px;background:var(--cyan);box-shadow:0 0 9px var(--cyan)}.updates strong{display:block}.updates span{display:block;color:var(--muted);font-size:13px}.footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}@media(max-width:600px){.hero{padding-top:70px}.content{padding:24px}.lead{font-size:17px}}
+  </style>
+</head>
+<body>
+  <header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a></div></header>
+  <main class="shell">
+    <section class="hero">
+      <p class="kicker">RELEASE INTELLIGENCE / 2026.07.17</p>
+      <h1>Reliability<br>by Contract.</h1>
+      <p class="lead">Research工程の契約違反を検知し、境界を越える前に最大1回だけ再試行する仕組みを中心に、運用と設計文書を強化しました。</p>
+      <div class="meta"><span>RESEARCH RETRY</span><span>ADR × 5</span><span>ERROR CATALOG</span><span>WEBSITE v2</span></div>
+    </section>
+    <article class="content">
+      <h2>Local AI Foundry 2026-07-17 Update</h2>
+      <ul class="updates">
+        <li><strong>Research Contract違反時の最大1回Retry</strong><span>無制限再試行を避け、契約違反時だけ境界内で再実行します。</span></li>
+        <li><strong>Research Retry Error Code</strong><span>再試行と失敗理由を追跡できるエラー分類を追加しました。</span></li>
+        <li><strong>Architecture文書整備</strong><span>Agent責務、DTO境界、Normalize、Contract Gateの関係を整理しました。</span></li>
+        <li><strong>ADR 5件追加</strong><span>重要な設計判断と選択理由を記録しました。</span></li>
+        <li><strong>Error Catalog追加</strong><span>失敗をSilent Failureにしない共通の判断材料を整備しました。</span></li>
+        <li><strong>Documentation Map追加</strong><span>設計資料と運用資料への導線を整理しました。</span></li>
+        <li><strong>spool Transport修正</strong><span>n8nへの受け渡しと永続化の安定性を改善しました。</span></li>
+        <li><strong>起動・停止運用改善</strong><span>ローカル環境の再現性と日常運用を改善しました。</span></li>
+        <li><strong>GitHub Pages v2公開</strong><span>Local AI Foundryの思想・構造・現在地を伝える公式サイトを公開しました。</span></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="footer"><div class="shell">Local AI Foundry — Contract-Driven Multi-Agent Platform ©2026 FC決死隊隊長</div></footer>
+</body>
+</html>
