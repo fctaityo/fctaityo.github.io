@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Local AI Foundry</title>
+<style>
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#07111f;color:#eef}
+body:before{content:"";position:fixed;inset:0;background:
+linear-gradient(rgba(0,255,255,.05) 1px,transparent 1px),
+linear-gradient(90deg,rgba(0,255,255,.05) 1px,transparent 1px);
+background-size:40px 40px;z-index:-2}
+.hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:70px 8%;min-height:90vh}
+h1{font-size:64px;margin:.1em 0;color:#6ff;text-shadow:0 0 18px #0ff}
+.tag{font-size:28px;color:#bde}
+.catch{font-size:34px;font-weight:bold;margin:20px 0;color:#fff}
+.buttons a{display:inline-block;margin:8px;padding:14px 24px;border-radius:12px;background:#12b5ff;color:#fff;text-decoration:none;font-weight:bold}
+.card{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:18px;padding:24px}
+.heroimg{width:min(420px,90vw);border-radius:20px;border:2px solid #4cf;box-shadow:0 0 30px #09f}
+section{padding:50px 8%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.item{padding:22px;border-radius:16px;background:#12253c;border:1px solid #285a88}
+.item h3{margin-top:0;color:#6ff}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-weight:bold}
+.flow span{background:#113454;padding:10px 16px;border-radius:999px}
+.arrow{color:#6ff}
+header{position:fixed;top:0;left:0;right:0;background:rgba(7,17,31,.75);backdrop-filter:blur(10px);padding:12px 8%;display:flex;justify-content:space-between}
+header a{color:#fff;text-decoration:none;margin-left:18px}
+footer{text-align:center;padding:40px;color:#9bb}
+</style>
+</head>
+<body>
+<header>
+<div><strong>LOCAL AI FOUNDRY</strong></div>
+<nav>
+<a href="#docs">Docs</a>
+<a href="#community">Community</a>
+<a href="#roadmap">Roadmap</a>
+</nav>
+</header>
+
+<div class="hero">
+<div>
+<div class="tag">Contract-Driven Multi-Agent Platform</div>
+<h1>LOCAL AI<br>FOUNDRY</h1>
+<div class="catch">意味は自由。構造は厳格。</div>
+<p>Dify × n8n × ComfyUI × Ollama を統合したローカルAI制作基盤。</p>
+<div class="buttons">
+<a href="releases/2026-07-15.html">🚀 Latest Release</a>
+<a href="#docs">📚 Documentation</a>
+</div>
+</div>
+<div>
+<img class="heroimg" src="assets/header-girl.png" alt="Hero">
+<p style="text-align:center;color:#9cf">※ header-girl.png を配置すると表示されます</p>
+</div>
+</div>
+
+<section>
+<div class="card">
+<h2>Workflow</h2>
+<div class="flow">
+<span>Planning</span><div class="arrow">➜</div>
+<span>Research</span><div class="arrow">➜</div>
+<span>Writing</span><div class="arrow">➜</div>
+<span>Review</span><div class="arrow">➜</div>
+<span>Image</span><div class="arrow">➜</div>
+<span>Audit</span><div class="arrow">➜</div>
+<span>Package</span>
+</div>
+</div>
+</section>
+
+<section id="docs">
+<h2>Documentation</h2>
+<div class="grid">
+<div class="item"><h3>Architecture</h3><p>全体設計・責務・State Machine</p></div>
+<div class="item"><h3>DTO Contracts</h3><p>Planning / Research契約</p></div>
+<div class="item"><h3>ADR</h3><p>設計判断の記録</p></div>
+<div class="item"><h3>Error Catalog</h3><p>Error Code一覧</p></div>
+<div class="item"><h3>Pipeline</h3><p>Dify → n8n → ComfyUI</p></div>
+<div class="item"><h3>Manual</h3><p>手動確認手順</p></div>
+</div>
+</section>
+
+<section id="community">
+<h2>Community</h2>
+<div class="grid">
+<div class="item"><h3>🐦 X</h3><p>毎日の開発実況</p><p><a href="https://x.com/fctaityo">Open X</a></p></div>
+<div class="item"><h3>📖 NOTE</h3><p>設計思想・開発ブログ</p><p><a href="https://note.com/taityo_fc">Open NOTE</a></p></div>
+<div class="item"><h3>💻 GitHub</h3><p>Source Code</p><p><a href="#">Repository</a></p></div>
+</div>
+</section>
+
+<section id="roadmap">
+<h2>Roadmap</h2>
+<div class="grid">
+<div class="item">✅ Planning DTO</div>
+<div class="item">✅ Research DTO</div>
+<div class="item">✅ Research Retry</div>
+<div class="item">🟡 Writing DTO</div>
+<div class="item">🟡 Review DTO</div>
+<div class="item">🟡 Audit DTO</div>
+</div>
+</section>
+
+<footer>
+Local AI Foundry ©2026 FC決死隊隊長
+</footer>
+</body>
+</html>
