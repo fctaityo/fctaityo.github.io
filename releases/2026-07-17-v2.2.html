@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050914">
+  <meta name="description" content="Local AI Foundry v2.2 — 日本語UI、開発ステータス、AI Agent WorkflowとPlatform Pipelineを改善。">
+  <title>Local AI Foundry v2.2 — 2026-07-17</title>
+  <style>
+    :root{--bg:#050914;--text:#eef6ff;--muted:#91a2ba;--cyan:#29d9ff;--violet:#a855f7;--line:rgba(117,183,255,.18)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.75}body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(44,124,196,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(44,124,196,.05) 1px,transparent 1px);background-size:48px 48px}.shell{width:min(900px,calc(100% - 40px));margin:auto}.header{padding:30px 0;border-bottom:1px solid var(--line)}a{color:var(--cyan)}.back{text-decoration:none;font-size:12px;letter-spacing:.08em}.hero{padding:100px 0 50px}.kicker{font-size:11px;letter-spacing:.24em;color:var(--cyan);font-weight:800}.hero h1{font-size:clamp(44px,8vw,76px);line-height:1;margin:15px 0 25px;letter-spacing:-.05em}.lead{font-size:20px;color:#c3d0e2;max-width:760px}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.meta span{padding:6px 10px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:10px}.content{padding:35px;background:linear-gradient(145deg,rgba(15,28,48,.94),rgba(7,14,26,.96));border:1px solid var(--line);border-radius:18px;margin-bottom:80px}.content h2{font-size:24px;margin:0 0 24px}.updates{list-style:none;padding:0;margin:0}.updates li{padding:18px 0 18px 34px;border-bottom:1px solid var(--line);position:relative}.updates li:last-child{border-bottom:0}.updates li:before{content:"";position:absolute;left:5px;top:31px;width:10px;height:2px;background:var(--cyan);box-shadow:0 0 9px var(--cyan)}.updates strong{display:block}.updates span{display:block;color:var(--muted);font-size:13px}.footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:11px}@media(max-width:600px){.hero{padding-top:70px}.content{padding:24px}.lead{font-size:17px}}
+  </style>
+</head>
+<body>
+  <header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a></div></header>
+  <main class="shell">
+    <section class="hero">
+      <p class="kicker">RELEASE / 2026.07.17</p>
+      <h1>Local AI Foundry<br>v2.2</h1>
+      <p class="lead">見た目は派手に、状態表示は厳格に。現在の実装状況を正確に伝え、日本語ユーザーが構造を理解しやすい公式サイトへ改善しました。</p>
+      <div class="meta"><span>JAPANESE UI</span><span>WORKFLOW GROUPS</span><span>STATUS ACCURACY</span><span>RESPONSIVE QA</span></div>
+    </section>
+    <article class="content">
+      <h2>v2.2 更新内容</h2>
+      <ul class="updates">
+        <li><strong>本番稼働済みに見える表現を調整</strong><span>完成済みではなく、契約駆動基盤を段階的に構築している現在地へ統一しました。</span></li>
+        <li><strong>開発ステータスを実態に合わせて整理</strong><span>「契約基盤 稼働中」「DTO契約を段階的に拡張中」を中心に表示します。</span></li>
+        <li><strong>AI Agent工程とPlatform Pipelineを分離</strong><span>7段階のAgent処理と、Package以降の基盤処理を別グループとして表示しました。</span></li>
+        <li><strong>Architectureリンクを整理</strong><span>独立した設計ページではなく、トップページ内の「アーキテクチャ概要」であることを明確にしました。</span></li>
+        <li><strong>主要見出しとナビゲーションを日本語中心へ変更</strong><span>ブランド名とDTO、Contract、Normalizeなどの技術用語は維持しています。</span></li>
+        <li><strong>PC・スマートフォン表示を再検証</strong><span>Hero画像、メニュー、Workflow、リンク、横スクロール、Console errorを確認しました。</span></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="footer"><div class="shell">Local AI Foundry — Contract-Driven Multi-Agent Platform ©2026 FC決死隊隊長</div></footer>
+</body>
+</html>
