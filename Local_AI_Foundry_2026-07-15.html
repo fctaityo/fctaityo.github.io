@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Local AI Foundry 現状設計書 — 2026-07-15</title>
+<style>
+:root{
+  --bg:#0b1020; --panel:#121a2f; --panel2:#17213b; --text:#eaf0ff; --muted:#aebbd6;
+  --line:#334465; --blue:#5aa9ff; --cyan:#55d7e5; --green:#64d98b; --yellow:#f2c45c;
+  --red:#ff7a90; --purple:#b693ff; --white:#fff; --shadow:0 14px 38px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#08101d 0%,#0d1426 55%,#09101c 100%);color:var(--text);
+ font-family:"Segoe UI","Yu Gothic UI","Yu Gothic","Meiryo",sans-serif;line-height:1.75}
+a{color:var(--cyan)}
+.wrapper{max-width:1280px;margin:0 auto;padding:28px}
+.hero{padding:52px 46px;border:1px solid #2b4167;background:
+ radial-gradient(circle at 85% 5%,rgba(90,169,255,.22),transparent 32%),
+ radial-gradient(circle at 0 100%,rgba(182,147,255,.16),transparent 34%),var(--panel);
+ border-radius:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.eyebrow{font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700}
+h1{font-size:clamp(2.2rem,5vw,4.6rem);line-height:1.08;margin:.2em 0 .15em}
+.subtitle{font-size:1.25rem;color:var(--muted);max-width:850px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.badge{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#0d162b;color:#dce8ff;font-size:.9rem}
+.badge.ok{border-color:#327a52;color:#8cf0aa}.badge.wip{border-color:#8a6d2c;color:#ffd778}.badge.next{border-color:#5a4890;color:#cab7ff}
+.grid{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;margin-top:24px}
+nav{position:sticky;top:20px;align-self:start;background:rgba(18,26,47,.92);border:1px solid var(--line);border-radius:18px;padding:20px;max-height:calc(100vh - 40px);overflow:auto}
+nav strong{display:block;margin-bottom:10px;color:white}
+nav a{display:block;color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:8px;font-size:.93rem}
+nav a:hover{background:#1a2846;color:white}
+main section{margin-bottom:24px;padding:30px;background:rgba(18,26,47,.94);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+h2{font-size:1.75rem;margin:0 0 15px;border-bottom:1px solid var(--line);padding-bottom:10px}
+h3{color:#dbe8ff;margin-top:1.6em}
+.lead{font-size:1.12rem;color:#dce6fb}
+.callout{border-left:5px solid var(--blue);background:#0e1930;padding:16px 18px;border-radius:0 12px 12px 0;margin:18px 0}
+.callout.warn{border-color:var(--yellow)} .callout.danger{border-color:var(--red)} .callout.good{border-color:var(--green)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.kpi{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi b{display:block;font-size:1.45rem;color:white}.kpi span{color:var(--muted);font-size:.9rem}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.92rem}
+th,td{border:1px solid var(--line);padding:10px;vertical-align:top}
+th{background:#1a2846;text-align:left;color:#e9f2ff}
+td{background:#101a30}
+code,pre{font-family:Consolas,"SFMono-Regular",monospace}
+code{background:#0a1325;border:1px solid #293c5e;border-radius:5px;padding:.12em .38em}
+pre{white-space:pre-wrap;background:#081221;border:1px solid #2b3c5e;padding:16px;border-radius:12px;overflow:auto;color:#dceaff}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{margin-top:0}.status{font-weight:700}.status.ok{color:var(--green)}.status.wip{color:var(--yellow)}.status.todo{color:var(--purple)}.status.bad{color:var(--red)}
+.flow{overflow-x:auto;margin:20px 0}
+.flow svg{min-width:1080px;width:100%;height:auto;background:#0b1426;border:1px solid var(--line);border-radius:16px}
+.legend{display:flex;gap:15px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.timeline{border-left:2px solid var(--line);margin-left:10px;padding-left:22px}
+.timeline article{position:relative;margin:0 0 20px}
+.timeline article:before{content:"";position:absolute;left:-29px;top:.45em;width:12px;height:12px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px #17213b}
+.small{font-size:.88rem;color:var(--muted)}
+.footer{color:var(--muted);text-align:center;padding:24px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}nav{position:relative;top:auto}.kpis{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.wrapper{padding:14px}.hero{padding:34px 24px}}
+@media print{
+ body{background:white;color:#111;font-size:10pt}.wrapper{max-width:none;padding:0}.hero,main section,nav{box-shadow:none;background:white;color:#111;border-color:#bbb}
+ nav{display:none}.grid{display:block}.subtitle,.small,.footer,.lead{color:#333}
+ h1,h2,h3,.card h3{color:#111}.badge{color:#111;background:#eee}
+ table{font-size:8pt}th,td{background:white;color:#111;border-color:#aaa}
+ pre,code{background:#f5f5f5;color:#111;border-color:#bbb}
+ .flow svg{background:white}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<header class="hero">
+  <div class="eyebrow">Current Architecture & Design Baseline</div>
+  <h1>Local AI Foundry</h1>
+  <p class="subtitle">契約駆動型マルチエージェント・コンテンツ生産基盤<br>
+  現状設計書 — 2026年7月15日時点</p>
+  <div class="badges">
+    <span class="badge ok">入力正規化：実装済み</span>
+    <span class="badge ok">Planning / Research契約：実装済み</span>
+    <span class="badge wip">Writing成果物検査：検証中</span>
+    <span class="badge next">Writing DTO：次フェーズ</span>
+  </div>
+</header>
+
+<div class="grid">
+<nav>
+<strong>目次</strong>
+<a href="#summary">1. エグゼクティブサマリー</a>
+<a href="#scope">2. 目的・スコープ</a>
+<a href="#principles">3. 設計原則</a>
+<a href="#architecture">4. 全体アーキテクチャ</a>
+<a href="#responsibilities">5. 役割・責務</a>
+<a href="#input">6. 入力正規化</a>
+<a href="#dto">7. DTO / IF設計</a>
+<a href="#planning">8. Planning DTO</a>
+<a href="#research">9. Research DTO</a>
+<a href="#contract">10. 契約整形・ゲート</a>
+<a href="#writing">11. Writing / Package</a>
+<a href="#trace">12. 証跡・監査</a>
+<a href="#failure">13. サイレントフェイル</a>
+<a href="#test">14. テスト戦略</a>
+<a href="#status">15. 現在地</a>
+<a href="#roadmap">16. ロードマップ</a>
+<a href="#decisions">17. 主要設計判断</a>
+</nav>
+
+<main>
+<section id="summary">
+<h2>1. エグゼクティブサマリー</h2>
+<p class="lead">本システムは、Dify上の複数AIエージェント、n8n、ComfyUIを連携させ、記事・X投稿・タグ・画像を一体の成果物パッケージとして生成するローカルAI基盤である。</p>
+<div class="callout good"><b>本日の最大の到達点：</b>「AIの出力内容は自由でも、工程間の搬送形式は契約で固定する」という方針を、入力正規化・DTO・契約整形・契約ゲートとして実装へ落とし始めた。</div>
+<div class="kpis">
+ <div class="kpi"><b>7</b><span>役割ベースのAI工程</span></div>
+ <div class="kpi"><b>19</b><span>現時点のWorkflowノード数</span></div>
+ <div class="kpi"><b>18</b><span>現時点のエッジ数</span></div>
+ <div class="kpi"><b>2</b><span>固定回帰テストケース A/B</span></div>
+</div>
+<p>従来は「Workflowが正常終了したか」が成功判定の中心だった。しかし、Planning / Researchが部分スキーマしか返さなくてもWritingが偶然本文を作り、空のX投稿や無関係な固定タグを含む成果物が成功扱いされる事象が発生した。これを契機に、工程成功・契約成功・成果物成功を分離して扱う設計へ移行している。</p>
+</section>
+
+<section id="scope">
+<h2>2. 目的・スコープ</h2>
+<h3>目的</h3>
+<p>ローカル環境で、複数のAIエージェントが担当工程を分担し、再現性・監査性・拡張性を備えたコンテンツ生産ラインを構築する。</p>
+<h3>現在の主な成果物</h3>
+<div class="cards">
+ <div class="card"><h3>テキスト成果物</h3><p>記事本文、X投稿、タグ、画像生成プロンプト、メタデータ。</p></div>
+ <div class="card"><h3>証跡成果物</h3><p>handoff trace、artifact、logs、各工程DTO、契約状態、正規化履歴。</p></div>
+ <div class="card"><h3>外部連携</h3><p>Dify → n8n → ファイル保存 / ComfyUI画像生成。</p></div>
+ <div class="card"><h3>将来拡張</h3><p>SEO、動画、翻訳、YouTube、SNS展開などの追加Agent。</p></div>
+</div>
+</section>
+
+<section id="principles">
+<h2>3. 設計原則</h2>
+<div class="cards">
+ <div class="card"><h3>意味は自由、構造は厳格</h3><p>Agentが何を主張するかは役割の範囲内で自由。ただし、機械が読むキー・型・階層はIF契約に従う。</p></div>
+ <div class="card"><h3>生LLM出力を直結しない</h3><p>後続工程はraw textではなく、契約整形済みDTOだけを参照する。</p></div>
+ <div class="card"><h3>整形と意味生成を分離</h3><p>Normalizeは階層・型・既定の空値を整える。欠けた調査結果や成功条件を勝手に作文しない。</p></div>
+ <div class="card"><h3>失敗を成功に見せない</h3><p>固定タグ、別項目からの意味転用、過剰な救済パースで異常を隠さない。</p></div>
+ <div class="card"><h3>工程ごとの品質ゲート</h3><p>PlanningがfailedならResearchへ進めず、ResearchがfailedならWritingへ進めない。</p></div>
+ <div class="card"><h3>Workflow成功 ≠ 成果物成功</h3><p>記事・X投稿・タグ等の最低限成果物が揃って初めてパッケージ成功とする。</p></div>
+</div>
+</section>
+
+<section id="architecture">
+<h2>4. 全体アーキテクチャ</h2>
+<div class="flow">
+<svg viewBox="0 0 1260 510" role="img" aria-label="Local AI Foundry architecture">
+<defs>
+ <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#6e89b8"/></marker>
+ <style>.n{rx:12;ry:12;stroke-width:2}.t{font:600 14px 'Segoe UI','Yu Gothic';fill:#eff5ff}.s{font:12px 'Segoe UI','Yu Gothic';fill:#b8c8e5}.l{stroke:#6e89b8;stroke-width:2;marker-end:url(#arrow)}</style>
+</defs>
+<rect x="35" y="55" width="145" height="65" class="n" fill="#163152" stroke="#5aa9ff"/><text x="107" y="83" text-anchor="middle" class="t">Start</text><text x="107" y="103" text-anchor="middle" class="s">ユーザー入力</text>
+<rect x="220" y="55" width="160" height="65" class="n" fill="#163152" stroke="#55d7e5"/><text x="300" y="83" text-anchor="middle" class="t">入力正規化</text><text x="300" y="103" text-anchor="middle" class="s">明示デフォルト</text>
+<rect x="420" y="55" width="145" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="492" y="83" text-anchor="middle" class="t">01 Planning</text><text x="492" y="103" text-anchor="middle" class="s">企画</text>
+<rect x="605" y="40" width="165" height="95" class="n" fill="#17384a" stroke="#55d7e5"/><text x="687" y="72" text-anchor="middle" class="t">Planning DTO</text><text x="687" y="94" text-anchor="middle" class="s">Normalize</text><text x="687" y="114" text-anchor="middle" class="s">raw / normalized / contract</text>
+<polygon points="850,40 930,87 850,135 770,87" fill="#3b3220" stroke="#f2c45c" stroke-width="2"/><text x="850" y="83" text-anchor="middle" class="t">Planning</text><text x="850" y="103" text-anchor="middle" class="s">Contract Gate</text>
+<rect x="975" y="55" width="145" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="1047" y="83" text-anchor="middle" class="t">02 Research</text><text x="1047" y="103" text-anchor="middle" class="s">調査</text>
+<line x1="180" y1="87" x2="220" y2="87" class="l"/><line x1="380" y1="87" x2="420" y2="87" class="l"/><line x1="565" y1="87" x2="605" y2="87" class="l"/><line x1="770" y1="87" x2="790" y2="87" class="l"/><line x1="930" y1="87" x2="975" y2="87" class="l"/>
+
+<rect x="975" y="210" width="165" height="95" class="n" fill="#17384a" stroke="#55d7e5"/><text x="1057" y="242" text-anchor="middle" class="t">Research DTO</text><text x="1057" y="264" text-anchor="middle" class="s">Normalize</text><text x="1057" y="284" text-anchor="middle" class="s">raw / normalized / contract</text>
+<polygon points="875,210 955,257 875,305 795,257" fill="#3b3220" stroke="#f2c45c" stroke-width="2"/><text x="875" y="253" text-anchor="middle" class="t">Research</text><text x="875" y="273" text-anchor="middle" class="s">Contract Gate</text>
+<rect x="605" y="225" width="150" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="680" y="253" text-anchor="middle" class="t">03 Writing</text><text x="680" y="273" text-anchor="middle" class="s">記事 / X / Tags</text>
+<rect x="405" y="225" width="150" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="480" y="253" text-anchor="middle" class="t">04 Review</text><text x="480" y="273" text-anchor="middle" class="s">レビュー判定</text>
+<rect x="220" y="225" width="145" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="292" y="253" text-anchor="middle" class="t">05–06</text><text x="292" y="273" text-anchor="middle" class="s">修正 / 画像系工程</text>
+<rect x="35" y="225" width="145" height="65" class="n" fill="#2b2450" stroke="#b693ff"/><text x="107" y="253" text-anchor="middle" class="t">07 Audit</text><text x="107" y="273" text-anchor="middle" class="s">最終監査</text>
+<line x1="1047" y1="120" x2="1057" y2="210" class="l"/><line x1="975" y1="257" x2="955" y2="257" class="l"/><line x1="795" y1="257" x2="755" y2="257" class="l"/><line x1="605" y1="257" x2="555" y2="257" class="l"/><line x1="405" y1="257" x2="365" y2="257" class="l"/><line x1="220" y1="257" x2="180" y2="257" class="l"/>
+
+<rect x="35" y="390" width="180" height="70" class="n" fill="#183a2b" stroke="#64d98b"/><text x="125" y="420" text-anchor="middle" class="t">Package Output</text><text x="125" y="442" text-anchor="middle" class="s">成果物最低限チェック</text>
+<rect x="285" y="390" width="145" height="70" class="n" fill="#163152" stroke="#5aa9ff"/><text x="357" y="420" text-anchor="middle" class="t">n8n</text><text x="357" y="442" text-anchor="middle" class="s">保存・実行連携</text>
+<rect x="500" y="390" width="145" height="70" class="n" fill="#163152" stroke="#5aa9ff"/><text x="572" y="420" text-anchor="middle" class="t">ComfyUI</text><text x="572" y="442" text-anchor="middle" class="s">画像生成</text>
+<rect x="735" y="390" width="190" height="70" class="n" fill="#482333" stroke="#ff7a90"/><text x="830" y="420" text-anchor="middle" class="t">Fail / Human Check</text><text x="830" y="442" text-anchor="middle" class="s">契約違反・空成果物</text>
+<line x1="107" y1="290" x2="125" y2="390" class="l"/><line x1="215" y1="425" x2="285" y2="425" class="l"/><line x1="430" y1="425" x2="500" y2="425" class="l"/>
+<line x1="850" y1="135" x2="830" y2="390" stroke="#ff7a90" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<line x1="875" y1="305" x2="830" y2="390" stroke="#ff7a90" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+</svg>
+</div>
+<div class="legend"><span><i class="dot" style="background:#b693ff"></i>AI Agent</span><span><i class="dot" style="background:#55d7e5"></i>Normalize / DTO</span><span><i class="dot" style="background:#f2c45c"></i>Contract Gate</span><span><i class="dot" style="background:#64d98b"></i>成果物</span><span><i class="dot" style="background:#ff7a90"></i>停止・要確認</span></div>
+</section>
+
+<section id="responsibilities">
+<h2>5. 役割・責務</h2>
+<table>
+<tr><th>工程</th><th>主責務</th><th>やってはいけないこと</th><th>現状</th></tr>
+<tr><td>入力正規化</td><td>Start入力をWorkflow内部の確定値へ変換</td><td>topicを勝手に生成する</td><td><span class="status ok">実装済み</span></td></tr>
+<tr><td>01 Planning</td><td>企画、成功条件、構成、Researchへの問いを作る</td><td>handoffだけを返して外側DTOを省略する</td><td><span class="status ok">契約化済み</span></td></tr>
+<tr><td>02 Research</td><td>調査結果、確認事項、リスク、Writing材料を作る</td><td>企画情報を確認済み事実として転用する</td><td><span class="status ok">契約化済み</span></td></tr>
+<tr><td>03 Writing</td><td>記事・X投稿・タグ・画像プロンプトを生成</td><td>本文だけ出して成果物一式を空で通す</td><td><span class="status wip">安定化中</span></td></tr>
+<tr><td>04 Review</td><td>成果物を評価し、修正要否を判定</td><td>本文や付随成果物を勝手に上書きする</td><td><span class="status ok">専用DTO導入済み</span></td></tr>
+<tr><td>05–06</td><td>必要な修正・画像関連の中間処理</td><td>前工程の契約違反を隠す</td><td><span class="status wip">既存実装</span></td></tr>
+<tr><td>07 Audit</td><td>最終品質・禁止事項・証跡を監査</td><td>成果物を上書きして辻褄を合わせる</td><td><span class="status ok">専用DTO導入済み</span></td></tr>
+<tr><td>Package Output</td><td>成果物と証跡を組み立て、最低条件を検査</td><td>固定タグや意味フォールバックで空を埋める</td><td><span class="status wip">最終防波堤を追加中</span></td></tr>
+</table>
+</section>
+
+<section id="input">
+<h2>6. 入力正規化設計</h2>
+<p>UI入力は任意欄を含むが、Workflow内部ではStart直後の入力正規化ノードで確定値にする。後続はStart Nodeを直接読まず、正規化済み値を参照する。</p>
+<table>
+<tr><th>項目</th><th>ユーザー未指定時</th><th>空許容</th><th>備考</th></tr>
+<tr><td>topic</td><td>デフォルトなし</td><td>不可</td><td>空ならPlanning前にfailed</td></tr>
+<tr><td>target_reader</td><td>一般層</td><td>内部では不可</td><td>明示デフォルト</td></tr>
+<tr><td>tone</td><td>標準</td><td>内部では不可</td><td>ユーザー指定優先</td></tr>
+<tr><td>article_length</td><td>2000字前後</td><td>内部では不可</td><td>ユーザー指定優先</td></tr>
+</table>
+<pre>{
+  "original": {"target_reader": "", "tone": "", "article_length": ""},
+  "normalized": {
+    "target_reader": "一般層",
+    "tone": "標準",
+    "article_length": "2000字前後"
+  },
+  "defaults_applied": ["target_reader", "tone", "article_length"]
+}</pre>
+</section>
+
+<section id="dto">
+<h2>7. DTO / IF設計</h2>
+<p>DTO（Data Transfer Object）は、Agent間の受け渡し専用データ構造であり、内部API仕様に相当する。</p>
+<div class="callout"><b>required と empty_allowed は別概念。</b><br>キーが存在していても、必須文字列が空、必須配列が空なら契約違反になり得る。</div>
+<table>
+<tr><th>属性</th><th>意味</th></tr>
+<tr><td>type</td><td>string / array[string] / object など、機械処理上の型</td></tr>
+<tr><td>required</td><td>キーまたは項目の存在が必須か</td></tr>
+<tr><td>empty_allowed</td><td>空文字・空配列・空objectを許すか</td></tr>
+<tr><td>used_by</td><td>実際に参照する後続ノード</td></tr>
+<tr><td>violation_action</td><td>正規化、警告、failedのどれにするか</td></tr>
+</table>
+<h3>整形ノードの論理出力</h3>
+<pre>{
+  "raw": { "...": "LLMが実際に返した内容" },
+  "normalized": { "...": "規格化されたDTO" },
+  "contract": {
+    "status": "ok | normalized | failed",
+    "schema_valid_before_normalization": false,
+    "missing_required": [],
+    "defaulted_optional": [],
+    "fallback_from_start": [],
+    "moved_fields": [],
+    "invalid_types": [],
+    "notes": []
+  }
+}</pre>
+</section>
+
+<section id="planning">
+<h2>8. Planning DTO契約</h2>
+<table>
+<tr><th>field</th><th>type</th><th>必須</th><th>空可</th><th>違反時</th></tr>
+<tr><td>stage</td><td>string</td><td>Yes</td><td>No</td><td>欠落はnormalized、異なる値はfailed</td></tr>
+<tr><td>task_summary</td><td>string</td><td>Yes</td><td>No</td><td>start.topicから補完可</td></tr>
+<tr><td>target_reader</td><td>string</td><td>Yes</td><td>No</td><td>入力正規化値から補完</td></tr>
+<tr><td>tone</td><td>string</td><td>Yes</td><td>No</td><td>入力正規化値から補完</td></tr>
+<tr><td>article_length</td><td>string</td><td>Yes</td><td>No</td><td>入力正規化値から補完</td></tr>
+<tr><td>success_criteria</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化。意味生成禁止</td></tr>
+<tr><td>sections</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>assumptions</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>handoff</td><td>object</td><td>Yes</td><td>No</td><td>子項目を取得不能ならfailed</td></tr>
+<tr><td>handoff.research_questions</td><td>array[string]</td><td>Yes</td><td>No</td><td>トップレベルから移動可。空ならfailed</td></tr>
+<tr><td>handoff.writing_requirements</td><td>array[string]</td><td>Yes</td><td>No</td><td>トップレベルから移動可。空ならfailed</td></tr>
+<tr><td>handoff.image_direction</td><td>string</td><td>No</td><td>Yes</td><td>""へ正規化</td></tr>
+</table>
+</section>
+
+<section id="research">
+<h2>9. Research DTO契約</h2>
+<table>
+<tr><th>field</th><th>type</th><th>必須</th><th>空可</th><th>違反時</th></tr>
+<tr><td>stage</td><td>string</td><td>Yes</td><td>No</td><td>欠落はnormalized、異なる値はfailed</td></tr>
+<tr><td>research_summary</td><td>string</td><td>Yes</td><td>No</td><td>他項目からの転用禁止。空ならfailed</td></tr>
+<tr><td>confirmed_points</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>local_or_general_knowledge</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>needs_external_verification</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>source_notes</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>risks</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+<tr><td>handoff</td><td>object</td><td>Yes</td><td>No</td><td>主要材料なしならfailed</td></tr>
+<tr><td>handoff.usable_material</td><td>array[string]</td><td>Yes</td><td>No</td><td>トップレベルから移動可。空ならfailed</td></tr>
+<tr><td>handoff.claims_to_avoid</td><td>array[string]</td><td>No</td><td>Yes</td><td>[]へ正規化</td></tr>
+</table>
+<div class="callout danger"><b>禁止された意味転用：</b><br>
+<code>research_summary = planning.task_summary</code><br>
+<code>confirmed_points = planning.success_criteria</code><br>
+どちらも意味が異なり、調査結果を捏造するため削除対象となった。</div>
+</section>
+
+<section id="contract">
+<h2>10. 契約整形・契約ゲート</h2>
+<h3>契約状態</h3>
+<table>
+<tr><th>status</th><th>条件</th><th>後続</th></tr>
+<tr><td><span class="status ok">ok</span></td><td>rawが最初から期待スキーマ・型・階層を満たす</td><td>進行</td></tr>
+<tr><td><span class="status wip">normalized</span></td><td>stage欠落、handoff階層移動、任意項目空値化、確定入力値による補完</td><td>進行可能。証跡・警告を残す</td></tr>
+<tr><td><span class="status bad">failed</span></td><td>JSON解釈不能、異なるstage、必須項目空、必須配列空、修復不能な型異常</td><td>次のAgentへ進ませない</td></tr>
+</table>
+<h3>ゲート配置</h3>
+<pre>Planning Agent
+  → Planning Normalize
+  → Planning Contract Gate
+  → Research Agent
+  → Research Normalize
+  → Research Contract Gate
+  → Writing Agent</pre>
+<p>Planning failed時にResearchを走らせない。Research failed時にWritingを走らせない。これにより、壊れた部分情報を後続が「それっぽく」利用して成果物を作るサイレントフェイルを防ぐ。</p>
+</section>
+
+<section id="writing">
+<h2>11. Writing / Package Output</h2>
+<p>Planning / Research契約が正常でも、Writingが空成果物を返すケースが確認された。Package Outputに最低限チェックを置き、空の正常成果物を禁止する。</p>
+<table>
+<tr><th>成果物</th><th>最低条件</th><th>不正例</th></tr>
+<tr><td>article_markdown</td><td>string、trim後に空不可</td><td>""</td></tr>
+<tr><td>x_posts</td><td>array[string]、1件以上、空要素不可</td><td>[], ["x_posts"]</td></tr>
+<tr><td>tags</td><td>array[string]、1件以上、空要素不可</td><td>[], ["tags"], 別テーマ固定タグ</td></tr>
+</table>
+<div class="callout warn"><b>現在の位置づけ：</b>Package Output検査は最終防波堤。恒久的にはWriting直後にWriting DTO Normalize / Contract Gateを追加し、Review前に止める。</div>
+<h3>Writingで確認された問題</h3>
+<ul>
+<li>長い記事本文を先に出すJSONでは、後半のX投稿・タグが崩れやすい。</li>
+<li>救済パースが配列の値ではなく、<code>"x_posts"</code> / <code>"tags"</code>というキー名を拾った。</li>
+<li>Package Outputの固定レトロゲームタグが、欠落を隠して正常に見せた。</li>
+</ul>
+<h3>採用した暫定対策</h3>
+<ul>
+<li>Writing出力順を短い配列（X投稿・タグ）先、長文記事最後へ変更。</li>
+<li>救済配列抽出のキー名混入バグを修正。</li>
+<li>固定タグフォールバックを削除。</li>
+<li>記事・X投稿・タグが空ならPackageでfailed。</li>
+</ul>
+</section>
+
+<section id="trace">
+<h2>12. 証跡・監査</h2>
+<p>契約整形により、元のAgent出力と後続が参照したデータを区別して残す。</p>
+<table>
+<tr><th>情報</th><th>目的</th></tr>
+<tr><td>raw</td><td>LLMが実際に返した内容。原因追跡とモデル挙動確認。</td></tr>
+<tr><td>normalized</td><td>後続が参照した規格DTO。</td></tr>
+<tr><td>contract.status</td><td>ok / normalized / failedの判定。</td></tr>
+<tr><td>raw_keys</td><td>元出力に存在したキー一覧。</td></tr>
+<tr><td>moved_fields</td><td>トップレベルからhandoffへ移動した項目。</td></tr>
+<tr><td>fallback_from_start</td><td>確定入力値から補完した項目。</td></tr>
+<tr><td>defaulted_optional</td><td>任意欠落を空値へ正規化した項目。</td></tr>
+<tr><td>missing_required / invalid_types</td><td>契約違反の原因。</td></tr>
+</table>
+<p>証跡はhandoff_trace / artifact / logs / Audit DTO / Package Outputへ渡し、後から「Agentが自力で契約を守ったか、構造整形が発動したか」を確認可能にする。</p>
+</section>
+
+<section id="failure">
+<h2>13. サイレントフェイル</h2>
+<div class="callout danger"><b>サイレントフェイル：</b>処理はエラーなく完走し、出力も自然に見えるが、内部工程や成果物の一部が壊れている状態。</div>
+<h3>今回の代表例</h3>
+<pre>Planning：handoffだけ返却（外側スキーマ欠落）
+Research：handoffだけ返却（外側スキーマ欠落）
+Writing：部分情報だけで本文を生成
+Review / Audit：通過
+Package：成功
+結果：本文は良いが、X投稿は ["x_posts"]、タグは別テーマ固定値</pre>
+<p>構文上正しいJSONや自然な本文が生成されるため、クラッシュより発見が難しい。契約ゲートと成果物最低条件の両方が必要である。</p>
+</section>
+
+<section id="test">
+<h2>14. テスト戦略</h2>
+<h3>固定回帰ケース</h3>
+<table>
+<tr><th>ケース</th><th>入力特性</th><th>主目的</th></tr>
+<tr><td>A：メトロイド</td><td>具体的・レトロゲーム・明示指定あり</td><td>従来正常系の回帰、Research完全DTO、成果物一式</td></tr>
+<tr><td>B：AIの素晴らしさ</td><td>抽象的・任意入力空</td><td>入力デフォルト、JSON遵守揺れ、タグ/X投稿の誤救済</td></tr>
+</table>
+<h3>構造テスト</h3>
+<ul>
+<li>YAML構文、ノード数、エッジ数、接続経路。</li>
+<li>Start直読みの残存検索。</li>
+<li>raw Agent textを読むノードの限定。</li>
+<li>固定意味フォールバックの残存検索。</li>
+</ul>
+<h3>実行テストの合格条件</h3>
+<ul>
+<li>Planning / Research contractが期待値。</li>
+<li>metadata.topicがStartのtopic原文。</li>
+<li>article / x_posts / tagsが非空かつ型正常。</li>
+<li><code>["x_posts"]</code>、<code>["tags"]</code>を拒否。</li>
+<li>別テーマの固定タグが存在しない。</li>
+<li>failedを正常パッケージとして送信しない。</li>
+</ul>
+</section>
+
+<section id="status">
+<h2>15. 2026年7月15日時点の現在地</h2>
+<div class="cards">
+<div class="card"><h3><span class="status ok">確定・実装済み</span></h3>
+<ul><li>入力正規化ノード</li><li>Planning DTO整形・契約</li><li>Research DTO整形・契約</li><li>工程別契約ゲート</li><li>04 Review / 07 Audit専用DTO</li><li>固定レトロタグ削除</li><li>DTO契約資料の初版</li></ul></div>
+<div class="card"><h3><span class="status wip">検証中</span></h3>
+<ul><li>WritingのJSON安定化</li><li>救済パースの限定化</li><li>Package Output最低条件</li><li>A/B最終回帰テスト</li><li>空成果物の停止動作</li></ul></div>
+<div class="card"><h3><span class="status todo">次フェーズ</span></h3>
+<ul><li>Writing DTO仕様</li><li>Writing Contract Gate</li><li>Package DTO仕様</li><li>Review / Audit契約の文書化</li><li>自動回帰テスト</li></ul></div>
+<div class="card"><h3><span class="status bad">既知リスク</span></h3>
+<ul><li>LLMのスキーマ遵守はプロンプトだけでは保証できない</li><li>救済パースが異常を正常化する危険</li><li>出力順変更は確率改善であり契約保証ではない</li><li>最終テスト結果により本書の状態更新が必要</li></ul></div>
+</div>
+</section>
+
+<section id="roadmap">
+<h2>16. 推奨ロードマップ</h2>
+<div class="timeline">
+<article><h3>Phase 1 — 現断面を安定化</h3><p>A/Bを再実行し、契約と成果物最低条件が連続して通ることを確認。チェックポイントコミットを作る。</p></article>
+<article><h3>Phase 2 — Writing契約化</h3><p>article_markdown / x_posts / tags / image_promptの型・必須・空許容・救済範囲を定義。Writing直後にNormalize / Gateを配置。</p></article>
+<article><h3>Phase 3 — Package / Review / Audit契約の完成</h3><p>成果物パッケージのIF、Review判定、Audit判定を仕様書として統一。</p></article>
+<article><h3>Phase 4 — エラー・運用設計</h3><p>error_code、retry戦略、timeout、needs_human_check、trace_id、DTO versionを導入。</p></article>
+<article><h3>Phase 5 — 自動回帰と拡張</h3><p>固定テストデータと期待契約をリポジトリ管理し、新Agent追加時も既存ラインを保護。</p></article>
+</div>
+</section>
+
+<section id="decisions">
+<h2>17. 主要設計判断と理由</h2>
+<table>
+<tr><th>判断</th><th>理由</th></tr>
+<tr><td>入力デフォルトはStart直後に確定</td><td>契約整形ノードが場当たり的に意味を作ることを防ぐ。</td></tr>
+<tr><td>生LLM出力を後続が直接読まない</td><td>入力形状の揺れを1か所で吸収し、責務を限定する。</td></tr>
+<tr><td>任意欠落は空値へ、必須空はfailed</td><td>構造の安定と意味不足の検出を両立する。</td></tr>
+<tr><td>Planning情報をResearch結果へ転用しない</td><td>企画条件と確認済み事実は意味が異なる。</td></tr>
+<tr><td>プロンプト補強と機械ゲートを併用</td><td>プロンプトは遵守確率を上げるだけで、保証にはならない。</td></tr>
+<tr><td>固定タグフォールバックを削除</td><td>欠落を隠し、別テーマ情報を混入させるサイレントフェイルになる。</td></tr>
+<tr><td>Packageを最終防波堤にする</td><td>上流契約が正常でも、最終成果物が空になる可能性がある。</td></tr>
+<tr><td>将来はWriting直後へゲートを前倒し</td><td>Review / Auditへ空成果物を渡さず、障害点の近くで止める。</td></tr>
+</table>
+<div class="callout good"><b>設計の核心：</b>AIを「正しく返すはずの部品」として信頼するのではなく、「出力が揺れる外部サービス」として扱い、各境界で契約を検査する。</div>
+</section>
+</main>
+</div>
+
+<div class="footer">Local AI Foundry — Current Design Baseline / 2026-07-15<br>
+本資料は作業中の設計断面。最終A/BテストとWriting契約化に応じて更新する。</div>
+</div>
+</body>
+</html>
