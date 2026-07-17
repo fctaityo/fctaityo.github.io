@@ -38,14 +38,13 @@
         <div class="eyebrow"><span></span> Contract-Driven Multi-Agent Platform</div>
         <h1><span>LOCAL AI</span><br>FOUNDRY</h1>
         <p class="hero-jp">意味は<span>自由</span>。構造は<span>厳格</span>。</p>
-        <p class="hero-team-copy"><span>AIがチームで考え、</span><span>確認し、完成させる。</span></p>
         <p class="hero-en">Reliable AI Doesn't Happen by Chance.<br>It Happens by Contract.</p>
         <p class="hero-description">Dify・n8n・ComfyUI・Ollamaを統合し、AI同士を契約で安全につなぐローカル・マルチエージェント基盤。</p>
         <p class="manifesto">記事生成AIではない。<strong>AIチームの生産基盤である。</strong></p>
         <div class="hero-actions">
           <a class="button primary" href="#principles">基本原則 <span aria-hidden="true">→</span></a>
           <a class="button" href="#documentation">プロジェクトを見る</a>
-          <a class="text-link" href="releases/2026-07-17-v2.6.html">最新リリース</a>
+          <a class="text-link" href="releases/2026-07-17-v2.5.html">最新リリース</a>
           <a class="text-link" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">公式サイトのソース ↗</a>
         </div>
         <div class="hero-metrics" aria-label="プロジェクト概要">
@@ -75,13 +74,13 @@
     <section id="team-flow" class="section-shell audience-section" aria-labelledby="team-flow-title">
       <div class="section-heading reveal"><div><p class="kicker">できること <span>FROM IDEA TO ARTIFACT</span></p><h2 id="team-flow-title">AIチームが、<br>ひとつの成果物をつくるまで。</h2></div><p>記事制作を例に、役割の違う工程が順番に受け渡します。</p></div>
       <ol class="audience-flow reveal" aria-label="AIチームが記事を制作する流れ">
-        <li><span>01</span><strong>テーマを受け取る</strong><em>つくる内容を共有</em><small>INPUT</small></li>
-        <li><span>02</span><strong>構成を考える</strong><em>話の流れを決める</em><small>PLANNING</small></li>
-        <li><span>03</span><strong>情報を調べる</strong><em>必要な材料を集める</em><small>RESEARCH</small></li>
-        <li><span>04</span><strong>文章を書く</strong><em>文章を組み立てる</em><small>WRITING</small></li>
-        <li><span>05</span><strong>内容を確認する</strong><em>不足や矛盾を確認</em><small>REVIEW</small></li>
-        <li><span>06</span><strong>画像をつくる</strong><em>内容に合う画像を制作</em><small>IMAGE</small></li>
-        <li><span>07</span><strong>検査して保存する</strong><em>完成条件を検査</em><small>PACKAGE</small></li>
+        <li><span>01</span><strong>テーマを受け取る</strong><small>INPUT</small></li>
+        <li><span>02</span><strong>構成を考える</strong><small>PLANNING</small></li>
+        <li><span>03</span><strong>情報を調べる</strong><small>RESEARCH</small></li>
+        <li><span>04</span><strong>文章を書く</strong><small>WRITING</small></li>
+        <li><span>05</span><strong>内容を確認する</strong><small>REVIEW</small></li>
+        <li><span>06</span><strong>画像をつくる</strong><small>IMAGE</small></li>
+        <li><span>07</span><strong>検査して保存する</strong><small>PACKAGE</small></li>
       </ol>
     </section>
 
@@ -102,8 +101,7 @@
     <section id="demo" class="section-shell audience-section demo-section" aria-labelledby="demo-title">
       <div class="section-heading reveal"><div><p class="kicker">固定シナリオデモ <span>INTERACTIVE DEMO</span></p><h2 id="demo-title">AIチームの動きを<br>見てみる。</h2></div><p>実際のAIや外部APIには接続しない、仕組みを理解するためのデモです。</p></div>
       <div class="demo-board reveal" data-team-demo>
-        <div class="demo-controls"><div><p>最終確認で問題を見つけ、執筆だけをやり直して完成する流れを再現します。</p><small>固定シナリオで、失敗の検出から部分再試行、完成までを約10秒で体験できます。</small></div><div class="demo-buttons"><button class="button primary demo-start" type="button" data-demo-start>AIチームを動かしてみる <span aria-hidden="true">→</span></button><button class="demo-skip" type="button" data-demo-skip hidden>結果まで進める</button></div></div>
-        <div class="demo-phase" aria-label="デモの現在フェーズ"><span data-demo-phase>開始前</span><ol aria-hidden="true"><li data-phase="production">第1幕 制作</li><li data-phase="detection">第2幕 問題検出</li><li data-phase="recovery">第3幕 復旧</li><li data-phase="complete">完成</li></ol></div>
+        <div class="demo-controls"><p>最終確認で問題を見つけ、執筆だけをやり直して完成する流れを再現します。</p><button class="button primary demo-start" type="button" data-demo-start>デモを開始 <span aria-hidden="true">→</span></button></div>
         <ol class="demo-steps" aria-label="デモの工程">
           <li data-demo-step="plan"><span>01</span><strong>構成</strong><small data-demo-status>待機中</small></li>
           <li data-demo-step="research"><span>02</span><strong>調査</strong><small data-demo-status>待機中</small></li>
@@ -113,20 +111,18 @@
           <li data-demo-step="audit"><span>06</span><strong>最終確認</strong><small data-demo-status>待機中</small></li>
           <li data-demo-step="save"><span>07</span><strong>保存</strong><small data-demo-status>待機中</small></li>
         </ol>
-        <div class="team-log" aria-labelledby="team-log-title"><div class="team-log-head"><h3 id="team-log-title">AIチームのやり取り</h3><small>工程間のステータス報告</small></div><div class="team-log-list" data-team-log aria-hidden="true"><p><strong>進行管理</strong><span>開始を待っています。</span></p></div><p class="sr-only" data-demo-message aria-live="polite">「AIチームを動かしてみる」を押すと、工程が順番に進みます。</p></div>
-        <div class="demo-outcome" data-demo-outcome>検査前の成果物は保存しません。問題がある工程だけを戻し、再検査後に保存します。</div>
-        <div class="demo-complete-cta" data-demo-complete aria-hidden="true"><div><strong>AIチームの仕事が完了しました。</strong><span>次は、この仕組みを支える設計を見てみましょう。</span></div><a class="button primary" href="#workflow" tabindex="-1">技術的なワークフローを見る <span aria-hidden="true">↓</span></a><a href="#reliability" tabindex="-1">なぜ失敗を前提にするのか</a></div>
-        <p class="demo-disclaimer">この表示は工程の概念を説明する固定演出です。ブラウザからDifyやLLMは実行していません。実運用では、処理記録、受け渡しルールの検証、成果物検査を行います。</p>
-        <noscript><div class="demo-noscript"><p>JavaScriptが無効でもページ本文は読めます。デモでは、構成、調査、執筆、レビュー、画像、最終確認、保存の順に進み、問題があれば執筆だけを再試行します。</p><a href="#workflow">技術的なワークフローを見る</a></div></noscript>
+        <p class="demo-message" data-demo-message aria-live="polite">「デモを開始」を押すと、工程が順番に進みます。</p>
+        <noscript><p class="demo-noscript">JavaScriptが無効でもページ本文は読めます。デモでは、構成、調査、執筆、レビュー、画像、最終確認、保存の順に進み、問題があれば執筆だけを再試行します。</p></noscript>
       </div>
+      <div class="audience-bridge reveal"><p>ここから先は、この動きをどう実現しているかを紹介します。</p><a class="button" href="#workflow">技術的なワークフローを見る <span aria-hidden="true">↓</span></a></div>
     </section>
 
     <section id="releases" class="section-shell release-strip reveal" aria-labelledby="latest-title">
       <div class="release-date"><small>最新アップデート</small><time datetime="2026-07-17">2026.07.17</time></div>
-      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.6</span><h2 id="latest-title">AIチームの連携を、短い物語として体験。</h2>
-        <div class="tag-list"><span>Hero訴求</span><span>3幕デモ</span><span>工程メッセージ</span><span>部分再試行</span></div>
+      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.5</span><h2 id="latest-title">AIチームの動きが、直感でわかる入口へ。</h2>
+        <div class="tag-list"><span>一般向け導入</span><span>制作フロー</span><span>比較</span><span>体験デモ</span></div>
       </div>
-      <div class="release-actions"><a class="button compact" href="releases/2026-07-17-v2.6.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
+      <div class="release-actions"><a class="button compact" href="releases/2026-07-17-v2.5.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
     </section>
 
     <section class="section-shell intro reveal" aria-labelledby="what-title">
@@ -227,7 +223,7 @@
 
     <section class="section-shell releases-list" aria-labelledby="release-list-title">
       <div class="section-heading reveal"><div><p class="kicker">リリース履歴 <span>RELEASES</span></p><h2 id="release-list-title">公開し、記録し、改善する。</h2></div></div>
-      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-07-17">2026.07.17</time><span><strong>全リリースを一覧で確認</strong><small>v2.6からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
+      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-07-17">2026.07.17</time><span><strong>全リリースを一覧で確認</strong><small>v2.5からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
     </section>
 
     <section id="community" class="section-shell community-section" aria-labelledby="community-title">

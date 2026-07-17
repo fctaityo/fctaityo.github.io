@@ -56,10 +56,19 @@ if (parallax && !reduceMotion && window.matchMedia('(min-width: 901px)').matches
 const teamDemo = document.querySelector('[data-team-demo]');
 if (teamDemo) {
   const startButton = teamDemo.querySelector('[data-demo-start]');
-  const message = teamDemo.querySelector('[data-demo-message]');
+  const skipButton = teamDemo.querySelector('[data-demo-skip]');
+  const liveMessage = teamDemo.querySelector('[data-demo-message]');
+  const teamLog = teamDemo.querySelector('[data-team-log]');
+  const phaseLabel = teamDemo.querySelector('[data-demo-phase]');
+  const phaseItems = [...teamDemo.querySelectorAll('[data-phase]')];
+  const outcome = teamDemo.querySelector('[data-demo-outcome]');
+  const completeCta = teamDemo.querySelector('[data-demo-complete]');
   const steps = new Map([...teamDemo.querySelectorAll('[data-demo-step]')].map(step => [step.dataset.demoStep, step]));
-  const delay = reduceMotion ? 80 : 650;
+  const delay = reduceMotion ? 60 : 650;
+  const pendingTimers = new Set();
   let running = false;
+  let skipRequested = false;
+  let pageLeaving = false;
 
   const setStep = (name, status, state) => {
     const step = steps.get(name);
@@ -68,53 +77,150 @@ if (teamDemo) {
     step.querySelector('[data-demo-status]').textContent = status;
   };
 
-  const wait = duration => new Promise(resolve => window.setTimeout(resolve, duration));
+  const wait = duration => new Promise(resolve => {
+    const pending = { id: 0, resolve };
+    pending.id = window.setTimeout(() => {
+      pendingTimers.delete(pending);
+      resolve();
+    }, duration);
+    pendingTimers.add(pending);
+  });
+
+  const clearPendingTimers = () => {
+    pendingTimers.forEach(pending => {
+      window.clearTimeout(pending.id);
+      pending.resolve();
+    });
+    pendingTimers.clear();
+  };
+
+  const setPhase = (phase, label) => {
+    phaseLabel.textContent = label;
+    const currentIndex = phaseItems.findIndex(item => item.dataset.phase === phase);
+    phaseItems.forEach((item, index) => {
+      item.classList.remove('is-current', 'is-past');
+      if (index === currentIndex) item.classList.add('is-current');
+      else if (currentIndex >= 0 && index < currentIndex) item.classList.add('is-past');
+    });
+  };
+
+  const report = (speaker, text) => {
+    const entry = document.createElement('p');
+    const role = document.createElement('strong');
+    const content = document.createElement('span');
+    role.textContent = speaker;
+    content.textContent = text;
+    entry.append(role, content);
+    [...teamLog.children].forEach(item => item.classList.remove('is-current'));
+    entry.classList.add('is-current');
+    teamLog.append(entry);
+    while (teamLog.children.length > 3) teamLog.firstElementChild.remove();
+    liveMessage.textContent = `${speaker}: ${text}`;
+  };
+
+  const setOutcome = (text, state = '') => {
+    outcome.className = 'demo-outcome';
+    if (state) outcome.classList.add(state);
+    outcome.textContent = text;
+  };
 
   const resetDemo = () => {
     steps.forEach((step, name) => setStep(name, '待機中', ''));
-    message.textContent = 'AIチームが工程を開始します。';
+    teamLog.replaceChildren();
+    report('進行管理', '開始を待っています。');
+    setPhase('', '開始前');
+    setOutcome('検査前の成果物は保存しません。問題がある工程だけを戻し、再検査後に保存します。');
+    completeCta.classList.remove('is-visible');
+    completeCta.setAttribute('aria-hidden', 'true');
+    completeCta.querySelectorAll('a').forEach(link => link.setAttribute('tabindex', '-1'));
+  };
+
+  const finishDemo = () => {
+    for (const name of ['plan', 'research', 'review', 'image', 'audit', 'save']) setStep(name, '完了', 'is-complete');
+    setStep('writing', '再試行完了', 'is-complete');
+    setPhase('complete', '完成');
+    setOutcome('検査を通過しました。成果物を保存しました。', 'is-complete');
+    report('進行管理', '検査済みの成果物を保存しました。');
+    completeCta.classList.add('is-visible');
+    completeCta.setAttribute('aria-hidden', 'false');
+    completeCta.querySelectorAll('a').forEach(link => link.removeAttribute('tabindex'));
+    startButton.disabled = false;
+    startButton.textContent = 'AIチームの仕事をもう一度見る';
+    skipButton.hidden = true;
+    running = false;
   };
 
   const runDemo = async () => {
     if (running) return;
     running = true;
+    skipRequested = false;
+    pageLeaving = false;
     startButton.disabled = true;
-    startButton.textContent = 'デモ実行中…';
+    startButton.textContent = 'AIチームが作業中…';
+    skipButton.hidden = false;
     resetDemo();
+    setPhase('production', '第1幕: 制作中');
 
-    for (const [name, label] of [['plan', '構成'], ['research', '調査'], ['writing', '執筆'], ['review', 'レビュー'], ['image', '画像']]) {
+    const production = [
+      ['plan', '構成担当', '記事の流れを決めました。'],
+      ['research', '調査担当', '必要な情報を確認しました。'],
+      ['writing', '執筆担当', '本文を作成しています。'],
+      ['review', 'レビュー担当', '内容の不足と矛盾を確認しました。'],
+      ['image', '画像担当', '内容に合う画像を用意しました。']
+    ];
+    for (const [name, speaker, text] of production) {
       setStep(name, '処理中', 'is-active');
-      message.textContent = `${label}の担当が作業しています。`;
+      report(speaker, text);
       await wait(delay);
+      if (skipRequested || pageLeaving) return;
       setStep(name, '完了', 'is-complete');
     }
 
+    setPhase('detection', '第2幕: 確認中');
     setStep('audit', '確認中', 'is-active');
-    message.textContent = '最終確認が、文章の途中終了を検査しています。';
+    report('最終確認', '文章が最後まで完成しているか検査します。');
     await wait(delay);
+    if (skipRequested || pageLeaving) return;
     setStep('audit', '問題を検出', 'is-warning');
     setStep('writing', '再試行', 'is-warning');
-    message.textContent = '問題を検出しました。そのまま保存せず、執筆だけを再試行します。';
+    setOutcome('文章の途中終了を検出しました。未完成のため保存せず、執筆工程だけを再試行します。', 'is-warning');
+    report('最終確認', '文章が途中で終了しています。');
+    report('進行管理', '保存を停止し、執筆工程だけを再試行します。');
     await wait(delay);
+    if (skipRequested || pageLeaving) return;
 
+    setPhase('recovery', '第3幕: 修正中');
     setStep('writing', '処理中', 'is-active');
-    message.textContent = '執筆担当が、最後まで完結するように書き直しています。';
+    setOutcome('全部はやり直しません。問題のある執筆工程だけを戻しています。', 'is-recovery');
+    report('執筆担当', '不足していた後半を追加しています。');
     await wait(delay);
+    if (skipRequested || pageLeaving) return;
     setStep('writing', '再試行完了', 'is-complete');
+    report('執筆担当', '不足していた後半を追加しました。');
     setStep('audit', '再検査', 'is-active');
-    message.textContent = '修正された文章をもう一度確認しています。';
+    setOutcome('不足部分を補いました。保存前に再検査を行います。', 'is-recovery');
+    report('最終確認', '修正された文章を再検査します。');
     await wait(delay);
+    if (skipRequested || pageLeaving) return;
     setStep('audit', '完了', 'is-complete');
 
     setStep('save', '処理中', 'is-active');
-    message.textContent = '検査に合格した成果物だけを保存しています。';
+    report('最終確認', '完成条件を満たしました。');
     await wait(delay);
-    setStep('save', '完了', 'is-complete');
-    message.textContent = '完成しました。問題を見つけ、必要な工程だけをやり直し、検査後に保存しました。';
-    startButton.disabled = false;
-    startButton.textContent = 'もう一度見る →';
-    running = false;
+    if (skipRequested || pageLeaving) return;
+    finishDemo();
   };
 
   startButton.addEventListener('click', runDemo);
+  skipButton.addEventListener('click', () => {
+    if (!running) return;
+    skipRequested = true;
+    clearPendingTimers();
+    finishDemo();
+  });
+  window.addEventListener('pagehide', () => {
+    pageLeaving = true;
+    clearPendingTimers();
+    running = false;
+  });
 }
