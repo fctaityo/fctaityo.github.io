@@ -24,7 +24,7 @@
       <span class="sr-only">メニューを開く</span><i></i><i></i><i></i>
     </button>
     <nav id="primary-nav" class="nav" aria-label="メインナビゲーション">
-      <a href="#home">ホーム</a><a href="#about">AIチーム</a><a href="#principles">基本原則</a><a href="#system">システム構成</a>
+      <a href="#home">ホーム</a><a href="#principles">基本原則</a><a href="#system">システム構成</a>
       <a href="#workflow">ワークフロー</a><a href="#status">現在の開発状況</a><a href="releases/index.html">更新履歴</a><a href="#roadmap">ロードマップ</a>
       <a href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">X</a>
       <a href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">NOTE</a>
@@ -44,7 +44,7 @@
         <div class="hero-actions">
           <a class="button primary" href="#principles">基本原則 <span aria-hidden="true">→</span></a>
           <a class="button" href="#documentation">プロジェクトを見る</a>
-          <a class="text-link" href="releases/2026-07-17-v2.5.html">最新リリース</a>
+          <a class="text-link" href="releases/2026-07-17-v2.4.html">最新リリース</a>
           <a class="text-link" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">公式サイトのソース ↗</a>
         </div>
         <div class="hero-metrics" aria-label="プロジェクト概要">
@@ -57,72 +57,12 @@
       </div>
     </section>
 
-    <section id="about" class="section-shell audience-section audience-about reveal" aria-labelledby="about-title">
-      <div class="audience-kicker">AI TEAM, NOT JUST ONE AI</div>
-      <div class="audience-about-grid">
-        <div>
-          <p class="audience-copy">AIひとりではなく、<strong>AIチームで創る。</strong></p>
-          <h2 id="about-title">Local AI Foundryって何？</h2>
-        </div>
-        <div class="audience-lead">
-          <p>ひとつのAIに全部を任せるのではなく、役割を持った複数のAIが、調べ、考え、書き、確認しながら、ひとつの成果物を完成させます。</p>
-          <p>Local AI Foundryは、AIを「ひとりの回答者」ではなく、協力して働くチームとして動かす仕組みです。</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="team-flow" class="section-shell audience-section" aria-labelledby="team-flow-title">
-      <div class="section-heading reveal"><div><p class="kicker">できること <span>FROM IDEA TO ARTIFACT</span></p><h2 id="team-flow-title">AIチームが、<br>ひとつの成果物をつくるまで。</h2></div><p>記事制作を例に、役割の違う工程が順番に受け渡します。</p></div>
-      <ol class="audience-flow reveal" aria-label="AIチームが記事を制作する流れ">
-        <li><span>01</span><strong>テーマを受け取る</strong><small>INPUT</small></li>
-        <li><span>02</span><strong>構成を考える</strong><small>PLANNING</small></li>
-        <li><span>03</span><strong>情報を調べる</strong><small>RESEARCH</small></li>
-        <li><span>04</span><strong>文章を書く</strong><small>WRITING</small></li>
-        <li><span>05</span><strong>内容を確認する</strong><small>REVIEW</small></li>
-        <li><span>06</span><strong>画像をつくる</strong><small>IMAGE</small></li>
-        <li><span>07</span><strong>検査して保存する</strong><small>PACKAGE</small></li>
-      </ol>
-    </section>
-
-    <section id="difference" class="section-shell audience-section" aria-labelledby="difference-title">
-      <div class="section-heading reveal"><div><p class="kicker">違い <span>WHY A TEAM?</span></p><h2 id="difference-title">ひとつのAIに任せるのと、<br>何が違う？</h2></div><p>生成するだけでなく、分担し、確認し、問題を見つけられるようにします。</p></div>
-      <div class="comparison-grid reveal">
-        <article class="comparison-card single"><p>一般的な一発生成</p><ul><li>ひとつのAIが最初から最後まで担当</li><li>生成した内容をそのまま利用</li><li>失敗しても気づきにくい</li><li>処理の経緯が見えにくい</li></ul></article>
-        <article class="comparison-card foundry"><p>Local AI Foundry</p><ul><li>役割の違うAIが分担</li><li>別のAIや検査処理が確認</li><li>問題を検出して停止・再試行</li><li>判断や失敗の記録を残す</li></ul></article>
-      </div>
-    </section>
-
-    <section id="reliability" class="section-shell audience-section reliability-section reveal" aria-labelledby="reliability-title">
-      <div class="reliability-mark" aria-hidden="true">!</div>
-      <div><p class="kicker">失敗を前提にする <span>BUILT TO VERIFY</span></p><h2 id="reliability-title">AIは、間違える。<br>だから確認する。</h2></div>
-      <div class="reliability-copy"><p>AIは文章を途中で終えたり、必要な情報を抜かしたり、決められた形を守れないことがあります。</p><p>Local AI Foundryは、処理が最後まで動いたことと、成果物が完成したことを別々に確認します。問題があれば、そのまま公開せず、停止・再試行・記録を行います。</p><small>Workflow Success ≠ Artifact Success</small></div>
-    </section>
-
-    <section id="demo" class="section-shell audience-section demo-section" aria-labelledby="demo-title">
-      <div class="section-heading reveal"><div><p class="kicker">固定シナリオデモ <span>INTERACTIVE DEMO</span></p><h2 id="demo-title">AIチームの動きを<br>見てみる。</h2></div><p>実際のAIや外部APIには接続しない、仕組みを理解するためのデモです。</p></div>
-      <div class="demo-board reveal" data-team-demo>
-        <div class="demo-controls"><p>最終確認で問題を見つけ、執筆だけをやり直して完成する流れを再現します。</p><button class="button primary demo-start" type="button" data-demo-start>デモを開始 <span aria-hidden="true">→</span></button></div>
-        <ol class="demo-steps" aria-label="デモの工程">
-          <li data-demo-step="plan"><span>01</span><strong>構成</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="research"><span>02</span><strong>調査</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="writing"><span>03</span><strong>執筆</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="review"><span>04</span><strong>レビュー</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="image"><span>05</span><strong>画像</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="audit"><span>06</span><strong>最終確認</strong><small data-demo-status>待機中</small></li>
-          <li data-demo-step="save"><span>07</span><strong>保存</strong><small data-demo-status>待機中</small></li>
-        </ol>
-        <p class="demo-message" data-demo-message aria-live="polite">「デモを開始」を押すと、工程が順番に進みます。</p>
-        <noscript><p class="demo-noscript">JavaScriptが無効でもページ本文は読めます。デモでは、構成、調査、執筆、レビュー、画像、最終確認、保存の順に進み、問題があれば執筆だけを再試行します。</p></noscript>
-      </div>
-      <div class="audience-bridge reveal"><p>ここから先は、この動きをどう実現しているかを紹介します。</p><a class="button" href="#workflow">技術的なワークフローを見る <span aria-hidden="true">↓</span></a></div>
-    </section>
-
     <section id="releases" class="section-shell release-strip reveal" aria-labelledby="latest-title">
       <div class="release-date"><small>最新アップデート</small><time datetime="2026-07-17">2026.07.17</time></div>
-      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.5</span><h2 id="latest-title">AIチームの動きが、直感でわかる入口へ。</h2>
-        <div class="tag-list"><span>一般向け導入</span><span>制作フロー</span><span>比較</span><span>体験デモ</span></div>
+      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.4</span><h2 id="latest-title">5秒で伝わる、公式サイトへ。</h2>
+        <div class="tag-list"><span>Heroコピー</span><span>タイポグラフィ</span><span>日本語UI</span><span>視線誘導</span></div>
       </div>
-      <div class="release-actions"><a class="button compact" href="releases/2026-07-17-v2.5.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
+      <div class="release-actions"><a class="button compact" href="releases/2026-07-17-v2.4.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
     </section>
 
     <section class="section-shell intro reveal" aria-labelledby="what-title">
@@ -223,7 +163,7 @@
 
     <section class="section-shell releases-list" aria-labelledby="release-list-title">
       <div class="section-heading reveal"><div><p class="kicker">リリース履歴 <span>RELEASES</span></p><h2 id="release-list-title">公開し、記録し、改善する。</h2></div></div>
-      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-07-17">2026.07.17</time><span><strong>全リリースを一覧で確認</strong><small>v2.5からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
+      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-07-17">2026.07.17</time><span><strong>全リリースを一覧で確認</strong><small>v2.4からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
     </section>
 
     <section id="community" class="section-shell community-section" aria-labelledby="community-title">
