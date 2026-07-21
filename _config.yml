@@ -1,0 +1,5 @@
+title: Local AI Foundry Docs
+markdown: kramdown
+remote_theme: pages-themes/cayman  # または任意のテーマ
+plugins:
+  - jekyll-relative-links
