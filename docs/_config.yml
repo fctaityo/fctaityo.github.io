@@ -1,12 +1,7 @@
 title: Local AI Foundry Docs
-description: ADR and documentation
-baseurl: ""  # 空のまま
+baseurl: "/docs"   # ← これ大事！
 url: "https://fctaityo.github.io"
 
-# Markdown設定
 markdown: kramdown
-
-# 相対リンクを有効化
 relative_links:
   enabled: true
-  collections: true
