@@ -1,7 +1,0 @@
-title: Local AI Foundry Docs
-baseurl: "/docs"   # ← これ大事！
-url: "https://fctaityo.github.io"
-
-markdown: kramdown
-relative_links:
-  enabled: true
