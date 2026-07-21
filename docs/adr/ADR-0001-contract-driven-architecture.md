@@ -1,3 +1,7 @@
+---
+title: ADR-0001 Contract-Driven Architecture
+---
+
 # ADR-0001: Contract-Driven Architectureを採用する
 
 - Status: Accepted
