@@ -4,6 +4,8 @@
 
 [Architecture](architecture-public.md)は構造、Glossaryは用語、[ADR](adr/)は重要な設計判断、Decision Logは運用・小規模判断を扱う。本書はそれら全体に適用する基本原則を定義する。
 
+[Public Documentationへ戻る](README-public.md)
+
 ## 原則
 
 ### P-01 — 意味は自由。構造は厳格。

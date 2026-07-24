@@ -1,5 +1,7 @@
 # Review Agent文体誤検知とfixed未反映
 
+[Operational Review一覧へ戻る](index.md)
+
 - Review ID: `REV-20260718-003`
 - 日付: 2026-07-18
 - Status: `Open`

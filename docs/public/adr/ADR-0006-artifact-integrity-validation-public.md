@@ -95,3 +95,5 @@ Artifact Integrity Validationは、成果物が最低限の完全性条件を満
 - [ADR-0002: Agent間境界にDTOを採用する](ADR-0002-dto-boundaries.md)
 - [REV-20260716-001 記事途中切断](../reviews/2026-07-16-operational-article-truncation.md)
 - [REV-20260717-001 Section Writing Artifact Integrity](../reviews/2026-07-17-e2e-section-writing-integrity.md)
+
+[Public Documentationへ戻る](../README-public.md)

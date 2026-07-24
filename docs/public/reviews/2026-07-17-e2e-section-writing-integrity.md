@@ -88,8 +88,10 @@ Section Writing導入直後のWorkflowでは、次の責務が十分に分離さ
 
 ## 関連ADR
 
-- [ADR-0006 Artifact Integrity Validation](../adr/ADR-0006-artifact-integrity-validation.md)
+- [ADR-0006 Artifact Integrity Validation](../adr/ADR-0006-artifact-integrity-validation-public.md)
 - ADR-0007 Section-based Writing
+
+[Operational Review一覧へ戻る](index.md)
 
 ## Lessons Learned
 

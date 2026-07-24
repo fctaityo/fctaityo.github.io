@@ -1,5 +1,7 @@
 # ADR-0003: Normalizeを構造補正に限定する
 
+[Public Documentationへ戻る](../README-public.md)
+
 - Status: Accepted
 - Date: 2026-07-16
 - Scope: Contract Normalize nodes

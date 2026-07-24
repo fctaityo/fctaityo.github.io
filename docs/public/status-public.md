@@ -7,9 +7,8 @@
 
 
 本書はLocal AI FoundryのCurrent Snapshot（現在地）の正本であり、Project
-Dashboardとして扱う。履歴や経緯は記載しない。過去情報は[Operational
-Reviews](reviews-public.md)、[ADR](adr-public/)、[Decision
-Log](decisions.md)、Gitへ委譲する。
+Dashboardとして扱う。履歴や経緯は記載しない。過去情報は
+[Operational Reviews](reviews/index.md)、[ADR](adr/)、Decision Log、Gitへ委譲する。
 
 ## プロジェクト健全性
 
@@ -26,8 +25,6 @@ Log](decisions.md)、Gitへ委譲する。
 
   — Conclusion Retry Prompt synchronization、`Blocked`
 
-
-## 現在の既知制約
 
 -   Published WorkflowはConfiguration Synchronizationの比較対象外である。
 -   Current Baselineは`Provisional / Blocked`であり、既知Configuration
@@ -57,7 +54,7 @@ Log](decisions.md)、Gitへ委譲する。
 -   Image Generation: ComfyUI
 -   Persistence: UUID spool transportと原子的保存
 -   Configuration Governance:
-    [Configuration Management](configuration-management-public.md) Change Set B導入済み
+    Configuration Management Change Set B導入済み
 
 ### 現在のPipeline
 
@@ -122,3 +119,5 @@ Log、Gitで追跡する。
 
 -   Snapshot Updated: `2026-07-24`
 -   Last Verified: `2026-07-24`
+
+[Public Documentationへ戻る](README-public.md)

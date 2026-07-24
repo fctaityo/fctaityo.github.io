@@ -6,6 +6,8 @@
 
 レビュー一覧は[index.md](index.md)を参照してください。
 
+[Public Documentationへ戻る](../README-public.md)
+
 公開版では、設計上の判断、観測された問題、改善の方向性を残しつつ、実行環境固有の値、内部Run ID、Commit SHA、非公開証跡、運用上の機微情報は省略しています。
 
 ## 運用規則

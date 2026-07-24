@@ -1,5 +1,7 @@
 # Tone Contract違反をReview Agentが見逃し
 
+[Operational Review一覧へ戻る](index.md)
+
 - Review ID: `REV-20260718-004`
 - 日付: 2026-07-18
 - Status: `Open`

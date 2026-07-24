@@ -1,5 +1,7 @@
 # Research Entity Resolution欠如によるTopic逸脱
 
+[Operational Review一覧へ戻る](index.md)
+
 - Review ID: `REV-20260718-002`
 - 日付: 2026-07-18
 - Status: `Open`
