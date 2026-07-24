@@ -12,7 +12,7 @@
 - 03 Contract Drivenとは何か？（公開）
 - 04 DTOだけを受け渡す理由（公開）
 - 05 NormalizeはAIを信用しないためにある（公開）
-- 06 Retryは保険ではない（次回執筆）
+- 06 Retryは保険ではない（公開）
 - 07 Configuration Managementという最後の壁
 - 08 Runtimeを見ないレビューはレビューではない
 - 09 Documentationは説明書ではなくUX
