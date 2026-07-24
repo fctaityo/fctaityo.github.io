@@ -22,6 +22,25 @@ nav.addEventListener('click', event => {
   }
 });
 
+const sectionLinks = [...nav.querySelectorAll('a[href^="#"]')];
+const navSections = sectionLinks
+  .map(link => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
+
+const syncActiveNav = () => {
+  if (!navSections.length) return;
+  const current = [...navSections]
+    .reverse()
+    .find(section => section.getBoundingClientRect().top <= 150) || navSections[0];
+  sectionLinks.forEach(link => {
+    const active = link.getAttribute('href') === `#${current.id}`;
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+};
+syncActiveNav();
+window.addEventListener('scroll', syncActiveNav, { passive: true });
+
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && nav.classList.contains('open')) {
     nav.classList.remove('open');
