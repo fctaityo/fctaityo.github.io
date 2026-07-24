@@ -33,6 +33,12 @@
 
 > 完全始動は完成ではない。
 
+> 入口で止めれば、出口は壊れない。
+
+> 生成できても、運べなければ成果物にはならない。
+
+> Reviewは判定する。本文を書き直させない。
+
 ## 珍言
 
 > 「git diffください」
@@ -47,9 +53,9 @@
 
 今回のGitHub連携検証で、Foundryの運用方針が一つ固まった。
 
-- GitHub上の `notes/` を正本（Single Source of Truth）とする。
-- ChatGPTはGitHub最新版を読み、修正版全文を提案する。
-- 最終判断・Commitは人間が行う。
-- 思考は対話で育て、履歴はCommitで残す。
+* GitHub上の `notes/` を正本（Single Source of Truth）とする。
+* ChatGPTはGitHub最新版を読み、修正版全文を提案する。
+* 最終判断・Commitは人間が行う。
+* 思考は対話で育て、履歴はCommitで残す。
 
 この運用により、常にGitHub最新版を基準として設計・レビュー・ナレッジ整理を行う。
