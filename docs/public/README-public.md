@@ -57,6 +57,7 @@ flowchart LR
 
 - [基本原則](principles-public.md): 設計思想の正本
 - [全体設計](architecture-public.md): システム構成とデータフロー
+- [Website Operations](website-operations-public.md): 公式ホームページとリリースの運用方針
 - 用語集: プロジェクト固有用語の正本
 - Documentation Style Guide: Documentationの表記・変更記録ルール
 

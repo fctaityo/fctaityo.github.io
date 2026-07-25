@@ -1,5 +1,9 @@
 # Website Operations Policy
 
+> **Public Edition**
+>
+> この文書はWebsite Operations Policyの公開版です。内部正本から非公開情報を除き、公開運用に必要な方針を掲載しています。
+
 - Status: Active
 - Applies To: Local AI Foundry公式ホームページ
 - Owner: Repository Maintainer
