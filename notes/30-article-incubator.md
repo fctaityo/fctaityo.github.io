@@ -13,7 +13,8 @@
 - 04 DTOだけを受け渡す理由（公開）
 - 05 NormalizeはAIを信用しないためにある（公開）
 - 06 Retryは保険ではない（公開）
-- 07 Configuration Managementという最後の壁
+- 07 すべて直した。それでも終わらなかった。（公開）
+  - 副題：Configuration Managementという最後の壁
 - 08 Runtimeを見ないレビューはレビューではない
 - 09 Documentationは説明書ではなくUX
 
@@ -37,6 +38,17 @@
 ### Aggregatorが全部を壊した日（笑）
 
 - 現状：
-  - notes/・Bug Zoo・Hall of Fame・Operational Review・ADRのいずれにも記録なし
+  - War Diary：未記録
+  - Bug Zoo：未登録
+  - Hall of Fame：未登録
+  - Operational Review：未作成
+  - ADR：未作成
+- 核となるテーマ：
+  - Aggregatorが責務を超えて情報を再構成・再生成したことで、Workflow全体の整合性が崩壊した。
+  - 問題は実装ではなく、責務境界を曖昧にした設計にあった。
+  - Aggregatorは「統合」だけを行い、「意味を作らない」という設計原則へ至る契機となった。
 - 昇格条件：
-  - Bug Zoo登録 → Hall of Fame入り → Operational Review作成 → ADR化、のいずれかまで育った時点で番号を振り直して再検討
+  - War Diaryへの事実記録。
+  - Bug Zooへの一般化。
+  - Operational ReviewによるRoot Cause分析。
+  - ADRとして設計判断が確立した時点で、正式シリーズへの昇格を再検討する。
