@@ -29,6 +29,43 @@
 
 日付は、HTMLの`datetime`属性とファイル名では`YYYY-MM-DD`、画面表示では`YYYY.MM.DD`を使用する。
 
+## リリース判定基準
+
+Version更新の要否は変更量ではなく、公開上の意味が変化するかで判断する。利用者が認識すべき変更はVersion更新対象とし、判断に迷う場合はVersion更新側へ倒す。複数の軽微な修正をまとめて正式リリースとして扱うことは許容する。
+
+Version更新を原則必要とする変更:
+
+- Public Documentationの新規追加
+- Public Documentationの大幅な内容更新
+- Architectureの変更
+- 公開仕様または公開Contractの変更
+- Workflow構成または主要処理フローの変更
+- 公式サイトの構成変更
+- Release Driven Website Operationの変更
+- 利用者から見える機能、仕様、制約、導線の変更
+
+Version更新を原則不要とする変更:
+
+- Typo修正
+- 表記揺れ修正
+- 意味を変更しない文章修正
+- 軽微なリンク修正
+- CSSやレイアウトの軽微な調整
+- 公開仕様に影響しない内部整理
+- コメントや補足説明のみの追加
+
+| 変更内容 | Version更新 |
+|---|---|
+| Public Documentation追加・大幅更新 | 必要 |
+| Architecture変更 | 必要 |
+| 公開Contract・Workflow仕様変更 | 必要 |
+| 公式サイト構成変更 | 必要 |
+| Typo・表記揺れ修正 | 原則不要 |
+| 軽微なリンク修正 | 原則不要 |
+| CSS微調整 | 原則不要 |
+
+Version更新を伴う場合は、公式トップページ、Releases一覧、個別Releaseページを同時更新する。Commitは公開準備完了であり、公開完了ではない。`origin/main`へのPushとGitHub Pages反映確認まで完了した時点をRelease Completeとする。
+
 ## 更新履歴
 
 トップページには、閲覧者がプロジェクトの現在を理解するために重要な更新だけを掲載する。
@@ -117,10 +154,16 @@ Commit
 ↓
 Push
 ↓
-GitHub Pages公開
+GitHub Pages反映確認
+↓
+Release Complete
 ```
 
 公開前にリンク、表示、Markdown、正本との整合を検証する。工程の一部が対象外の場合は省略できるが、公開内容と正本の整合確認は省略しない。
+
+Push未実施のCommitは公開されていない。正式リリースは、Push後のGitHub Pages反映確認をもって完了する。作業指示に明示的な「Push禁止」がない限り、正式リリース作業はPushと公開確認まで実施する。
+
+Documentation編集のみを目的とする作業では、指示に応じてCommitで停止してよい。Releaseまたは公開を目的とする作業では、原則としてCommitで停止しない。
 
 ## 運用原則
 
