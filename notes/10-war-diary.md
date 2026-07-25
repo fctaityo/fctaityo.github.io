@@ -18,6 +18,11 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-07
 
+### 2026-07-25
+
+- [WD-20260725-001 曖昧なPromptがReviewを一周増やした](war-diary/WD-20260725-001-ambiguous-prompt-added-review-round.md)  
+  Review Commentを反映してCommitへ進める意図だったが、工程と停止地点を曖昧に指示したため、不要なRound 2 Review Packageが作成された事件と、AIへの指示は意図ではなく実行工程で書くという教訓を記録。
+
 ### 2026-07-24
 
 - [WD-20260724-001 Local AI Foundry 完全始動](war-diary/WD-20260724-001-foundry-launched.md)  
