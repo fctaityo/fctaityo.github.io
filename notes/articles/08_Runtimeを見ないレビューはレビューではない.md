@@ -100,7 +100,7 @@ Ollama自体に直接、実際に短い生成リクエストを送っている�
 
 ## 5. SOPが「Runtime確認」を独立した手順にしている理由
 
-Codex Standard Operating Procedureには、標準フローが17ステップで定義されている。その中の11番目にこうある。
+Local AI Foundryでは、Codex（このプロジェクトで実装・運用作業を担当しているAIエージェント）向けの標準作業手順を、Codex Standard Operating Procedure（以下SOP）として定義している。SOPには、標準フローが17ステップで定義されている。その中の11番目にこうある。
 
 > 11. Runtime実効値とArtifactを確認する。
 
