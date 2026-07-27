@@ -124,4 +124,4 @@ Runtimeを見ないレビューは、レビューではない。読んだだけ�
 
 ---
 
-※本記事は「Local AI Foundry」開発ログの08本目。01〜07も合わせてどうぞ。実例は`CFG-20260724-002`、`CFG-20260725-001`を参照。運用規則はCodex Standard Operating Procedureに基づく。
+※本記事は「Local AI Foundry」開発ログの08本目。01〜07も合わせてどうぞ。実例は`CFG-20260724-002`、`CFG-20260725-001`を参照。運用規則はプロジェクト内のCodex向けSOP（Standard Operating Procedure）に基づく。
