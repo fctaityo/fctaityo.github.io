@@ -2,14 +2,20 @@
 
 - Audit ID: `CFG-20260730-001`
 - Date: `2026-07-30`
-- Auditor: `Public Documentation`
+- Auditor: Codex
 - Phase: `Development`
-- Configuration Item: `CFG-A001`
+- Configuration Item: [`CFG-A001`](../configuration-items.md#cfg-a001)
 - Scope: Planning Agent System PromptのDraft → DSL同期とRuntime Acceptance
 - Task: 承認済みDraft Planning PromptのRepository Reflection
 - Trigger: CFG-A001 Human Final Decision Approved後のfield-level同期
 - Supersedes: `N/A`
 - Related Review: `REV-20260730-001`
+
+> **Public Edition**
+>
+> 本書は内部Configuration Auditを基にした公開版である。App ID、Workflow ID、Run ID、
+> SHA-256、Git baseline、内部Repository path、Database table名など、公開に不要な運用識別情報は
+> 削除または一般化している。監査Scope、検証結果、Blocking判定、残存RiskおよびNext Actionは維持する。
 
 ## Baseline
 
@@ -24,7 +30,7 @@
 | DSL path | 公開対象外 |
 | Draft / DSL System Prompt | 実効文字列の一致をfingerprintで確認 |
 | User Prompt Before / After | 同一であることをfingerprintで確認 |
-| Provider | Local LLM Provider。Secretは記録しない |
+| Provider | `langgenius/ollama/ollama` / `gemma4:latest`。Secretは記録しない |
 | Runtime Run IDs | 公開対象外 |
 | Previous Audit | [`CFG-20260724-002`](CFG-20260724-002-configuration-synchronization.md) |
 
@@ -179,7 +185,7 @@ Current Ownerは、承認済みDraftがDSLへ同期済みである一方、Runti
 | E2E | Not completed | Planning Evidence取得後にRun停止 |
 | Runtime | FAIL | 曖昧Entity Raw Contract |
 | Artifact | Not Applicable | Planning Stage対象 |
-| Documentation links | PASS for public links | 公開対象文書間の相対リンクを確認 |
+| Public document links | PASS | 本文内の公開対象相対リンクを確認 |
 | Mermaid | Not Applicable | Mermaidなし |
 
 ## Repository Reflection Result
@@ -197,6 +203,9 @@ Gate: ok
 Publish: Not performed
 Push: Not performed
 ```
+
+上記の`Publish`および`Push`は、元のRepository Reflection実施時点における作業結果を示す。
+本公開版の公開状態を示す項目ではない。
 
 ## Final Result
 
@@ -235,6 +244,7 @@ Draft／DSL System Prompt同期は成功したが、曖昧Entity Runtime Accepta
 | 項目 | 値 |
 |---|---|
 | Review Package | Repository外 |
-| Review Result | `PASS（軽微修正反映済み）` |
+| AI Reviewer Verdict | `PASS` |
+| Reviewer Final Decision | `PASS（軽微修正反映済み）` |
 | Human Final Decision | `Approved` |
 | Repository Action | `Authorized` |
