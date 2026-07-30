@@ -2,61 +2,92 @@
 
 > **Public Edition**
 >
-> この文書は Local AI Foundry の公開版プロジェクトステータスです。
-> 内部運用情報、構成管理情報、監査情報、環境固有情報は公開版では省略しています。
+> この文書はLocal AI Foundryの公開版プロジェクトステータスです。
+> 内部運用情報、環境固有情報、構成管理の詳細、監査証跡は公開版では省略しています。
 
+本書はLocal AI FoundryのCurrent Snapshot（現在地）の正本であり、Project Dashboardとして扱います。
 
-本書はLocal AI FoundryのCurrent Snapshot（現在地）の正本であり、Project
-Dashboardとして扱う。履歴や経緯は記載しない。過去情報は
-[Operational Reviews](reviews/index.md)、[ADR](adr/)、Decision Log、Gitへ委譲する。
+現在状態のみを管理し、変更履歴や設計判断の詳細はConfiguration Audit、Operational Reviews、ADR、Decision Log、Gitへ委譲します。
 
-## プロジェクト健全性
+---
 
-| 項目 | 状態 |
-|---|---|
-| 総合状態 | 🟡 開発中 |
-| アーキテクチャ | 🟢 安定 |
-| Workflow | 🟡 実験運用 |
-| ドキュメント | 🟡 Governance導入・Baseline監査前 |
-| 成果物検証 | 🟢 Validator稼働中 |
-| 本番運用準備 | 🟡 未完了 |
+# Project Dashboard
 
-## 現在の既知制約
+| 項目                         | 現在状態                                 |
+| -------------------------- | ------------------------------------ |
+| Project Status             | 🟡 Development                       |
+| Current Focus              | Workflow Publish Compatibility       |
+| Architecture               | Contract-Driven Multi-Agent Platform |
+| Workflow Revision          | `0.3.2`                              |
+| Workflow Validation        | PASS                                 |
+| Configuration Verification | PASS                                 |
+| Publish Status             | BLOCKED                              |
+| Runtime Verification       | PENDING                              |
 
-  — Conclusion Retry Prompt synchronization、`Blocked`
+---
 
+# Current Status
 
--   Published WorkflowはConfiguration Synchronizationの比較対象外である。
--   Current Baselineは`Provisional / Blocked`であり、既知Configuration
-    Driftの採用判断は未完了である。
--   GemmaのDTO出力に構文・キー・長さの揺らぎがある。
--   fixtureなしの実LLM 5 Section連続正常系はOpenである。
--   Research
-    Retryが初回raw全文を再利用し、同種の構文違反を繰り返す場合がある。
--   Image Prompt、Image Request、Final
--   DTOに共通の明示version fieldがない。
+現在のWorkflowは開発版として正常に検証されており、Workflow ValidationおよびConfiguration Verificationは完了しています。
 
-## 次のMilestone
+一方で、現在使用しているDifyの新しいPublish Validationにより、Workflowはまだ公開可能な状態には至っていません。
 
+現在は、このPublish制約へ適合するためのWorkflow最適化を進めています。
 
-## プロジェクト参照情報
+---
 
-### 現在のArchitecture
+# Current Blocking Issue
 
--   Architecture: Contract-Driven Multi-Agent Platform
--   Dify Workflow Revision: `0.3.2`
--   Current Workflow:
-    `workflows/dify/local-ai-7-stage-multi-agent.dsl.yml`
--   Node数: 73
--   Edge数: 79
--   LLM: Ollama `gemma4:latest`
--   Orchestration: Dify / n8n
--   Image Generation: ComfyUI
--   Persistence: UUID spool transportと原子的保存
--   Configuration Governance:
-    Configuration Management Change Set B導入済み
+現在確認されている制約は、Dify Publish時に適用されるWorkflow構造上の制約です。
 
-### 現在のPipeline
+Workflow自体の検証結果には問題はありませんが、Publish Validationを通過するためにはWorkflow構造の最適化が必要です。
+
+この制約への対応が完了した後、PublishおよびRuntime Verificationを実施する予定です。
+
+---
+
+# Recently Completed
+
+最近完了した主な作業は次のとおりです。
+
+* Workflow Compatibilityの改善
+* Configuration Contractの整理
+* Workflow Validation
+* Configuration Verification
+* Dify Import Verification
+* Semantic Validation
+* UI Verification
+
+これらの検証は完了しており、現在はPublish Compatibilityへの対応を進めています。
+
+---
+
+# Project Health
+
+| 領域            | 状態                  |
+| ------------- | ------------------- |
+| Architecture  | Stable              |
+| Workflow      | Validation Complete |
+| Configuration | Verified            |
+| Documentation | Active Development  |
+| Validation    | PASS                |
+| Publish       | Pending             |
+| Runtime       | Pending             |
+
+---
+
+# Current Architecture
+
+* Architecture: Contract-Driven Multi-Agent Platform
+* Workflow Revision: `0.3.2`
+* Workflow: Local AI Multi-Agent Workflow
+* LLM: Ollama
+* Orchestration: Dify / n8n
+* Image Generation: ComfyUI
+
+---
+
+# Current Pipeline
 
 ```text
 Planning
@@ -69,55 +100,84 @@ Section Writing
 ↓
 Assembly
 ↓
-Artifact Validator
+Artifact Validation
 ↓
 Review
 ↓
+Final Audit
 ↓
 Package
 ```
 
-Research、各Section、ReviewのRetryは最大1回の有限グラフである。Artifact
-Validator FAIL時はReview以降へ進まない。
+各工程はContract-Driven Architectureに基づき構成され、Validationを通過した成果物のみ次工程へ進みます。
 
-### 現在のDTO
+---
 
-正式または専用Builderとして現在実装済みのDTOは次のとおり。
+# Current Capabilities
 
--   Planning DTO
--   Research DTO
--   Writing Plan DTO
--   Section Writing DTO
--   Review入力DTO
--   Review出力DTO
--   Artifact / Package payload
+現在実装されている主要機能は次のとおりです。
 
-prompt上のschemaまたは専用処理が存在するが、DTO / Normalize / Contract
-Gateの契約一式は未完成である。
+* Planning
+* Research
+* Writing Planning
+* Section Writing
+* Review
+* Final Audit
+* Artifact Packaging
 
-### 現在のTest状況
+詳細な契約仕様およびDTO設計については、関連Documentationを参照してください。
 
-Last Verified: `2026-07-18`
+---
 
-| Test | Current Status |
-|---|---|
-| Unit Tests | 16件成功（Artifact Integrity / Research Retry） |
-| Integration Tests | n8n transport / persistence 8ケース成功 |
-| E2E | 固定DTOによるDify → n8n → ComfyUI正常系とValidator異常系に成功。実LLM 5 Section正常系はOpen |
-| Dify DSL Validation | 成功、73 nodes / 79 edges、environment key検証成功 |
-| Mermaid Validation | Architecture 10ブロック、構造エラー0 |
-| Markdown Links | 177リンク、切れ0 |
+# Current Verification
 
-## 更新方針
+| 項目                         | 状態      |
+| -------------------------- | ------- |
+| Workflow Validation        | PASS    |
+| Configuration Verification | PASS    |
+| Import Verification        | PASS    |
+| Semantic Verification      | PASS    |
+| UI Verification            | PASS    |
+| Publish Verification       | Pending |
+| Runtime Verification       | Pending |
 
-本書は常に現在状態だけを保持する。Workflow、DTO、ADR、Operational
-Review、主要テストが変更された場合は同じ変更で更新する。変更履歴を追記せず、以前の値はReviews、ADR、Decision
-Log、Gitで追跡する。
+---
 
+# Known Limitations
 
-## 最終更新
+現在確認されている主な制約は次のとおりです。
 
--   Snapshot Updated: `2026-07-24`
--   Last Verified: `2026-07-24`
+* Publish Validationへの対応を実施中
+* Runtime Verificationは未実施
+* 一部機能は継続して改善中
+
+詳細な技術情報および対応履歴はConfiguration AuditおよびOperational Reviewで管理します。
+
+---
+
+# Next Milestone
+
+次のマイルストーンは、WorkflowをPublish Validationへ適合させ、Runtime Verificationを完了することです。
+
+Publish完了後、Runtime Verificationを実施し、Workflowの正式公開を予定しています。
+
+---
+
+# Update Policy
+
+本書は常に現在状態のみを保持します。
+
+Workflow、Architecture、Documentation、Configuration、主要なValidation結果またはRuntime状態が変更された場合は更新します。
+
+過去の変更履歴および判断理由はConfiguration Audit、Operational Reviews、ADR、Decision LogおよびGitで管理します。
+
+---
+
+# Last Updated
+
+* Snapshot Updated: `2026-07-30`
+* Runtime Status: `Pending`
+
+---
 
 [Public Documentationへ戻る](README-public.md)
