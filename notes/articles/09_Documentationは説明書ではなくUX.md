@@ -141,4 +141,4 @@ Season2で、また壊そう。
 
 ---
 
-※本記事は「Local AI Foundry」開発ログの09本目、Season1最終回。01〜08も合わせてどうぞ。実例は`WD-20260724-003`を参照。運用仕様はDocumentation Style Guide、Status Artifact Contract、Documentation Mapに基づく。
+※本記事は「Local AI Foundry」開発ログの09本目、Season1最終回。01〜08も合わせてどうぞ。実例は`WD-20260724-003`を参照。
