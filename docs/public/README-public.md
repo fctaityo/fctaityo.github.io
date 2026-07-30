@@ -4,7 +4,6 @@
 >
 > このディレクトリは公開版ドキュメントです。内部運用資料・環境固有情報・実装詳細への導線は公開対象のみへ調整しています。
 
-
 このディレクトリは、設計、契約、判断、運用、品質証跡へ辿るための入口である。READMEは導線、各リンク先は担当領域の正本とする。実装の正本はDify DSL、n8n Workflow/runtime、起動・停止スクリプトである。
 
 - [Project Status](status-public.md): 現在状態だけを示すProject Dashboard
@@ -15,7 +14,7 @@
 |---|---|---|
 | 現在地と次の行動を知る | [Project Status](status-public.md) | Dashboard内のConfiguration Item IDと最新Audit |
 | `CFG-*`の意味、状態、依存を知る | Configuration Item Registry | Item行の「根拠へ進む」導線 |
-| 同期状態とEvidenceを確認する | Configuration Audit一覧 | 対象Audit本文 |
+| 同期状態とEvidenceを確認する | [Configuration Audit一覧](configuration-audits/index.md) | 対象Audit本文 |
 | 判断理由を確認する | Decision Log | 関連ADR、Review |
 | 重要な設計判断を確認する | [ADR一覧](adr/) | [Architecture](architecture-public.md)の対象責務 |
 | 構造と責務境界を理解する | [Architecture](architecture-public.md) | 原則、DTO契約、運用仕様 |
@@ -73,7 +72,7 @@ flowchart LR
 
 ## 実装・運用
 
-- Configuration Audit一覧
+- [Configuration Audit一覧](configuration-audits/index.md)
 - Definition of Done
 - Codex Standard Operating Procedure
 - Dify Import & Test
@@ -103,7 +102,7 @@ flowchart LR
 | 原則 | [principles-public.md](principles-public.md) |
 | 構成管理 | configuration-management.md |
 | Configuration Item | configuration-items.md |
-| 構成監査履歴 | configuration-audits/ |
+| 構成監査履歴 | [configuration-audits/](configuration-audits/) |
 | 完了条件 | definition-of-done.md |
 | Codex作業手順 | codex-standard-operating-procedure.md |
 | 全体構成 | [architecture-public.md](architecture-public.md) |
