@@ -63,6 +63,11 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 - [BZ-20260725-014 Context Window 4096天井事件](bug-zoo/BZ-20260725-014-context-window-4096.md)  
   Promptやモデルではなく、DifyのLLM Node側Runtime設定が生成上限を決めていた。
 
+## Source / Change Management
+
+- [BZ-20260731-016 Partial SourceをCanonical Sourceとして扱う](bug-zoo/BZ-20260731-016-partial-source-as-canonical-source.md)  
+  正本の一部だけを取得した状態で不足部分を補完し、既存成果物を再生成して変更対象外を失う。
+
 ## Project Framing
 
 - [BZ-20260725-008 Local万能論事件](bug-zoo/BZ-20260725-008-local-is-not-enough.md)  
