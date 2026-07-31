@@ -2,115 +2,89 @@
 
 > **Public Edition**
 >
-> このディレクトリは公開版ドキュメントです。内部運用資料・環境固有情報・実装詳細への導線は公開対象のみへ調整しています。
+> このディレクトリは、Local AI Foundryの公開ドキュメント入口である。
+> 内部運用資料、環境固有情報、非公開Evidence、実装上の識別情報は含めない。
 
-このディレクトリは、設計、契約、判断、運用、品質証跡へ辿るための入口である。READMEは導線、各リンク先は担当領域の正本とする。実装の正本はDify DSL、n8n Workflow/runtime、起動・停止スクリプトである。
+このページでは、公開済みの設計、判断、Configuration Audit、Operational Reviewへ辿るための導線だけを提供する。
 
-- [Project Status](status-public.md): 現在状態だけを示すProject Dashboard
+## 最初に読む
+
+- [Project Status](status-public.md): 公開可能な範囲で、現在地と次の主要Gateを確認する
+- [Architecture](architecture-public.md): システム全体の構造と責務境界を確認する
+- [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md): Project State、Current Snapshot、Baseline、Human Authorizationの考え方を確認する
+- [Configuration Audit一覧](configuration-audits/index.md): 公開済みConfiguration Auditを確認する
+- [Operational Review一覧](reviews/index.md): 実運用で観測された事象と知見を確認する
+- [ADR一覧](adr/): 重要な設計判断を確認する
 
 ## 目的別Navigation
 
-| 目的 | 最初に開く文書 | 次に確認する根拠 |
+| 目的 | 最初に開く文書 | 次に確認する文書 |
 |---|---|---|
-| 現在地と次の行動を知る | [Project Status](status-public.md) | Dashboard内のConfiguration Item IDと最新Audit |
-| `CFG-*`の意味、状態、依存を知る | Configuration Item Registry | Item行の「根拠へ進む」導線 |
-| 同期状態とEvidenceを確認する | [Configuration Audit一覧](configuration-audits/index.md) | 対象Audit本文 |
-| 判断理由を確認する | Decision Log | 関連ADR、Review |
-| 重要な設計判断を確認する | [ADR一覧](adr/) | [Architecture](architecture-public.md)の対象責務 |
-| 構造と責務境界を理解する | [Architecture](architecture-public.md) | 原則、DTO契約、運用仕様 |
-| Configuration Lifecycleに従って作業する | Configuration Management | Audit運用規則、Definition of Done |
-| 用語や表記を調べる | 用語集 | Documentation Style Guide |
-
-固定IDが分かっている場合は、全文検索より先にDashboardまたは各一覧のIDリンクを使用する。
-固定IDが分からない場合は、この表から目的に対応する正本へ進む。
+| 現在地と次の行動を知る | [Project Status](status-public.md) | [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md) |
+| Project StateとCurrent Snapshotの考え方を知る | [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md) | [Project Status](status-public.md) |
+| 公開済みの構成監査結果を確認する | [Configuration Audit一覧](configuration-audits/index.md) | 対象Audit本文 |
+| 重要な設計判断を確認する | [ADR一覧](adr/) | [Architecture](architecture-public.md) |
+| 構造と責務境界を理解する | [Architecture](architecture-public.md) | 関連ADR、Configuration Audit |
+| 実運用で得られた知見を確認する | [Operational Review一覧](reviews/index.md) | 対象Review本文 |
+| 公式サイトの公開・更新方針を確認する | [Website Operations](website-operations-public.md) | 公開対象Documentation |
 
 ## Documentation Navigation構成
 
 ```mermaid
 flowchart LR
     Status["Project Status<br/>現在地・次の行動"]
-    Registry["Configuration Item Registry<br/>対象・状態・依存"]
-    Audit["Configuration Audit<br/>同期状態・Evidence"]
-    Decision["Decision Log<br/>局所判断"]
+    ProjectState["Project State Governance<br/>State・Baseline・Current Snapshot"]
+    Audit["Configuration Audit<br/>同期状態・検証結果"]
     ADR["ADR<br/>重要な設計判断"]
     Architecture["Architecture<br/>構造・責務境界"]
-    Governance["Configuration Management<br/>Lifecycle・運用規則"]
+    Review["Operational Review<br/>実運用知識"]
 
-    Status -->|"CFG-* ID"| Registry
-    Status -->|"最新Audit"| Audit
-    Registry -->|"関連Evidence"| Audit
-    Registry -->|"関連判断"| Decision
-    Audit -->|"判断根拠"| Decision
+    Status -->|"現在地の背景"| ProjectState
+    ProjectState -->|"検証結果"| Audit
     Audit -->|"設計根拠"| ADR
-    Decision -->|"重要判断"| ADR
     ADR -->|"構造上の位置付け"| Architecture
+    Review -->|"必要に応じて設計判断へ昇華"| ADR
     Architecture -->|"現在地へ戻る"| Status
-    Registry -->|"Lifecycle"| Governance
-    Governance -->|"現在状態"| Status
 ```
 
-矢印は情報の複製方向ではなく、利用者が次に確認する文書を示す。各Nodeの情報責務は
-下記「正本管理」から変更しない。
+矢印は情報の複製方向ではなく、公開利用者が次に確認する文書を示す。
 
-## はじめに
+## 公開ドキュメント
 
-- [基本原則](principles-public.md): 設計思想の正本
-- [全体設計](architecture-public.md): システム構成とデータフロー
-- [Website Operations](website-operations-public.md): 公式ホームページとリリースの運用方針
-- 用語集: プロジェクト固有用語の正本
-- Documentation Style Guide: Documentationの表記・変更記録ルール
+### はじめに
 
-## 設計
+- [基本原則](principles-public.md): 設計思想
+- [Architecture](architecture-public.md): システム構成とデータフロー
+- [Project Status](status-public.md): 公開可能なCurrent Snapshot
+- [Website Operations](website-operations-public.md): 公式ホームページと公開運用方針
 
-- [Project Status](status-public.md): Current Snapshotと作業Queue
-- DTO契約: field、Normalize、Contract Gate
-- Configuration Management: GUI、Draft、DSL、Git、Documentation、Runtimeの構成管理
-- Configuration Item Registry: Configuration Item ID、Owner、Statusの唯一の正本
-- [Architecture Decision Records](adr/): 重要な設計判断
-- 判断記録: 小規模・運用判断
-- エラーコード一覧: Error CodeとOperator対応
+### 設計・判断
 
-## 実装・運用
+- [ADR一覧](adr/): 重要な設計判断
+- [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md): Project State Governance導入の公開実例
 
-- [Configuration Audit一覧](configuration-audits/index.md)
-- Definition of Done
-- Codex Standard Operating Procedure
-- Dify Import & Test
-- Dify → n8n → ComfyUI出力パイプライン
-- Dify Ollama Provider
-- Ollama / Dify Setup
-- Manual Verification
-- MCP Extension
+### Configuration Audit
 
-## 品質・証跡
+- [Public Configuration Audit](configuration-audits/README.md): 公開版Auditの考え方とマスク方針
+- [Configuration Audit一覧](configuration-audits/index.md): 公開済みAuditの索引
+
+### Operational Review
 
 - [Operational Review規約](reviews/README.md)
 - [Operational Review一覧](reviews/index.md)
-- E2E Evidence
-- Handover一覧
 
-## 将来計画
+## 公開版の範囲
 
-- 開発ロードマップ
+公開版には、利用者が設計思想、責務境界、判断理由、監査結果を理解するために必要な情報を掲載する。
 
-## 正本管理
+次の情報は削除または一般化する。
 
-| 領域 | 正本 |
-|---|---|
-| 実装 | `workflows/dify/`、`workflows/n8n/`、実行スクリプト |
-| 現在地 | [status-public.md](status-public.md) |
-| 原則 | [principles-public.md](principles-public.md) |
-| 構成管理 | configuration-management.md |
-| Configuration Item | configuration-items.md |
-| 構成監査履歴 | [configuration-audits/](configuration-audits/) |
-| 完了条件 | definition-of-done.md |
-| Codex作業手順 | codex-standard-operating-procedure.md |
-| 全体構成 | [architecture-public.md](architecture-public.md) |
-| 契約 | dify-dto-contracts.md |
-| 用語 | glossary.md |
-| Documentation表記 | documentation-style.md |
-| Error Code | error-catalog.md |
-| 重要判断 | [adr/](adr/) |
-| 小規模判断 | decisions.md |
-| 実運用知識 | [reviews/](reviews/) |
-| 時点情報 | handover/ |
+- App ID、Workflow ID、Draft ID、Run ID
+- Commit SHA、hash、fingerprint
+- ローカル環境path、内部Repository path
+- Database情報、認証情報、接続情報
+- Repository外の承認記録全文
+- 内部Working Treeの具体的差分
+- 非公開Evidenceの詳細
+
+公開対象としなかった文書やマスク判断は、公開物ではなく内部のPublication Reflection Registerで管理する。
