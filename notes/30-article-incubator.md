@@ -38,7 +38,7 @@ Workflow全体を設計・検証・運用する段階へ移行する流れを扱
 Season 1では、AI Workflowを壊れにくくするための設計を扱った。
 
 Season 2では、設計されたWorkflowを継続的に変更、検証、同期、公開するための
-Configuration Managementと運用統制を中心に扱う。
+Configuration Management、Project State Governance、正本管理、公開判断を中心に扱う。
 
 以下は目次候補であり、記事番号、タイトル、掲載順は執筆時に再評価する。
 
@@ -104,18 +104,81 @@ Configuration Managementと運用統制を中心に扱う。
 * 扱うテーマ：
 
   * 30秒Dashboard
-  * Work Queue
+  * Project State
   * Current Phase
-  * Baseline
-  * Block
-  * Pending
+  * Current Objective
+  * Current Blocker
+  * Remaining Gate
+  * Next Action
   * Evidence Navigation
 * 記事の到達点：
 
   * Current Snapshotは「何をしたか」ではなく、
-    「現在どの判断が可能か」を示すProject Dashboardである。
+    「現在どの状態にあり、次にどの判断が可能か」を示すProject Dashboardである。
+  * 作業ログとProject Stateを混同してはならない。
 
-### 05 Canonical Sourceを失った日
+### 05 Active Baselineは「正しい状態」の証明
+
+* 核となる問い：
+
+  * 複数のDraft、Commit、Import結果が存在する中で、何を現在の基準として扱うのか。
+* 扱うテーマ：
+
+  * Candidate Baseline
+  * Active Baseline
+  * Historical Baseline
+  * Baseline ID
+  * Current Snapshot
+  * Transition Evidence
+  * 一意性
+* 記事の到達点：
+
+  * 最新のものが正本とは限らない。
+  * Active Baselineは、現在採用されている唯一の基準状態を明示する。
+  * Candidateが存在しても、Human DecisionなしにActiveへ昇格してはならない。
+
+### 06 Human Publish Decisionが最後の責任を持つ
+
+* 核となる問い：
+
+  * Test、Import、Semantic VerificationがPASSしても、なぜAIだけでPublishを決めてはいけないのか。
+* 扱うテーマ：
+
+  * Human Authorization
+  * Publish Decision
+  * State Transition
+  * Entry Condition
+  * Evidence
+  * Allowed Next State
+  * 自己承認の禁止
+* 記事の到達点：
+
+  * Evidenceを揃えることと、公開を承認することは別である。
+  * AIは状態候補を提示できるが、自分で承認してはならない。
+  * 最終的なPublish責任はHuman Decisionに残す。
+
+### 07 PRR――Gitに残らない判断を資産化する
+
+* 核となる問い：
+
+  * 公開されなかった文書や、公開時にマスクされた情報の判断理由を、どこへ残すのか。
+* 扱うテーマ：
+
+  * Publication Reflection Register
+  * 採用
+  * 不採用
+  * 保留
+  * 採用（マスクあり）
+  * マスク基準
+  * 公開判断履歴
+* 記事の到達点：
+
+  * Gitは公開されなかった文書の理由を残さない。
+  * Public Documentationはマスク後の姿しか見せない。
+  * PRRは、公開物から消える判断を人間向けの表として残す。
+  * 「対象ドキュメント」「判定」「その理由」があれば、未来の自分が30秒で判断を思い出せる。
+
+### 08 Canonical Sourceを失った日
 
 * 核となる問い：
 
@@ -137,7 +200,7 @@ Configuration Managementと運用統制を中心に扱う。
   * 一部だけ見えている情報から、ファイル全体を再構成してはならない。
   * 変更前に正本全文を取得し、変更後に差分を確認する必要がある。
 
-### 06 Repository Reflectionという最後の確認
+### 09 Repository Reflectionという最後の確認
 
 * 核となる問い：
 
@@ -156,7 +219,7 @@ Configuration Managementと運用統制を中心に扱う。
   * 成果物を生成したことと、正本へ正しく反映されたことは別である。
   * Repositoryから再取得して初めて、変更の完了を確認できる。
 
-### 07 Runtime Verificationが最後の砦
+### 10 Runtime Verificationが最後の砦
 
 * 核となる問い：
 
@@ -174,7 +237,7 @@ Configuration Managementと運用統制を中心に扱う。
   * Graphが正しく、テストが通っていても、Runtimeの実出力は契約を破る可能性がある。
   * 実際に動かした結果を確認しない限り、Workflowの受け入れは完了しない。
 
-### 08 Publishして終わりではない
+### 11 Publishして終わりではない
 
 * 核となる問い：
 
@@ -193,7 +256,7 @@ Configuration Managementと運用統制を中心に扱う。
   * Publish操作は、公開状態への変更要求にすぎない。
   * Published Workflowの実体とRepository正本を再確認して初めて公開完了となる。
 
-### 09 Difyのバージョンアップで契約が壊れた日
+### 12 Difyのバージョンアップで契約が壊れた日
 
 * 核となる問い：
 
@@ -212,24 +275,29 @@ Configuration Managementと運用統制を中心に扱う。
   * Workflowが昨日動いたことは、今日も動く保証にならない。
   * Platform VersionもConfiguration Baselineの一部として管理する必要がある。
 
-### 10 Season 2総括：AI開発は変更管理になる
+### 13 Season 2総括：AI開発は状態管理と変更管理になる
 
 * 核となる問い：
 
-  * Workflowが完成に近づくほど、なぜ作業の中心がAI調整から変更管理へ移るのか。
+  * Workflowが完成に近づくほど、なぜ作業の中心がAI調整から状態管理と変更管理へ移るのか。
 * 扱うテーマ：
 
   * Configuration Management
   * Registration
   * Audit
+  * Project State
   * Current Snapshot
+  * Active Baseline
+  * Human Authorization
+  * PRR
   * Runtime Verification
   * Repository Reflection
   * Publish Verification
 * 記事の到達点：
 
-  * AI Workflow開発の後半で支配的になるのは、Prompt Engineeringではない。
-  * 何を変更し、何を正本とし、何をEvidenceとして承認するかという変更管理である。
+  * AI Workflow開発の後半で支配的になるのは、Prompt Engineeringだけではない。
+  * 何を変更し、どの状態を採用し、何を正本とし、何をEvidenceとして承認するかという状態管理と変更管理である。
+  * 壊れないWorkflowを運用し続けるには、WorkflowだけでなくProjectそのものを管理する必要がある。
 
 ---
 
@@ -244,19 +312,28 @@ Season 2は以下の順序で積み上げる。
    Configuration AuditとDrift
 
 3. 現在地を判断可能にする
-   Current SnapshotとWork Queue
+   Project StateとCurrent Snapshot
 
-4. 正本を守る
+4. 採用中の基準を固定する
+   Active Baseline
+
+5. 最終判断の責任を分離する
+   Human AuthorizationとPublish Decision
+
+6. 公開物から消える判断を残す
+   PRRとマスク基準
+
+7. 正本を守る
    Canonical SourceとRepository Reflection
 
-5. 実動作を確認する
+8. 実動作を確認する
    Runtime Verification
 
-6. 公開状態を確認する
+9. 公開状態を確認する
    Publish Verification
 
-7. 外部変化を管理する
-   Platform VersionとCompatibility
+10. 外部変化を管理する
+    Platform VersionとCompatibility
 
 Season 1が「壊れない設計」を扱ったのに対し、
 Season 2は「壊れない状態を維持する運用」を扱う。
