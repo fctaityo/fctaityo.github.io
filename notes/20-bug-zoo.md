@@ -14,6 +14,7 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 - 発生日を特定できない既存項目は、分割移行日を採番日に使用してよい。
 - 同じ出来事の一次記録がWar Diaryにある場合は、BZ本文から相互参照する。
 - 設計判断として確定した内容はADRを正本とし、Bug Zooでは障害パターンとして要約する。
+- 既存BZが別のBZへ包含された場合、元のIDは削除・再利用せず、統合済み記録として保持する。
 - 詳細本文はこのインデックスへ再掲しない。
 
 ## Prompt / Agent Instruction
@@ -40,9 +41,6 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 ## Review / Evidence / Artifact
 
-- [BZ-20260725-003 git diffください事件（笑）](bug-zoo/BZ-20260725-003-review-without-evidence.md)  
-  レビュー対象の実体を読まず、説明や要約だけで判定しようとした。
-
 - [BZ-20260725-004 Workflow Success偽装事件](bug-zoo/BZ-20260725-004-workflow-success-masked-artifact-failure.md)  
   Workflow SuccessをArtifact Successと同一視し、破損した成果物を正常終了の裏側へ隠した。
 
@@ -66,7 +64,7 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 ## Source / Change Management
 
 - [BZ-20260731-016 Partial SourceをCanonical Sourceとして扱う](bug-zoo/BZ-20260731-016-partial-source-as-canonical-source.md)  
-  正本の一部だけを取得した状態で不足部分を補完し、既存成果物を再生成して変更対象外を失う。
+  正本やEvidenceの一部だけを取得した状態で判定・補完・再生成し、誤判定や変更対象外の消失を招く。
 
 ## Project Framing
 
@@ -75,3 +73,8 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 - [BZ-20260725-010 完全始動＝完成事件](bug-zoo/BZ-20260725-010-launch-is-not-completion.md)  
   改善サイクルが始まった状態と、完成状態を混同しかけた。
+
+## 統合済み
+
+- [BZ-20260725-003 git diffください事件（笑）](bug-zoo/BZ-20260725-003-review-without-evidence.md)  
+  **BZ-20260731-016へ統合済み。** レビュー対象の実体やEvidenceを十分に取得せず、説明や要約だけで判定する障害パターンとして包含された。
