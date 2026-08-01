@@ -16,6 +16,13 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 - 将来も引用できる原則や言葉はHall of Fameへ昇格させる。
 - NOTE記事へ展開しても、一次記録は削除しない。
 
+## 2026-08
+
+### 2026-08-01
+
+- [WD-20260801-001 Project Stateを整え、公開判断まで資産化した](war-diary/WD-20260801-001-project-state-governance-and-publication.md)  
+  Project State Governanceを導入し、Current Snapshot、Active Baseline、Human Publish Decisionを整理したうえで、Public Documentation、公式HP v2.11、PRRへ反映した一連の作業を記録。公開判断を資産化する運用、完成版ファイル方式への切り替え、GitHub Read／Writeの区別まで含めて整理。
+
 ## 2026-07
 
 ### 2026-07-25
