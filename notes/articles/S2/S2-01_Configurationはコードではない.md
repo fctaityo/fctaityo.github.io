@@ -104,4 +104,5 @@ DifyのGUIで何かを直したという事実だけでは、それが正式な�
 
 ---
 
-※本記事は「Local AI Foundry」開発ログ Season2の01本目。Season1（01〜09）も合わせてどうぞ。実例はConfiguration Item Registry（Public Edition）のCFG-A002を参照。設計判断はADR-0009に基づく。
+※本記事は「Local AI Foundry」開発ログ Season2の01本目。Season1（01〜09）も合わせてどうぞ。実例は[Configuration Item Registry（Public Edition）の`CFG-A002`](../../../docs/public/configuration-items-public.md#cfg-a002)を参照。設計判断はADR-0009に基づく。
+
