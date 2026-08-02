@@ -355,6 +355,32 @@ Season 2は「壊れない状態を維持する運用」を扱う。
 
 ## Backlog（昇格待ち）
 
+### AIだからContractは後から育てられる
+
+* 現状：
+
+  * Project Evidence：Status Artifact Contractの正式フォーマット追加
+  * Configuration Audit：CFG-20260802-001
+  * Status Artifactの章構成・表示順リファクタリング実施
+  * Project State、Baseline、Evidence、Runtime状態、Workflowは変更なし
+* 核となるテーマ：
+
+  * 人間中心のProjectでは、変更・レビュー・整合性確認のコストが高いため、将来必要になりそうな管理体系まで事前に整備することが多い。
+  * AI主体のProjectでは、Documentation更新、契約化、差分確認、監査を必要になった時点で高速に実施できる。
+  * そのため、「何も管理しない」と「最初からすべてを厳密に管理する」の二択ではなく、運用で実際に揺れた部分だけをContract化する段階的なGovernanceが成立する。
+  * ただし、Projectの起点として毎回参照されるstatus.mdのように、表示構造の安定が人間とAIの双方に必要なArtifactは、早い段階でContract化する価値がある。
+  * 管理は必要だが、管理のための管理は増やさない。
+* 関連するSeason 2候補：
+
+  * 04 Current Snapshotは進捗表ではない
+  * 13 Season 2総括：AI開発は状態管理と変更管理になる
+* 昇格条件：
+
+  * Status Artifact以外にも、運用上の必要から後付けでContract化した事例が蓄積すること。
+  * 人間中心のProjectとの違いを、単なるAIの処理速度ではなく、管理コストと変更容易性の違いとして一般化できること。
+  * 「運用で回す対象」と「Contractとして固定する対象」の判断基準を整理できること。
+  * 独立記事にするか、Season 2-04またはSeason 2-13へ吸収するかを再評価すること。
+
 ### AIへの指示は意図ではなく工程で書く
 
 * 現状：
