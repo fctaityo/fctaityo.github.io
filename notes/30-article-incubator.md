@@ -101,6 +101,7 @@ Configuration Management、Project State Governance、正本管理、公開判�
 * 核となる問い：
 
   * なぜCurrent Snapshotは単なる作業一覧では不十分なのか。
+  * Project全体の現在地と、現在作業中の復帰地点は、なぜ同じSnapshotへ入れてはいけないのか。
 * 扱うテーマ：
 
   * 30秒Dashboard
@@ -111,11 +112,26 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * Remaining Gate
   * Next Action
   * Evidence Navigation
+  * Project State Current Snapshot
+  * Active Work Current Snapshot
+  * Active Initiative
+  * Completed Checkpoint
+  * Interrupt Recovery
+  * Snapshotごとの更新Trigger
+* 関連記録：
+
+  * War Diary：WD-20260802-001
+  * ADR：ADR-0012
+  * Configuration Item：CFG-D005
 * 記事の到達点：
 
   * Current Snapshotは「何をしたか」ではなく、
     「現在どの状態にあり、次にどの判断が可能か」を示すProject Dashboardである。
   * 作業ログとProject Stateを混同してはならない。
+  * Project State Current SnapshotはProject全体のLifecycle上の到達状態を示す。
+  * Active Work Current Snapshotは、現在のInitiativeについて、どこまで完了し、どこから再開するかを示す。
+  * 低頻度で変わる正式状態と、高頻度で変わる作業断面は別責務として扱う。
+  * Current Snapshotは一つに集約するのではなく、何の現在値を示すArtifactなのかを明確にする必要がある。
 
 ### 05 Active Baselineは「正しい状態」の証明
 
@@ -287,6 +303,7 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * Audit
   * Project State
   * Current Snapshot
+  * Active Work
   * Active Baseline
   * Human Authorization
   * PRR
@@ -298,6 +315,7 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * AI Workflow開発の後半で支配的になるのは、Prompt Engineeringだけではない。
   * 何を変更し、どの状態を採用し、何を正本とし、何をEvidenceとして承認するかという状態管理と変更管理である。
   * 壊れないWorkflowを運用し続けるには、WorkflowだけでなくProjectそのものを管理する必要がある。
+  * Project全体の正式状態だけでなく、現在の作業断面と復帰地点も責務を分けて管理する必要がある。
 
 ---
 
@@ -311,28 +329,31 @@ Season 2は以下の順序で積み上げる。
 2. 差分を検出する
    Configuration AuditとDrift
 
-3. 現在地を判断可能にする
-   Project StateとCurrent Snapshot
+3. Project全体の現在地を判断可能にする
+   Project StateとProject State Current Snapshot
 
-4. 採用中の基準を固定する
+4. 現在作業中の復帰地点を保持する
+   Active Work Current Snapshot、Active Initiative、Completed Checkpoint、Next Action
+
+5. 採用中の基準を固定する
    Active Baseline
 
-5. 最終判断の責任を分離する
+6. 最終判断の責任を分離する
    Human AuthorizationとPublish Decision
 
-6. 公開物から消える判断を残す
+7. 公開物から消える判断を残す
    PRRとマスク基準
 
-7. 正本を守る
+8. 正本を守る
    Canonical SourceとRepository Reflection
 
-8. 実動作を確認する
+9. 実動作を確認する
    Runtime Verification
 
-9. 公開状態を確認する
-   Publish Verification
+10. 公開状態を確認する
+    Publish Verification
 
-10. 外部変化を管理する
+11. 外部変化を管理する
     Platform VersionとCompatibility
 
 Season 1が「壊れない設計」を扱ったのに対し、
@@ -417,3 +438,112 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * Bug Zooへの一般化。
   * Operational ReviewによるRoot Cause分析。
   * ADRとして設計判断が確立した時点で、正式シリーズへの昇格を再検討する。
+
+### このプロジェクトはアジャイルなのか？
+
+* 現状：
+
+  * 思考メモへWaterfall、Agile、Scrum、XP、Kanban、Spiral、Prototypeとの比較仮説を記録済み。
+  * Documentation IA、Active Work、Project State Governance、Configuration Managementが、実運用のEvidenceを基に段階的に追加された。
+  * 独自の開発モデル名は定義していない。
+* 核となる問い：
+
+  * Local AI Foundryの進め方は、既存のどの開発モデルに近いのか。
+  * 「独自手法」と呼ぶ前に、既存モデルでどこまで説明できるのか。
+* 扱うテーマ：
+
+  * Waterfallとの違い
+  * Agileとの共通点
+  * Scrumではない可能性
+  * XP、Kanbanとの比較観点
+  * SpiralのRisk Drivenとの比較
+  * Prototypeとの共通点と相違点
+  * ソフトウェア実装だけでなくDocumentation、Governance、Configurationまで反復的に育てる進め方
+  * Evidenceを基に必要な責務だけを追加する段階的Governance
+* 記事の到達点：
+
+  * 現時点ではアジャイル的、反復的、漸進的な性質が強い。
+  * ただしScrum、XP、Kanbanのいずれかと同一視できるEvidenceはない。
+  * SpiralやPrototypeとも共通点はあるが、目的と継続方法が異なる可能性がある。
+  * 既存モデルで説明できない部分が繰り返し観測されるまでは、独自モデルと断定しない。
+* 昇格条件：
+
+  * 各開発モデルの定義と比較観点を一次資料または信頼できる資料で確認すること。
+  * Project Evidenceを具体例として整理すること。
+  * 共通点、相違点、比較不能な点を表形式で整理すること。
+  * 「AIだから新しい」という結論を先に置かないこと。
+
+### Current Snapshotは一つではなかった
+
+* 現状：
+
+  * War Diary：WD-20260802-001
+  * ADR：ADR-0012
+  * Configuration Item：CFG-D005
+  * Active Work Minimum Adoption：Repository Reflection完了
+  * Season 2-04へ統合候補
+* 核となる問い：
+
+  * Project State Current Snapshotだけでは、なぜ現在作業中の復帰地点を確認できなかったのか。
+  * 同じ「現在地」を示すArtifactでも、なぜ責務を分離する必要があるのか。
+* 扱うテーマ：
+
+  * `status.md`
+  * `active-work.md`
+  * Project State Current Snapshot
+  * Active Work Current Snapshot
+  * 更新Trigger
+  * Active Initiative
+  * Completed Checkpoint
+  * Next Action
+  * Interrupt Recovery
+  * 履歴のGit、Audit、Report、Review Packageへの委譲
+* 記事の到達点：
+
+  * Project StateはProject全体のLifecycle上の到達状態を示す。
+  * Active Workは現在作業中のInitiativeの復帰地点を示す。
+  * 低頻度で変わる正式状態と、高頻度で変わる作業断面を同じArtifactへ混ぜてはならない。
+  * Current Snapshotは一つに集約することより、何の現在値を示すかを明確にすることが重要である。
+* 昇格条件：
+
+  * Season 2-04へ吸収するか、独立記事として扱うかを再評価すること。
+  * Active Work運用を複数回実施し、Snapshot更新Triggerが妥当か確認すること。
+  * Public Documentationへ一般化可能な責務境界を整理すること。
+
+### Documentation IAは最初には作れなかった
+
+* 現状：
+
+  * Documentation Information Architecture採用済み。
+  * ADR-0011採用済み。
+  * 責務別Directory再編を段階的Commitで実施中。
+  * Active Work追加時に、Human Decision、ADR-0012、IA更新を経てRoot責務を拡張した。
+* 核となる問い：
+
+  * Documentationを最初から設計対象にすべきであっても、なぜ完成したInformation Architectureを初期段階で固定できなかったのか。
+  * Directory責務は、いつ、何を根拠に追加・変更すべきなのか。
+* 扱うテーマ：
+
+  * Documentationを最初から設計対象にすること
+  * Information Architectureを最初から完成させることの違い
+  * 実運用で観測された責務
+  * Human Decision
+  * ADR
+  * IA更新
+  * READMEのNavigation責務
+  * Historical Evidence保護
+  * Compatibility shimを残さない判断
+  * 責務単位の段階的Commit
+* 記事の到達点：
+
+  * Documentationは最初から設計対象に含めるべきである。
+  * ただし、実在しない責務やDirectoryまで先回りして固定する必要はない。
+  * 十分な文書と実運用Evidenceが生まれた後で、観測された責務をInformation Architectureとして整理できる場合がある。
+  * Directory構造は永久固定ではなく、新しい責務が発見された時にHuman Decision、ADR、IA更新を経て進化させる。
+  * 「必要になったら育てる」は無計画ではなく、Evidenceを基に必要な責務だけを追加することを意味する。
+* 昇格条件：
+
+  * Documentation IA実装のCommit 3以降を完了すること。
+  * Directory再編前後の責務とNavigationの違いを比較できること。
+  * Public Documentationへ公開可能なIA文書と事例を選別すること。
+  * Season 2本編、独立記事、公式HPの思想コンテンツのどこへ配置するか再評価すること。
