@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#050914">
-  <meta name="description" content="Dify・n8n・ComfyUI・Ollamaを契約で安全につなぐ、ローカル・マルチエージェント基盤 Local AI Foundry。">
+  <meta name="description" content="Dify・n8n・ComfyUI・Ollamaを契約で安全につなぎ、変更・検証・承認・公開まで運用するローカル・マルチエージェント基盤 Local AI Foundry。">
   <title>Local AI Foundry — Contract-Driven Multi-Agent Platform</title>
   <link rel="preload" href="assets/header-girl.png" as="image" fetchpriority="high">
   <link rel="stylesheet" href="styles.css?v=2.8">
+  <link rel="stylesheet" href="styles-v2.12.css?v=2.12">
   <script src="script.js?v=2.8" defer></script>
 </head>
 <body>
@@ -25,7 +26,7 @@
     </button>
     <nav id="primary-nav" class="nav" aria-label="メインナビゲーション">
       <a href="#home">ホーム</a><a href="#about">AIチーム</a><a href="#principles">基本原則</a><a href="#system">システム構成</a>
-      <a href="#workflow">ワークフロー</a><a href="#knowledge">知識基盤</a><a href="#status">現在の開発状況</a><a href="releases/index.html">更新履歴</a><a href="#roadmap">ロードマップ</a>
+      <a href="#workflow">ワークフロー</a><a href="#knowledge">知識基盤</a><a href="#status">プロジェクトの現在地</a><a href="releases/index.html">更新履歴</a><a href="#roadmap">ロードマップ</a>
       <span class="nav-external" aria-label="サイト外でプロジェクトを追う">
         <small>FOLLOW / EXPLORE</small>
         <a class="nav-social x" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer"><b aria-hidden="true">X</b><span>X</span></a>
@@ -45,10 +46,11 @@
         <p class="hero-en">Reliable AI Doesn't Happen by Chance.<br>It Happens by Contract.</p>
         <p class="hero-description">Dify・n8n・ComfyUI・Ollamaを統合し、AI同士を契約で安全につなぐローカル・マルチエージェント基盤。</p>
         <p class="manifesto">記事生成AIではない。<strong>AIチームの生産基盤である。</strong></p>
+        <p class="hero-operation">AIチームを動かすだけではない。変更・検証・承認・公開まで、壊さず運用し続ける。</p>
         <div class="hero-actions">
           <a class="button primary" href="#principles">基本原則 <span aria-hidden="true">→</span></a>
           <a class="button" href="#documentation">プロジェクトを見る</a>
-          <a class="text-link release-link" href="releases/2026-08-01-v2.11.html">最新リリース</a>
+          <a class="text-link release-link" href="releases/2026-08-02-v2.12.html">最新リリース</a>
           <a class="text-link" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">公式サイトのソース ↗</a>
         </div>
         <div class="hero-metrics" aria-label="プロジェクト概要">
@@ -57,7 +59,7 @@
       </div>
       <div class="hero-visual reveal" data-parallax>
         <div class="image-frame"><img src="assets/header-girl.png" alt="青い髪のLocal AI Foundryキャラクターが右側から指差しているビジュアル" width="1536" height="1024" fetchpriority="high"></div>
-        <div class="signal-card"><span class="status-dot"></span><div><small>現在の開発状況</small><strong>契約基盤 稼働中</strong><em>DTO EXPANSION IN PROGRESS</em></div></div>
+        <div class="signal-card"><span class="status-dot"></span><div><small>プロジェクトの現在地</small><strong>Published</strong><em>DOCUMENTATION IA IN PROGRESS</em></div></div>
       </div>
     </section>
 
@@ -125,11 +127,12 @@
     </section>
 
     <section id="releases" class="section-shell release-strip reveal" aria-labelledby="latest-title">
-      <div class="release-date"><small>最新アップデート</small><time datetime="2026-08-01">2026.08.01</time></div>
-      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.11</span><h2 id="latest-title">Project Stateと公開資料を、ひとつの導線へ。</h2>
-        <div class="tag-list"><span>Project State</span><span>Public Documentation</span><span>Documentation Map</span><span>Public Navigation</span></div>
+      <div class="release-date"><small>最新アップデート</small><time datetime="2026-08-02">2026.08.02</time></div>
+      <div class="release-copy"><span class="kicker">LOCAL AI FOUNDRY v2.12</span><h2 id="latest-title">現在地と作業地点を、分けて見せる。</h2>
+        <p class="release-why"><strong>Why Changed:</strong> Project Stateだけでは現在作業中の復帰地点を示せなかったため、Active Workを別責務として導入し、公式HPの現在地表示を更新しました。</p>
+        <div class="tag-list"><span>Project State</span><span>Active Work</span><span>Documentation IA</span><span>Operating Principle</span></div>
       </div>
-      <div class="release-actions"><a class="button compact" href="releases/2026-08-01-v2.11.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
+      <div class="release-actions"><a class="button compact" href="releases/2026-08-02-v2.12.html">更新内容を見る <span aria-hidden="true">→</span></a><a class="history-link" href="releases/index.html">すべての更新履歴を見る</a></div>
     </section>
 
     <section class="section-shell intro reveal" aria-labelledby="what-title">
@@ -153,6 +156,10 @@
         <article class="principle-card reveal"><span>07</span><h3>Atomic Persistence</h3><p>保存途中の破損を許さず、完成単位で確定する。</p></article>
         <article class="principle-card reveal"><span>08</span><h3>Evidence by Default</h3><p>判断と変更の根拠を標準で記録する。</p></article>
       </div>
+      <aside class="operating-principle reveal" aria-label="Foundry運用原則">
+        <small>FOUNDRY OPERATING PRINCIPLE</small>
+        <strong>管理のための管理はしない。必要になったら育てる。</strong>
+      </aside>
     </section>
 
     <section id="system" class="section-shell system-section" aria-labelledby="system-title">
@@ -200,33 +207,50 @@
     </section>
 
     <section id="knowledge" class="section-shell knowledge-section" aria-labelledby="knowledge-title">
-      <div class="section-heading reveal"><div><p class="kicker">プロジェクトを支える知識基盤 <span>PROJECT KNOWLEDGE</span></p><h2 id="knowledge-title">完成品だけでなく、<br>判断を残す。</h2></div><p>Project KnowledgeをSSOTとして再編。設計・判断・検査・現在地を分離し、次の改善へつながる形で記録しています。</p></div>
+      <div class="section-heading reveal"><div><p class="kicker">プロジェクトを支える知識基盤 <span>PROJECT KNOWLEDGE</span></p><h2 id="knowledge-title">完成品だけでなく、<br>判断を残す。</h2></div><p>Documentation Information Architectureを構造の正本とし、設計・判断・契約・検査・現在地を責務別に記録しています。</p></div>
       <div class="knowledge-grid">
         <article class="knowledge-card reveal"><span>01</span><h3>基本原則</h3><p>変えてよいものと、守るべき境界を定義します。</p><small>PRINCIPLES</small></article>
         <article class="knowledge-card reveal"><span>02</span><h3>アーキテクチャ</h3><p>各基盤の責務と接続関係を、全体構造として整理します。</p><small>ARCHITECTURE</small></article>
         <article class="knowledge-card reveal"><span>03</span><h3>設計判断</h3><p>重要な選択と理由を、後から追跡できる形で残します。</p><small>ADR / DECISION</small></article>
         <article class="knowledge-card reveal"><span>04</span><h3>運用レビュー</h3><p>実運用で観測した事実を、改善へつなぐ知識として保存します。</p><small>OPERATIONAL REVIEW</small></article>
         <article class="knowledge-card reveal"><span>05</span><h3>構成ガバナンス</h3><p>設定差分と同期状態を識別し、根拠のある変更を支えます。</p><small>CONFIGURATION GOVERNANCE</small></article>
-        <article class="knowledge-card reveal"><span>06</span><h3>現在地</h3><p>実装・検証・未完了事項を、現在のスナップショットとして示します。</p><small>CURRENT STATUS</small></article>
+        <article class="knowledge-card reveal"><span>06</span><h3>二つの現在地</h3><p>Project全体の正式状態と、現在作業中の復帰地点を別々のSnapshotで示します。</p><small>PROJECT STATE / ACTIVE WORK</small></article>
       </div>
-      <div class="knowledge-note reveal"><strong>Documentation Phase 2 完了</strong><p>Documentation Governance、Configuration Governance、Definition of Done、運用手順、Current Snapshotの標準化を完了しました。Workflow全体の完成を意味するものではありません。</p></div>
+      <div class="knowledge-note reveal"><strong>Documentation IA 実装中</strong><p>Documentation Information Architectureを正本として、責務別Directory再編を段階的に反映しています。Workflow全体の完成を意味するものではありません。</p></div>
     </section>
 
     <section id="documentation" class="section-shell panel-section" aria-labelledby="docs-title">
       <div class="section-heading reveal"><div><p class="kicker">4つの入口 <span>CONTENT PATHWAYS</span></p><h2 id="docs-title">知りたい深さに合わせて、<br>次の場所へ。</h2></div><p>公式サイト、Public Documentation、GitHub、NOTEの役割を分け、必要な深さへ直接進めるようにしています。</p></div>
       <div class="pathway-grid">
-        <a class="pathway-card site reveal" href="#principles"><span>01 / OFFICIAL SITE</span><h3>仕組みと現在地を知る</h3><p>価値、基本原則、システム構成、進捗を短時間でつかむための入口です。</p><b>基本原則から見る →</b></a>
-        <a class="pathway-card github reveal" href="docs/public/README-public.md"><span>02 / PUBLIC DOCUMENTATION</span><h3>公開設計と監査結果を読む</h3><p>Project State、Architecture、Configuration Audit、Operational Reviewへ目的別に辿れます。</p><b>公開資料を見る →</b></a>
+        <a class="pathway-card site reveal" href="#principles"><span>01 / OFFICIAL SITE</span><h3>仕組みと現在地を知る</h3><p>価値、基本原則、システム構成、Project StateとActive Workを短時間でつかむための入口です。</p><b>基本原則から見る →</b></a>
+        <a class="pathway-card github reveal" href="docs/public/README-public.md"><span>02 / PUBLIC DOCUMENTATION</span><h3>公開設計と監査結果を読む</h3><p>Documentation Mapから、Project State、Information Architecture、Architecture、Configuration Audit、Operational Reviewへ目的別に辿れます。</p><b>公開資料を見る →</b></a>
         <a class="pathway-card github reveal" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer"><span>03 / GITHUB</span><h3>公開されている実装を見る</h3><p>公式サイトのソース、公開資料、更新履歴からプロジェクトの実在性を確認できます。</p><b>GitHubを見る ↗</b></a>
         <a class="pathway-card note reveal" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer"><span>04 / NOTE</span><h3>開発記録や設計の背景を読む</h3><p>設計判断、失敗、検証の背景を、読み物として詳しくたどれます。</p><b>NOTEを読む ↗</b></a>
       </div>
     </section>
 
     <section id="status" class="section-shell status-section" aria-labelledby="status-title">
-      <div class="section-heading reveal"><div><p class="kicker">現在の開発状況 <span>CURRENT STATUS</span></p><h2 id="status-title">知識基盤を整え、<br>Workflowを検証中。</h2></div><div class="live-pill"><span></span> Documentation Phase 2 完了</div></div>
-      <div class="status-board reveal">
-        <div class="status-column implemented"><h3><span></span> 運用中 <b>04</b></h3><ul><li>Documentation Governance</li><li>Configuration Governance</li><li>Artifact Validation</li><li>Current Snapshot</li></ul></div>
-        <div class="status-column progress"><h3><span></span> 検証・拡張中 <b>03</b></h3><ul><li>Workflow Experimental Operation</li><li>DTO Contract Expansion</li><li>Configuration Verification</li></ul></div>
+      <div class="section-heading reveal"><div><p class="kicker">プロジェクトの現在地 <span>PROJECT POSITION</span></p><h2 id="status-title">現在地と作業地点は、<br>同じではない。</h2></div><div class="live-pill"><span></span> Published</div></div>
+      <p class="status-lead reveal">Project全体の正式状態、現在のInitiative、次のGateを分けて表示します。</p>
+      <div class="status-board status-board-v212 reveal">
+        <article class="status-column state">
+          <h3><span></span> Project State <b>01</b></h3>
+          <strong>Published</strong>
+          <p>承認済みBaselineを維持し、公開状態を継続しています。</p>
+          <small>ACTIVE BASELINE: BL-20260801-001</small>
+        </article>
+        <article class="status-column work">
+          <h3><span></span> Current Initiative <b>02</b></h3>
+          <strong>Documentation Information Architecture</strong>
+          <p>責務別Directory再編を段階的に実装中。ContractsとActive Workの導入まで完了しています。</p>
+          <small>STATUS: PAUSED FOR KNOWLEDGE / PUBLIC REFLECTION</small>
+        </article>
+        <article class="status-column gate">
+          <h3><span></span> Next Gate <b>03</b></h3>
+          <strong>Documentation IA Commit 3</strong>
+          <p>Governance、Registry、Quality、Planningの責務再配置へ進みます。</p>
+          <small>RUNTIME ACCEPTANCE: PENDING</small>
+        </article>
       </div>
     </section>
 
@@ -241,8 +265,8 @@
 
     <section class="section-shell releases-list" aria-labelledby="release-list-title">
       <div class="section-heading reveal"><div><p class="kicker">リリース履歴 <span>RELEASES</span></p><h2 id="release-list-title">公開し、記録し、改善する。</h2></div></div>
-      <a class="release-row reveal" href="releases/2026-08-01-v2.11.html"><time datetime="2026-08-01">2026.08.01</time><span><strong>Local AI Foundry v2.11</strong><small>Project State Governanceを公開し、Public Documentationと公式サイトの導線を更新しました。</small></span><b>更新内容を見る →</b></a>
-      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-08-01">2026.08.01</time><span><strong>全リリースを一覧で確認</strong><small>v2.11からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
+      <a class="release-row reveal" href="releases/2026-08-02-v2.12.html"><time datetime="2026-08-02">2026.08.02</time><span><strong>Local AI Foundry v2.12</strong><small>Project StateとActive Workを分離し、公式HPの現在地表示と運用思想を更新しました。</small></span><b>更新内容を見る →</b></a>
+      <a class="release-row reveal" href="releases/index.html"><time datetime="2026-08-02">2026.08.02</time><span><strong>全リリースを一覧で確認</strong><small>v2.12からPhase 1 Foundationまで、更新内容と詳細ページをまとめています。</small></span><b>更新履歴を見る →</b></a>
     </section>
 
     <section id="community" class="section-shell community-section" aria-labelledby="community-title">

@@ -1,0 +1,116 @@
+/* Local AI Foundry v2.12 — Project State / Active Work Reflection */
+
+.hero-operation {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: #c7d6e8;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+}
+
+.operating-principle {
+  margin-top: 28px;
+  padding: 22px 26px;
+  border: 1px solid rgba(41, 217, 255, .28);
+  border-left: 4px solid #29d9ff;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(14, 33, 55, .82), rgba(7, 17, 30, .88));
+}
+
+.operating-principle small,
+.status-column small {
+  display: block;
+  color: #29d9ff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.operating-principle strong {
+  display: block;
+  margin-top: 8px;
+  color: #eef6ff;
+  font-size: clamp(18px, 2.3vw, 26px);
+  line-height: 1.5;
+}
+
+.release-why {
+  max-width: 760px;
+  margin: 14px 0 0;
+  color: #aebdd0;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.release-why strong {
+  color: #29d9ff;
+}
+
+.status-lead {
+  max-width: 760px;
+  margin: -16px 0 28px;
+  color: #9aabc1;
+}
+
+.status-board.status-board-v212 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.status-board-v212 .status-column {
+  min-height: 250px;
+}
+
+.status-board-v212 .status-column > strong {
+  display: block;
+  margin: 24px 0 12px;
+  color: #eef6ff;
+  font-size: clamp(21px, 2.4vw, 30px);
+  line-height: 1.25;
+}
+
+.status-board-v212 .status-column > p {
+  margin: 0 0 24px;
+  color: #9aabc1;
+}
+
+.status-board-v212 .status-column small {
+  margin-top: auto;
+  color: #7fcce0;
+  line-height: 1.6;
+}
+
+.status-board-v212 .status-column.state {
+  border-color: rgba(83, 224, 162, .28);
+}
+
+.status-board-v212 .status-column.work {
+  border-color: rgba(41, 217, 255, .32);
+}
+
+.status-board-v212 .status-column.gate {
+  border-color: rgba(255, 198, 84, .28);
+}
+
+@media (max-width: 900px) {
+  .status-board.status-board-v212 {
+    grid-template-columns: 1fr;
+  }
+
+  .status-board-v212 .status-column {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-operation {
+    font-size: 15px;
+  }
+
+  .operating-principle {
+    padding: 20px;
+  }
+
+  .release-why {
+    font-size: 14px;
+  }
+}
