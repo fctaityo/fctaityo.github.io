@@ -33,3 +33,39 @@
 * Current SnapshotはRegistryの縮小コピーではなく、人間が今どこにいて次に何をするかだけを示すべきなのかもしれない。
 * 情報を全部見せることより、不要な情報を意図的に見せない方が品質が上がる場面もあるのかもしれない。
 * Documentationは情報を保存するためではなく、人間が最短で正しい判断をするために設計するものなのかもしれない。
+* Local AI Foundryの進め方はウォーターフォールよりアジャイルに近いように見えるが、Scrum、XP、Kanbanのいずれかと断定できるEvidenceはまだ不足している。
+* 最初にすべてを設計せず、実運用で不足を観測してから小さく仕組みを追加している点は、アジャイルの反復的・漸進的な性質と近いのかもしれない。
+* Local AI Foundryはソフトウェア実装だけでなく、Documentation、Governance、Configuration、Review、Repository運用までインクリメンタルに育てている点が特徴なのかもしれない。
+* Local AI Foundryとスパイラルモデルには、実装、評価、改善を繰り返す共通点があるが、Risk DrivenなのかEvidence Drivenなのかはまだ評価が必要。
+* Local AI Foundryとプロトタイプモデルには、まず動かして学ぶ共通点があるが、試作品を捨てて本番を作り直すのではなく、既存成果物と運用を継続的に育てている点が異なるのかもしれない。
+* Local AI FoundryはScrumではない可能性が高い。Sprint、Product Owner、Scrum Master、Daily ScrumなどのScrum固有の運用を採用していないためである。
+* Kanbanは作業フローの可視化、XPは実装プラクティスを主に扱うため、Project全体の成長モデルとの比較では観点を分ける必要があるかもしれない。
+* 「既存モデルのどれにも当てはまらない」と結論づける前に、アジャイル、スパイラル、プロトタイプなどとの共通点と相違点をEvidence付きで整理する必要がある。
+* Local AI Foundry独自の開発モデルが存在するとしても、それは最初に宣言して作るものではなく、既存モデルで説明できない部分が繰り返し観測された後に初めて定義できるのかもしれない。
+* 「Documentationは最初から設計対象に入れるべき」という教訓と、「Documentation IAは最初には作れなかった」という事実は矛盾しないのかもしれない。Documentationを設計対象として意識することと、最終的な分類体系を初期段階で固定することは別だからである。
+* Documentation IAは最初に完成させるものではなく、十分な文書と責務が実際に生まれた後で、観測された構造を整理するために成立する場合があるのかもしれない。
+* 最初から完全なDocumentation IAを作ると、実在しない責務やDirectoryを想像で作り、管理のための管理へ進む危険があるのかもしれない。
+* 「必要になったら育てる」は無計画に作ることではなく、実運用のEvidenceを基に必要な責務だけを追加することなのかもしれない。
+* 問題が起きるたびにルールを増やすのではなく、同じ種類の判断不能や復帰不能が再発する構造を見つけた時だけ仕組みへ昇華すべきなのかもしれない。
+* Project State Current SnapshotとActive Work Current Snapshotは、どちらも現在地を示すが、更新頻度と判断対象が違うため別Artifactにすべきなのかもしれない。
+* Project StateはProject全体のLifecycle上の到達地点を示し、Active Workは現在のInitiativeの復帰地点を示すのかもしれない。
+* 「現在地」と「作業地点」は同じではないのかもしれない。
+* 低頻度で変わる正式状態と、高頻度で変わる作業断面を同じDashboardへ入れると、どちらかが作業ログ化または情報不足になるのかもしれない。
+* Active Workは進捗管理表ではなく、Interrupt後に再開するためのBookmarkに近いのかもしれない。
+* Active Workに履歴を残し始めると、Git、Audit、Report、Review Packageと責務が重複し、再びCurrent Snapshotが肥大化する可能性がある。
+* Project State Current Snapshotだけで作業再開できなかったことは、Status Artifactの失敗ではなく、新しいSnapshot責務が必要になったEvidenceだったのかもしれない。
+* Working Tree、Audit、Report、Review Package、Human Review、Commit、Local Commit Verifyという流れは、AIがEvidenceを準備し、人間が判断するための標準境界として機能し始めているのかもしれない。
+* Review Packageの価値は、AIが「完了した」と説明することではなく、人間が実際の成果物と差分を見て承認できることにあるのかもしれない。
+* Human ReviewはAIの作業をやり直す工程ではなく、AIが揃えたEvidenceに対して責任ある判断を行う工程として設計すべきなのかもしれない。
+* AIが作成、静的検証、Audit、Report、Review Package生成まで担当し、人間が採用、却下、修正要求、Commit許可を判断する分担は、AI Projectにおける実用的なGovernance Modelになり得るかもしれない。
+* Repository Reflectionは単なるCommitではなく、Human Reviewで承認された成果物を正本へ固定し、その一致を再確認する工程なのかもしれない。
+* Local Commit Verifyがあることで、Commit操作そのものと、承認Scopeが正しくRepositoryへ反映されたことを分離して確認できるのかもしれない。
+* Directory責務は永久固定ではなく、実運用で新しい責務が発見された場合にHuman Decision、ADR、IA更新を経て進化させる方が自然なのかもしれない。
+* Information Architectureは整理整頓のルールではなく、文書の責務と正本境界を判断するArchitectureなのかもしれない。
+* READMEをNavigation専用にすると、入口の説明肥大化を防ぎ、各責務の正本へ直接進めるのかもしれない。
+* DocumentationのDirectory再編はファイル移動ではなく、正本の責務、参照経路、Historical Evidence、Review境界を再定義する作業なのかもしれない。
+* Historical Evidenceでは当時のPath記述を保存しつつ、現在正本へ進むlive linkだけを更新することで、過去の事実と現在のNavigationを両立できるのかもしれない。
+* Compatibility shimはリンク切れを防げる一方で、正本が複数存在するように見せ、旧構造を恒久化する危険があるのかもしれない。
+* 新しい仕組みを導入した直後に、その仕組みが本当に必要だった経緯をWar Diaryへ残すことで、後から制度だけが残って目的が失われることを防げるのかもしれない。
+* notesは未完成な考えを保存する場所、docsは採用された判断を固定する場所、Public Documentationは外部へ説明可能な形へ変換する場所として段階を分けるべきなのかもしれない。
+* 内部notesからPublic Documentationや公式HPへ反映する際は、すべてを公開するのではなく、一般化できる知識、公開してよいEvidence、内部に残す識別情報を分離する必要がある。
