@@ -8,35 +8,40 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 運用ルール
 
-- 1つの出来事を1ファイルとして記録する。
-- ファイル名は `WD-YYYYMMDD-NNN-short-title.md` とする。
-- このファイルには、日付・題名・概要・リンクだけを置く。
-- 障害パターンとして再利用できるものはBug Zooへ整理する。
-- 設計判断として確定したものはADRへ記録する。
-- 将来も引用できる原則や言葉はHall of Fameへ昇格させる。
-- NOTE記事へ展開しても、一次記録は削除しない。
+* 1つの出来事を1ファイルとして記録する。
+* ファイル名は `WD-YYYYMMDD-NNN-short-title.md` とする。
+* このファイルには、日付・題名・概要・リンクだけを置く。
+* 障害パターンとして再利用できるものはBug Zooへ整理する。
+* 設計判断として確定したものはADRへ記録する。
+* 将来も引用できる原則や言葉はHall of Fameへ昇格させる。
+* NOTE記事へ展開しても、一次記録は削除しない。
 
 ## 2026-08
 
+### 2026-08-02
+
+* [WD-20260802-001 Project Snapshotでは作業断面へ戻れなかった](war-diary/WD-20260802-001-project-snapshot-and-active-work.md)
+  Documentation IAのCommit 2完了後、`status.md`だけでは現在作業中の復帰地点を特定できないことを確認。Project State Current SnapshotとActive Work Current Snapshotを別責務として整理し、ADR-0012、CFG-D005、Active Work Minimum Adoptionへ至った経緯を記録。
+
 ### 2026-08-01
 
-- [WD-20260801-001 Project Stateを整え、公開判断まで資産化した](war-diary/WD-20260801-001-project-state-governance-and-publication.md)  
+* [WD-20260801-001 Project Stateを整え、公開判断まで資産化した](war-diary/WD-20260801-001-project-state-governance-and-publication.md)
   Project State Governanceを導入し、Current Snapshot、Active Baseline、Human Publish Decisionを整理したうえで、Public Documentation、公式HP v2.11、PRRへ反映した一連の作業を記録。公開判断を資産化する運用、完成版ファイル方式への切り替え、GitHub Read／Writeの区別まで含めて整理。
 
 ## 2026-07
 
 ### 2026-07-25
 
-- [WD-20260725-001 曖昧なPromptがReviewを一周増やした](war-diary/WD-20260725-001-ambiguous-prompt-added-review-round.md)  
+* [WD-20260725-001 曖昧なPromptがReviewを一周増やした](war-diary/WD-20260725-001-ambiguous-prompt-added-review-round.md)
   曖昧なPromptにより、Review Comment Resolutionだけで済むはずだった作業が、新しいReview Roundとして解釈され、不要なReview Packageが生成された事件。AIへの指示は意図ではなく、工程・停止条件・禁止事項まで固定する必要があることを記録。
 
 ### 2026-07-24
 
-- [WD-20260724-001 Local AI Foundry 完全始動](war-diary/WD-20260724-001-foundry-launched.md)  
+* [WD-20260724-001 Local AI Foundry 完全始動](war-diary/WD-20260724-001-foundry-launched.md)
   制作基盤としての初期構成、検証状況、設計上の到達点と「完全始動」の意味を記録。
 
-- [WD-20260724-002 AIは悪くなかった。悪かったのは設計だった。](war-diary/WD-20260724-002-design-not-ai.md)  
+* [WD-20260724-002 AIは悪くなかった。悪かったのは設計だった。](war-diary/WD-20260724-002-design-not-ai.md)
   実LLM正常系の検証で連続した障害と、DTO、Gate、Retry、Transport、Artifact検証、責任分離、Runtimeから得た設計上の教訓を記録。
 
-- [WD-20260724-003 ChatGPT、SSOT運用を破る](war-diary/WD-20260724-003-chatgpt-broke-ssot.md)  
+* [WD-20260724-003 ChatGPT、SSOT運用を破る](war-diary/WD-20260724-003-chatgpt-broke-ssot.md)
   GitHub最新版を取得できなかったChatGPTが代替情報で更新案を生成し、正本運用を自ら破った事件と、その後追加した停止ルールを記録。
