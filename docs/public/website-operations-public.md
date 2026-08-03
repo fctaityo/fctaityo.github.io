@@ -2,7 +2,7 @@
 
 > **Public Edition**
 >
-> この文書はWebsite Operations Policyの公開版です。内部正本から非公開情報を除き、公開運用に必要な方針を掲載しています。
+> この文書はWebsite Operations Policyの公開版である。内部正本から非公開情報を除き、公式ホームページのPresentation Layer運用に必要な方針を掲載する。
 
 - Status: Active
 - Applies To: Local AI Foundry公式ホームページ
@@ -11,11 +11,30 @@
 
 ## 目的
 
-本書は、Local AI Foundry公式ホームページに何を掲載し、いつ更新し、どの記録を正本として扱うかを定める。公式ホームページ運用のSingle Source of Truthとする。
+本書は、Local AI Foundry公式ホームページに何を掲載し、いつ更新し、どの公開情報へ利用者を案内するかを定める。
 
-公式ホームページは、初めてプロジェクトを知る閲覧者、継続的に開発状況を追う利用者、公開資料やGitHubへ進む技術者に対し、プロジェクトの価値、設計の概要、現在地、公開情報への入口を提供する。
+公式ホームページはPresentation Layerであり、内部成果物、公開判断、Publication Current Stateまたは公開Documentationの正本ではない。
+
+公式ホームページは、初めてプロジェクトを知る閲覧者、継続的に開発状況を追う利用者、公開資料やGitHubへ進む技術者に対し、プロジェクトの価値、設計の概要、公開可能な現在地、主要な更新および公開情報への入口を提供する。
 
 更新では、既存のブランド、情報構造、公開範囲を維持する。内部仕様を転載せず、公開する価値と導線に変更が生じた場合に必要な範囲を更新する。
+
+Publicationの契約は`docs/governance/publication-governance.md`、現在の公開状態は`docs/registry/publication-registry.md`を参照する。
+
+## 責務境界
+
+| Layer / Document | Responsibility |
+|---|---|
+| Internal Repository | 唯一の正本 |
+| Publication Governance | 公開契約・公開統制 |
+| Publication Registry | Current Publication State |
+| Publication Reflection Register (PRR) | 不採用・保留理由、およびMask / Generalization判断の内部履歴 |
+| Public Repository | Internalから生成された公開成果物 |
+| Website | Presentation Layer、概要、告知、公開導線 |
+
+本書はWebsiteの表示と公開導線だけを扱う。
+
+公開可否、Mask / Generalization、PRR要否、Current Publication Stateを本書で決定または保持しない。
 
 ## バージョン運用
 
@@ -25,7 +44,7 @@
 - Minor: 公開セクション、重要な導線、Public Documentation、主要な説明または体験を追加・更新する変更
 - Major: サイトの目的、対象読者、ブランド構造、主要な情報設計を大きく変更する更新
 
-正式リリースは、対象変更とDocumentationが整合し、検証が完了した時点で付与する。複数の軽微な変更は、公開上の意味が一つになる単位へまとめてよい。
+正式リリースは、対象変更と公開成果物が整合し、検証が完了した時点で付与する。複数の軽微な変更は、公開上の意味が一つになる単位へまとめてよい。
 
 日付は、HTMLの`datetime`属性とファイル名では`YYYY-MM-DD`、画面表示では`YYYY.MM.DD`を使用する。
 
@@ -37,9 +56,9 @@ Version更新を原則必要とする変更:
 
 - Public Documentationの新規追加
 - Public Documentationの大幅な内容更新
-- Architectureの変更
+- 公開Architectureの変更
 - 公開仕様または公開Contractの変更
-- Workflow構成または主要処理フローの変更
+- 公開Workflow構成または主要処理フローの変更
 - 公式サイトの構成変更
 - Release Driven Website Operationの変更
 - 利用者から見える機能、仕様、制約、導線の変更
@@ -57,14 +76,16 @@ Version更新を原則不要とする変更:
 | 変更内容 | Version更新 |
 |---|---|
 | Public Documentation追加・大幅更新 | 必要 |
-| Architecture変更 | 必要 |
+| 公開Architecture変更 | 必要 |
 | 公開Contract・Workflow仕様変更 | 必要 |
 | 公式サイト構成変更 | 必要 |
 | Typo・表記揺れ修正 | 原則不要 |
 | 軽微なリンク修正 | 原則不要 |
 | CSS微調整 | 原則不要 |
 
-Version更新を伴う場合は、公式トップページ、Releases一覧、個別Releaseページを同時更新する。Commitは公開準備完了であり、公開完了ではない。`origin/main`へのPushとGitHub Pages反映確認まで完了した時点をRelease Completeとする。
+Version更新を伴う場合は、公式トップページ、Releases一覧、個別Releaseページを同時更新する。
+
+Commitは公開準備であり公開完了ではない。承認されたPublic RepositoryへのPushとGitHub Pages反映確認まで完了した時点をRelease Completeとする。
 
 ## 更新履歴
 
@@ -74,7 +95,7 @@ Version更新を伴う場合は、公式トップページ、Releases一覧、�
 
 - 新機能または新しい公開体験
 - Public Documentationの追加・重要な更新
-- Architectureの公開上重要な更新
+- 公開Architectureの重要な更新
 - 公開ADRの追加
 - Public Release
 - 重要な品質、導線、アクセシビリティ改善
@@ -93,15 +114,17 @@ Version更新を伴う場合は、公式トップページ、Releases一覧、�
 
 `releases/index.html`は、公式サイトの正式リリースを時系列で一覧化する。各正式リリースは、日付、バージョン、要約、詳細ページへの導線を持つ。
 
-詳細ページには、公開利用者へ影響する変更、改善理由、検証結果を簡潔に記載する。内部実装値、Prompt、非公開証跡、環境固有情報は掲載しない。
+詳細ページには、公開利用者へ影響する変更、改善理由、検証結果を簡潔に記載する。内部実装値、Prompt、非公開証跡、環境固有情報、PRRの内容は掲載しない。
 
-ReleasesページはGit履歴の複製ではない。Gitが全変更の技術記録であるのに対し、Releasesページは公開上意味のある変更を人間が理解できる単位で説明する。
+ReleasesページはGit履歴またはPublication Registryの複製ではない。Gitが技術的な変更記録、Publication RegistryがCurrent Publication Stateを示すのに対し、Releasesページは公開上意味のある変更を人間が理解できる単位で説明する。
 
 ## Git、GitHub Releases、公式サイト
 
 ### Git Commit
 
-Git Commitは、ファイル単位の変更内容、実装経緯、差分を追跡する技術的な正本である。公開サイトへ掲載しない軽微な変更や内部変更も記録する。
+Git Commitは、Public Repositoryに反映されたファイル単位の変更内容と差分を追跡する技術記録である。
+
+Git Commitだけでは、公開判断、Current Publication StateまたはGitHub Pages反映完了を証明しない。
 
 ### GitHub Releases
 
@@ -109,71 +132,109 @@ GitHub Releasesは、配布物、タグ、外部利用者へ固定して告知�
 
 ### 公式サイト
 
-公式サイトは、プロジェクトの価値、公開可能な設計、現在地、主要な更新、次に進む導線を示す。Commit一覧や内部変更履歴の代替にはしない。
+公式サイトは、プロジェクトの価値、公開可能な設計、公開上の現在地、主要な更新および次に進む導線を示す。
+
+Commit一覧、Publication Registry、PRR、内部変更履歴または公開Documentation本文の代替にはしない。
 
 ## Documentationとの関係
 
 ### 内部Documentation
 
-内部Documentationは、実装、運用、構成管理、詳細契約、検証証跡の正本を保持する。公開サイトから直接リンクしない。
+内部DocumentationはInternal Repositoryに保持し、実装、運用、構成管理、詳細契約、検証証跡の唯一の正本を構成する。
+
+内部DocumentationをPublic Repositoryまたは公式サイトから直接リンクしない。
 
 ### Public Documentation
 
-内部正本は`docs/`に保持する。公開版は`docs/public/`に配置し、公開可能なArchitecture、Principles、Status、ADR、Operational Reviewを保持する。公式サイトより詳しい公開資料の正本であり、内部資料への導線を含めない。
+Public Documentationは、Internal Repositoryの正本からPublication Governanceに従って生成された派生物である。
 
-公開時はPublic版のみを公式導線へ掲載し、内部文書へ公式サイトから直接リンクしない。
+公開可能なArchitecture、Principles、Status、ADR、Operational Reviewその他の公開成果物を保持できるが、Internal Repositoryの正本性を代替しない。
+
+公開時はPublic版だけを公式導線へ掲載し、内部文書への導線を含めない。
 
 ### 公式サイト
 
 公式サイトは概要と入口を担当する。Public Documentationの全文を重複掲載せず、閲覧者が必要な深さへ進める導線を提供する。
 
-同じ事実を複数箇所へ記載する場合は、詳細な正本をDocumentationに置き、公式サイトは要約とリンクに限定する。
+同じ事実を複数箇所へ記載する場合、詳細は対応する公開成果物へ置き、公式サイトは要約とリンクに限定する。
 
 ## Release Driven Website Operation
 
 - 公式ホームページ更新は、原則として正式リリースと同時に実施する。
-- トップページ更新時はVersionを更新する。
-- Releasesページを同時に更新する。
-- 正式リリースごとにReleaseページを作成する。
-- Website更新だけを単独で行わない。
+- トップページ更新時はVersion更新要否を判定する。
+- Version更新時はReleasesページを同時に更新する。
+- 正式リリースごとに必要なReleaseページを作成する。
+- Website更新は、承認されたPublication ScopeのPresentation Reflectionとして実施する。
+- Website更新だけでPublication Classification、PRRまたはRegistry更新を代替しない。
 
-## Documentation Flow
+## Publication and Documentation Flow
 
 ```text
-実装
+Internal Artifact
 ↓
-内部Documentation更新
+Publication Classification
 ↓
-Public Documentation更新
+Mask / Generalization要否判定
 ↓
-Website更新
+Human Review
 ↓
-Version更新
+PRR要否判定
 ↓
-Commit
+Public Artifact作成
 ↓
-Push
+Public Repository Reflection
+↓
+GitHub Read Verify
+↓
+Publication Registry更新
+↓
+Website Presentation Reflection
+↓
+Version / Releaseページ更新
 ↓
 GitHub Pages反映確認
 ↓
 Release Complete
 ```
 
-公開前にリンク、表示、Markdown、正本との整合を検証する。工程の一部が対象外の場合は省略できるが、公開内容と正本の整合確認は省略しない。
+PRRは、不採用・保留理由、またはMask / Generalization判断が公開物やGit履歴から確認できなくなる場合だけ作成する。
 
-Push未実施のCommitは公開されていない。正式リリースは、Push後のGitHub Pages反映確認をもって完了する。作業指示に明示的な「Push禁止」がない限り、正式リリース作業はPushと公開確認まで実施する。
+工程の一部が対象外の場合は省略できるが、公開内容とInternal Repositoryの正本との対応確認、Publication RegistryのCurrent State確認およびWebsiteの導線確認は省略しない。
 
-Documentation編集のみを目的とする作業では、指示に応じてCommitで停止してよい。Releaseまたは公開を目的とする作業では、原則としてCommitで停止しない。
+Push未実施のCommitは公開されていない。正式リリースは、承認されたPush後のGitHub Pages反映確認をもって完了する。
+
+Documentation編集のみを目的とする作業では、Humanが指定した停止点に従う。Releaseまたは公開を目的とする作業でも、Push権限を作業指示や本書から推測してはならない。
 
 ## 運用原則
 
-1. GitHub `main`の実ファイルとGit履歴を変更確認の基準にする。
-2. 公式サイトは概要と公開導線に集中し、内部仕様を転載しない。
-3. Public Documentationを公開詳細の正本として扱う。
-4. 公開先が存在しない文書へのリンクを作らない。
-5. 正式リリースではトップページ、Releases一覧、詳細ページのバージョンと日付を一致させる。
-6. 更新履歴は公開上意味のある変更だけを記録する。
-7. 既存デザイン、ブランド、レスポンシブ、アクセシビリティを維持する。
-8. Commit前に差分、リンク、構文、対象ファイルを確認する。
-9. Push後にGitHubのCommit SHAとGitHub Pages反映状態を確認する。
-10. 内部Documentation、Public Documentation、公式サイトの責務を混在させない。
+1. Internal Repositoryだけを正本とする。
+2. Publication Governanceに従って公開対象と境界を確定する。
+3. Publication RegistryをCurrent Publication Stateの正本として扱う。
+4. PRRは必要な場合だけ内部で作成し、公式サイトへ掲載しない。
+5. Public Repositoryの成果物はInternalから生成された派生物として扱う。
+6. 公式サイトは概要と公開導線に集中し、内部仕様を転載しない。
+7. 公開先が存在しない文書へのリンクを作らない。
+8. 正式リリースではトップページ、Releases一覧、詳細ページのバージョンと日付を一致させる。
+9. 更新履歴は公開上意味のある変更だけを記録する。
+10. 既存デザイン、ブランド、レスポンシブ、アクセシビリティを維持する。
+11. Commit前に差分、リンク、構文、対象ファイルを確認する。
+12. PushはHuman Authorizationがある場合だけ実施する。
+13. Push後にGitHubのCommit SHAとGitHub Pages反映状態を確認する。
+14. Internal Documentation、Public Artifact、Publication Registry、PRR、Websiteの責務を混在させない。
+
+## Verification and Definition of Done
+
+Website Reflectionは次をすべて満たした場合に完了とする。
+
+- Websiteへ反映するPublication ScopeがHuman Review済みである。
+- WebsiteがPresentation Layerの責務に限定されている。
+- 内部情報、PRR内容および非公開Evidenceが掲載されていない。
+- Public Artifactへのリンクが有効である。
+- Publication RegistryのCurrent StateとWebsiteの表示が矛盾していない。
+- Version更新要否が判定されている。
+- Version更新時はトップページ、Releases一覧および詳細ページが同期している。
+- HTML、リンク、表示、レスポンシブおよびアクセシビリティを確認している。
+- 承認されたCommit / Pushが完了している。
+- GitHub最新版とGitHub Pages反映を確認している。
+- 意図しない変更がない。
+- Internal Repositoryが唯一の正本であることを維持している。
