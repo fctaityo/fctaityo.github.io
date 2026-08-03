@@ -8,7 +8,7 @@ Publicationとは、Internal Repositoryで管理される成果物をPublic Repo
 
 本書は公開可否の判断基準、責務境界、公開フローおよび禁止事項のみを定義する。
 
-本書は現在状態、公開履歴、公開成果物そのものを保持しない。
+本書は現在状態、公開判断履歴、公開成果物そのものを保持しない。
 
 それぞれ次を正本とする。
 
@@ -32,7 +32,7 @@ Publicationは責務単位で分離する。
 | Internal Repository | 唯一の正本（Single Source of Truth） |
 | Publication Governance | 公開契約・公開統制 |
 | Publication Registry | 現在公開状態 |
-| Publication Reflection Register | 公開判断履歴 |
+| Publication Reflection Register | 公開物やGit履歴から確認できなくなる公開判断履歴 |
 | Public Repository | 公開成果物 |
 | Website | Presentation Layer |
 
@@ -43,6 +43,8 @@ Current StateをGovernanceへ保持してはならない。
 履歴をRegistryへ保持してはならない。
 
 公開物をGovernanceへ保持してはならない。
+
+PRRには、不採用・保留理由、または公開時のマスク・一般化判断だけを保持する。
 
 ---
 
@@ -61,7 +63,7 @@ Publication Classification
         │
         ├── Publication Registry
         │
-        ├── PRR
+        ├── PRR（必要な場合のみ）
         │
         ▼
 Public Repository
@@ -95,20 +97,29 @@ Internal Artifact
  No        Yes
    │         │
  Internal   公開可能性判定
+   │         │
+   │         ▼
+   │   機密・内部情報を含むか？
+   │         │
+   │  ┌──────┴──────┐
+   │  │             │
+   │ Yes            No
+   │  │             │
+   │ Mask / Generalize   Public Candidate
+   │  │             │
+   └──┴──────┬──────┘
+             ▼
+       Human Decision
              │
              ▼
- 機密・内部情報を含むか？
+ PRR要否判定
              │
       ┌──────┴──────┐
       │             │
-     Yes            No
+ 必要             不要
       │             │
- Mask / Generalize   Public Candidate
-      │             │
+ PRR記録           記録なし
       └──────┬──────┘
-             ▼
- Human Decision
-             │
              ▼
  Publication Registry
              │
@@ -121,6 +132,8 @@ Internal Artifact
 
 Human Decisionなしに公開してはならない。
 
+不採用・保留、またはマスク・一般化を伴わない単純公開では、PRRを作成しない。
+
 ---
 
 # 5. Publication Boundary
@@ -131,7 +144,7 @@ Human Decisionなしに公開してはならない。
 |---|---|
 | Internal | 正本 |
 | Registry | Current State |
-| PRR | Decision History |
+| PRR | 公開物やGit履歴から確認できなくなるDecision History |
 | Public | Published Artifact |
 | Website | Presentation |
 
@@ -150,14 +163,20 @@ Internal Completion
 Publication Classification
         │
         ▼
-Mask / Generalization
+Mask / Generalization要否判定
         │
         ▼
 Human Review
         │
         ▼
-PRR Recording
+PRR要否判定
         │
+   ┌────┴────┐
+   │         │
+ 必要       不要
+   │         │
+PRR Recording
+   └────┬────┘
         ▼
 Registry Update
         │
@@ -168,7 +187,7 @@ Public Repository Reflection
 Website Reflection
 ```
 
-PRRは公開判断を保存する。
+PRRは、不採用・保留理由、または公開時のマスク・一般化判断を保存する必要がある場合だけ作成する。
 
 RegistryはCurrent Stateのみ更新する。
 
@@ -186,6 +205,7 @@ Publicationでは次を必須とする。
 - Human Reviewを必須とする。
 - Public Documentationは一般利用者向けに編集する。
 - 必要に応じてMaskおよびGeneralizationを実施する。
+- 不採用・保留、またはMask / Generalization判断が公開物やGit履歴から確認できなくなる場合だけPRRを作成する。
 - Public成果物は公開契約に従って生成する。
 
 ---
@@ -209,6 +229,7 @@ Public Repositoryは公開成果物のみ保持する。
 - Runtime Evidence
 - Internal Audit
 - Internal Registry
+- PRR
 - Human Working Notes
 - Internal Decision
 
@@ -222,7 +243,7 @@ Public RepositoryはInternal Repositoryの代替として扱ってはならな�
 |---|---|
 | Publication Governance | Publication Contract |
 | Publication Registry | Current Publication State |
-| PRR | Publication Decision History |
+| PRR | 不採用・保留理由、およびMask / Generalization判断の内部履歴 |
 | Configuration Management | Internal Configuration |
 | Documentation Information Architecture | Documentation Responsibility |
 | Project State Transition | Project Lifecycle |
@@ -266,6 +287,8 @@ Internal Repositoryを更新した後、新たなPublication Processを開始す
 - PRRへCurrent Stateを書くこと
 - GovernanceへCurrent Stateを書くこと
 - Governanceへ履歴を書くこと
+- PRRをPublic Repositoryへ配置すること
+- PRRが不要な単純公開で形式的なPRR Entryを作成すること
 - Public RepositoryからInternal Repositoryを更新すること
 - Human Reviewなしに公開すること
 - 機密情報を公開すること
@@ -281,7 +304,9 @@ Publicationは次を満たした場合のみ完了とする。
 - Publication Classificationが完了している。
 - Human Reviewが完了している。
 - 必要なMaskまたはGeneralizationが完了している。
-- PRRへ公開判断が記録されている。
+- PRR要否が判定されている。
+- PRRが必要な場合は、不採用・保留理由またはMask / Generalization判断がPRRへ記録されている。
+- PRRが不要な場合は、公開物やGit履歴から消える判断情報が存在しないことを確認している。
 - Publication RegistryがCurrent Stateへ更新されている。
 - Public Repositoryへ反映されている。
 - Websiteへ必要なPresentationが反映されている。
