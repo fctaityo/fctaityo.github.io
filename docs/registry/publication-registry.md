@@ -50,7 +50,7 @@ Publication Registryの責務はCurrent Publication Stateのみである。
 | Public Repository | 公開Repository |
 | Website Representation | Website掲載先 |
 | Last Verified | 最終Verify日時 |
-| Related PRR | 最新PRR ID |
+| Related PRR | 関連PRR ID。PRR不要の場合は `Not Required` |
 
 RegistryはCurrent Stateのみ保持する。
 
@@ -67,7 +67,9 @@ Classificationは次のみ許可する。
 | Generalized | 一般化して公開 |
 | Not Published | 公開対象外 |
 
-Classification変更時はPRRを更新する。
+Classification変更時はPRR要否を判定する。
+
+不採用・保留、またはMask / Generalization判断が公開物やGit履歴から確認できなくなる場合だけPRRを更新する。
 
 ---
 
@@ -100,7 +102,11 @@ Registry更新は次の場合のみ許可する。
 
 公開判断だけではRegistryを更新しない。
 
-PRR確定後にCurrent Stateを更新する。
+公開反映とVerifyが成立した後にCurrent Stateを更新する。
+
+PRRが必要な場合は、対応するPRR確定後に更新する。
+
+PRRが不要な場合は、`Related PRR`へ`Not Required`を記録する。
 
 ---
 
@@ -110,7 +116,7 @@ PRR確定後にCurrent Stateを更新する。
 |---|---|
 | Publication Governance | Publication Contract |
 | Publication Registry | Current Publication State |
-| Publication Reflection Register | Decision History |
+| Publication Reflection Register | 不採用・保留理由、およびMask / Generalization判断の内部履歴 |
 | Website Operations | Presentation |
 | Public Repository | Public Artifact |
 
@@ -150,6 +156,7 @@ Registryは現在状態のみ保持する。
 - 判断理由を書くこと
 - Human Reviewを書くこと
 - PRR内容を書くこと
+- PRRが不要な公開で架空のPRR IDを書くこと
 - Website内容を書くこと
 - Governance内容を書くこと
 - Public Repository内容を書くこと
@@ -163,12 +170,13 @@ RegistryはCurrent Stateのみ保持する。
 
 Registry更新は次を満たした場合のみ完了とする。
 
-- PRRが確定している。
 - Current Publication Stateが更新されている。
 - 最新Classificationが反映されている。
 - 最新Statusが反映されている。
 - Website反映先が確認されている。
 - Last Verifiedが更新されている。
-- Related PRRが最新を指している。
+- PRR要否が判定されている。
+- PRRが必要な場合は、Related PRRが対応する最新PRRを指している。
+- PRRが不要な場合は、Related PRRが`Not Required`である。
 
 RegistryはCurrent Stateのみを保持し、履歴管理は行わない。
