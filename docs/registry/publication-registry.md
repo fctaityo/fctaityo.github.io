@@ -137,46 +137,11 @@ Current Statusは現在値のみ保持する。
 
 ---
 
-## 7. Publication Items
-
-次の表を、Internal文書とPublic成果物の対応関係、およびCurrent Publication Stateの正本とする。
-
-| Publication ID | Artifact Name | Internal Source | Publication Type | Public Representation | Publication Classification | Current Status | Current Version | Public Repository | Website Representation | Last Verified | Related PRR |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| `PUB-DOC-001` | Public Documentation README | `docs/README.md` | Derived | `docs/public/README-public.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation入口 | 2026-08-03 JST | `PRR-20260801-002` |
-| `PUB-DOC-002` | Project Status Public | `docs/status.md` | Derived | `docs/public/status-public.md` | Masked | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Project Status | 2026-08-03 JST | `PRR-20260803-001` |
-| `PUB-DOC-003` | Architecture Public | `docs/architecture/architecture.md` | Derived | `docs/public/architecture-public.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Architecture | 2026-08-03 JST | `PRR-20260803-002` |
-| `PUB-DOC-004` | Principles Public | `docs/governance/principles.md` | Derived | `docs/public/principles-public.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Principles | 2026-08-03 JST | `PRR-20260803-005` |
-| `PUB-DOC-005` | Publication Governance | `Not Applicable` | Public Canonical | `docs/governance/publication-governance.md` | Public | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Publication | 2026-08-03 JST | `PRR-20260803-003` |
-| `PUB-DOC-006` | Publication Registry | `Not Applicable` | Public Canonical | `docs/registry/publication-registry.md` | Public | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Publication | 2026-08-03 JST | `PRR-20260803-004` |
-| `PUB-DOC-007` | Website Operations Public | `docs/operations/website-operations.md` | Derived | `docs/public/website-operations-public.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Website Operations | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-008` | Project State Governance Audit | `docs/configuration-audits/CFG-20260801-001-project-state-governance.md` | Derived | `docs/public/configuration-audits/CFG-20260801-001-project-state-governance.md` | Masked | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Configuration Audit | 2026-08-03 JST | `PRR-20260801-001` |
-| `PUB-DOC-009` | Public Configuration Audit Index | `docs/configuration-audits/index.md` | Derived | `docs/public/configuration-audits/index.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Configuration Audit | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-010` | Public Configuration Audit Policy | `docs/configuration-audits/README.md` | Derived | `docs/public/configuration-audits/README.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Configuration Audit | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-011` | Public Operational Review Index | `docs/reviews/index.md` | Derived | `docs/public/reviews/index.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Operational Review | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-012` | Public Operational Review Policy | `docs/reviews/README.md` | Derived | `docs/public/reviews/README.md` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / Operational Review | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-013` | Public ADR Collection | `docs/adr/` | Reference | `docs/public/adr/` | Generalized | Published | Repository Current | `fctaityo/fctaityo.github.io` | Public Documentation / ADR | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-014` | Configuration Management | `docs/governance/configuration-management.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-015` | Documentation Information Architecture | `docs/governance/documentation-information-architecture.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-016` | Project State Transition | `docs/contracts/project-state-transition.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-017` | Status Artifact Contract | `docs/contracts/status-artifact-contract.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-018` | Definition of Done | `docs/quality/definition-of-done.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-019` | Codex Standard Operating Procedure | `docs/operations/codex-standard-operating-procedure.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-020` | Configuration Item Registry | `docs/registry/configuration-items.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-021` | Publication Reflection Register | `docs/publication-reflection-register/` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-| `PUB-DOC-022` | Active Work | `docs/active-work.md` | Internal Only | `Not Applicable` | Not Published | Not Published | Not Applicable | Not Applicable | Not Applicable | 2026-08-03 JST | `Not Required` |
-
-個別のADR、Configuration Audit、Operational Review、Website Release、Noteその他の公開成果物について、独立したCurrent State管理が必要な場合は、Publication Itemを1成果物1行で追加する。
-
-Collection単位の登録は、個別の公開、置換、取り下げまたはVerifyを管理する必要があるPublication Itemの登録を代替しない。
-
----
-
-## 8. Registry Update Rules
+## 7. Registry Update Rules
 
 Registry更新は次の場合のみ許可する。
 
-- 新しいInternal文書をPublication管理対象へ追加する
+- Human ReviewによりPublication Typeを確定したInternal文書をPublication管理対象へ追加する
 - Publication TypeをHuman Reviewにより追加または変更する
 - 新規公開する
 - 公開終了する
@@ -200,7 +165,7 @@ Registry行は削除せず、公開終了または置換時はCurrent Statusを�
 
 ---
 
-## 9. Relationship to Other Documents
+## 8. Relationship to Other Documents
 
 | Document | Responsibility |
 |---|---|
@@ -216,7 +181,7 @@ Registry行は削除せず、公開終了または置換時はCurrent Statusを�
 
 ---
 
-## 10. Registry Lifecycle
+## 9. Registry Lifecycle
 
 Publication RegistryはCurrent Stateのみ管理する。
 
@@ -245,7 +210,7 @@ Publication Classificationの変更もStatus Transitionとは分離して管理�
 
 ---
 
-## 11. Prohibited Practices
+## 10. Prohibited Practices
 
 次を禁止する。
 
@@ -258,6 +223,7 @@ Publication Classificationの変更もStatus Transitionとは分離して管理�
 - Governance内容を再定義すること
 - Public Repository内容を本文へ転載すること
 - Internal Repositoryを変更すること
+- Documentation Information Architectureへの掲載だけを根拠にPublication Itemへ登録すること
 - Internal Sourceを確認せずPublic Representationを登録すること
 - Public Representationを確認せずPublishedへ変更すること
 - Publication TypeとPublication Classificationを同一項目として扱うこと
@@ -269,7 +235,7 @@ RegistryはInternal文書とPublic成果物の対応関係、およびCurrent St
 
 ---
 
-## 12. Verification and Definition of Done
+## 11. Verification and Definition of Done
 
 Registry更新は次を満たした場合のみ完了とする。
 
