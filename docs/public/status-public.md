@@ -1,242 +1,136 @@
-# Project Status
+# プロジェクト状況（Project Status）
 
 > **Public Edition**
 >
-> この文書はLocal AI Foundryの公開版プロジェクトステータスです。
-> 内部運用情報、環境固有情報、構成管理の詳細、監査証跡および内部識別子は公開版では省略または一般化しています。
+> 本書はLocal AI Foundryの公開版Project Statusである。
+> Internal Repositoryにある`status.md`を正本とし、本書は公開可能なCurrent Snapshotだけを保持する派生物である。
+> 内部識別子、環境固有情報、非公開Evidenceおよび内部Repository構造は省略または一般化している。
 
-本書は、公開可能なCurrent Snapshot（現在地）を示すPublic Artifactです。
+本書はProject Stateに同期した公開用Current Snapshotであり、利用者が現在地と次の一歩を30秒以内に把握するための簡潔なNavigationである。
 
-Internal Repositoryだけを唯一の正本とし、本書はその公開用派生物として現在状態のみを提供します。
+公開契約は[Publication Governance](../governance/publication-governance.md)、現在の公開状態は[Publication Registry](../registry/publication-registry.md)を参照する。
 
-変更履歴や設計判断の詳細は、公開済みConfiguration Audit、Operational Review、ADRおよびGitへ委譲します。
+## 現在地（要約）
 
----
+Workflowの設計、実装、Import、Publishおよび意味上の一致確認までは完了している。
 
-# Project Dashboard
+現在は、Published Workflowを実際に動かす前に、何を入力し、何を確認し、どの状態を合格とするかを決めている段階である。
 
-| 項目 | 現在状態 |
+Published Workflowは固定済みである。
+
+Runtime Verificationはまだ実行していない。
+
+## 30秒Current Snapshot
+
+| 確認項目 | 現在値 |
 |---|---|
-| Project Status | 🟢 Published |
-| Current Focus | Runtime Verification Preparation |
-| Architecture | Contract-Driven Multi-Agent Platform |
-| Workflow Revision | `0.3.2` |
-| Workflow Validation | PASS |
-| Configuration Verification | PASS |
-| Publish Status | PASS |
-| Runtime Verification | NOT EXECUTED |
-| Runtime Acceptance | PENDING |
+| 現在地 | Project State: `Published`<br>Current Baseline: Active<br>Repository / Draft / Publishedの整合確認済み |
+| 目的 | Published Workflowを固定し、Runtime VerificationとRuntime Acceptanceの明示承認に備える |
+| 最近完了 | Publish、Published Workflow作成、Repository / Published Semantic Verification PASS |
+| 残りGate | Runtime Verification、Runtime Acceptance |
+| Blocker | なし。Runtime実行はHuman Authorization未成立のため未実施 |
+| 次の一歩 | Runtime Verificationの対象、入力、必須Run、Acceptance条件を確認する |
+| Human判断 | Published Workflowに対するRuntime VerificationのScopeと実行を承認するか |
 
----
+## Current Baseline
 
-# Current Status
+| Representation | 公開情報 | 確認状態 |
+|---|---|---|
+| Baseline | Active Baseline | Active |
+| Repository | 対象BaselineのRepository状態 | 確認済み |
+| Workflow DSL | Internal Repository上の対象Workflow | 確認済み |
+| Draft Workflow | 対象Draft Workflow | 検証済み |
+| Draft Graph | DAG、Maximum DepthおよびPath制約 | PASS |
+| Semantic Graph | Repository / Draft / Published | MATCH |
+| UI Checklist | 必須Checklist | PASS |
+| Published Workflow | 対象Published Workflow | PASS |
 
-Workflowの設計、実装、Import、PublishおよびRepository / Published間の意味上の一致確認は完了しています。
+内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
 
-現在のProject Stateは`Published`です。
+## Runtime Status
 
-Published Workflowは固定済みですが、Runtime Verificationはまだ実行していません。
+**Runtime Status:** Not Executed
 
-現在は、実行対象、入力、必須RunおよびAcceptance条件を確定し、Runtime Verificationの明示承認に備えている段階です。
+| 確認項目 | 公開情報 | 確認状態 |
+|---|---|---|
+| Runtime Verification | Run未実施 | Not Executed |
+| Runtime Acceptance | Acceptance Evidence未確定 | `PENDING` |
 
----
+### `Runtime Verified`へ進むGate
 
-# Current Gate
-
-`Runtime Verified`へ進むためには、次の条件が必要です。
-
-1. Published WorkflowをRuntime Verification対象として明示承認する。
+1. 対象Published WorkflowをRuntime Verification対象として明示承認する。
 2. 実行入力、必須RunおよびAcceptance条件を確定する。
-3. Runtime実行前にRepository、DraftおよびPublishedのBaseline不変を確認する。
-4. 必須Runtime RunとAcceptance EvidenceがPASSする。
+3. Runtime実行前にRepository / Draft / PublishedのBaseline不変を確認する。
+4. 必須Runtime RunとAcceptance EvidenceがPASSした場合だけ`Runtime Verified`へ進む。
 
-Runtime実行の承認はまだ成立していません。
+Runtime実行承認はまだ存在しない。
 
-本書はRuntime実行権限を付与しません。
+本SnapshotはRuntime実行権限を付与しない。
 
----
+## Transition Information
 
-# Recently Completed
+> **公開Current Snapshot:** Active BaselineのPublishとPublished Verificationは完了した。
+> Project Stateは`Published`である。Runtimeは未実施である。
 
-最近完了した主な作業は次のとおりです。
-
-- Workflow設計および実装
-- Workflow Compatibility改善
-- Configuration Contract整理
-- Workflow Validation
-- Configuration Verification
-- Dify Import Verification
-- Semantic Verification
-- UI Verification
-- Workflow Publish
-- Published Workflow Verification
-- Repository / Draft / Published Semantic Match確認
-
-これらの検証は完了しています。
-
----
-
-# Project Health
-
-| 領域 | 状態 |
+| 確認項目 | 現在値 |
 |---|---|
-| Architecture | Stable |
-| Workflow | Published |
-| Configuration | Verified |
-| Documentation | Active |
-| Validation | PASS |
-| Publish | PASS |
-| Runtime | Not Executed |
-| Acceptance | Pending |
+| Current Phase | Runtime Verification Preparation |
+| Project State | `Published` |
+| Transition Evidence | Internal Repositoryで管理 |
+| Baseline | Active |
+| Allowed Next States | `Runtime Verified`、`Blocked`、`Cancelled` |
+| Next State Gate | Runtime実行の明示承認、必須Run完了、Acceptance Evidence PASS |
+| Snapshot Updated | `2026-08-02` |
 
----
+### その他の許可Transition
 
-# Current Architecture
+- Blocking条件を確認した場合: `Blocked`
+- 現Baselineの利用中止を人間が承認した場合: `Cancelled`
 
-- Architecture: Contract-Driven Multi-Agent Platform
-- Workflow Revision: `0.3.2`
-- Workflow: Local AI Multi-Agent Workflow
-- LLM: Ollama
-- Orchestration: Dify / n8n
-- Image Generation: ComfyUI
+## Bootstrap Information
 
-内部のApp ID、Workflow ID、Commit SHA、Hash、Revision識別子および環境固有情報は公開版では掲載しません。
+`Draft Verified`の初期State確定はInternal RepositoryのBootstrap Evidenceで管理している。
 
----
+公開可能な確認結果は次のとおりである。
 
-# Current Pipeline
+- Import実使用ファイルとRepository上の対象Artifactが一致
+- Draft GraphのNode / Edge構造、DAGおよびDepth制約を確認
+- Writing Planのfan-out / fan-inとAssembly順序を確認
+- Section間の不要な直列依存がないことを確認
+- 対象Gateへの不要field非混入を確認
+- Retry Contextの契約を確認
+- Writing Plan Raw GateとDeterministic Normalizeを確認
+- RepositoryとDraftの主要属性およびSemantic Graphが一致
+- Dify UI Checklist PASS
 
-```text
-Planning
-↓
-Research
-↓
-Writing Plan
-↓
-Section Writing
-↓
-Assembly
-↓
-Artifact Validation
-↓
-Review
-↓
-Final Audit
-↓
-Package
-```
+内部Hash、識別子、Database確認手順および非公開Evidenceの詳細は掲載しない。
 
-各工程はContract-Driven Architectureに基づき構成され、Validationを通過した成果物のみ次工程へ進みます。
+## 詳細へのNavigation
 
----
-
-# Current Capabilities
-
-現在実装されている主要機能は次のとおりです。
-
-- Planning
-- Research
-- Writing Planning
-- Section Writing
-- Review
-- Final Audit
-- Artifact Packaging
-
-詳細な公開契約およびDTO設計については、関連するPublic Documentationを参照してください。
-
----
-
-# Current Verification
-
-| 項目 | 状態 |
+| 確認対象 | 公開先 |
 |---|---|
-| Workflow Validation | PASS |
-| Configuration Verification | PASS |
-| Import Verification | PASS |
-| Semantic Verification | PASS |
-| UI Verification | PASS |
-| Publish Verification | PASS |
-| Runtime Verification | Not Executed |
-| Runtime Acceptance | Pending |
+| 公開Documentation入口 | [Public Documentation](README-public.md) |
+| 公開契約 | [Publication Governance](../governance/publication-governance.md) |
+| 現在の公開状態 | [Publication Registry](../registry/publication-registry.md) |
+| 公開Architecture | [Architecture](architecture-public.md) |
+| 公開Configuration Audit | [Configuration Audit一覧](configuration-audits/index.md) |
+| 公開Operational Review | [Operational Review一覧](reviews/index.md) |
+| 公式サイト運用 | [Website Operations](website-operations-public.md) |
 
----
+## Publication Boundary
 
-# Known Limitations
+本公開版では、次の情報を省略または一般化している。
 
-現在確認されている主な制約は次のとおりです。
-
-- Runtime Verificationは未実施
-- Runtime Acceptanceは未確定
-- 実行入力、必須RunおよびAcceptance条件はHuman Decision待ち
-- 一部機能は継続して改善中
-
-詳細な技術情報、内部識別子および対応履歴はInternal Repositoryで管理します。
-
-公開可能な監査結果および運用知識は、Public Configuration AuditおよびOperational Reviewで確認できます。
-
----
-
-# Next Milestone
-
-次のマイルストーンは、Published Workflowに対するRuntime Verificationを実施し、Acceptance Evidenceを確定することです。
-
-必須Runtime RunとAcceptance EvidenceがPASSした場合だけ、Project Stateは`Runtime Verified`へ進みます。
-
----
-
-# Allowed Next States
-
-現在のProject Stateから許可される次の状態は次のとおりです。
-
-- `Runtime Verified`
-- `Blocked`
-- `Cancelled`
-
-通常の次状態は`Runtime Verified`です。
-
-Blocking条件が確認された場合は`Blocked`、現Baselineの利用中止が承認された場合は`Cancelled`へ進みます。
-
----
-
-# Publication Boundary
-
-この公開版では、次の情報を省略または一般化しています。
-
-- Repository Commit SHA
-- WorkflowおよびSemantic GraphのHash
+- Baseline ID
+- Repository BranchおよびCommit SHA
+- Workflow HashおよびSemantic Graph Hash
 - Dify App ID
 - Draft Workflow ID
 - Published Workflow ID
-- 内部Revision識別子
-- 内部Evidence Path
-- Runtime外の内部確認手順
-- Databaseおよび環境固有情報
+- Revision Timestamp
+- 内部Evidence IDおよびPath
+- Database確認情報
+- 環境固有情報
+- Repository外の承認記録
 
-公開版は、Projectの現在地、主要Gate、Verification結果および次の行動を理解するために必要な情報だけを保持します。
-
----
-
-# Update Policy
-
-本書は常に公開可能な現在状態のみを保持します。
-
-Project State、Architecture、Workflow、Documentation、Configuration、主要Validation結果またはRuntime状態が変更された場合に更新します。
-
-公開判断の契約は[Publication Governance](../governance/publication-governance.md)、現在の公開状態は[Publication Registry](../registry/publication-registry.md)を参照してください。
-
-過去の変更履歴および判断理由は、公開済みConfiguration Audit、Operational Review、ADRおよびGitで管理します。
-
-公開物またはGit履歴から確認できなくなる不採用・保留理由、MaskまたはGeneralization判断は、内部のPublication Reflection Registerで管理します。
-
----
-
-# Last Updated
-
-- Snapshot Updated: `2026-08-02`
-- Project State: `Published`
-- Runtime Status: `Not Executed`
-- Runtime Acceptance: `Pending`
-
----
-
-[Public Documentationへ戻る](README-public.md)
+これらのMask / Generalization判断は、Public Artifactではなく内部のPublication Reflection Registerで管理する。
