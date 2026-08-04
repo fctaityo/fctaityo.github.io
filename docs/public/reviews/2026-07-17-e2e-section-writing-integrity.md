@@ -1,10 +1,10 @@
 # Section Writing Artifact Integrity 実環境E2Eレビュー
 
-- Review ID: `REV-20260717-001`
-- 日付: 2026-07-17
-- Status: `Open`
-- Review Type: 打鍵レビュー / 実運用レビュー / 品質レビュー
-- 対象: Section-based Writing Workflow
+* Review ID: `REV-20260717-001`
+* 日付: 2026-07-17
+* Status: `Open`
+* Review Type: 打鍵レビュー / 実運用レビュー / 品質レビュー
+* 対象: Section-based Writing Workflow
 
 ## 目的
 
@@ -53,9 +53,9 @@ Artifact ValidatorへSection単位の完成性検査を追加し、本文が未�
 
 異常系では次を確認した。
 
-- Conclusionが欠落した成果物はReview前に停止する。
-- Section本文が途中終了した成果物はReview前に停止する。
-- Retry時に成果物DTOが返らない場合は、必須項目欠落として停止する。
+* Conclusionが欠落した成果物はReview前に停止する。
+* Section本文が途中終了した成果物はReview前に停止する。
+* Retry時に成果物DTOが返らない場合は、必須項目欠落として停止する。
 
 ただし、実LLMがすべてのSectionを連続生成する正常系については、モデル出力の不安定さが残っており、継続検証が必要である。
 
@@ -73,23 +73,22 @@ Artifact ValidatorへSection単位の完成性検査を追加し、本文が未�
 
 Section Writing導入直後のWorkflowでは、次の責務が十分に分離されていなかった。
 
-- LLM出力から成果物を抽出する責務
-- 初回結果とRetry結果を選択する責務
-- Section単位で完成性を検証する責務
-- 要求された構成と実際の構成差異を記録する責務
+* LLM出力から成果物を抽出する責務
+* 初回結果とRetry結果を選択する責務
+* Section単位で完成性を検証する責務
+* 要求された構成と実際の構成差異を記録する責務
 
 ## 改善
 
-- 最終回答部分だけを成果物抽出の対象とする。
-- Retry成功時はRetry成果物を優先する。
-- 各Sectionの完成性をArtifact Validatorで検査する。
-- 要求値と実採用値を分離して記録する。
-- Researchを固定した試験と、実LLMを使う試験を分ける。
+* 最終回答部分だけを成果物抽出の対象とする。
+* Retry成功時はRetry成果物を優先する。
+* 各Sectionの完成性をArtifact Validatorで検査する。
+* 要求値と実採用値を分離して記録する。
+* Researchを固定した試験と、実LLMを使う試験を分ける。
 
 ## 関連ADR
 
-- [ADR-0006 Artifact Integrity Validation](../adr/ADR-0006-artifact-integrity-validation-public.md)
-- ADR-0007 Section-based Writing
+* [ADR-0006 Artifact Integrity Validation](../adr/ADR-0006-artifact-integrity-validation-public.md)
 
 [Operational Review一覧へ戻る](index.md)
 
