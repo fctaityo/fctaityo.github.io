@@ -181,3 +181,7 @@ Conclusion Retry Promptだけを最初の承認対象とする。
 - Required: `Yes`
 - Status: `Pending`
 - Notes: 本Auditは比較と候補提示のみ。同期、設定変更、公開、Commitは実施していない。
+
+[Configuration Audit一覧へ戻る](index.md)
+
+[Public Documentationへ戻る](../README-public.md)

@@ -143,3 +143,7 @@ Research Initial Contract GateとResearch Retry Final Gateについて、Configu
 - 内部Registryの全件数・個別anchor
 - 非公開Human Decision記録
 - fingerprint、hash、実行コマンド
+
+[Configuration Audit一覧へ戻る](index.md)
+
+[Public Documentationへ戻る](../README-public.md)

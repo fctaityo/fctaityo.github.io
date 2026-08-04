@@ -188,3 +188,7 @@ Human Publish Decision後、Publish直前にRepository、Active Baseline、Dify 
 - Database情報
 - Repository外の承認記録全文
 - 内部Evidence IDの詳細
+
+[Configuration Audit一覧へ戻る](index.md)
+
+[Public Documentationへ戻る](../README-public.md)

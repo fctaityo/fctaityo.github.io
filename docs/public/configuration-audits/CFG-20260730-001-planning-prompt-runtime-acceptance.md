@@ -4,7 +4,7 @@
 - Date: `2026-07-30`
 - Auditor: Codex
 - Phase: `Development`
-- Configuration Item: [`CFG-A001`](../configuration-items.md#cfg-a001)
+- Configuration Item: `CFG-A001`
 - Scope: Planning Agent System PromptのDraft → DSL同期とRuntime Acceptance
 - Task: 承認済みDraft Planning PromptのRepository Reflection
 - Trigger: CFG-A001 Human Final Decision Approved後のfield-level同期
@@ -248,3 +248,7 @@ Draft／DSL System Prompt同期は成功したが、曖昧Entity Runtime Accepta
 | Reviewer Final Decision | `PASS（軽微修正反映済み）` |
 | Human Final Decision | `Approved` |
 | Repository Action | `Authorized` |
+
+[Configuration Audit一覧へ戻る](index.md)
+
+[Public Documentationへ戻る](../README-public.md)
