@@ -8,10 +8,9 @@
 
 公開文書の関係は次のとおりである。
 
-- 設計思想の公開入口: [基本原則](principles-public.md)
-- 公開Architectureの入口: 本書
-- 公開判断とマスク履歴: Publication Reflection Register
-- `README-public.md`: Public Documentation全体への入口
+* 設計思想の公開入口: [基本原則](principles-public.md)
+* 公開Architectureの入口: 本書
+* `README-public.md`: Public Documentation全体への入口
 
 内部パス、環境固有値、実行時設定値、接続先、保存方式の詳細、Error Code、監査構成、未公開文書への直接導線は公開対象外とする。公開内容と内部正本が食い違う場合は、内部正本を基準として本書を更新する。
 
@@ -23,11 +22,11 @@ Local AI Foundryは、ローカルLLM、Workflow Orchestrator、保存・連携�
 
 ## 3. 解決する課題
 
-- LLM出力の揺らぎを、後続工程の暗黙知ではなくDTO契約で制御する
-- 壊れた中間成果物をWorkflow成功として後段へ流さない
-- 生成処理と、保存・外部実行処理を分離する
-- 記事だけでなく、判断経路、契約判定、Retry履歴も保存する
-- 複数のローカルサービスを一体として起動・停止し、到達性を確認する
+* LLM出力の揺らぎを、後続工程の暗黙知ではなくDTO契約で制御する
+* 壊れた中間成果物をWorkflow成功として後段へ流さない
+* 生成処理と、保存・外部実行処理を分離する
+* 記事だけでなく、判断経路、契約判定、Retry履歴も保存する
+* 複数のローカルサービスを一体として起動・停止し、到達性を確認する
 
 ## 4. 設計原則
 
@@ -52,6 +51,7 @@ flowchart LR
 ```
 
 <a id="architecture-overview"></a>
+
 ## 5. 全体アーキテクチャ
 
 ```mermaid
@@ -76,6 +76,7 @@ flowchart LR
 Generation Workflowは企画、調査、執筆、レビュー、画像要求、最終監査を担当する。Integration Workflowは成果物受信、永続化、画像生成実行、結果返却を担当する。
 
 <a id="agent-responsibilities"></a>
+
 ## 6. 7段階Agent構成と各責務
 
 ```mermaid
@@ -83,15 +84,15 @@ flowchart LR
   P["01 Planning"] --> R["02 Research"] --> WP["03 Writing Plan"] --> SW["Section Writing"] --> AS["Assembly"] --> AV["Artifact Validator"] --> V["04 Review"] --> IP["05 Image Prompt"] --> IR["06 Image Request"] --> A["07 Final Audit"] --> PK["Package Output"]
 ```
 
-| Stage | 責務 |
-|---|---|
-| Planning | 入力から制作ブリーフ、調査質問、執筆条件を作る |
-| Research | 既知情報、要確認事項、執筆可能な材料、避ける主張を整理する |
-| Writing | 本文なしのPlan、独立Section、意味非生成Assembly、配布メタデータを生成する |
-| Review | Writing成果物を最小Review DTOで受け、合否、問題、修正方針を返す |
-| Image Prompt | 画像生成向けの著作権配慮済みプロンプトを作る |
-| Image Generation Request | 画像生成実行に必要な要求を構成する |
-| Final Audit | 最小Audit DTOを受け、公開前の合否と注意点を返す |
+| Stage                    | 責務                                             |
+| ------------------------ | ---------------------------------------------- |
+| Planning                 | 入力から制作ブリーフ、調査質問、執筆条件を作る                        |
+| Research                 | 既知情報、要確認事項、執筆可能な材料、避ける主張を整理する                  |
+| Writing                  | 本文なしのPlan、独立Section、意味非生成Assembly、配布メタデータを生成する |
+| Review                   | Writing成果物を最小Review DTOで受け、合否、問題、修正方針を返す       |
+| Image Prompt             | 画像生成向けの著作権配慮済みプロンプトを作る                         |
+| Image Generation Request | 画像生成実行に必要な要求を構成する                              |
+| Final Audit              | 最小Audit DTOを受け、公開前の合否と注意点を返す                   |
 
 ### LLM Runtime Parameters（実行時設定）
 
@@ -121,6 +122,7 @@ DTOはAgentの創造内容を規定するものではなく、後続処理が機
 DTOでは、必須・任意、型、空値許容、利用者、違反時動作を明示する。具体的なField、Schema、内部契約文書は公開対象外とする。
 
 <a id="normalize-responsibility"></a>
+
 ## 9. Normalizeの役割
 
 Normalizeは型変換、空値正規化、既存Fieldの階層移動、固定Stageの構造補正を行う。
@@ -128,6 +130,7 @@ Normalizeは型変換、空値正規化、既存Fieldの階層移動、固定Sta
 Normalizeは未生成の要約、事実、成功条件等を新たに作らない。入力からの補完を許可する場合も、元の要求を同義Fieldへ確定する限定処理とする。
 
 <a id="contract-gate-responsibility"></a>
+
 ## 10. Contract Gateの役割
 
 Contract Gateは必須項目、型、空値、固定値を検査し、PASSまたはFAILと違反理由を返す。
@@ -153,6 +156,7 @@ flowchart TD
 Retry制御情報はResearch DTOへ混入させず、業務データと監査情報を分離する。具体的なRetry Context、監査Field、停止Code、保存先は内部仕様とする。
 
 <a id="section-writing"></a>
+
 ## 12. Section WritingとArtifact Integrity（成果物完全性）
 
 Writing Planは本文を書かず、Section構成、各Sectionの役割、論点、目標量、結論方向を定義する。
@@ -288,17 +292,17 @@ stateDiagram-v2
 
 Rは実行責任、Aは最終責任、Cは参照、Iは通知・証跡受領を表す。実装上のComponent責務であり、組織上の職位を表さない。
 
-| 活動 | Generation Agent | Normalize | Contract Gate | Package Output | Integration Runtime | Image Runtime | Operator |
-|---|---|---|---|---|---|---|---|
-| 意味内容の生成 | R/A | I | I | I | I | I | C |
-| DTO構造補正 | I | R/A | C | I | I | I | I |
-| DTO合否判定 | I | C | R/A | C | I | I | I |
-| Stage再生成 | R | C | A | I | I | I | I |
-| 最終成果物Guard | I | I | C | R/A | I | I | I |
-| Transport受信 | I | I | I | C | R/A | I | I |
-| 原子的保存・検証 | I | I | I | C | R/A | I | I |
-| 画像生成 | I | I | I | C | C | R/A | I |
-| 障害調査・再実行判断 | I | I | I | I | C | C | R/A |
+| 活動          | Generation Agent | Normalize | Contract Gate | Package Output | Integration Runtime | Image Runtime | Operator |
+| ----------- | ---------------- | --------- | ------------- | -------------- | ------------------- | ------------- | -------- |
+| 意味内容の生成     | R/A              | I         | I             | I              | I                   | I             | C        |
+| DTO構造補正     | I                | R/A       | C             | I              | I                   | I             | I        |
+| DTO合否判定     | I                | C         | R/A           | C              | I                   | I             | I        |
+| Stage再生成    | R                | C         | A             | I              | I                   | I             | I        |
+| 最終成果物Guard  | I                | I         | C             | R/A            | I                   | I             | I        |
+| Transport受信 | I                | I         | I             | C              | R/A                 | I             | I        |
+| 原子的保存・検証    | I                | I         | I             | C              | R/A                 | I             | I        |
+| 画像生成        | I                | I         | I             | C              | C                   | R/A           | I        |
+| 障害調査・再実行判断  | I                | I         | I             | I              | C                   | C             | R/A      |
 
 Normalizeが意味内容、Gateが修正、Integration RuntimeがDTO意味生成を担当することはない。
 
@@ -369,26 +373,26 @@ sequenceDiagram
 
 ## 24. 設計思想の変遷
 
-| 段階 | 発見した問題 | 設計上の対応 |
-|---|---|---|
-| 初期Multi-stage Workflow | raw JSONと巨大Contextで後続AgentがStageを誤認 | Review、Audit向け最小DTOを導入 |
-| Contract Phase 1 | Workflow完走でも不完全成果物が成功扱い | Package Output Final Guardを追加 |
-| Contract Phase 2 | 前段の必須値欠落が後段へ波及 | DTO、Normalize、Contract Gateを分離 |
-| Research障害対応 | 正常なGate停止にも人間の再入力が必要 | 有限Research Retryを追加 |
-| Persistence障害対応 | 大容量Payloadが実行環境の制約へ衝突 | Transport境界と原子的Persistenceを採用 |
-| Artifact Integrity Phase | 長文途中切断とReview Stage逸脱が保存成功扱い | Section Writing、Artifact Validator、Review有限Retry、全文Auditを導入 |
-| Runtime Parameter調査 | Provider既定値だけでは長文処理を保証できない | 各LLM NodeでRuntime Parametersを明示管理 |
+| 段階                       | 発見した問題                              | 設計上の対応                                                      |
+| ------------------------ | ----------------------------------- | ----------------------------------------------------------- |
+| 初期Multi-stage Workflow   | raw JSONと巨大Contextで後続AgentがStageを誤認 | Review、Audit向け最小DTOを導入                                      |
+| Contract Phase 1         | Workflow完走でも不完全成果物が成功扱い             | Package Output Final Guardを追加                               |
+| Contract Phase 2         | 前段の必須値欠落が後段へ波及                      | DTO、Normalize、Contract Gateを分離                              |
+| Research障害対応             | 正常なGate停止にも人間の再入力が必要                | 有限Research Retryを追加                                         |
+| Persistence障害対応          | 大容量Payloadが実行環境の制約へ衝突               | Transport境界と原子的Persistenceを採用                               |
+| Artifact Integrity Phase | 長文途中切断とReview Stage逸脱が保存成功扱い        | Section Writing、Artifact Validator、Review有限Retry、全文Auditを導入 |
+| Runtime Parameter調査      | Provider既定値だけでは長文処理を保証できない          | 各LLM NodeでRuntime Parametersを明示管理                           |
 
 具体的な障害事象、内部値、Evidence ID、判断文書は公開対象外とする。
 
 ## 25. DTO Version方針
 
-- 現行DTOの一部は明示的なVersion Fieldを持たない
-- Field追加は、任意かつ既存Consumerが無視できる場合に限り後方互換とする
-- 必須Field追加、型変更、意味変更、階層移動は破壊的変更とする
-- 破壊的変更時はVersion識別子または新DTO名を採用し、Producer、Normalize、Gate、Consumer、Fixtureを同一変更単位で更新する
-- Normalizeは旧Versionの意味を推測して新Versionへ変換しない
-- Migrationは明示的なRuleだけを許可する
+* 現行DTOの一部は明示的なVersion Fieldを持たない
+* Field追加は、任意かつ既存Consumerが無視できる場合に限り後方互換とする
+* 必須Field追加、型変更、意味変更、階層移動は破壊的変更とする
+* 破壊的変更時はVersion識別子または新DTO名を採用し、Producer、Normalize、Gate、Consumer、Fixtureを同一変更単位で更新する
+* Normalizeは旧Versionの意味を推測して新Versionへ変換しない
+* Migrationは明示的なRuleだけを許可する
 
 現在のVersion未付与は既知の技術的負債であり、今後の契約更新時に共通表現を決定する。具体的な対象DTOと実施時期は内部計画へ委譲する。
 
@@ -402,11 +406,11 @@ Error CodeはLog文言ではなく機械判定用Interfaceとして扱う。
 
 ## 27. テスト戦略
 
-- 静的検証: 構文、識別子、参照、到達性、出力、環境Key
-- Contract単体: 初回PASS、FAILからPASS、FAILからFAIL、意味転用禁止、有限Graph
-- Transport / Persistence: 小規模、通常、大規模、特殊文字、不正構造、空入力、並行実行
-- 統合: Generation Workflow、Integration Workflow、画像生成、成果物保存
-- 手動: Provider解決、UI実行履歴、最終成果物の意味品質
+* 静的検証: 構文、識別子、参照、到達性、出力、環境Key
+* Contract単体: 初回PASS、FAILからPASS、FAILからFAIL、意味転用禁止、有限Graph
+* Transport / Persistence: 小規模、通常、大規模、特殊文字、不正構造、空入力、並行実行
+* 統合: Generation Workflow、Integration Workflow、画像生成、成果物保存
+* 手動: Provider解決、UI実行履歴、最終成果物の意味品質
 
 具体的なTest名、Script、Fixture、件数、結果、実行環境は公開対象外とする。
 
@@ -432,11 +436,10 @@ Architectureには、実装状況の変化に左右されないStage境界、責
 
 ## 31. 関連文書
 
-- [Public Documentation Map](README-public.md)
-- [Project Status](status-public.md)
-- [基本原則](principles-public.md)
-- [公開Architecture Decision Records](adr/)
-- [公開Configuration Audit](configuration-audits/)
-- [Publication Reflection Register](publication-reflection-register.md)
+* [Public Documentation Map](README-public.md)
+* [Project Status](status-public.md)
+* [基本原則](principles-public.md)
+* [公開Architecture Decision Records](adr/)
+* [公開Configuration Audit](configuration-audits/)
 
 内部正本、内部契約、運用手順、Error Catalog、Roadmap、Handover、内部Reviewへの直接導線は公開版では保持しない。
