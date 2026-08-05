@@ -1,17 +1,16 @@
 # Project Roadmap
 
-> **Public Edition**
->
-> 本書はInternal Project Roadmapから生成されたPublic派生物である。
-> Internal Repositoryを唯一の正本とし、本書は公開用Representationのみを提供する。
+> **Public Documentation (Derived from the Internal Project Roadmap)**
 
 ## 1. Purpose
 
-本書は Local AI Foundry プロジェクト全体の中長期的な発展方針を管理する Planning Document の正本である。
+本書は Local AI Foundry プロジェクト全体の中長期的な発展方針を説明するPublic Documentationである。
+
+本書はInternal Project Roadmapから派生した公開版であり、Project全体の将来的な方向性を説明することを目的とする。
 
 Roadmapは現在の状態を管理する文書ではなく、Project全体が将来どのように成熟していくかを示す。
 
-Current Status、Project Planning、Project Stateおよび運用状況は、それぞれ対応する公開Documentationを参照する。
+Current Status、Current Initiative、Project State、Runtime結果および日々の進捗は、それぞれ対応するPublic Documentationを参照する。
 
 ---
 
@@ -21,33 +20,33 @@ Current Status、Project Planning、Project Stateおよび運用状況は、そ�
 
 対象
 
-- Workflow Platform
-- Documentation
-- Publication
-- Website
-- Runtime
-- Platform
+* Workflow Platform
+* Documentation
+* Publication
+* Website
+* Runtime
+* Platform
 
 対象外
 
-- Current Status
-- Active Work
-- Project State
-- Commit Plan
-- Runtime Evidence
-- Audit / Report / Review
-- Architecture本文
-- ADR本文
+* Current Status
+* Active Work
+* Project State
+* Commit Plan
+* Runtime Evidence
+* Audit / Report / Review
+* Architecture本文
+* ADR本文
 
 ---
 
 # 3. Planning Principles
 
-- Roadmapは将来像を管理する。
-- Current Stateは保持しない。
-- Workstream単位でProject全体の成熟方向を整理する。
-- 実施順序はHuman Decisionによって決定する。
-- Architectureは現在の構造、本書は将来の方向性を管理する。
+* Roadmapは将来像を管理する。
+* Current Stateは保持しない。
+* Workstream単位でProject全体の成熟方向を整理する。
+* 実施順序はHuman Decisionによって決定する。
+* Architectureは現在の構造、本書は将来の方向性を管理する。
 
 ---
 
@@ -93,14 +92,14 @@ Continuous Evolution
 
 ## 5.2 Evolution Stages
 
-| Stage | Focus |
-|--------|-------|
-| Foundation | Workflow・Platform基盤構築 |
+| Stage      | Focus                               |
+| ---------- | ----------------------------------- |
+| Foundation | Workflow・Platform基盤構築               |
 | Governance | Documentation・Contract・Governance整備 |
-| Knowledge | Project Knowledge体系化 |
-| Delivery | Public Documentation提供 |
-| Operation | Runtime品質保証 |
-| Evolution | Capability継続拡張 |
+| Knowledge  | Project Knowledge体系化                |
+| Delivery   | Public Documentation提供              |
+| Operation  | Runtime品質保証                         |
+| Evolution  | Capability継続拡張                      |
 
 ---
 
@@ -168,13 +167,13 @@ Operational Qualityを継続的に保証する。
 
 # 7. Cross-workstream Relationships
 
-| From | To | Relationship |
-|------|----|--------------|
-| Workflow | Documentation | Knowledge Source |
-| Documentation | Publication | Publication Source |
-| Publication | Website | Public Presentation |
-| Workflow | Runtime | Validation Target |
-| Platform | All | Execution Foundation |
+| From          | To            | Relationship         |
+| ------------- | ------------- | -------------------- |
+| Workflow      | Documentation | Knowledge Source     |
+| Documentation | Publication   | Publication Source   |
+| Publication   | Website       | Public Presentation  |
+| Workflow      | Runtime       | Validation Target    |
+| Platform      | All           | Execution Foundation |
 
 ---
 
@@ -182,15 +181,15 @@ Operational Qualityを継続的に保証する。
 
 RoadmapはPlanning Layerのみを管理する。
 
-| Subject | Source of Truth |
-|----------|-----------------|
-| Current Status | Public Project Status Documentation |
-| Current Initiative | Public Project Planning Documentation |
-| Project State | Project State Documentation |
-| Architecture | Public Architecture Documentation |
-| Documentation Structure | Public Documentation Information Architecture |
-| Publication | Publication Governance |
-| Configuration | Configuration Management |
+| Subject                 | Reference              |
+| ----------------------- | ---------------------- |
+| Current Status          | Public Documentation   |
+| Current Initiative      | Public Documentation   |
+| Project State           | Public Documentation   |
+| Architecture            | Public Documentation   |
+| Documentation Structure | Public Documentation   |
+| Publication             | Publication Governance |
+| Configuration           | Internal Documentation |
 
 ---
 
@@ -206,14 +205,14 @@ Current Status、Commit、Runtime、Audit、Reviewのみでは更新しない。
 
 更新完了条件
 
-- Project全体を対象としている。
-- Current Statusを保持していない。
-- Active Workと責務が重複していない。
-- Architectureと責務が重複していない。
-- WorkstreamごとのMissionを定義している。
-- Evolution Stageを整理している。
-- Workstream間の関係を示している。
-- 長期的なProject Visionを説明している。
+* Project全体を対象としている。
+* Current Statusを保持していない。
+* Active Workと責務が重複していない。
+* Architectureと責務が重複していない。
+* WorkstreamごとのMissionを定義している。
+* Evolution Stageを整理している。
+* Workstream間の関係を示している。
+* 長期的なProject Visionを説明している。
 
 ---
 
@@ -223,4 +222,4 @@ RoadmapはProjectの未来を説明する文書である。
 
 現在を説明する文書ではない。
 
-各正本文書が一貫した方向で発展できるよう、Project全体の長期的な成長指針を提供する。
+各Documentationが一貫した方向で発展できるよう、Project全体の長期的な成長指針を提供する。
