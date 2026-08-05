@@ -70,3 +70,37 @@ body{font-size:18px;line-height:1.72}.legacy-anchor{display:block;position:relat
 @media(max-width:720px){.hero-team-copy{font-size:24px;line-height:1.36}.hero-team-copy span{display:block}.audience-flow em{font-size:14px}.demo-controls>div:first-child{max-width:none}.demo-buttons{width:100%}.demo-skip{align-self:center}.demo-phase{align-items:flex-start;flex-direction:column;gap:10px;padding:18px 20px}.demo-phase ol{grid-template-columns:1fr 1fr}.team-log{grid-template-columns:1fr}.team-log-head{padding:20px;border-right:0;border-bottom:1px solid var(--line)}.team-log-list{padding:18px 20px}.team-log-list p{grid-template-columns:1fr;gap:2px}.demo-outcome,.demo-disclaimer{padding:14px 20px}.demo-complete-cta{grid-template-columns:1fr;padding:22px 20px}.demo-complete-cta>a:last-child{grid-column:auto;text-align:center}.demo-complete-cta .button{width:100%}}
 @media(prefers-reduced-motion:reduce){.team-log-list p{animation:none}.hero-team-copy,.demo-phase li,.demo-outcome{transition:none}}
 .demo-complete-cta{visibility:hidden}.demo-complete-cta.is-visible{visibility:visible}
+
+/* v2.12: Project State / Active Work Reflection — merged in v2.14 */
+.hero-operation{max-width:720px;margin:16px 0 0;color:#c7d6e8;font-size:clamp(15px,1.5vw,18px);line-height:1.8}
+.operating-principle{margin-top:28px;padding:22px 26px;border:1px solid rgba(41,217,255,.28);border-left:4px solid #29d9ff;border-radius:14px;background:linear-gradient(135deg,rgba(14,33,55,.82),rgba(7,17,30,.88))}
+.operating-principle small,.status-column small{display:block;color:#29d9ff;font-size:12px;font-weight:800;letter-spacing:.16em}
+.operating-principle strong{display:block;margin-top:8px;color:#eef6ff;font-size:clamp(18px,2.3vw,26px);line-height:1.5}
+.release-why{max-width:760px;margin:14px 0 0;color:#aebdd0;font-size:15px;line-height:1.7}
+.release-why strong{color:#29d9ff}
+.status-lead{max-width:760px;margin:-16px 0 28px;color:#9aabc1}
+.status-board.status-board-v212{grid-template-columns:repeat(3,minmax(0,1fr))}
+.status-board-v212 .status-column{min-height:250px}
+.status-board-v212 .status-column>strong{display:block;margin:24px 0 12px;color:#eef6ff;font-size:clamp(21px,2.4vw,30px);line-height:1.25}
+.status-board-v212 .status-column>p{margin:0 0 24px;color:#9aabc1}
+.status-board-v212 .status-column small{margin-top:auto;color:#7fcce0;line-height:1.6}
+.status-board-v212 .status-column.state{border-color:rgba(83,224,162,.28)}
+.status-board-v212 .status-column.work{border-color:rgba(41,217,255,.32)}
+.status-board-v212 .status-column.gate{border-color:rgba(255,198,84,.28)}
+@media(max-width:900px){.status-board.status-board-v212{grid-template-columns:1fr}.status-board-v212 .status-column{min-height:auto}}
+@media(max-width:640px){.hero-operation{font-size:15px}.operating-principle{padding:20px}.release-why{font-size:14px}}
+
+/* v2.14: Public knowledge navigation and website consolidation */
+.knowledge-path{min-height:360px}
+.knowledge-links{display:grid;gap:8px;margin-top:22px}
+.knowledge-links a{display:flex;align-items:center;justify-content:space-between;min-height:38px;padding:8px 11px;border:1px solid var(--line);border-radius:8px;color:#c7d7e9;font-size:13px;text-decoration:none;transition:.2s}
+.knowledge-links a:hover,.knowledge-links a:focus-visible{border-color:var(--cyan);color:#fff;background:rgba(41,217,255,.06)}
+.knowledge-path small{margin-top:20px}
+.pathway-grid{grid-template-columns:repeat(4,1fr)}
+.pathway-card{min-height:340px}
+.roadmap-document-link{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:24px;padding:24px 28px;border:1px solid rgba(41,217,255,.3);border-radius:14px;background:rgba(41,217,255,.045)}
+.roadmap-document-link p{margin:0;color:#aebdd0}
+.signal-card em{white-space:nowrap}
+@media(max-width:1150px){.pathway-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1000px){.knowledge-path{min-height:330px}}
+@media(max-width:720px){.pathway-grid{grid-template-columns:1fr}.pathway-card{min-height:240px}.knowledge-path{min-height:auto}.roadmap-document-link{align-items:stretch;flex-direction:column;padding:22px}.roadmap-document-link .button{width:100%}}

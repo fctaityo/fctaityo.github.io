@@ -15,30 +15,23 @@
     body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 10%,rgba(41,217,255,.08),transparent 28%),radial-gradient(circle at 85% 30%,rgba(70,104,255,.07),transparent 30%)}
     .shell{width:min(1080px,calc(100% - 40px));margin:auto}
     .header{padding:30px 0;border-bottom:1px solid var(--line);backdrop-filter:blur(14px);background:rgba(5,9,20,.72);position:sticky;top:0;z-index:10}
-    a{color:inherit}
-    .back{color:var(--cyan);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.06em}
-    .hero{padding:104px 0 58px}
-    .kicker{margin:0;font-size:14px;letter-spacing:.22em;color:var(--cyan);font-weight:800}
+    a{color:inherit}.back{color:var(--cyan);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.06em}
+    .hero{padding:104px 0 58px}.kicker{margin:0;font-size:14px;letter-spacing:.22em;color:var(--cyan);font-weight:800}
     .hero h1{font-size:clamp(46px,8vw,82px);line-height:.95;margin:14px 0 26px;letter-spacing:-.04em}
-    .hero-copy{max-width:760px;color:var(--muted);font-size:20px}
-    .hero-copy strong{color:var(--text)}
+    .hero-copy{max-width:760px;color:var(--muted);font-size:20px}.hero-copy strong{color:var(--text)}
     .history-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;margin:0 0 32px;padding:28px 30px;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:16px;background:linear-gradient(145deg,rgba(15,28,48,.88),rgba(7,14,26,.96))}
-    .history-intro h2{margin:0;font-size:28px;line-height:1.25}
-    .history-intro p{margin:0;color:var(--muted)}
+    .history-intro h2{margin:0;font-size:28px;line-height:1.25}.history-intro p{margin:0;color:var(--muted)}
     .history{display:grid;gap:22px;padding-bottom:90px}
     .release{position:relative;display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:start;padding:32px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(15,28,48,.92),rgba(7,14,26,.97));text-decoration:none;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
     .release:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:transparent;transition:background .2s ease}
     .release:hover,.release:focus-visible{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 18px 42px rgba(0,0,0,.22);outline:none}
     .release:hover:before,.release:focus-visible:before{background:var(--cyan)}
     .release.latest{border-color:rgba(41,217,255,.28);background:linear-gradient(145deg,rgba(13,34,52,.97),rgba(7,17,29,.98))}
-    .date-block{display:grid;gap:6px}
-    time{font-weight:800;color:var(--cyan)}
+    .date-block{display:grid;gap:6px}time{font-weight:800;color:var(--cyan)}
     .version{font-size:13px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
     .theme{display:block;margin-bottom:6px;color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-    h2{font-size:25px;line-height:1.25;margin:0 0 10px}
-    .release p{margin:0;color:var(--muted)}
-    .keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-    .keywords span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d7e9;font-size:12px;letter-spacing:.05em;background:rgba(255,255,255,.02)}
+    h2{font-size:25px;line-height:1.25;margin:0 0 10px}.release p{margin:0;color:var(--muted)}
+    .keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.keywords span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d7e9;font-size:12px;letter-spacing:.05em;background:rgba(255,255,255,.02)}
     .release b{align-self:center;color:var(--cyan);font-size:14px;white-space:nowrap}
     .footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
     @media(max-width:760px){body{font-size:16px}.hero{padding-top:72px}.history-intro{grid-template-columns:1fr}.release{grid-template-columns:1fr;gap:14px;padding:26px}.release b{margin-top:4px}h2{font-size:22px}}
@@ -48,8 +41,7 @@
   <header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a></div></header>
   <main class="shell">
     <section class="hero">
-      <p class="kicker">RELEASE HISTORY</p>
-      <h1>進化の記録。</h1>
+      <p class="kicker">RELEASE HISTORY</p><h1>進化の記録。</h1>
       <p class="hero-copy">Local AI Foundryのリリースは、単なるバージョン更新ではありません。<strong>設計思想・運用・公開体系が、どのように育ってきたか</strong>を時系列で記録しています。</p>
     </section>
     <section class="history-intro" aria-labelledby="history-guide-title">
@@ -57,76 +49,21 @@
       <p>各リリースには、その時点で取り組んだテーマ、設計上の意味、関連キーワードを記載しています。実装、Governance、Documentation、Public Releaseが一つの流れとしてどう積み上がったかを確認できます。</p>
     </section>
     <section class="history" aria-label="リリース一覧">
-      <a class="release latest" href="2026-08-04-v2.13.html">
-        <div class="date-block"><time datetime="2026-08-04">2026.08.04</time><span class="version">v2.13</span></div>
-        <div><span class="theme">Architecture Public Documentation</span><h2>公開アーキテクチャを、ひとつの体系へ。</h2><p>Architecture、MCP Extension、Dify → n8n → ComfyUI Output Pipelineを公開し、Publication Governance、Publication Registry、Publication Reviewによる公開管理体系を確立。</p><div class="keywords"><span>Architecture</span><span>MCP Extension</span><span>Output Pipeline</span><span>Publication</span><span>Governance</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-08-02-v2.12.html">
-        <div class="date-block"><time datetime="2026-08-02">2026.08.02</time><span class="version">v2.12</span></div>
-        <div><span class="theme">Project State & Active Work</span><h2>現在地と作業地点を、分けて見せる。</h2><p>Project StateとActive Workを別責務として整理し、公式HPの現在地表示、Documentation IA導線、Roadmapを最新状態へ同期。</p><div class="keywords"><span>Project State</span><span>Active Work</span><span>Current Snapshot</span><span>Documentation IA</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-08-01-v2.11.html">
-        <div class="date-block"><time datetime="2026-08-01">2026.08.01</time><span class="version">v2.11</span></div>
-        <div><span class="theme">Project State Governance</span><h2>プロジェクトの到達状態を、正式に管理する。</h2><p>Project State Governanceを公開し、Public Documentationと公式サイトの導線を更新。</p><div class="keywords"><span>Project State</span><span>Baseline</span><span>Governance</span><span>Public Documentation</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-30-v2.10.html">
-        <div class="date-block"><time datetime="2026-07-30">2026.07.30</time><span class="version">v2.10</span></div>
-        <div><span class="theme">Configuration & Publish Compatibility</span><h2>構成差分と公開可能性を、同じ地図で追う。</h2><p>Project StatusとConfiguration Auditを更新し、Publish Compatibilityの現在地と公開導線を同期。</p><div class="keywords"><span>Configuration</span><span>Audit</span><span>Publish</span><span>Compatibility</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-25-v2.9.html">
-        <div class="date-block"><time datetime="2026-07-25">2026.07.25</time><span class="version">v2.9</span></div>
-        <div><span class="theme">Public Documentation Foundation</span><h2>公開資料を、読める状態から使える状態へ。</h2><p>Public Documentationを全面整備し、リンク監査、公開導線の修復、再監査PASSまでを完了。</p><div class="keywords"><span>Public Documentation</span><span>Navigation</span><span>Link Audit</span><span>Verification</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-24-v2.8.html">
-        <div class="date-block"><time datetime="2026-07-24">2026.07.24</time><span class="version">v2.8</span></div>
-        <div><span class="theme">Website Experience</span><h2>公式サイトの視線誘導と入口を磨く。</h2><p>Header、外部ブランド導線、Hero CTA、セクション間の視線誘導を改善。</p><div class="keywords"><span>Website</span><span>UX</span><span>Navigation</span><span>Brand</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-24-v2.7.html">
-        <div class="date-block"><time datetime="2026-07-24">2026.07.24</time><span class="version">v2.7</span></div>
-        <div><span class="theme">Documentation Phase 2</span><h2>知識基盤と公開メディアの役割を分ける。</h2><p>Documentation Phase 2の完了、Project Knowledge、公式サイト・GitHub・NOTEの役割を反映。</p><div class="keywords"><span>Documentation</span><span>Project Knowledge</span><span>GitHub</span><span>NOTE</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17-v2.6.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.6</span></div>
-        <div><span class="theme">Recovery Experience</span><h2>失敗検出から復旧までを、体験として見せる。</h2><p>Hero訴求と固定デモを強化し、問題検出から部分再試行、完成までを3幕の体験として表現。</p><div class="keywords"><span>Retry</span><span>Recovery</span><span>Demo</span><span>Artifact Success</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17-v2.5.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.5</span></div>
-        <div><span class="theme">AI Team Introduction</span><h2>AIチームの仕事を、一般向けに伝える。</h2><p>一般向けの導入、AIチーム制作フロー、比較、失敗から戻るインタラクティブデモを追加。</p><div class="keywords"><span>AI Team</span><span>Workflow</span><span>Interactive Demo</span><span>Introduction</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17-v2.4.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.4</span></div>
-        <div><span class="theme">Visual Refinement</span><h2>言葉と視線の流れを整える。</h2><p>Heroコピー、タイポグラフィ、視線誘導、日本語UIをブラッシュアップ。</p><div class="keywords"><span>Copy</span><span>Typography</span><span>Japanese UI</span><span>Visual Design</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17-v2.3.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.3</span></div>
-        <div><span class="theme">Information Architecture</span><h2>基本原則とシステム構成を分離する。</h2><p>基本原則とシステム構成を分離し、文字サイズ、情報階層、余白を改善。</p><div class="keywords"><span>Information Architecture</span><span>Principles</span><span>System</span><span>Hierarchy</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17-v2.2.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.2</span></div>
-        <div><span class="theme">Workflow Separation</span><h2>AI工程とPlatform処理を分ける。</h2><p>日本語UI化、AIエージェント工程とプラットフォーム処理の分離、状態表示を整理。</p><div class="keywords"><span>Agent Workflow</span><span>Platform Pipeline</span><span>Japanese UI</span><span>Status</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-17.html">
-        <div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.1 / Website v2</span></div>
-        <div><span class="theme">Reliability & Website v2</span><h2>Retry、Error、Transport、Webを同時に前進させる。</h2><p>Research retry、ADR、Error Catalog、TransportとWebサイトを改善。</p><div class="keywords"><span>Retry</span><span>ADR</span><span>Error Catalog</span><span>Transport</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
-      <a class="release" href="2026-07-15.html">
-        <div class="date-block"><time datetime="2026-07-15">2026.07.15</time><span class="version">Phase 1</span></div>
-        <div><span class="theme">Foundation</span><h2>契約駆動Architectureの最初の土台。</h2><p>契約駆動アーキテクチャと最初のDTO境界を構築。</p><div class="keywords"><span>Contract Driven</span><span>DTO</span><span>Foundation</span><span>Architecture</span></div></div>
-        <b>詳細を見る →</b>
-      </a>
+      <a class="release latest" href="2026-08-05-v2.14.html"><div class="date-block"><time datetime="2026-08-05">2026.08.05</time><span class="version">v2.14</span></div><div><span class="theme">Public Knowledge &amp; Publication Restructuring</span><h2>知識の入口を増やし、公開管理を内側へ戻す。</h2><p>GlossaryとProject Roadmapを公開し、Publication Registryを廃止。Public Repository、Documentation導線、CSS構成を整理。</p><div class="keywords"><span>Glossary</span><span>Roadmap</span><span>Publication</span><span>Public Documentation</span><span>Website Refactoring</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-08-04-v2.13.html"><div class="date-block"><time datetime="2026-08-04">2026.08.04</time><span class="version">v2.13</span></div><div><span class="theme">Architecture Public Documentation</span><h2>公開アーキテクチャを、ひとつの体系へ。</h2><p>Architecture、MCP Extension、Dify → n8n → ComfyUI Output Pipelineを公開し、Publication Governanceによる公開管理体系を確立。</p><div class="keywords"><span>Architecture</span><span>MCP Extension</span><span>Output Pipeline</span><span>Publication</span><span>Governance</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-08-02-v2.12.html"><div class="date-block"><time datetime="2026-08-02">2026.08.02</time><span class="version">v2.12</span></div><div><span class="theme">Project State &amp; Active Work</span><h2>現在地と作業地点を、分けて見せる。</h2><p>Project StateとActive Workを別責務として整理し、公式HPの現在地表示、Documentation IA導線、Roadmapを最新状態へ同期。</p><div class="keywords"><span>Project State</span><span>Active Work</span><span>Current Snapshot</span><span>Documentation IA</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-08-01-v2.11.html"><div class="date-block"><time datetime="2026-08-01">2026.08.01</time><span class="version">v2.11</span></div><div><span class="theme">Project State Governance</span><h2>プロジェクトの到達状態を、正式に管理する。</h2><p>Project State Governanceを公開し、Public Documentationと公式サイトの導線を更新。</p><div class="keywords"><span>Project State</span><span>Baseline</span><span>Governance</span><span>Public Documentation</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-30-v2.10.html"><div class="date-block"><time datetime="2026-07-30">2026.07.30</time><span class="version">v2.10</span></div><div><span class="theme">Configuration &amp; Publish Compatibility</span><h2>構成差分と公開可能性を、同じ地図で追う。</h2><p>Project StatusとConfiguration Auditを更新し、Publish Compatibilityの現在地と公開導線を同期。</p><div class="keywords"><span>Configuration</span><span>Audit</span><span>Publish</span><span>Compatibility</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-25-v2.9.html"><div class="date-block"><time datetime="2026-07-25">2026.07.25</time><span class="version">v2.9</span></div><div><span class="theme">Public Documentation Foundation</span><h2>公開資料を、読める状態から使える状態へ。</h2><p>Public Documentationを全面整備し、リンク監査、公開導線の修復、再監査PASSまでを完了。</p><div class="keywords"><span>Public Documentation</span><span>Navigation</span><span>Link Audit</span><span>Verification</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-24-v2.8.html"><div class="date-block"><time datetime="2026-07-24">2026.07.24</time><span class="version">v2.8</span></div><div><span class="theme">Website Experience</span><h2>公式サイトの視線誘導と入口を磨く。</h2><p>Header、外部ブランド導線、Hero CTA、セクション間の視線誘導を改善。</p><div class="keywords"><span>Website</span><span>UX</span><span>Navigation</span><span>Brand</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-24-v2.7.html"><div class="date-block"><time datetime="2026-07-24">2026.07.24</time><span class="version">v2.7</span></div><div><span class="theme">Documentation Phase 2</span><h2>知識基盤と公開メディアの役割を分ける。</h2><p>Documentation Phase 2の完了、Project Knowledge、公式サイト・GitHub・NOTEの役割を反映。</p><div class="keywords"><span>Documentation</span><span>Project Knowledge</span><span>GitHub</span><span>NOTE</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17-v2.6.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.6</span></div><div><span class="theme">Recovery Experience</span><h2>失敗検出から復旧までを、体験として見せる。</h2><p>Hero訴求と固定デモを強化し、問題検出から部分再試行、完成までを3幕の体験として表現。</p><div class="keywords"><span>Retry</span><span>Recovery</span><span>Demo</span><span>Artifact Success</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17-v2.5.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.5</span></div><div><span class="theme">AI Team Introduction</span><h2>AIチームの仕事を、一般向けに伝える。</h2><p>一般向けの導入、AIチーム制作フロー、比較、失敗から戻るインタラクティブデモを追加。</p><div class="keywords"><span>AI Team</span><span>Workflow</span><span>Interactive Demo</span><span>Introduction</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17-v2.4.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.4</span></div><div><span class="theme">Visual Refinement</span><h2>言葉と視線の流れを整える。</h2><p>Heroコピー、タイポグラフィ、視線誘導、日本語UIをブラッシュアップ。</p><div class="keywords"><span>Copy</span><span>Typography</span><span>Japanese UI</span><span>Visual Design</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17-v2.3.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.3</span></div><div><span class="theme">Information Architecture</span><h2>基本原則とシステム構成を分離する。</h2><p>基本原則とシステム構成を分離し、文字サイズ、情報階層、余白を改善。</p><div class="keywords"><span>Information Architecture</span><span>Principles</span><span>System</span><span>Hierarchy</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17-v2.2.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.2</span></div><div><span class="theme">Workflow Separation</span><h2>AI工程とPlatform処理を分ける。</h2><p>日本語UI化、AIエージェント工程とプラットフォーム処理の分離、状態表示を整理。</p><div class="keywords"><span>Agent Workflow</span><span>Platform Pipeline</span><span>Japanese UI</span><span>Status</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-17.html"><div class="date-block"><time datetime="2026-07-17">2026.07.17</time><span class="version">v2.1 / Website v2</span></div><div><span class="theme">Reliability &amp; Website v2</span><h2>Retry、Error、Transport、Webを同時に前進させる。</h2><p>Research retry、ADR、Error Catalog、TransportとWebサイトを改善。</p><div class="keywords"><span>Retry</span><span>ADR</span><span>Error Catalog</span><span>Transport</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-07-15.html"><div class="date-block"><time datetime="2026-07-15">2026.07.15</time><span class="version">Phase 1</span></div><div><span class="theme">Foundation</span><h2>契約駆動Architectureの最初の土台。</h2><p>契約駆動アーキテクチャと最初のDTO境界を構築。</p><div class="keywords"><span>Contract Driven</span><span>DTO</span><span>Foundation</span><span>Architecture</span></div></div><b>詳細を見る →</b></a>
     </section>
   </main>
   <footer class="footer"><div class="shell">Local AI Foundry — Contract-Driven Multi-Agent Platform ©2026 FC決死隊隊長</div></footer>

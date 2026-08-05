@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050914">
+  <meta name="description" content="Local AI Foundry v2.14 — GlossaryとProject Roadmapを公開し、Publication管理と公式HPの公開導線を再編。">
+  <title>Local AI Foundry v2.14 — 2026-08-05</title>
+  <style>
+    :root{--bg:#050914;--text:#eef6ff;--muted:#9aabc1;--cyan:#29d9ff;--line:rgba(117,183,255,.18)}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}
+    body:before{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(44,124,196,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(44,124,196,.05) 1px,transparent 1px);background-size:48px 48px}
+    .shell{width:min(900px,calc(100% - 40px));margin:auto}.header{padding:30px 0;border-bottom:1px solid var(--line)}
+    a{color:var(--cyan)}.back{text-decoration:none;font-size:14px}.hero{padding:100px 0 50px}
+    .kicker{font-size:14px;letter-spacing:.2em;color:var(--cyan);font-weight:800}.hero h1{font-size:clamp(44px,8vw,76px);line-height:1;margin:15px 0 25px}
+    .lead{font-size:21px;color:#c3d0e2}.why{margin:26px 0;padding:20px 24px;border:1px solid rgba(41,217,255,.26);border-left:4px solid var(--cyan);border-radius:12px;background:rgba(10,24,41,.72)}
+    .why strong{display:block;color:var(--cyan);font-size:13px;letter-spacing:.14em}.why p{margin:7px 0 0;color:#d7e3f1}
+    .meta{display:flex;gap:10px;flex-wrap:wrap}.meta span{padding:7px 11px;border:1px solid var(--line);border-radius:99px;color:var(--muted);font-size:13px}
+    .content{padding:36px;background:linear-gradient(145deg,rgba(15,28,48,.94),rgba(7,14,26,.96));border:1px solid var(--line);border-radius:18px;margin-bottom:80px}
+    .content h2{font-size:28px}.updates{list-style:none;padding:0}.updates li{padding:20px 0 20px 34px;border-bottom:1px solid var(--line);position:relative}
+    .updates li:before{content:"";position:absolute;left:5px;top:34px;width:10px;height:2px;background:var(--cyan)}
+    .updates strong,.updates span{display:block}.updates strong{font-size:19px}.updates span{color:var(--muted)}
+    .footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    @media(max-width:600px){body{font-size:16px}.hero{padding-top:70px}.content{padding:24px}.lead{font-size:18px}}
+  </style>
+</head>
+<body>
+  <header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a>　<a class="back" href="index.html">更新履歴</a></div></header>
+  <main class="shell">
+    <section class="hero">
+      <p class="kicker">RELEASE / 2026.08.05</p>
+      <h1>Local AI Foundry<br>v2.14</h1>
+      <p class="lead">GlossaryとProject RoadmapをPublic Documentationへ追加し、公開管理情報をInternalへ集約。Public Repositoryと公式HPを、公開成果物を利用者へ届けるLayerとして整理しました。</p>
+      <div class="why"><strong>WHY CHANGED</strong><p>Public Documentationが増える一方で、用語、全体像、現在地、将来像への入口が分散していました。また、Public RepositoryにPublication Reviewの管理情報を保持する構成が、公開成果物と内部管理の責務を曖昧にしていました。そこでGlossaryとRoadmapを公開し、公開管理をInternalへ戻し、Websiteの導線とCSS構成を整理しました。</p></div>
+      <div class="meta"><span>GLOSSARY</span><span>ROADMAP</span><span>PUBLICATION</span><span>WEBSITE REFACTORING</span></div>
+    </section>
+    <article class="content">
+      <h2>v2.14 更新内容</h2>
+      <ul class="updates">
+        <li><strong>Glossary Public Documentationを追加</strong><span>Project固有用語を公開Referenceとして参照できる入口を追加しました。</span></li>
+        <li><strong>Project Roadmap Public Documentationを追加</strong><span>Project Vision、Evolution Stage、Workstream、長期的な成長方向を公開しました。</span></li>
+        <li><strong>Publication Registryを廃止</strong><span>公開対象一覧とPublication Review Current Stateの管理をInternalへ戻し、Public Repositoryから内部管理台帳を除外しました。</span></li>
+        <li><strong>Public Repositoryの責務を整理</strong><span>Public Repositoryは公開可能な成果物のみを保持し、WebsiteはPresentationとNavigationを担当する構成へ同期しました。</span></li>
+        <li><strong>Public Documentation入口を4分類へ再編</strong><span>Understand、Explore、Track、Governの目的別に資料を辿れるようにしました。</span></li>
+        <li><strong>初めて読む人の入口を改善</strong><span>Glossary、Architecture、Status、Roadmapへ直接進める4つの入口を設けました。</span></li>
+        <li><strong>Project StateとDocumentation Releaseを分離表示</strong><span>Project StateはPublished、公式HPのDocumentation Releaseはv2.14として別の状態であることを明確にしました。</span></li>
+        <li><strong>Roadmap全文への導線を追加</strong><span>トップページの要約からPublic Roadmap全文へ直接進めるCTAを追加しました。</span></li>
+        <li><strong>CSSを一本化</strong><span>styles-v2.12.cssの有効なルールをstyles.cssへ統合し、トップページのStylesheetを一つに整理しました。</span></li>
+        <li><strong>旧CSSを削除可能な状態へ移行</strong><span>index.htmlからstyles-v2.12.cssへの参照を削除し、統合後のstyles.css?v=2.14だけを読み込む構成にしました。</span></li>
+        <li><strong>公式HPとRelease Historyを同期</strong><span>Hero、最新アップデート、Project Position、Roadmap、Release Historyをv2.14へ更新しました。</span></li>
+        <li><strong>Runtime状態を維持</strong><span>Project StateはPublishedのままです。Runtime VerificationおよびRuntime Acceptanceは未実施であり、本リリースはRuntime実行を意味しません。</span></li>
+      </ul>
+    </article>
+  </main>
+  <footer class="footer"><div class="shell">Local AI Foundry — Contract-Driven Multi-Agent Platform ©2026 FC決死隊隊長</div></footer>
+</body>
+</html>
