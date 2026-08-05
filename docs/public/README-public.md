@@ -14,6 +14,7 @@ Internal Repositoryを唯一の正本とし、このPublic Repositoryに配置�
 * [Project Status](status-public.md): 公開可能な範囲で現在地と次の主要Gateを確認する
 * [Architecture](architecture-public.md): システム全体の構造と責務境界を確認する
 * [基本原則](principles-public.md): Local AI Foundryの設計思想を確認する
+* [Glossary](glossary-public.md): Local AI Foundryで使用するProject固有用語を確認する
 * [Publication Governance](../governance/publication-governance.md): 公開契約、責務境界、分類、公開フローを確認する
 * [Website Operations](website-operations-public.md): 公式サイトの表示、導線、VersionおよびRelease運用を確認する
 * [Configuration Audit一覧](configuration-audits/index.md): 公開済みConfiguration Auditを確認する
@@ -26,6 +27,7 @@ Internal Repositoryを唯一の正本とし、このPublic Repositoryに配置�
 | ------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | 現在地と次の行動を知る                           | [Project Status](status-public.md)                                                                  | [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md) |
 | Project StateとCurrent Snapshotの考え方を知る | [Project State Governance Audit](configuration-audits/CFG-20260801-001-project-state-governance.md) | [Project Status](status-public.md)                                                                  |
+| Project固有用語を確認する                      | [Glossary](glossary-public.md)                                                                      | 関連する公開文書                                                                                            |
 | 公開契約と責務境界を知る                          | [Publication Governance](../governance/publication-governance.md)                                   | [Website Operations](website-operations-public.md)                                                  |
 | 公式サイトの表示・導線・Release運用を確認する            | [Website Operations](website-operations-public.md)                                                  | [Publication Governance](../governance/publication-governance.md)                                   |
 | 公開済みの構成監査結果を確認する                      | [Configuration Audit一覧](configuration-audits/index.md)                                              | 対象Audit本文                                                                                           |
@@ -69,6 +71,7 @@ Publication GovernanceとWebsite Operationsは相互に代替しない。
 * [基本原則](principles-public.md): 設計思想
 * [Architecture](architecture-public.md): システム構成とデータフロー
 * [Project Status](status-public.md): 公開可能なCurrent Snapshot
+* [Glossary](glossary-public.md): Project固有用語のCurrent Reference
 
 ### Publication
 
