@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050914">
+<title>AI Team Demo — Local AI Foundry</title>
+<link rel="stylesheet" href="styles.css?v=3.0"><script src="script.js?v=3.0" defer></script>
+<style>
+.demo-page{padding:76px 0 80px}.demo-page .back{display:inline-block;margin-bottom:40px;color:var(--cyan);text-decoration:none;font-weight:800}
+.demo-intro{display:grid;grid-template-columns:1fr 250px;align-items:end;gap:28px;margin-bottom:28px}.demo-intro img{max-height:250px;object-fit:contain;filter:drop-shadow(0 14px 30px rgba(0,0,0,.3))}
+.demo-board{padding:24px;border:1px solid var(--line);border-radius:22px;background:rgba(10,20,36,.82)}.demo-controls{display:flex;justify-content:space-between;gap:18px;align-items:center}.demo-controls p{margin:0;color:var(--muted)}
+.demo-buttons{display:flex;gap:9px}.demo-skip{min-height:42px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:transparent;color:#fff}
+.demo-steps{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.demo-steps li{padding:14px 10px;border:1px solid var(--line);border-radius:13px;background:#091525}.demo-steps span,.demo-steps strong,.demo-steps small{display:block}.demo-steps span{font-size:9px;color:#607792}.demo-steps small{margin-top:16px;color:var(--muted);font-size:9px}.demo-steps li.active{border-color:var(--cyan)}.demo-steps li.done{border-color:rgba(77,241,162,.4)}.demo-steps li.warning{border-color:rgba(255,180,70,.7)}
+.team-log{margin-top:16px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#07111f}.team-log h2{font-size:16px;margin:0 0 10px}.team-log-list{display:grid;gap:6px}.team-log-list p{display:grid;grid-template-columns:100px 1fr;gap:10px;margin:0;font-size:12px}.team-log-list strong{color:var(--cyan)}.team-log-list span{color:var(--muted)}
+.demo-outcome{margin-top:14px;padding:14px 16px;border-left:3px solid var(--cyan);background:rgba(65,219,255,.04);color:#c3d2e3}.demo-outcome.warning{border-color:#ffb446}.demo-outcome.complete{border-color:var(--green)}
+@media(max-width:850px){.demo-intro{grid-template-columns:1fr}.demo-intro img{justify-self:center}.demo-controls{align-items:stretch;flex-direction:column}.demo-steps{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<main class="demo-page">
+<div class="shell">
+<a class="back" href="index.html#how">← LOCAL AI FOUNDRYへ戻る</a>
+<div class="demo-intro">
+<div><p class="kicker">INTERACTIVE DEMO</p><h1 style="font-size:clamp(44px,7vw,82px);line-height:.95">失敗を見つけ、<br>必要な工程だけ戻す。</h1><p class="hero-description">固定シナリオで、制作 → 問題検出 → 部分再試行 → 完成までを体験できます。実際のAIや外部APIは実行しません。</p></div>
+<img src="assets/mascot-check.webp" alt="デモを案内するLocal AI Foundryのマスコットキャラクター">
+</div>
+<div class="demo-board" data-team-demo>
+<div class="demo-controls"><p>最終確認で文章の途中終了を検出し、執筆工程だけを再試行します。</p><div class="demo-buttons"><button class="button primary" data-demo-start type="button">AIチームを動かす →</button><button class="demo-skip" data-demo-skip hidden type="button">結果まで進める</button></div></div>
+<ol class="demo-steps" aria-label="AIチームの工程">
+<li data-demo-step="plan"><span>01</span><strong>構成</strong><small>待機中</small></li>
+<li data-demo-step="research"><span>02</span><strong>調査</strong><small>待機中</small></li>
+<li data-demo-step="writing"><span>03</span><strong>執筆</strong><small>待機中</small></li>
+<li data-demo-step="review"><span>04</span><strong>レビュー</strong><small>待機中</small></li>
+<li data-demo-step="image"><span>05</span><strong>画像</strong><small>待機中</small></li>
+<li data-demo-step="audit"><span>06</span><strong>最終確認</strong><small>待機中</small></li>
+<li data-demo-step="save"><span>07</span><strong>保存</strong><small>待機中</small></li>
+</ol>
+<div class="team-log"><h2>AIチームのやり取り</h2><div class="team-log-list" data-team-log></div><p class="sr-only" aria-live="polite" data-demo-message>開始を待っています。</p></div>
+<div class="demo-outcome" data-demo-outcome>検査前の成果物は保存しません。</div>
+</div>
+</div>
+</main>
+</body>
+</html>
