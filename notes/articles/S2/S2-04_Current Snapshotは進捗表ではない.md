@@ -179,5 +179,3 @@ Project全体の現在地と作業地点は、これで分けられた。では�
 一次記録：
 - [WD-20260802-001 Project Snapshotでは作業断面へ戻れなかった](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/war-diary/WD-20260802-001-project-snapshot-and-active-work.md)
 - [CM-20260802-002 Project SnapshotとActive Work Snapshotを分離する](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/configuration-management/CM-20260802-002-project-snapshot-and-active-work.md)
-
-関連する設計・Configuration Evidence：`ADR-0012` / `CFG-D005` / `CFG-20260802-007`
