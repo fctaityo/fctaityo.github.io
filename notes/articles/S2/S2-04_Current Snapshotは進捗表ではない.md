@@ -1,7 +1,7 @@
 # S2-04 Current Snapshotは進捗表ではない
 
 ### 📌 本記事
-- **04 Current Snapshotは進捗表ではない**
+- **Season2 第04話 Current Snapshotは進捗表ではない**
 
 ### 関連記事はコチラ👇
 - **03 Auditは犯人探しではない**
