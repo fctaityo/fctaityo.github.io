@@ -1,4 +1,4 @@
-# 04 Current Snapshotは進捗表ではない
+# S2-04 Current Snapshotは進捗表ではない
 
 ### 📌 本記事
 - **04 Current Snapshotは進捗表ではない**
