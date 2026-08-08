@@ -38,3 +38,17 @@ main{padding-top:76px}.hero{min-height:calc(100vh - 76px);display:flex;align-ite
 @media(max-width:760px){html{scroll-padding-top:76px}.site-header{height:68px}.header-shell{width:calc(100% - 28px)}.brand-copy small{display:none}main{padding-top:68px}.shell{width:calc(100% - 28px)}.hero{padding-bottom:42px}.hero-copy{padding-top:46px}.hero-frame img{aspect-ratio:1.15/1}.hero-signal{right:7px;bottom:10px}.section{padding:58px 0}.section-character-grid,.section-with-character.alt .section-character-grid{display:flex;flex-direction:column}.section-with-character.alt .character-panel{order:2}.section-heading{grid-template-columns:1fr;gap:6px}.character-panel{width:min(310px,90%);min-height:235px;margin:0 auto}.character-panel img{max-height:270px}.character-panel .speech{left:-4px;right:-4px}.two,.three,.four{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.demo-strip{flex-direction:column;align-items:stretch}.demo-strip .button{width:100%}.follow-head{grid-template-columns:1fr 150px}.follow-mascot{height:150px}.footer-grid{grid-template-columns:1fr;gap:12px}.current-actions .button{flex:1}.external-nav a span:last-child{display:inline}}
 @media(max-width:480px){h1{font-size:56px}.external-nav a{padding:0 7px}.external-nav a span:last-child{display:none}.follow-head{grid-template-columns:1fr 105px}.follow-mascot{height:120px}.hero-main br{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{transition:none!important;animation:none!important}}
+
+/* v3.0 mobile mascot speech hotfix: keep speech below character on narrow screens */
+@media(max-width:760px){
+.character-panel{width:min(310px,92%);min-height:0;height:auto;margin:8px auto 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px}
+.character-panel img{order:1;width:min(270px,86vw);max-width:100%;max-height:320px;height:auto;object-fit:contain;object-position:center}
+.character-panel .speech{position:static;order:2;inset:auto;top:auto;right:auto;bottom:auto;left:auto;width:100%;margin:0;padding:13px 15px;border-radius:15px;box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.section-with-character.alt .character-panel{order:2;align-self:auto}
+.section-with-character .section-character-grid{gap:24px}
+}
+@media(max-width:480px){
+.character-panel{width:min(290px,94%)}
+.character-panel img{width:min(250px,84vw);max-height:295px}
+.character-panel .speech{padding:12px 14px;font-size:12px;line-height:1.65}
+}
