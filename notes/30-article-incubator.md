@@ -522,6 +522,78 @@ Season 2は「壊れない状態を維持する運用」を扱う。
 
 ---
 
+## Long-range Series Direction
+
+Season 2以降の長期展開は、現時点では確定シリーズではない。
+Project Evidenceが増えるたびに再評価し、独自理論を先に作らない。
+
+詳細な長期到達像とCapability Gapは、
+[DM-20260808-001 AI-Native Developmentの長期到達像とCapability Gap](development-model/DM-20260808-001-ai-native-development-target-and-capability-gaps.md)
+をWorking Modelとして参照する。
+
+### Season 3構想（未FIX）：AIと作ると、開発はどう変わるのか
+
+* 中心となる問い：
+
+  * AIを開発工程へ深く組み込むと、人間側の仕事、責任、指示、承認、Governanceはどう変わるのか。
+* Working Theme：
+
+  * Human-AI Development Operating Model
+  * AIへの指示は意図ではなく工程で書く
+  * AIチームは表現であって、設計ではない
+  * 役職ではなく工程とAuthorityで責任を切る
+  * Aggregator等の責務境界
+  * Evidenceを基にContract / Governanceを後から育てる
+  * Documentation IAは最初には作れなかった
+  * 問題が起きるたびにルールを増やすべきか
+  * Agile / Spiral / Kanban / XP / Prototype等との比較
+  * Human in the LoopではなくHuman Responsibility Boundary
+* 到達候補：
+
+  * AIができない仕事をHumanへ残すのではなく、最終責任を誰へ帰属させるべきかで責任境界を決める。
+  * AIがEvidence準備、Technical Verification、Candidate State Proposalを担い、HumanはPurpose、Risk Acceptance、Business Acceptance、不可逆なAuthorizationを保持するモデルを検証する。
+  * Local AI Foundry独自の開発手法を先に宣言せず、既存Development Modelで説明できない差分がEvidenceとして残るかを確認する。
+* 昇格条件：
+
+  * Season 2の実Evidenceを完了させる。
+  * Human Authorizationの複数事例を比較する。
+  * Development Model比較を一次資料ベースで実施する。
+  * 独自性ではなく再現可能なPracticeとして説明できるテーマを優先する。
+
+### Season 4構想（未FIX）：Continuous Assurance
+
+* 中心となる問い：
+
+  * 設計、Publish、Runtime Verificationを通過したAI Systemが、目的を満たし続けていることをどう継続的に証明するのか。
+* Working Theme：
+
+  * Evaluation Framework
+  * Evaluation Case / Dataset / Trial / Grader
+  * Regression Evaluation
+  * Outcome Verification
+  * Risk-based Authorization
+  * Runtime Observability
+  * Recovery / Rollback
+  * Execution Provenance
+  * Security / Privacy
+  * Continuous Risk Monitoring
+  * User / Outcome Feedback
+  * Continuous Assurance
+* 到達候補：
+
+  * Contractどおりであることと、成果として良いことを分離して測定する。
+  * Runtime Verificationを一回のGateで終わらせず、ObservabilityとFeedbackへ接続する。
+  * 壊さない能力だけでなく、壊れた場合に既知の良好状態へ戻せる能力を持つ。
+  * AIの自律範囲をRiskに比例させ、Human Authorizationを必要な場所へ集中させる。
+* 昇格条件：
+
+  * Season 2-11の実Runtime Evidenceが成立する。
+  * 複数RunのTraceとOutcomeを比較できる。
+  * EvaluationまたはRegressionの実験Evidenceが存在する。
+  * Recovery、Security、Provenanceの少なくとも一部について実Project Evidenceが存在する。
+
+---
+
 ## Backlog（昇格待ち）
 
 ### AIだからContractは後から育てられる
@@ -540,10 +612,11 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * そのため、「何も管理しない」と「最初からすべてを厳密に管理する」の二択ではなく、運用で実際に揺れた部分だけをContract化する段階的なGovernanceが成立する。
   * ただし、Projectの起点として毎回参照される`status.md`のように、表示構造の安定が人間とAIの双方に必要なArtifactは、早い段階でContract化する価値がある。
   * 管理は必要だが、管理のための管理は増やさない。
-* 関連するSeason 2候補：
+* 関連する記事候補：
 
-  * 04 Current Snapshotは進捗表ではない
-  * 13 Season 2総括：AI開発は状態管理と変更管理になる
+  * Season 2-04 Current Snapshotは進捗表ではない
+  * Season 2-13 Season 2総括：AI開発は状態管理と変更管理になる
+  * Season 3構想：Evidenceを基にContract / Governanceを後から育てる
 * 昇格条件：
 
   * Status Artifact、Active Work以外にも、運用上の必要から後付けでContract化した事例を整理すること。

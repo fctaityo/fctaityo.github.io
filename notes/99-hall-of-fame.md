@@ -57,6 +57,10 @@
 
 > Active Workは進捗表ではない。Interrupt後に再開するためのBookmarkである。
 
+> Human in the Loopではない。Human Responsibility Boundaryである。
+
+> 制御できることと、良い結果を測れることは別である。
+
 > Information Architectureは整理術ではない。責務を定義するArchitectureである。
 
 ## 珍言

@@ -31,5 +31,7 @@ docs/ に残るのは「決まったこと」。 notes/
   正本、差分、同期、検証、反映完了条件など、既存成果物を安全に変更するための運用知識を整理する。
 - [思考メモ](50-random-thoughts.md)  
   まだ体系化されていない気付きや仮説を保管する。
+- [Development Model Notes](60-development-model.md)  
+  AI前提の開発モデル、人間とAIの責任境界、長期到達像、Capability Gap、将来の検証課題を構造化して育てる。
 - [Hall of Fame](99-hall-of-fame.md)  
   将来も設計判断や思想として引用できる言葉を記録する。
