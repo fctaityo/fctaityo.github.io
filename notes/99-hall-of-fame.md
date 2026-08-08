@@ -55,6 +55,8 @@
 
 > 現在地と作業地点は同じではない。
 
+> Active Workは進捗表ではない。Interrupt後に再開するためのBookmarkである。
+
 > Information Architectureは整理術ではない。責務を定義するArchitectureである。
 
 ## 珍言
@@ -98,3 +100,15 @@ Publication Reflection Register（PRR）の導入により、公開物やGit履�
 * 未来の自分が30秒で公開判断を思い出せることを目的とする。
 
 この運用により、公開された成果物だけでなく、公開されなかった判断もProject Knowledgeとして保持する。
+
+### 2026-08-04 Publication Governance責務分離
+
+Publication Governanceの再整理により、Current Publication ReviewとPublication Decision Historyを別責務として扱う方針が固まった。
+
+* Internal Publication Review Registryは、管理対象ごとの現在有効なPublication Review結果を保持する。
+* Publication Reflection Register（PRR）は、公開物やGit履歴から確認できなくなる判断履歴だけを保持する。
+* PRRはPrivate Artifactとし、Internal RepositoryおよびPublic Repositoryへ配置しない。
+* 不採用、保留、Mask、Generalization、委譲その他の「公開後には見えなくなる理由」がある場合だけPRRへ残す。
+* PRRを更新履歴、Git差分、Current Publication Reviewの複製にしない。
+
+この整理により、「現在の公開判定」と「なぜその判定になったか」を同じ台帳へ混在させない。

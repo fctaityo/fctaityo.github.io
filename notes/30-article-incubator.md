@@ -1,9 +1,30 @@
 # NOTE記事インキュベータ
 
-このファイルは、将来の記事になり得るテーマや構想を蓄積する。
+このファイルは、将来の記事になり得るテーマや構想を蓄積し、
+Local AI Foundry開発ログのシリーズ構成と今後の執筆順を管理する。
 
-完成した記事や単なる思いつきではなく、
-調査・検証・構造化する価値があるテーマを育てることを目的とする。
+完成した記事本文そのものや単なる思いつきを保存するのではなく、
+調査・検証・構造化する価値があるテーマを育て、
+Project Evidenceが揃ったものを正式記事へ昇格させることを目的とする。
+
+## 運用上の責務
+
+このファイルは、NOTE記事本文の正本ではない。
+
+主な責務は次のとおり。
+
+* Local AI Foundry開発ログのSeason構成を管理する。
+* 現在の執筆位置と、次に扱うテーマを管理する。
+* 各記事の核となる問い、扱う範囲、到達点を定義する。
+* War Diary、Bug Zoo、Configuration Management Notes、ADR、Configuration Audit等から、記事化可能なテーマを昇格させる。
+* 既存記事と重複する候補は、独立記事として残さず統合先を明示する。
+* Projectの進化により前提が変わった場合は、未執筆記事の順序、題名、Scopeを再評価する。
+
+記事本文、公開状態、公開日時、NOTE上の最終表示はNOTE側を正本とする。
+
+このファイルでは、将来展開を管理するために必要な範囲だけを保持する。
+
+---
 
 ## 確定シリーズ（Local AI Foundry 開発ログ）
 
@@ -33,14 +54,68 @@ Workflow全体を設計・検証・運用する段階へ移行する流れを扱
 
 ---
 
-## Season 2構想：壊れない仕組みをどう運用し続けるか
+## Season 2：壊れない仕組みをどう運用し続けるか
 
 Season 1では、AI Workflowを壊れにくくするための設計を扱った。
 
 Season 2では、設計されたWorkflowを継続的に変更、検証、同期、公開するための
-Configuration Management、Project State Governance、正本管理、公開判断を中心に扱う。
+Configuration Management、Project State Governance、正本管理、Human Authorization、
+Publication Governance、Repository Reflection、Runtime Verificationを扱う。
 
-以下は目次候補であり、記事番号、タイトル、掲載順は執筆時に再評価する。
+### Current Position
+
+現在の執筆位置は **04 Current Snapshotは進捗表ではない**。
+
+01〜03で、
+
+```text
+Configurationを管理対象として定義する
+↓
+正式にRegistrationする
+↓
+AuditでExpectedとActualの差を判断可能にする
+```
+
+まで進んだ。
+
+04では、その結果を踏まえて、
+
+```text
+Project全体はいまどこにいるのか
+↓
+現在の作業はどこから再開するのか
+```
+
+を別責務として扱う。
+
+04以降のCurrent Planは次のとおり。
+
+```text
+04 Current Snapshot
+↓
+05 Active Baseline
+↓
+06 Human Publish Decision
+↓
+07 Publication Review / PRR
+↓
+08 Canonical Source
+↓
+09 Repository Reflection
+↓
+10 Published State Verification
+↓
+11 Runtime Verification
+↓
+12 Platform Drift
+↓
+13 Season 2総括
+```
+
+未執筆記事の題名とScopeは、Project Evidenceが増えた場合に再評価できる。
+ただし、前後記事の責務を重複させず、各記事で一つの主要な問いへ到達することを優先する。
+
+---
 
 ### 01 Configurationはコードではない
 
@@ -98,46 +173,70 @@ Configuration Management、Project State Governance、正本管理、公開判�
 
 ### 04 Current Snapshotは進捗表ではない
 
+* Current Status：
+
+  * Writing Ready
+  * Season 2の現在執筆対象
 * 核となる問い：
 
   * なぜCurrent Snapshotは単なる作業一覧では不十分なのか。
   * Project全体の現在地と、現在作業中の復帰地点は、なぜ同じSnapshotへ入れてはいけないのか。
-* 扱うテーマ：
+* 中心となる対比：
 
-  * 30秒Dashboard
-  * Project State
-  * Current Phase
-  * Current Objective
-  * Current Blocker
-  * Remaining Gate
-  * Next Action
-  * Evidence Navigation
+  ```text
+  Project State Current Snapshot
+  ≠
+  Active Work Current Snapshot
+  ```
+
+* 中心テーマ：
+
   * Project State Current Snapshot
   * Active Work Current Snapshot
   * Active Initiative
   * Completed Checkpoint
+  * Next Action
   * Interrupt Recovery
   * Snapshotごとの更新Trigger
+  * 低頻度で変わる正式状態
+  * 高頻度で変わる作業断面
+* 補助的に扱うテーマ：
+
+  * 30秒Dashboard
+  * Current Phase
+  * Current Objective
+  * Current Blocker
+  * Remaining Gate
+  * Human Decision
+  * Evidence Navigation
 * 関連記録：
 
-  * War Diary：WD-20260802-001
-  * ADR：ADR-0012
-  * Configuration Item：CFG-D005
+  * War Diary：`WD-20260802-001`
+  * Configuration Management Note：`CM-20260802-002`
+  * ADR：`ADR-0012`
+  * Configuration Item：`CFG-D005`
+  * Configuration Audit：`CFG-20260802-007`
 * 記事の到達点：
 
-  * Current Snapshotは「何をしたか」ではなく、
-    「現在どの状態にあり、次にどの判断が可能か」を示すProject Dashboardである。
-  * 作業ログとProject Stateを混同してはならない。
-  * Project State Current SnapshotはProject全体のLifecycle上の到達状態を示す。
+  * Current Snapshotは「何をしたか」の履歴ではない。
+  * Project State Current Snapshotは、Project全体がLifecycle上どこまで到達したかを示す。
   * Active Work Current Snapshotは、現在のInitiativeについて、どこまで完了し、どこから再開するかを示す。
-  * 低頻度で変わる正式状態と、高頻度で変わる作業断面は別責務として扱う。
-  * Current Snapshotは一つに集約するのではなく、何の現在値を示すArtifactなのかを明確にする必要がある。
+  * Project Stateが変わらない通常作業を`status.md`へ書けば、Project State Snapshotは作業ログ化する。
+  * 作業断面をどこにも残さなければ、Interrupt後の復帰性が失われる。
+  * 異なる更新Triggerを持つ現在値は、同じArtifactへ混ぜない。
+  * Current Snapshotは一つへ集約することより、「何の現在値なのか」を明確にすることが重要である。
+* Scope Boundary：
 
-### 05 Active Baselineは「正しい状態」の証明
+  * Active BaselineのCandidate / Active / Historicalの詳細は05へ送る。
+  * Human AuthorizationとPublish承認責任の詳細は06へ送る。
+  * AuditのExpected / Actual / Drift判定方法は03へ戻し、04では再説明しない。
+  * Active Workを日報、Backlog、全Commit履歴へ拡張しない。
+
+### 05 Active Baselineは「最新」ではない
 
 * 核となる問い：
 
-  * 複数のDraft、Commit、Import結果が存在する中で、何を現在の基準として扱うのか。
+  * 複数のDraft、Commit、Import結果が存在する中で、何を現在採用中の基準として扱うのか。
 * 扱うテーマ：
 
   * Candidate Baseline
@@ -150,11 +249,16 @@ Configuration Management、Project State Governance、正本管理、公開判�
 * 記事の到達点：
 
   * 最新のものが正本とは限らない。
-  * Active Baselineは、現在採用されている唯一の基準状態を明示する。
+  * Active Baselineは、「最も新しいもの」ではなく、現在採用されている唯一の基準状態を明示する。
   * Candidateが存在しても、Human DecisionなしにActiveへ昇格してはならない。
+  * Baselineは正しさそのものを自動証明するものではなく、何を現在の判断基準として採用しているかを固定する。
 
 ### 06 Human Publish Decisionが最後の責任を持つ
 
+* Scope：
+
+  * Dify WorkflowのPublishとProject State Transitionを中心に扱う。
+  * Public DocumentationのPublication Governanceは07で扱う。
 * 核となる問い：
 
   * Test、Import、Semantic VerificationがPASSしても、なぜAIだけでPublishを決めてはいけないのか。
@@ -173,26 +277,36 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * AIは状態候補を提示できるが、自分で承認してはならない。
   * 最終的なPublish責任はHuman Decisionに残す。
 
-### 07 PRR――Gitに残らない判断を資産化する
+### 07 PRR――公開物から消える判断を資産化する
 
+* Scope：
+
+  * Public Documentation / WebsiteのPublication Governanceを扱う。
+  * Dify Workflow Publishとは区別する。
 * 核となる問い：
 
-  * 公開されなかった文書や、公開時にマスクされた情報の判断理由を、どこへ残すのか。
+  * Current Publication Reviewと、公開成果物から確認できなくなる判断履歴を、なぜ別々に管理するのか。
 * 扱うテーマ：
 
-  * Publication Reflection Register
+  * Publication Governance
+  * Internal Publication Review Registry
+  * Publication Reflection Register（PRR）
+  * Current Publication Review
+  * Publication Decision History
   * 採用
   * 不採用
   * 保留
-  * 採用（マスクあり）
-  * マスク基準
-  * 公開判断履歴
+  * Mask
+  * Generalization
+  * 委譲
+  * Public / Internal / Private Boundary
 * 記事の到達点：
 
-  * Gitは公開されなかった文書の理由を残さない。
-  * Public Documentationはマスク後の姿しか見せない。
-  * PRRは、公開物から消える判断を人間向けの表として残す。
-  * 「対象ドキュメント」「判定」「その理由」があれば、未来の自分が30秒で判断を思い出せる。
+  * Internal Publication Review Registryは、管理対象ごとの現在有効なPublication Review結果を保持する。
+  * PRRは、公開物やGit履歴から確認できなくなる判断だけをPrivate Artifactとして保持する。
+  * Current StateとDecision Historyを同じ台帳へ混ぜてはならない。
+  * Public Documentationは公開後の姿しか見せないため、消えた判断理由には別の保存責務が必要になる。
+  * PRRは形式的に毎回作るものではなく、不採用・保留・Mask・Generalization・委譲等の判断が残る場合に必要となる。
 
 ### 08 Canonical Sourceを失った日
 
@@ -207,53 +321,48 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * 会話履歴
   * 記憶による再構成
   * Full File Replacement
+  * Minimal Change
   * Diff Verification
 * 関連記録：
 
-  * Bug Zoo：BZ-20260731-016
+  * Bug Zoo：`BZ-20260731-016`
+  * Configuration Management Note：`CM-20260731-001`
 * 記事の到達点：
 
   * 一部だけ見えている情報から、ファイル全体を再構成してはならない。
   * 変更前に正本全文を取得し、変更後に差分を確認する必要がある。
+  * AIの記憶や会話履歴は、Canonical Sourceの代替にはならない。
 
-### 09 Repository Reflectionという最後の確認
+### 09 Repository Reflection――「作った」と「反映された」は別
 
 * 核となる問い：
 
-  * テストが通り、Importに成功しても、なぜ作業完了ではないのか。
+  * 成果物、Audit、Reviewが揃っても、なぜRepositoryへ正しく固定されたことを別途確認する必要があるのか。
 * 扱うテーマ：
 
+  * Working Tree
+  * Configuration Audit
+  * Configuration Report
+  * Review Package
+  * Human Review
   * Repository Reflection
-  * GitHub再取得
+  * Commit Authorization
+  * Local Commit Verify
+  * GitHub Read Verify
   * 期待した変更
   * 意図しない変更
   * 既存内容維持
-  * Human Commit
-  * VERIFY
+* 関連記録：
+
+  * Configuration Management Note：`CM-20260802-003`
 * 記事の到達点：
 
   * 成果物を生成したことと、正本へ正しく反映されたことは別である。
-  * Repositoryから再取得して初めて、変更の完了を確認できる。
+  * Human ReviewとCommit Authorizationは別である。
+  * Commitが成功したことと、承認Scopeが正しく固定されたことも別である。
+  * Repositoryから再取得して確認して初めて、Reflection結果を検証できる。
 
-### 10 Runtime Verificationが最後の砦
-
-* 核となる問い：
-
-  * Static Test、Import、Semantic Graph一致だけでは、なぜ不十分なのか。
-* 扱うテーマ：
-
-  * Runtime Verification
-  * Raw Output Contract
-  * Normalize後DTO
-  * Contract Gate
-  * 実LLM実行
-  * Runtime Acceptance
-* 記事の到達点：
-
-  * Graphが正しく、テストが通っていても、Runtimeの実出力は契約を破る可能性がある。
-  * 実際に動かした結果を確認しない限り、Workflowの受け入れは完了しない。
-
-### 11 Publishして終わりではない
+### 10 Publishして終わりではない
 
 * 核となる問い：
 
@@ -265,12 +374,39 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * Revision
   * Publish判定
   * Published State Verification
-  * Repositoryとの同期
-  * Release Complete
+  * Repository / Draft / Published Semantic Verification
+  * Project State `Published`
 * 記事の到達点：
 
-  * Publish操作は、公開状態への変更要求にすぎない。
-  * Published Workflowの実体とRepository正本を再確認して初めて公開完了となる。
+  * Publish操作は、Published状態への変更操作であって、検証そのものではない。
+  * Published Workflowの実体と対象Baselineを再確認して初めて、Published Stateを確定できる。
+  * Published State VerificationとRuntime Verificationは別Gateである。
+
+### 11 Runtime Verificationが最後の砦
+
+* Current Evidence State：
+
+  * Project Stateは`Published`まで到達済み。
+  * Runtime Verificationは未実施。
+  * Runtime Acceptanceは`PENDING`。
+  * 本記事は、実Runtime Evidenceが成立した後に最終構成を確定する。
+* 核となる問い：
+
+  * Static Test、Import、Semantic Graph一致、Published State Verificationだけでは、なぜ不十分なのか。
+* 扱うテーマ：
+
+  * Runtime Verification
+  * Raw Output Contract
+  * Normalize後DTO
+  * Contract Gate
+  * 実LLM実行
+  * Runtime Evidence
+  * Runtime Acceptance
+* 記事の到達点：
+
+  * Graphが正しく、Published状態まで一致していても、Runtimeの実出力は契約を破る可能性がある。
+  * 実際に動かした結果を確認しない限り、WorkflowのRuntime受け入れは完了しない。
+  * Runtime Verificationの実Evidenceが得られるまでは、成功談を先取りしない。
 
 ### 12 Difyのバージョンアップで契約が壊れた日
 
@@ -279,17 +415,19 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * Platform側の制約変更は、既存Workflowへどのように影響するのか。
 * 扱うテーマ：
 
-  * Dify 1.16
+  * Dify Version
   * Selector制約
   * Code Node
   * DTO field
   * `finish_reason`
   * Import Compatibility
   * Platform Drift
+  * Compatibility Verification
 * 記事の到達点：
 
   * Workflowが昨日動いたことは、今日も動く保証にならない。
-  * Platform VersionもConfiguration Baselineの一部として管理する必要がある。
+  * Platform VersionとPlatform側の制約もConfigurationとして追跡する必要がある。
+  * Platform変更時は、既存Workflowの契約と互換性を再確認する。
 
 ### 13 Season 2総括：AI開発は状態管理と変更管理になる
 
@@ -306,16 +444,21 @@ Configuration Management、Project State Governance、正本管理、公開判�
   * Active Work
   * Active Baseline
   * Human Authorization
+  * Publication Governance
+  * Publication Review Registry
   * PRR
-  * Runtime Verification
+  * Canonical Source
   * Repository Reflection
-  * Publish Verification
+  * Published State Verification
+  * Runtime Verification
+  * Platform Drift
 * 記事の到達点：
 
   * AI Workflow開発の後半で支配的になるのは、Prompt Engineeringだけではない。
   * 何を変更し、どの状態を採用し、何を正本とし、何をEvidenceとして承認するかという状態管理と変更管理である。
   * 壊れないWorkflowを運用し続けるには、WorkflowだけでなくProjectそのものを管理する必要がある。
-  * Project全体の正式状態だけでなく、現在の作業断面と復帰地点も責務を分けて管理する必要がある。
+  * Project全体の正式状態、現在の作業断面、公開判断、Repository Reflection、Runtime Evidenceは別責務として管理する必要がある。
+  * AIが強くなるほど、人間の仕事は「全部を手で作ること」から「何を正しい状態として採用するかを判断すること」へ移る。
 
 ---
 
@@ -323,38 +466,41 @@ Configuration Management、Project State Governance、正本管理、公開判�
 
 Season 2は以下の順序で積み上げる。
 
-1. 管理対象を定義する
+1. 管理対象を定義する  
    ConfigurationとConfiguration Registration
 
-2. 差分を検出する
+2. 差分を検出する  
    Configuration AuditとDrift
 
-3. Project全体の現在地を判断可能にする
+3. Project全体の現在地を判断可能にする  
    Project StateとProject State Current Snapshot
 
-4. 現在作業中の復帰地点を保持する
+4. 現在作業中の復帰地点を保持する  
    Active Work Current Snapshot、Active Initiative、Completed Checkpoint、Next Action
 
-5. 採用中の基準を固定する
-   Active Baseline
+5. 採用中の基準を固定する  
+   Candidate / Active / Historical Baseline
 
-6. 最終判断の責任を分離する
-   Human AuthorizationとPublish Decision
+6. 最終判断の責任を分離する  
+   Human AuthorizationとDify Publish Decision
 
-7. 公開物から消える判断を残す
-   PRRとマスク基準
+7. 公開判断のCurrent StateとDecision Historyを分離する  
+   Internal Publication Review RegistryとPrivate PRR
 
-8. 正本を守る
-   Canonical SourceとRepository Reflection
+8. 正本を守る  
+   Canonical Source、Minimal Change、Partial Source禁止
 
-9. 実動作を確認する
-   Runtime Verification
+9. 承認済み成果物を正本へ固定し、再確認する  
+   Repository ReflectionとVerify
 
-10. 公開状態を確認する
-    Publish Verification
+10. Published状態を確認する  
+    Published State Verification
 
-11. 外部変化を管理する
-    Platform VersionとCompatibility
+11. 実動作を確認する  
+    Runtime VerificationとRuntime Acceptance
+
+12. 外部変化を管理する  
+    Platform Version、Platform Drift、Compatibility
 
 Season 1が「壊れない設計」を扱ったのに対し、
 Season 2は「壊れない状態を維持する運用」を扱う。
@@ -367,10 +513,12 @@ Season 2は「壊れない状態を維持する運用」を扱う。
 
 * 実際のProject Evidenceが存在する。
 * 単発事故ではなく、一般化できるテーマになっている。
-* 設計、実装、運用のどの問題かを区別できる。
+* 設計、実装、運用、Governanceのどの問題かを区別できる。
 * Expected、Actual、原因、判断、結果を説明できる。
-* 内部情報を公開用にマスク可能である。
-* 記事公開後も正本Documentationへ誘導できる。
+* 内部情報を公開用にMaskまたはGeneralizeできる。
+* 記事公開後も正本Documentationまたは公開可能なEvidenceへ誘導できる。
+* 前後記事と主要な問いが重複していない。
+* Evidenceが未成立の将来結果を成功済みとして先取りしていない。
 
 ---
 
@@ -383,13 +531,14 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * Project Evidence：Status Artifact Contractの正式フォーマット追加
   * Configuration Audit：CFG-20260802-001
   * Status Artifactの章構成・表示順リファクタリング実施
-  * Project State、Baseline、Evidence、Runtime状態、Workflowは変更なし
+  * Active Work Current Snapshotを後付けで導入し、ADR-0012、CFG-D005、CM-20260802-002へ発展
+  * Project State、Baseline、Runtime状態、Workflowを変えずにDocumentation Contractを進化させた事例が複数存在する
 * 核となるテーマ：
 
   * 人間中心のProjectでは、変更・レビュー・整合性確認のコストが高いため、将来必要になりそうな管理体系まで事前に整備することが多い。
   * AI主体のProjectでは、Documentation更新、契約化、差分確認、監査を必要になった時点で高速に実施できる。
   * そのため、「何も管理しない」と「最初からすべてを厳密に管理する」の二択ではなく、運用で実際に揺れた部分だけをContract化する段階的なGovernanceが成立する。
-  * ただし、Projectの起点として毎回参照されるstatus.mdのように、表示構造の安定が人間とAIの双方に必要なArtifactは、早い段階でContract化する価値がある。
+  * ただし、Projectの起点として毎回参照される`status.md`のように、表示構造の安定が人間とAIの双方に必要なArtifactは、早い段階でContract化する価値がある。
   * 管理は必要だが、管理のための管理は増やさない。
 * 関連するSeason 2候補：
 
@@ -397,7 +546,7 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * 13 Season 2総括：AI開発は状態管理と変更管理になる
 * 昇格条件：
 
-  * Status Artifact以外にも、運用上の必要から後付けでContract化した事例が蓄積すること。
+  * Status Artifact、Active Work以外にも、運用上の必要から後付けでContract化した事例を整理すること。
   * 人間中心のProjectとの違いを、単なるAIの処理速度ではなく、管理コストと変更容易性の違いとして一般化できること。
   * 「運用で回す対象」と「Contractとして固定する対象」の判断基準を整理できること。
   * 独立記事にするか、Season 2-04またはSeason 2-13へ吸収するかを再評価すること。
@@ -473,51 +622,15 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * 共通点、相違点、比較不能な点を表形式で整理すること。
   * 「AIだから新しい」という結論を先に置かないこと。
 
-### Current Snapshotは一つではなかった
-
-* 現状：
-
-  * War Diary：WD-20260802-001
-  * ADR：ADR-0012
-  * Configuration Item：CFG-D005
-  * Active Work Minimum Adoption：Repository Reflection完了
-  * Season 2-04へ統合候補
-* 核となる問い：
-
-  * Project State Current Snapshotだけでは、なぜ現在作業中の復帰地点を確認できなかったのか。
-  * 同じ「現在地」を示すArtifactでも、なぜ責務を分離する必要があるのか。
-* 扱うテーマ：
-
-  * `status.md`
-  * `active-work.md`
-  * Project State Current Snapshot
-  * Active Work Current Snapshot
-  * 更新Trigger
-  * Active Initiative
-  * Completed Checkpoint
-  * Next Action
-  * Interrupt Recovery
-  * 履歴のGit、Audit、Report、Review Packageへの委譲
-* 記事の到達点：
-
-  * Project StateはProject全体のLifecycle上の到達状態を示す。
-  * Active Workは現在作業中のInitiativeの復帰地点を示す。
-  * 低頻度で変わる正式状態と、高頻度で変わる作業断面を同じArtifactへ混ぜてはならない。
-  * Current Snapshotは一つに集約することより、何の現在値を示すかを明確にすることが重要である。
-* 昇格条件：
-
-  * Season 2-04へ吸収するか、独立記事として扱うかを再評価すること。
-  * Active Work運用を複数回実施し、Snapshot更新Triggerが妥当か確認すること。
-  * Public Documentationへ一般化可能な責務境界を整理すること。
-
 ### Documentation IAは最初には作れなかった
 
 * 現状：
 
   * Documentation Information Architecture採用済み。
   * ADR-0011採用済み。
-  * 責務別Directory再編を段階的Commitで実施中。
-  * Active Work追加時に、Human Decision、ADR-0012、IA更新を経てRoot責務を拡張した。
+  * 責務別Directory再編のCommit 1〜6を完了し、Local Commit Verifyまで完了。
+  * Active Work導入時に、Human Decision、ADR-0012、IA更新を経てRoot責務を拡張した。
+  * Documentation IAは固定完成物ではなく、実運用で新しい責務が観測された場合に更新できる設計として実証された。
 * 核となる問い：
 
   * Documentationを最初から設計対象にすべきであっても、なぜ完成したInformation Architectureを初期段階で固定できなかったのか。
@@ -543,7 +656,29 @@ Season 2は「壊れない状態を維持する運用」を扱う。
   * 「必要になったら育てる」は無計画ではなく、Evidenceを基に必要な責務だけを追加することを意味する。
 * 昇格条件：
 
-  * Documentation IA実装のCommit 3以降を完了すること。
-  * Directory再編前後の責務とNavigationの違いを比較できること。
-  * Public Documentationへ公開可能なIA文書と事例を選別すること。
-  * Season 2本編、独立記事、公式HPの思想コンテンツのどこへ配置するか再評価すること。
+  * Directory再編前後の責務とNavigationの違いを比較する。
+  * Public Documentationへ公開可能なIA文書と事例を選別する。
+  * Season 2本編、独立記事、公式HPの思想コンテンツのどこへ配置するか再評価する。
+
+---
+
+## 統合済み候補
+
+### Current Snapshotは一つではなかった
+
+* 統合先：
+
+  * Season 2-04 `Current Snapshotは進捗表ではない`
+* 関連記録：
+
+  * War Diary：`WD-20260802-001`
+  * Configuration Management Note：`CM-20260802-002`
+  * ADR：`ADR-0012`
+  * Configuration Item：`CFG-D005`
+  * Configuration Audit：`CFG-20260802-007`
+* 統合理由：
+
+  * 独立記事として扱うより、04の中心命題である
+    `Project State Current Snapshot ≠ Active Work Current Snapshot`
+    を実例として構成した方が、前後記事との責務分離が明確になる。
+  * 04へ統合しても一次記録、運用知識、設計判断、Configuration Evidenceは各正本に残るため、知識は失われない。

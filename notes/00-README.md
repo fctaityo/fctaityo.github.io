@@ -26,7 +26,7 @@ docs/ に残るのは「決まったこと」。 notes/
 - [Bug Zoo](20-bug-zoo.md)  
   再発可能な障害パターン、Root Cause、再発防止の教訓を整理する。
 - [NOTE記事インキュベータ](30-article-incubator.md)  
-  調査・検証・構造化する価値がある記事テーマを育てる。
+  調査・検証・構造化する価値がある記事テーマを育て、確定シリーズの構成、現在の執筆位置、今後の執筆順を管理する。
 - [Configuration Management Notes](40-configuration-management.md)  
   正本、差分、同期、検証、反映完了条件など、既存成果物を安全に変更するための運用知識を整理する。
 - [思考メモ](50-random-thoughts.md)  
