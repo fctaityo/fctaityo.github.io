@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050914">
+<meta name="description" content="Local AI Foundry v4.0 — 記事自動生成を出発点としたLFを、人間主導でAIと仕事を設計するFoundryへ再定義したメジャーリリース。">
+<title>v4.0 Human-Directed Foundry Repositioning — Local AI Foundry</title>
+<style>
+:root{--bg:#050914;--panel:#0a1424;--text:#eef6ff;--muted:#9aabc1;--cyan:#41dbff;--green:#57f1a8;--violet:#9e84ff;--line:rgba(117,183,255,.18)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 8%,rgba(65,219,255,.08),transparent 28%),var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}a{color:inherit}.shell{width:min(980px,calc(100% - 40px));margin:auto}
+header{padding:28px 0;border-bottom:1px solid var(--line)}header a{color:var(--cyan);text-decoration:none;font-weight:800}
+.hero{padding:88px 0 42px}.kicker{color:var(--green);font-size:13px;letter-spacing:.18em;font-weight:900}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:12px 0 20px;letter-spacing:-.04em}.hero h1 strong{color:var(--cyan)}.lead{max-width:820px;color:var(--muted);font-size:20px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.meta span{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#c8d6e5}
+.version-callout{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:30px;padding:18px 20px;border:1px solid rgba(87,241,168,.3);border-left:4px solid var(--green);border-radius:15px;background:linear-gradient(90deg,rgba(87,241,168,.08),rgba(65,219,255,.04))}
+.version-callout strong{font:900 36px/1 "Segoe UI",sans-serif}.version-callout span{color:var(--muted)}
+section{padding:36px 0;border-top:1px solid var(--line)}h2{font-size:29px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:21px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.card strong{display:block;font-size:18px}.card p{margin:6px 0 0;color:var(--muted)}
+ul{color:var(--muted)}li+li{margin-top:7px}.story{padding:22px;border-left:3px solid var(--cyan);background:rgba(65,219,255,.035);font-size:20px}.story strong{color:var(--cyan)}
+footer{padding:32px 0 52px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.lead{font-size:18px}.version-callout{grid-template-columns:1fr;gap:6px}.hero h1{font-size:43px}}
+</style></head>
+<body>
+<header><div class="shell"><a href="../index.html">← LOCAL AI FOUNDRY</a>　<a href="index.html">RELEASE HISTORY</a></div></header>
+<main class="shell">
+<section class="hero">
+<p class="kicker">2026.08.09 / LOCAL AI FOUNDRY v4.0 / MAJOR RELEASE</p>
+<h1>記事自動生成から、<br><strong>AIと仕事を設計するFoundryへ。</strong></h1>
+<p class="lead">Local AI Foundryの位置づけを大幅に再定義し、公式ホームページの構成・表現・Visual Storyを全面刷新しました。記事制作はLFの重要なReference Implementationとして残しつつ、Documentation Productionや今後の別業務領域へ展開できるHuman-directedなAI開発・制作基盤として、現在のプロジェクト像を明確化しています。</p>
+<div class="version-callout"><strong>v4.0</strong><span>Current Website Version — Human-Directed Foundry Repositioning</span></div>
+<div class="meta"><span>Repositioning</span><span>Human-directed</span><span>Reference Implementation</span><span>Governance</span><span>Project Visualization</span><span>Mobile UX</span></div>
+</section>
+
+<section><h2>Why Changed</h2>
+<p>Local AI Foundryは、もともと「一つのPromptから記事を自動生成する」発想から始まりました。しかし実際にAIへ仕事を任せる過程で、Stage、DTO、Gate、Retry、Review、Evidence、Configuration Management、Publication Governanceなど、成果物を成立させるための制御と運用が積み上がりました。</p>
+<p>Xの収益化ポリシー変更を契機に「AIが自動で作って自動で出すこと」自体を価値の中心に置くべきかを見直した結果、LFが既に記事生成を越えて、<strong>人間が目的と責任を持ちながらAIへ仕事を委譲するためのFoundry</strong>へ進化していることを公式HPでも明示することにしました。</p>
+</section>
+
+<section><h2>Positioning</h2>
+<div class="story">自動化は出発点だった。<br><strong>作っていたのは、AIと仕事をするためのFoundryだった。</strong></div>
+</section>
+
+<section><h2>What Changed</h2><div class="grid">
+<div class="card"><strong>Human / Governance / AI Team</strong><p>AIを主役にせず、人間の目的・判断・責任を最上位に置く3層構造へ再整理。</p></div>
+<div class="card"><strong>Reference Implementation</strong><p>RI#1 Article Production、RI#2 Documentation Productionを明示し、RI#3以降の横展開を示す。</p></div>
+<div class="card"><strong>Parallel Project View</strong><p>複数の実証・Website・Foundry Coreが並行して進む状態をPhase Graphで可視化。</p></div>
+<div class="card"><strong>Proof of Work</strong><p>Architecture、Status、Roadmap、Governanceなどの公開資料を「実装の証拠」への導線として再配置。</p></div>
+<div class="card"><strong>Visual Story</strong><p>ARTICLE → TEAM → CONTRACT → FOUNDRYという進化をHeroからページ全体へ通す。</p></div>
+<div class="card"><strong>Mobile Rebuild</strong><p>Desktop縮小ではなく、狭幅専用のReading Order・Status表示・図表構成へ再設計。</p></div>
+</div></section>
+
+<section><h2>Preserved</h2><ul>
+<li>Local AI FoundryのDark / Cyan Brand Identity</li>
+<li>既存Public Documentationへの導線</li>
+<li>Project StateとRuntime Acceptanceを混同しないCurrent State表示</li>
+<li>Human ReviewとEvidenceを重視する基本姿勢</li>
+<li>記事制作をRI#1として継続すること</li>
+</ul></section>
+
+<section><h2>Website Information Architecture</h2><ul>
+<li>HERO — Current Version / Repositioning / Human-directed Foundry</li>
+<li>Evolution — 記事自動生成からFoundryまでの進化</li>
+<li>New LF — Human / Governance / AI Team</li>
+<li>Human × AI — 全自動ではなくControlled Delegation</li>
+<li>Reference Implementations — RI#1 / RI#2 / RI#3構想</li>
+<li>Proof of Work — 実装・公開資料・System Map</li>
+<li>Current — 現在地とCurrent Website Version</li>
+</ul></section>
+
+<section><h2>Verification Scope</h2><ul>
+<li>Desktop / Mobile Reading Order</li>
+<li>Hero Title / Current Version visibility</li>
+<li>One-line Evolution Animation</li>
+<li>Typography minimum readability</li>
+<li>Internal Anchor / Public Documentation links</li>
+<li>Release History / v4.0 individual page</li>
+<li>Generated artwork is illustration, not Current State evidence</li>
+</ul></section>
+</main>
+<footer><div class="shell">LOCAL AI FOUNDRY — v4.0 Human-Directed Foundry Repositioning</div></footer>
+</body></html>
