@@ -712,3 +712,21 @@ body{font-size:var(--text-body);line-height:1.7}
     font-size:70px!important;
   }
 }
+
+
+/* =========================================================
+   v4.0 Prototype r10 — hero logo font hotfix
+   Keep Japanese body typography unchanged.
+   ========================================================= */
+
+/* v3's visible Windows rendering depended on Segoe UI fallback.
+   Pin the hero wordmark to a Latin UI font so text-stroke does not
+   use the Noto Sans JP Latin glyph in environments without Inter. */
+.hero h1{
+  font-family:"Segoe UI",Arial,Helvetica,sans-serif!important;
+  font-variation-settings:normal;
+  font-synthesis:none;
+}
+.hero h1 span{
+  font-family:inherit!important;
+}
