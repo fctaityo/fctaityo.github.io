@@ -730,3 +730,368 @@ body{font-size:var(--text-body);line-height:1.7}
 .hero h1 span{
   font-family:inherit!important;
 }
+
+
+/* =========================================================
+   v4.0 Prototype r11 — mobile layout rebuild
+   Mobile is a dedicated composition, not a squeezed desktop.
+   ========================================================= */
+
+@media(max-width:760px){
+
+  /* ---------- Header ---------- */
+  .site-header{height:66px}
+  .header-shell{width:calc(100% - 24px);gap:10px}
+  .brand-mark{width:34px;height:34px}
+  .brand-copy strong{font-size:12px}
+  .brand-copy small{display:none}
+  .menu-toggle{width:40px;height:40px}
+  .nav-wrap{
+    top:66px;
+    left:10px;
+    right:10px;
+    max-height:calc(100vh - 78px);
+    overflow:auto;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:auto;
+    padding:86px 0 34px;
+    justify-content:flex-start;
+  }
+  .hero-layout{
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto auto auto!important;
+    gap:18px!important;
+  }
+
+  /* Keep the animated line on ONE visible line, no horizontal scrolling. */
+  .hero-evolution{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%;
+    justify-content:center!important;
+    gap:5px!important;
+    padding:11px 0!important;
+    margin:0!important;
+    font-size:clamp(12px,3.15vw,14px)!important;
+    letter-spacing:-.035em!important;
+    white-space:nowrap!important;
+    overflow:visible!important;
+    border-top:1px solid rgba(69,220,255,.12);
+    border-bottom:1px solid rgba(69,220,255,.12);
+  }
+  .hero-evolution span,
+  .hero-evolution i,
+  .hero-evolution strong{
+    min-width:0!important;
+    white-space:nowrap!important;
+  }
+  .hero-evolution strong{
+    text-align:left;
+  }
+
+  .hero-copy{
+    grid-column:1!important;
+    grid-row:2!important;
+    max-width:none!important;
+  }
+  .eyebrow{
+    display:grid!important;
+    gap:4px!important;
+    margin-bottom:14px!important;
+  }
+  .eyebrow span,.eyebrow em{display:block}
+  .hero h1{
+    margin:12px 0 22px!important;
+    font-size:clamp(56px,17.5vw,70px)!important;
+    line-height:.84!important;
+  }
+  .hero-main{
+    margin-top:0!important;
+    font-size:clamp(23px,6.2vw,29px)!important;
+    line-height:1.42!important;
+  }
+  .hero-description{
+    margin-top:14px;
+    font-size:14px!important;
+    line-height:1.8!important;
+  }
+  .hero-actions{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .hero-actions .button{width:100%}
+  .hero-state-row{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+  }
+  .state-chip,
+  .state-chip.accent{
+    grid-column:auto!important;
+    min-width:0!important;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+
+  /* Hero artwork: image first, labels BELOW it instead of overlapping. */
+  .hero-art{
+    grid-column:1!important;
+    grid-row:3!important;
+    width:100%!important;
+    margin:2px auto 0!important;
+  }
+  .hero-art-frame{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:7px;
+    padding:7px!important;
+    overflow:hidden;
+    border-radius:20px!important;
+  }
+  .hero-art-frame img{
+    grid-column:1;
+    width:100%;
+    aspect-ratio:16/10;
+    object-fit:cover;
+    object-position:center top;
+    border-radius:14px;
+  }
+  .hero-art-shade{display:none}
+  .hero-art-label{
+    position:static!important;
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    width:100%;
+    padding:9px 11px!important;
+    border-radius:10px!important;
+    backdrop-filter:none;
+  }
+  .hero-art-label.label-human,
+  .hero-art-label.label-control,
+  .hero-art-label.label-team{
+    left:auto!important;right:auto!important;bottom:auto!important;
+  }
+  .hero-art-label span{font-size:12px!important}
+  .hero-art-label strong{
+    font-size:12px!important;
+    text-align:right;
+    white-space:normal!important;
+  }
+  .hero-art figcaption{
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:10px!important;
+    padding:0 2px;
+  }
+  .hero-bottom-line{display:none}
+
+  /* ---------- Generic section headings ---------- */
+  .section{padding:52px 0}
+  .section-heading,
+  .focused-heading{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+    max-width:none!important;
+  }
+  .focused-heading{
+    padding:18px 16px!important;
+    border-radius:18px!important;
+  }
+  .section-heading h2,
+  .current-copy h2{
+    font-size:clamp(32px,9.5vw,40px)!important;
+    line-height:1.18!important;
+  }
+  .section-heading>p,
+  .focused-heading>p,
+  .current-copy>p{
+    font-size:14px!important;
+    line-height:1.75;
+  }
+
+  /* ---------- Foundry layers / scope ---------- */
+  .layer-stack{grid-template-columns:1fr!important}
+  .layer{min-height:auto}
+  .scope-strip{grid-template-columns:1fr 1fr!important}
+  .scope-strip article:last-child{grid-column:1/-1}
+
+  /* ---------- Human × AI ---------- */
+  .model-grid{grid-template-columns:1fr!important}
+  .comparison-board{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  .comparison-axis{
+    height:24px!important;
+    transform:rotate(90deg);
+  }
+
+  /* On mobile, do NOT overlay dense workflow UI on the image. */
+  .model-visual-card{
+    min-height:0!important;
+    display:block;
+    overflow:hidden;
+  }
+  .model-visual-card>img{
+    position:static!important;
+    width:100%;
+    height:auto!important;
+    aspect-ratio:16/10;
+    object-fit:cover;
+  }
+  .model-visual-card:after{display:none}
+  .model-visual-overlay{
+    position:static!important;
+    display:grid;
+    gap:9px;
+    margin:0;
+    padding:12px!important;
+    border:0!important;
+    border-top:1px solid var(--line)!important;
+    border-radius:0!important;
+    background:#07111f!important;
+    backdrop-filter:none!important;
+  }
+  .workflow-flow{
+    grid-template-columns:repeat(2,1fr)!important;
+    gap:6px!important;
+  }
+  .workflow-flow li:last-child{grid-column:1/-1}
+  .control-rail{
+    grid-template-columns:repeat(2,1fr)!important;
+  }
+  .control-rail span:last-child{grid-column:1/-1}
+  .retry-loop{align-items:flex-start}
+
+  /* ---------- RI ---------- */
+  .ri-grid{grid-template-columns:1fr!important}
+  .ri-next{grid-column:auto!important}
+  .parallel-board{
+    padding:15px!important;
+    border-radius:16px!important;
+  }
+  .ri-guide{display:none!important}
+  .parallel-board:after{display:none}
+  .parallel-board-head{
+    display:grid!important;
+    gap:5px!important;
+    align-items:start!important;
+  }
+  .parallel-board-head strong{font-size:19px!important}
+  .phase-legend{
+    grid-template-columns:1fr repeat(5,minmax(0,1fr))!important;
+    gap:3px!important;
+  }
+  .phase-legend span{font-size:10px!important}
+  .project-rail{
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+    padding:12px 0!important;
+  }
+  .rail-title{
+    grid-template-columns:auto 1fr!important;
+  }
+  .rail-title em{
+    grid-column:1/-1!important;
+    text-align:left!important;
+  }
+
+  /* ---------- Proof / system map ---------- */
+  .proof-system-grid,
+  .proof-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  /* Absolute-position system diagram becomes a readable card grid. */
+  .system-map{
+    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    padding:10px;
+    overflow:visible;
+  }
+  .system-map svg{display:none!important}
+  .system-core{
+    position:static!important;
+    grid-column:1/-1;
+    transform:none!important;
+    width:auto!important;
+    height:auto!important;
+    border-radius:14px!important;
+    padding:18px 12px;
+  }
+  .system-node,
+  .n-dify,.n-n8n,.n-ollama,.n-comfy,.n-git,.n-human{
+    position:static!important;
+    transform:none!important;
+    width:auto!important;
+    inset:auto!important;
+  }
+  .system-node{min-height:78px;display:grid;place-content:center}
+
+  /* ---------- Current ---------- */
+  .current-shell{grid-template-columns:1fr!important;gap:22px!important}
+  .status-panel{grid-template-columns:1fr!important}
+  .status-panel article{
+    min-height:auto!important;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+  }
+  .status-panel strong{margin-top:0!important;text-align:right}
+
+  /* ---------- Finale ---------- */
+  .finale{padding:52px 0}
+  .finale-panel{
+    max-width:none!important;
+    padding:20px 17px!important;
+    border-radius:20px!important;
+  }
+  .finale-copy h2{
+    max-width:none!important;
+    font-size:clamp(40px,12vw,50px)!important;
+    line-height:1.08!important;
+  }
+  .finale-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .finale-actions .button{width:100%}
+
+  /* ---------- Footer ---------- */
+  .footer-grid{
+    flex-direction:column!important;
+    align-items:flex-start;
+  }
+  .footer-grid>div:last-child{
+    flex-wrap:wrap;
+  }
+}
+
+/* Extra narrow phones */
+@media(max-width:380px){
+  :root{--shell:calc(100% - 22px)}
+  .hero-evolution{
+    font-size:11.5px!important;
+    gap:4px!important;
+  }
+  .hero h1{
+    font-size:clamp(52px,17vw,62px)!important;
+  }
+  .scope-strip{grid-template-columns:1fr!important}
+  .scope-strip article:last-child{grid-column:auto}
+  .system-map{grid-template-columns:1fr}
+  .system-core{grid-column:auto}
+}
