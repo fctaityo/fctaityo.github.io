@@ -8,7 +8,7 @@ Publicationとは、Internal Repositoryで管理される成果物をPublic Repo
 
 本書は公開可否の判断基準、責務境界、公開フローおよび禁止事項のみを定義する。
 
-本書は現在状態、公開判断履歴、公開成果物そのものを保持しない。
+本書は現在状態、Human-controlled Private History、公開成果物そのものを保持しない。
 
 それぞれ次を正本とする。
 
@@ -16,15 +16,15 @@ Publicationとは、Internal Repositoryで管理される成果物をPublic Repo
 |---|---|
 | Publication Contract | 本書 |
 | Publication Review Current State | Internal Publication Review Registry |
-| Publication Decision History | Publication Reflection Register（PRR / Private） |
 | Public Contents | Public Repository |
 | Presentation | Website Operations |
 | Internal Source | Internal Repository |
 
 Internal Publication Review RegistryはInternal Repositoryで管理する。
 
-PRRはPrivate ArtifactとしてHuman-controlled Private Storageで管理し、
-Internal RepositoryおよびPublic Repositoryへ配置しない。
+Publication判断に関するHuman-controlled Private HistoryはPublication Execution Contractの外部責務である。
+
+Private Artifactの名称、ID、Path、SHA、Revision、存在、記録状態または更新状態を、Internal Publication Review Registry、Deferred Internal Reflection、Public Reflection、VerificationまたはPublication完了条件として要求してはならない。
 
 Internal RepositoryへのReflectionを即時実施できない場合は、
 本書が定めるDeferred Internal Reflection ModeによりPublicationを継続できる。
@@ -43,7 +43,6 @@ Publicationは責務単位で分離する。
 | Internal Repository | 唯一の正本（Single Source of Truth） |
 | Publication Governance | 公開契約・公開統制 |
 | Internal Publication Review Registry | 管理対象ごとの現在有効なPublication Review結果 |
-| Publication Reflection Register | 公開物やGit履歴から確認できなくなるPublication Review判断履歴を保持するPrivate Artifact |
 | Deferred Reflection Management | Internal Reflection待ちを管理する内部運用 |
 | Public Repository | 公開成果物 |
 | Website | Presentation Layer |
@@ -56,12 +55,12 @@ Review HistoryをInternal Publication Review Registryへ保持してはならな
 
 公開物をGovernanceへ保持してはならない。
 
-PRRには、不採用・保留理由、または公開時のMask・Generalization・委譲その他の公開成果物から確認できなくなる判断だけを保持する。
+Human-controlled Private HistoryはHuman側の責務であり、Publication Execution、Internal Current State、Public ArtifactまたはWebsite Presentationの成立条件として扱ってはならない。
 
-PRRはPrivate Artifactであり、Internal Publication Review Registryは必要に応じてRelated PRR IDだけを参照する。
+InternalまたはCODEX-facing Current Documentationは、Human-controlled Private Artifactの名称、ID、Path、SHA、Revision、存在または状態を参照、要求、検証またはExecution Dependencyとして使用してはならない。
 
 Deferred Reflection Managementは内部運用であり、
-Current Publication Review、PRRまたはInternal Sourceの正本として扱ってはならない。
+Current Publication ReviewまたはInternal Sourceの正本として扱ってはならない。
 
 ---
 
@@ -81,9 +80,11 @@ Publication Governance
         ▼
 Publication Review
         │
-        ├── Internal Publication Review Registry
+        ▼
+Human Decision
         │
-        └── Private PRR（必要な場合のみ）
+        ▼
+Internal Publication Review Registry
         │
         ▼
 Public Repository
@@ -91,6 +92,10 @@ Public Repository
         ▼
 Website
 ```
+
+Publication Executionへ渡す判断情報は、Human-approved Current Publication Decisionに限定する。
+
+Human-controlled Private HistoryはこのExecution Flowの外部で管理し、本Flowの入力、Gateまたは完了条件として扱わない。
 
 ## 3.2 Deferred Internal Reflection Mode
 
@@ -102,6 +107,9 @@ Publication Governance
         │
         ▼
 Publication Review
+        │
+        ▼
+Human Decision
         │
         ▼
 Deferred Reflection Management
@@ -124,16 +132,18 @@ Internal Source Reconciliation
         ▼
 Internal Publication Review Registry
         │
-        ├── Related Private PRR（必要な場合のみ）
-        │
         ▼
 Publication Synchronization Complete
 ```
 
 Deferred Internal Reflection Modeでは、
-Internal Publication Review RegistryへのRepository Reflectionおよび必要なPrivate PRRの確定を後続へ遅延できる。
+Internal Publication Review RegistryへのRepository Reflectionを後続へ遅延できる。
 
-ただし、Human Review、Publication Review、Internal Sourceの識別およびPRR要否判定を省略してはならない。
+ただし、Human Review、Publication Review、Internal Sourceの識別およびHuman Authorizationを省略してはならない。
+
+Deferred Reflection後のInternal作業へは、Human-approved Current Publication DecisionだけをExecution Inputとして渡す。
+
+Human-controlled Private Artifactの名称、ID、Path、SHA、Revisionまたは状態をDeferred Reflection Inputとして要求してはならない。
 
 Public Artifactが先に成立しても、
 Public RepositoryからInternal Repositoryへ逆同期してはならない。
@@ -173,15 +183,6 @@ Internal Artifact
       Publication Review
              │
              ▼
-        PRR要否判定
-             │
-      ┌──────┴──────┐
-      │             │
- 必要             不要
-      │             │
- Private PRR対象   記録なし
-      └──────┬──────┘
-             ▼
       Reflection Mode判定
              │
       ┌──────┴──────┐
@@ -204,10 +205,9 @@ Human Decisionなしに公開してはならない。
 
 Internal Publication Review Registryは、各管理対象の現在有効なPublication Review結果を保持する。
 
-不採用・保留、Mask・Generalization、委譲その他の公開成果物から確認できなくなる判断が存在する場合だけ、PRRを作成する。
+Publication ReviewからExecutionへ渡すCurrent Decisionは、Publication Type、Publication Classification、Review Status、Selection Reason、Public Representation、Mask / Generalization結果およびHuman Approval / Authorizationに限定する。
 
-Deferred ModeではPrivate PRRの確定を後続へ遅延できるが、
-PRR要否判定そのものを遅延してはならない。
+Human-controlled Private Historyの記録要否、保存形式または管理状態は、本Decision TreeおよびPublication ExecutionのGateに含めない。
 
 ---
 
@@ -220,17 +220,18 @@ PRR要否判定そのものを遅延してはならない。
 | Internal Repository | 正本 |
 | Publication Governance | Publication Contract |
 | Internal Publication Review Registry | Current Publication Review |
-| PRR | 公開物やGit履歴から確認できなくなるDecision Historyを保持するPrivate Artifact |
 | Deferred Reflection Management | Internal Reflection Pendingの内部運用管理 |
 | Public Repository | Published Artifact |
 | Website | Presentation |
 
 責務を横断して情報を保持してはならない。
 
-Internal Publication Review RegistryはInternal責務、PRRおよびDeferred Reflection ManagementはPrivate責務である。
+Internal Publication Review RegistryおよびDeferred Reflection OperationsはInternal責務である。
+
+Human-controlled Private HistoryはHuman側のPrivate責務であり、Internal Publication Review Registry、Deferred Reflection Management、Public RepositoryまたはWebsiteの責務へ取り込まない。
 
 Public RepositoryおよびWebsiteへ、
-Publication Reviewの内部管理情報、Decision HistoryまたはInternal Reflection Pendingの詳細を保持してはならない。
+Publication Reviewの内部管理情報、Human-controlled Private HistoryまたはInternal Reflection Pendingの詳細を保持してはならない。
 
 ---
 
@@ -253,17 +254,11 @@ Mask / Generalization要否判定
 Human Review
         │
         ▼
-Internal Publication Review Registry Update
+Human-approved Current Publication Decision
         │
         ▼
-PRR要否判定
+Internal Publication Review Registry Update
         │
-   ┌────┴────┐
-   │         │
- 必要       不要
-   │         │
-Private PRR Recording
-   └────┬────┘
         ▼
 Public Repository Reflection
         │
@@ -273,6 +268,8 @@ Website Reflection
         ▼
 Publication Synchronization Complete
 ```
+
+Human-controlled Private Historyの作成、更新、識別または検証は、このExecution Flowの前提条件または完了条件ではない。
 
 ## 6.2 Deferred Internal Reflection Mode
 
@@ -293,7 +290,7 @@ Mask / Generalization要否判定
 Human Review
         │
         ▼
-PRR要否判定
+Human-approved Current Publication Decision
         │
         ▼
 Deferred Reflection Management
@@ -316,14 +313,14 @@ Internal Source Reconciliation
         ▼
 Internal Publication Review Registry Update
         │
-        ├── Private PRR Recording（必要な場合）
-        │
         ▼
 Publication Synchronization Complete
 ```
 
 Deferred Modeの詳細な管理方法、Reflection Input、Pending管理、
 Conflict処理およびRecovery手順はInternal Operationsで定義する。
+
+Internal Operationsは、Human-approved Current Publication DecisionをExecution Inputとして使用し、Human-controlled Private Artifactを入力、Gate、Evidenceまたは完了条件として要求してはならない。
 
 WebsiteはPresentationのみ更新する。
 
@@ -337,21 +334,23 @@ Publicationでは次を必須とする。
 * Public Repositoryの成果物はInternal Sourceから生成または管理された公開成果物とする。
 * Public RepositoryからInternal Repositoryへ上書きしない。
 * Human Reviewを必須とする。
+* Human-approved Current Publication DecisionをPublication Executionの正規入力とする。
 * Public Documentationは一般利用者向けに編集する。
 * 必要に応じてMaskおよびGeneralizationを実施する。
 * 各管理対象のCurrent Publication ReviewをInternal Publication Review Registryへ記録する。
-* 不採用・保留、Mask・Generalization・委譲その他の公開成果物から確認できなくなる判断が存在する場合だけPRRを作成する。
 * Internal Publication Review RegistryをPublic Repositoryへ配置しない。
-* PRRをInternal RepositoryまたはPublic Repositoryへ配置しない。
+* Human-controlled Private ArtifactをInternal RepositoryまたはPublic Repositoryへ配置しない。
+* Human-controlled Private Artifactの名称、ID、Path、SHA、Revision、存在または状態をInternal / CODEX-facing Execution Contractへ含めない。
 * Public成果物は公開契約に従って生成する。
 * Websiteは公開成果物へのPresentationおよびNavigationだけを担当する。
 * Normal Reflection Modeを標準とする。
 * Internal Reflectionを即時実施できない場合だけDeferred Internal Reflection Modeを使用する。
-* Deferred ModeでもInternal Sourceの識別、Human Review、Publication ReviewおよびPRR要否判定を省略しない。
-* Deferred Reflectionの管理情報をInternal Source、Current Publication ReviewまたはPRRの正本として扱わない。
+* Deferred ModeでもInternal Sourceの識別、Human Review、Publication ReviewおよびHuman Authorizationを省略しない。
+* Deferred Reflectionの管理情報をInternal SourceまたはCurrent Publication Reviewの正本として扱わない。
 * Internal Reflection再開時はCurrent Internal Sourceとの整合を確認してからReflectionする。
 * Conflictがある場合はPublic ArtifactをInternalへ逆輸入せず、Current Internal Sourceを基準に再評価する。
 * Public Release CompleteとPublication Synchronization Completeを区別する。
+* Human-controlled Private Historyの管理状態はPublic Release CompleteまたはPublication Synchronization Completeの成立条件にしない。
 
 ---
 
@@ -375,7 +374,7 @@ Public Repositoryは公開成果物のみ保持する。
 * Internal Audit
 * Internal Configuration Registry
 * Internal Publication Review Registry
-* PRRを含むPrivate Publication Decision Artifact
+* Human-controlled Private Publication Decision Artifact
 * Deferred Reflection Management Artifact
 * Internal Reflection Pending一覧
 * Human Working Notes
@@ -384,7 +383,7 @@ Public Repositoryは公開成果物のみ保持する。
 Public RepositoryはInternal Repositoryの代替として扱ってはならない。
 
 Public Repositoryに公開対象一覧、内部Review Current State、
-Publication Decision HistoryまたはDeferred Reflectionの内部管理情報を保持してはならない。
+Human-controlled Private HistoryまたはDeferred Reflectionの内部管理情報を保持してはならない。
 
 ---
 
@@ -394,7 +393,6 @@ Publication Decision HistoryまたはDeferred Reflectionの内部管理情報を
 |---|---|
 | Publication Governance | Publication Contract |
 | Internal Publication Review Registry | Current Publication Review |
-| PRR | 不採用・保留理由、Mask・Generalization・委譲その他の内部判断履歴を保持するPrivate Artifact |
 | Deferred Reflection Operations | Deferred Internal Reflectionの内部運用 |
 | Configuration Management | Internal Configuration |
 | Documentation Information Architecture | Documentation Responsibility |
@@ -404,9 +402,11 @@ Publication Decision HistoryまたはDeferred Reflectionの内部管理情報を
 
 各文書は責務を重複しない。
 
-Internal Publication Review RegistryおよびDeferred Reflection OperationsはInternal管理とし、PRRはPrivate管理とする。
+Internal Publication Review RegistryおよびDeferred Reflection OperationsはInternal管理とする。
 
-いずれもPublic RepositoryへのNavigation対象としない。
+Human-controlled Private Historyは本Relationship ModelのExecution Dependencyに含めない。
+
+Internal Publication Review RegistryおよびDeferred Reflection OperationsはPublic RepositoryへのNavigation対象としない。
 
 ---
 
@@ -438,7 +438,7 @@ Internal Repositoryを更新した後、必要な場合は新たなPublication P
 
 必要なPublication Review結果はInternal Publication Review Registryへ反映する。
 
-公開成果物から確認できなくなる新たな判断が生じた場合はPRRへ記録する。
+公開成果物から確認できなくなる判断をHumanがPrivate Historyとして保持する場合でも、そのPrivate管理はPublication Execution、Internal ReflectionまたはPublication完了状態へ依存させない。
 
 ---
 
@@ -450,13 +450,13 @@ Internal Repositoryを更新した後、必要な場合は新たなPublication P
 * Websiteを正本として扱うこと
 * Deferred Reflection Management Artifactを正本として扱うこと
 * Internal Publication Review RegistryへReview Historyを書くこと
-* PRRへCurrent Publication Reviewを書くこと
 * GovernanceへCurrent Publication Reviewを書くこと
 * GovernanceへReview Historyを書くこと
 * Internal Publication Review RegistryをPublic Repositoryへ配置すること
-* PRRをInternal RepositoryまたはPublic Repositoryへ配置すること
+* Human-controlled Private ArtifactをInternal RepositoryまたはPublic Repositoryへ配置すること
+* Human-controlled Private Artifactの名称、ID、Path、SHA、Revision、存在、記録状態または更新状態をInternal / CODEX-facing Current Documentationで参照、要求、検証またはExecution Dependencyとして使用すること
+* Human-controlled Private Historyの成立、更新または整合をPublic Release CompleteまたはPublication Synchronization Completeの条件にすること
 * Deferred Reflectionの内部管理情報をPublic Repositoryへ配置すること
-* PRRが不要な単純公開で形式的なPRR Entryを作成すること
 * Public RepositoryからInternal Repositoryを自動更新または上書きすること
 * Public Artifactから失われたInternal SourceまたはHistorical Decisionを推測再生成すること
 * Internal Sourceを識別せずDeferred Modeを使用すること
@@ -465,7 +465,7 @@ Internal Repositoryを更新した後、必要な場合は新たなPublication P
 * 機密情報を公開すること
 * Internal Artifactをそのまま公開すること
 * Websiteへ公開判断を保持すること
-* WebsiteへInternal Publication Review Registry、PRRまたはDeferred Reflectionの内部管理情報を複製すること
+* WebsiteへInternal Publication Review RegistryまたはDeferred Reflectionの内部管理情報を複製すること
 * 公開対象一覧または内部Review台帳をPublic Documentationとして公開すること
 * Deferred Internal ReflectionをProject State TransitionまたはActive Baseline Transitionとして扱うこと
 
@@ -481,18 +481,18 @@ Public Releaseは次を満たした場合にCompleteとする。
 
 * Publication Classificationが完了している。
 * Human Reviewが完了している。
+* Human-approved Current Publication Decisionが成立している。
 * 必要なMaskまたはGeneralizationが完了している。
-* PRR要否が判定されている。
 * Public Repositoryへ承認済み公開成果物が反映されている。
 * Websiteへ必要なPresentationが反映されている。
 * Public側の反映結果が検証されている。
 * Internal Repositoryが唯一の正本であることを維持している。
-* Public RepositoryまたはWebsiteに内部管理情報が混入していない。
+* Public RepositoryまたはWebsiteに内部管理情報またはHuman-controlled Private情報が混入していない。
 
 Deferred Modeでは、これに加えて次を満たす。
 
 * Publication対象のInternal Sourceが識別されている。
-* Internal Reflection Pendingが内部運用上追跡可能である。
+* Internal ReflectionのDeferred使用がHuman Authorizationによって承認されている。
 
 Public Release CompleteはPublication Synchronization Completeを意味しない。
 
@@ -502,14 +502,14 @@ Publication Synchronizationは次を満たした場合にCompleteとする。
 
 * Current Internal Sourceとの整合確認が完了している。
 * Conflictがある場合はHuman ReviewまたはPublication Re-reviewが完了している。
+* Human-approved Current Publication DecisionがCurrentである。
 * Internal Publication Review RegistryがCurrent Publication Reviewへ更新されている。
-* PRRが必要な場合は、公開成果物から確認できなくなる判断がPrivate PRRへ記録され、Internal Publication Review RegistryからRelated PRR IDを参照できる。
-* PRRが不要な場合は、公開成果物やGit履歴から消える判断情報が存在しないことを確認している。
 * 必要なInternal Reflectionが正式に完了している。
 * Internal Reflection結果が検証されている。
 * Internal Repositoryが唯一の正本であることを維持している。
+* Human-controlled Private Artifactの存在、ID、状態または更新結果に依存せず上記条件を判定できる。
 
 公開完了後もInternal Repositoryを変更した場合は、必要な新たなPublication Processを開始する。
 
-Internal Publication Review Registry、PRR、Deferred Reflection Management、
+Internal Publication Review Registry、Deferred Reflection Management、
 Public RepositoryおよびWebsiteを更新したことによって、Internal Repositoryの正本性は変化しない。
