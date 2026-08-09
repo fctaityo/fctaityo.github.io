@@ -45,7 +45,7 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Documentation Navigation | 利用者を正本文書へ導くNavigation構造。 |
 | Documentation Synchronization | Documentation間のCurrent Stateを同期する作業。 |
 | Historical Artifact | Current Stateではなく履歴・証跡・時点情報を保持するArtifact。 |
-| Navigation | Documentation間の導線。READMEを起点として正本へ到達する仕組み。 |
+| Navigation | DocumentationやArchitecture間の導線。READMEを起点として正本へ到達する仕組み。 |
 | README | Documentation全体へのNavigation入口。 |
 | Root Current Snapshot | Project全体の現在地を示す唯一のCurrent Snapshot。 |
 | Status Artifact | Current Snapshotを保持するArtifact。 |
@@ -58,13 +58,13 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 
 | 用語 | 定義 |
 |------|------|
-| Current Publication State | 現在有効なPublication状態。Historyを含まない。 |
+| Deferred Internal Reflection | Internal Repositoryへ即時Reflectionできない期間に、承認済みPublication活動を進め、後続のInternal Reflectionとして管理する運用。 |
 | Derived | Internal Documentationから派生して生成されるPublic Documentation。 |
 | Generalization | 内部情報を一般化して公開する編集方法。 |
 | Information Value | 公開価値を評価するPublication Review観点。 |
 | Internal Only | Internal Repositoryだけで保持するDocumentation。 |
 | Mask | 公開不要情報を除外または秘匿する編集。 |
-| PRR (Publication Reflection Register) | 公開成果物やGit履歴から確認できなくなるPublication Review判断を保持する内部台帳。 |
+| Private Publication Decision History | 公開成果物やGit履歴から確認できなくなる判断をHuman側で管理するPrivate History。Internal / CODEX-facing Execution Contractの入力、検証または完了条件ではない。 |
 | Public Canonical | Public Repositoryで直接管理する公開正本文書。 |
 | Public Documentation | Public Repositoryで公開するDocumentation。 |
 | Public Representation | Internal Documentationに対応する公開形態。 |
@@ -72,9 +72,11 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Publication Governance | Publication運用全体を定義する正本。 |
 | Publication Item | Publication Review対象となるDocumentation管理単位。 |
 | Publication Reflection | Internal DocumentationをPublicへ反映する作業。 |
-| Publication Registry | Current Publication Stateを保持するRegistry。 |
+| Internal Reflection Pending | Public Release完了後、必要なInternal Current StateへのReflectionと検証が未完了の内部運用状態。Project Stateではない。 |
 | Publication Review | Public化可否および公開方法を判断するReview。 |
-| Publication Review Registry | Publication ReviewのCurrent Stateを保持するRegistry。 |
+| Internal Publication Review Registry | 管理対象ごとのCurrent Publication Reviewを保持するInternal正本。Human Approval / AuthorizationをReview Statusから推測せず、Private Artifactの識別情報または管理状態を保持・要求しない。 |
+| Human-approved Current Publication Decision | Publication Type、Classification、Review Status、Selection Reason、Public Representation、Mask / Generalization結果およびHuman Approval / Authorizationを含む、Sanitize済みのCurrent Decision Input。 |
+| Publication Synchronization Complete | Human-approved Current Publication Decisionに基づく必要なInternal Reflection、Internal Commit、Local Commit VerifyおよびPublic / Internal Verificationが完了した状態。Private Historyの管理状態には依存しない。 |
 | Publication Type | Internal Only、Derived、Public Canonical等の公開種別。 |
 | Reference | Public Repository上でReferenceとして公開する形態。 |
 | Release Audit | Public Release前に実施するPublication監査。 |
@@ -196,15 +198,19 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Architecture Layer | Projectを責務単位で分離した構造レイヤ。 |
 | Component | Architecture上で責務を持つ独立要素。 |
 | Data Flow | Component間で受け渡されるデータの流れ。 |
+| Core Candidate | 複数Reference Implementationの比較Evidenceによって再利用可能性を検証中のControl Pattern。Foundry Core確定要素ではない。 |
+| Foundry Core | 複数Reference Implementationの比較EvidenceとHuman Decisionを経て正式定義する共通Control Model。現時点では未確定。 |
+| Human Authority Boundary | Humanが保持するPurpose、Judgment、Responsibility、Approvalと、AIへ委譲できる責務との境界。 |
+| Human-Directed Foundry | HumanがPurpose、Judgment、Responsibility、Approvalを保持し、Contract、Validation、Review、Evidence、Governanceの下でAIへ業務を委譲するProject Positioning。 |
 | Internal Documentation | Internal Repositoryで管理するDocumentation。Project運用の正本を保持する。 |
 | Interface | Component間の接続契約。 |
 | MCP Extension | MCP連携機能を拡張するArchitecture。 |
-| Navigation | DocumentationやArchitecture間を移動するための導線。 |
 | Output Pipeline | Dify・n8n・ComfyUIなどを接続する出力処理系列。 |
 | Platform | Runtimeを構成する基盤環境。 |
 | Presentation Layer | 利用者へ情報を提示するための公開レイヤ。Websiteはこの責務を持つ。 |
-| Public Documentation | Public Repositoryで公開するDocumentation。 |
 | Repository Layer | Repository上で管理されるDocumentation・DSL・Configurationを保持するレイヤ。 |
+| Reference Implementation | FoundryのControl Patternを特定の業務領域と実装基盤で実証し、比較Evidenceを提供する実装。 |
+| Responsibility Boundary | Component、Stage、Human、AIが担当する責務と、越えてはならない範囲を明示する境界。 |
 | Runtime Layer | 実際のWorkflow実行を担当するレイヤ。 |
 | Website Presentation | Public DocumentationをWebsite上へ提示するPresentation Layer。 |
 
@@ -239,5 +245,5 @@ Glossaryの更新は、次をすべて満たした場合のみ完了とする。
 - 各用語は一意に定義されている。
 - 他文書の責務を重複して記載していない。
 - Documentation、Publication、Governance、Project State、Workflow、Architectureで使用する共通用語を網羅している。
-- Workflow系既存用語との意味が一致している。:contentReference[oaicite:0]{index=0}
+- Workflow系既存用語との意味が一致している。
 - 新しいProject固有用語が正式採用された場合、本書をCurrent Referenceとして更新する。

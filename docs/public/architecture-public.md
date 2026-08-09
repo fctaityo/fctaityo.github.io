@@ -16,17 +16,45 @@
 
 ## 2. Local AI Foundryの概要
 
-Local AI Foundryは、ローカルLLM、Workflow Orchestrator、保存・連携処理、画像生成基盤を組み合わせ、入力から記事、短文投稿、タグ、監査情報、画像等を生成・保存する制作基盤である。
+Local AI Foundryは、人間がPurpose、Judgment、Responsibility、Approvalを保持し、明示した責務境界の内側でAIへ業務を委譲するHuman-Directed Foundryである。Contract、DTO / Handoff、Validation、Gate、Review、EvidenceおよびHuman Gateによって、Workflow完走ではなく成果物の成立を制御する。
 
-主要な生成処理をローカル環境へ配置し、外部サービスへの依存を抑えながら、複数Stageの生成、契約検証、Retry、成果物検証、永続化を一つのWorkflowとして管理する。
+Article Productionは廃止せずReference Implementation #1（RI#1）として維持する。Documentation ProductionはReference Implementation #2（RI#2）として異なる業務と実装基盤上でControl Patternを実証する。Foundry Coreは未確定であり、RI間の比較EvidenceからCore Candidateを検証した後、別のHuman Decisionで確定する。RI#3はFuture / Undefinedであり、用途はHuman Decisionまで定義しない。
+
+## 2.1 責務階層
+
+```mermaid
+flowchart TD
+  H["Human Authority<br/>Purpose / Judgment / Responsibility / Approval"] --> F["Foundry Control Model<br/>Core Candidates under validation"]
+  F --> R1["RI#1 Article Production"]
+  F --> R2["RI#2 Documentation Production"]
+  F --> R3["RI#3 Future / Undefined"]
+  R1 --> I["Infrastructure / Runtime / Tooling"]
+  R2 --> I
+  R3 --> I
+```
+
+Human AuthorityはFoundry Control Modelと各Reference Implementationの上位責務である。AI DelegationはHuman Authority Boundaryを越えず、Purposeの設定、最終判断、責任、Approval / Human Gateを代替しない。
+
+Responsibility Boundary、Contract、DTO / Handoff、Normalize、Validation、Gate、Bounded Retry / Fail、Review、Evidence、Human Authority Boundaryは現時点のCore Candidateである。これはFoundry Coreの確定リストではない。
+
+## 2.2 Reference Implementationモデル
+
+| Reference Implementation | 位置付け |
+|---|---|
+| RI#1 — Article Production | 既存のArticle Production Workflowを最初のReference Implementationとして維持する。第5章以降の既存詳細は主としてRI#1のArchitectureを説明する。 |
+| RI#2 — Documentation Production | Documentationという異なる業務領域でControl Patternを検証するReference Implementation。検証継続中であり、Foundry Core確定を意味しない。 |
+| RI#3 — Future / Undefined | 次の業務領域。用途、Platform、Workflow、実装計画は未定義で、将来のHuman Decision対象とする。 |
+
+複数Reference Implementationで再現性、責務境界、失敗制御、Evidenceを比較し、Core Candidateを検証する。Foundry Coreは比較Evidenceだけで自動確定せず、Human Decisionによって正式に定義する。
 
 ## 3. 解決する課題
 
 * LLM出力の揺らぎを、後続工程の暗黙知ではなくDTO契約で制御する
 * 壊れた中間成果物をWorkflow成功として後段へ流さない
 * 生成処理と、保存・外部実行処理を分離する
-* 記事だけでなく、判断経路、契約判定、Retry履歴も保存する
-* 複数のローカルサービスを一体として起動・停止し、到達性を確認する
+* 成果物だけでなく、判断経路、契約判定、Retry履歴も保存する
+* HumanとAIの責務境界を明示し、AIへのDelegationがHuman Authorityを越えないようにする
+* 異なるReference Implementationを比較し、再利用可能なControl Patternを検証する
 
 ## 4. 設計原則
 
@@ -53,6 +81,8 @@ flowchart LR
 <a id="architecture-overview"></a>
 
 ## 5. 全体アーキテクチャ
+
+本章から第27章までの既存Article Production詳細は、RI#1のArchitectureとして維持する。
 
 ```mermaid
 flowchart LR
@@ -306,6 +336,8 @@ Rは実行責任、Aは最終責任、Cは参照、Iは通知・証跡受領を�
 
 Normalizeが意味内容、Gateが修正、Integration RuntimeがDTO意味生成を担当することはない。
 
+このMatrixはRI#1内部の実装責務を示す。Project全体のPurpose、Judgment、Responsibility、Approvalに関するHuman Authorityは本表より上位の責務境界である。
+
 ## 22. Data Flow Diagram（データフロー図）
 
 ```mermaid
@@ -382,6 +414,7 @@ sequenceDiagram
 | Persistence障害対応          | 大容量Payloadが実行環境の制約へ衝突               | Transport境界と原子的Persistenceを採用                               |
 | Artifact Integrity Phase | 長文途中切断とReview Stage逸脱が保存成功扱い        | Section Writing、Artifact Validator、Review有限Retry、全文Auditを導入 |
 | Runtime Parameter調査      | Provider既定値だけでは長文処理を保証できない          | 各LLM NodeでRuntime Parametersを明示管理                           |
+| Foundry Repositioning     | Article Production固有設計と再利用可能なControl Patternの境界が曖昧 | Article ProductionをRI#1として維持し、複数RIの比較EvidenceでCore Candidateを検証するHuman-Directed Foundryへ再位置付け |
 
 具体的な障害事象、内部値、Evidence ID、判断文書は公開対象外とする。
 
@@ -430,16 +463,19 @@ Architectureには、実装状況の変化に左右されないStage境界、責
 
 ## 30. 将来拡張
 
-将来拡張時も、本書で定義したDTO Boundary、有限Retry、意味生成と構造補正の責務分離、成果物成功とWorkflow成功の分離を維持する。
+将来拡張時も、本書で定義したDTO Boundary、有限Retry、意味生成と構造補正の責務分離、成果物成功とWorkflow成功の分離に加え、Human Authority BoundaryとReference Implementation比較によるCore Candidate検証を維持する。
 
-具体的な候補、優先順位、時期、内部依存はPlanning文書へ委譲する。
+Foundry Coreは、単一Reference Implementationの都合や自動化の進行だけで確定しない。十分な比較Evidenceを得た後、Human Decisionによって定義する。
+
+具体的な次Domain、優先順位、時期、内部依存はPlanning文書へ委譲する。
 
 ## 31. 関連文書
 
 * [Public Documentation Map](README-public.md)
 * [Project Status](status-public.md)
 * [基本原則](principles-public.md)
+* [Project Roadmap](roadmap-public.md)
 * [公開Architecture Decision Records](adr/)
 * [公開Configuration Audit](configuration-audits/)
 
-内部正本、内部契約、運用手順、Error Catalog、Roadmap、Handover、内部Reviewへの直接導線は公開版では保持しない。
+内部正本、内部契約、運用手順、Error Catalog、Handover、内部Reviewへの直接導線は公開版では保持しない。

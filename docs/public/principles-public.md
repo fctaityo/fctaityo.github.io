@@ -92,10 +92,16 @@ Bring-up、障害回避、実験のための暫定変更を恒久仕様と区別
 
 すべてのReviewを必ずADRや原則へ昇格させるのではなく、知識の影響範囲に合う正本へ反映する。上位文書または実装へ反映した後も、根拠となったReviewはProject Knowledgeとして削除しない。
 
+### P-19 — Human Authorityを保持する
+
+HumanはPurpose、Judgment、Responsibility、Approvalを保持する。AIへのDelegationは明示されたHuman Authority BoundaryとResponsibility Boundaryを越えず、Contract、Validation、Review、EvidenceおよびHuman Gateの下で成立させる。
+
+Automationそのものを目的とせず、Humanが責任を持って成立させる成果と判断を支援するために自動化する。
+
 ## 変更管理
 
 原則は通常のリファクタリングでは変更しない。Principles変更はプロジェクト全体へ影響する設計変更として扱う。
 
 変更が必要な場合は関連ReviewとADRを用意し、Workflow、DTO Contract、Error Catalogへの影響を確認する。採用後は影響を受ける文書と実装を同じ変更単位で追跡する。
 
-P-01からP-18のIDは変更しない。途中へ原則を追加する場合は既存IDを繰り上げず、枝番または新しい末尾番号を使用する。
+P-01からP-19のIDは変更しない。途中へ原則を追加する場合は既存IDを繰り上げず、枝番または新しい末尾番号を使用する。
