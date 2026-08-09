@@ -1,0 +1,24 @@
+/* =========================================================
+   Local AI Foundry Official Website v4.0 — r13 final hotfix
+
+   Scope:
+   - Enforce the agreed 12px minimum for visible micro-copy.
+   - No layout, color, typography-family, or animation changes.
+   ========================================================= */
+
+@media (max-width:760px) {
+  .phase-legend span {
+    font-size:12px!important;
+  }
+
+  .version-beacon span,
+  .version-beacon em {
+    font-size:12px!important;
+  }
+}
+
+@media (max-width:380px) {
+  .hero-evolution {
+    font-size:12px!important;
+  }
+}
