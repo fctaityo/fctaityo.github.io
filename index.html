@@ -4,217 +4,287 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050914">
-<meta name="description" content="AIを一人で働かせず、役割を持ったチームとして企画・調査・制作・確認・保存までつなぐローカル・マルチエージェント基盤 Local AI Foundry。">
-<title>Local AI Foundry — Contract-Driven Multi-Agent Platform</title>
-<link rel="preload" href="assets/header-girl.png" as="image" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=3.0">
-<script src="script.js?v=3.0" defer></script>
+<meta name="description" content="Local AI Foundryは、人間が目的と責任を持ち、AIへ仕事を委譲し、契約・検証・証拠によって成果物として成立させるためのローカルAI開発・制作基盤です。">
+<title>Local AI Foundry — AIと仕事を設計するFoundry</title>
+<link rel="stylesheet" href="styles.css?v=4.0-prototype-r9">
+<script src="script.js?v=4.0-prototype-r9" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">本文へ移動</a>
+<div class="scroll-progress" aria-hidden="true"><i data-scroll-progress></i></div>
 
 <header class="site-header" data-header>
   <div class="header-shell">
     <a class="brand" href="#home" aria-label="Local AI Foundry ホーム">
       <span class="brand-mark" aria-hidden="true">LF</span>
-      <span class="brand-copy"><strong>LOCAL AI FOUNDRY</strong><small>CONTRACT-DRIVEN AI</small></span>
+      <span class="brand-copy"><strong>LOCAL AI FOUNDRY</strong><small>AIと仕事を設計するFoundry</small></span>
     </a>
-
-    <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false">
+    <button class="menu-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" data-menu-toggle>
       <span class="sr-only">メニューを開く</span><i></i><i></i><i></i>
     </button>
-
-    <div class="nav-wrap" id="primary-nav">
+    <div class="nav-wrap" id="primary-nav" data-nav-wrap>
       <nav class="main-nav" aria-label="メインナビゲーション">
-        <a href="#how">HOW IT WORKS</a>
-        <a href="#why">WHY RELIABLE</a>
-        <a href="#explore">EXPLORE</a>
-        <a href="#current">CURRENT</a>
-        <a href="releases/index.html">RELEASES</a>
+        <a href="#evolution">進化</a>
+        <a href="#foundry">新しいLF</a>
+        <a href="#model">人とAIの役割</a>
+        <a href="#projects">実証プロジェクト</a>
+        <a href="#proof">実装と公開資料</a>
+        <a href="#current">現在地</a>
+        <a href="https://fctaityo.github.io/releases/">更新履歴</a>
       </nav>
-
       <nav class="external-nav" aria-label="外部リンク">
-        <a href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">
-          <span class="external-icon x-icon" aria-hidden="true">X</span><span>X</span>
-        </a>
-        <a href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">
-          <span class="external-icon note-icon" aria-hidden="true">N</span><span>NOTE</span>
-        </a>
-        <a href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">
-          <svg class="external-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v12a4 4 0 0 0 4 4h2v-2h-2a2 2 0 0 1-2-2V7h6.2l-2.1 2.1 1.4 1.4L18 6l-4.5-4.5-1.4 1.4L14.2 5H8V3H6Zm10 10v8h2v-8h-2Z"/></svg>
-          <span>GitHub</span>
-        </a>
+        <a href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer"><b>X</b><span>X</span></a>
+        <a href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer"><b>N</b><span>NOTE</span></a>
+        <a href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer"><b>GH</b><span>GitHub</span></a>
       </nav>
     </div>
   </div>
 </header>
 
 <main id="main">
-<section class="hero" id="home">
-  <div class="shell hero-grid">
-    <div class="hero-copy reveal">
-      <p class="kicker">CONTRACT-DRIVEN MULTI-AGENT PLATFORM</p>
-      <h1><span>LOCAL AI</span><br>FOUNDRY</h1>
-      <p class="hero-main">AIを一人で働かせない。<br><strong>チームで確認し、完成させる。</strong></p>
-      <p class="hero-description">Dify・n8n・ComfyUI・Ollamaをつなぎ、企画・調査・制作・確認・保存までを役割分担するLocal AI基盤。</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#how">仕組みを見る <span aria-hidden="true">→</span></a>
-        <a class="button" href="#explore">Public Documentation</a>
+  <section class="hero" id="home" data-hero>
+    <div class="hero-grid-bg" aria-hidden="true"></div>
+    <div class="shell hero-layout">
+      <div class="hero-evolution reveal" aria-label="Local AI Foundryの進化">
+        <span>記事自動生成</span><i>→</i><span>AIチーム</span><i>→</i><strong data-hero-word>人間主導のFoundry</strong>
       </div>
-      <div class="state-pill"><span class="status-dot"></span><span>PROJECT STATE</span><strong>Published</strong></div>
-    </div>
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span>LOCAL AI FOUNDRY / v4.0 構想</span><em>再定義 / REPOSITIONING</em></p>
+        <h1><span>LOCAL AI</span><br>FOUNDRY</h1>
+        <p class="hero-main"><span class="title-line">AIを自動化する場所から、</span><strong class="title-line">AIと仕事を設計する場所へ。</strong></p>
+        <p class="hero-description">人間が目的と責任を持ち、AIへ仕事を委譲する。契約、検証、レビュー、証拠、変更管理まで含めて、AIの仕事を成果物として成立させるためのローカルAI開発・制作基盤。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#evolution">LFの進化を見る ↓</a>
+          <a class="button" href="#proof">公開資料を見る</a>
+        </div>
+        <div class="hero-state-row">
+          <div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div>
+          <div class="state-chip"><span>現在の公開版</span><strong>v3.0</strong></div>
+          <div class="state-chip accent"><span>次期構想</span><strong>v4.0 / 試作</strong></div>
+        </div>
+      </div>
 
-    <div class="hero-visual reveal">
-      <div class="hero-frame"><img src="assets/header-girl.png" alt="Local AI Foundryの青髪マスコットキャラクター" fetchpriority="high"></div>
-      <div class="hero-signal"><small>LOCAL AI FOUNDRY</small><strong>Visual Navigation v3.0</strong></div>
+      <figure class="hero-art reveal">
+        <div class="hero-art-frame">
+          <img src="assets/hero-foundry.webp" alt="人間が判断の中心に立ち、AIチームとガバナンスをつないで仕事を進めるLocal AI Foundryのイメージ">
+          <div class="hero-art-shade" aria-hidden="true"></div>
+          <div class="hero-art-label label-human"><span>人間</span><strong>目的・判断・責任</strong></div>
+          <div class="hero-art-label label-control"><span>制御・管理</span><strong>契約・Gate・Review</strong></div>
+          <div class="hero-art-label label-team"><span>AIチーム</span><strong>分業・実行・再試行</strong></div>
+        </div>
+        <figcaption><span>HUMAN-DIRECTED</span><strong>人間が中心にいるFoundry</strong></figcaption>
+      </figure>
     </div>
-  </div>
-</section>
+    <div class="hero-bottom-line"><span>自動化から</span><i></i><strong>Foundryへ</strong></div>
+  </section>
 
-<section class="section section-with-character" id="about">
-  <div class="shell section-character-grid">
-    <div class="section-content reveal">
-      <div class="section-heading">
-        <div><p class="kicker">01 / WHAT IS LOCAL AI FOUNDRY?</p><h2>一人のAIではなく、<br>確認し合うAIチーム。</h2></div>
-        <p>生成そのものより、役割分担と確認の仕組みを重視する。AI同士が担当を分け、互いの仕事を確かめながら成果物を完成へ進めます。</p>
+  <section class="section evolution-section" id="evolution">
+    <div class="shell">
+      <div class="section-heading compact-heading reveal">
+        <div><p class="kicker">01 / 進化 <span>EVOLUTION</span></p><h2><span class="title-line">記事を作るために始めた。</span><strong class="title-line">仕事の設計基盤になった。</strong></h2></div>
+        <p>問題を一つずつ潰した結果、LFの対象は記事生成から、AIを仕事として成立させるための開発・運用基盤へ広がった。</p>
       </div>
-      <div class="grid two comparison">
-        <article class="card muted-card"><span class="card-label">ONE AI</span><h3>ひとつのAIに全部任せる</h3><p>最初から最後まで一人で担当。失敗や不足が見えにくい。</p></article>
-        <article class="card accent-card"><span class="card-label">LOCAL AI FOUNDRY</span><h3>役割を分け、別工程で確認する</h3><p>調べる、書く、確認する。問題があれば止めて必要な工程だけ戻す。</p></article>
+      <div class="evolution-pulse reveal" aria-hidden="true"><span>ARTICLE</span><i></i><span>TEAM</span><i></i><span>CONTRACT</span><i></i><strong>FOUNDRY</strong></div>
+      <div class="evolution-track compact-track">
+        <article class="evolution-step reveal"><span class="step-no">01</span><div><small>出発点</small><h3>記事自動生成</h3><p>一つのPromptから記事を作る、シンプルな自動化から始まった。</p></div></article>
+        <article class="evolution-step reveal"><span class="step-no">02</span><div><small>分業と制御</small><h3>AIチーム + 契約</h3><p>役割を分け、DTO・Gate・Retry・Reviewで受け渡しと失敗を管理した。</p></div></article>
+        <article class="evolution-step final reveal"><span class="step-no">03</span><div><small>現在</small><h3>人間主導のFoundry</h3><p>制作、開発、検証、Evidence、Governanceまでを一つの運用モデルとして扱う。</p></div></article>
       </div>
+      <blockquote class="big-statement reveal"><span>自動化は出発点だった。</span><strong>作っていたのはFoundryだった。</strong></blockquote>
     </div>
-    <aside class="character-panel reveal">
-      <img src="assets/mascot-explain.webp" alt="Local AI Foundryの仕組みを案内するマスコットキャラクター" loading="lazy">
-      <p class="speech">一人の天才AIじゃなくて、<strong>ちゃんと働けるチーム</strong>を作るのだ💛</p>
-    </aside>
-  </div>
-</section>
+  </section>
 
-<section class="section section-with-character alt" id="how">
-  <div class="shell section-character-grid">
-    <aside class="character-panel reveal">
-      <img src="assets/mascot-flow.webp" alt="AIチームの工程を指し示すマスコットキャラクター" loading="lazy">
-      <p class="speech">担当を分けて、<strong>次へ渡す。</strong><br>流れが見えると迷子にならない！</p>
-    </aside>
-    <div class="section-content reveal">
-      <div class="section-heading">
-        <div><p class="kicker">02 / HOW THE AI TEAM WORKS</p><h2>企画から完成まで、<br>一本の流れで見える。</h2></div>
-        <p>7つの工程が、それぞれの役割を持って順番に受け渡す。問題があれば必要な工程だけを戻し、全体をやり直しません。</p>
+  <section class="section foundry-section" id="foundry">
+    <div class="shell">
+      <div class="section-heading compact-heading reveal">
+        <div><p class="kicker">02 / 新しいLF <span>HUMAN-DIRECTED FOUNDRY</span></p><h2><span class="title-line">AIが主役ではない。</span><strong class="title-line">一番上にいるのは人間。</strong></h2></div>
+        <p>目的と最終判断を人間に残し、制御・管理の層を通してAIチームへ仕事を渡す。</p>
       </div>
-      <ol class="flow" aria-label="AIチームの7工程">
-        <li><span>01</span><strong>企画</strong><small>Planning</small></li>
-        <li><span>02</span><strong>調査</strong><small>Research</small></li>
-        <li><span>03</span><strong>執筆</strong><small>Writing</small></li>
-        <li><span>04</span><strong>確認</strong><small>Review</small></li>
-        <li><span>05</span><strong>画像</strong><small>Image</small></li>
-        <li><span>06</span><strong>監査</strong><small>Audit</small></li>
-        <li><span>07</span><strong>保存</strong><small>Package</small></li>
-      </ol>
-      <div class="demo-strip">
-        <div><strong>失敗 → 部分再試行を10秒で見る</strong><span>最終確認で問題を検出し、必要な工程だけを再試行する固定シナリオを体験できます。</span></div>
-        <a class="button compact" href="demo.html">AIチームのデモを見る →</a>
+      <div class="layer-stack compact-layers reveal">
+        <article class="layer human-layer"><div><span>01</span><small>人間</small></div><h3>目的・判断・責任</h3><p>何を作り、どこまでAIへ任せ、何を承認するかを決める。</p><strong>決める</strong></article>
+        <article class="layer governance-layer"><div><span>02</span><small>制御・管理</small></div><h3>契約・Gate・Review・Evidence</h3><p>AIの仕事を曖昧にせず、止める条件と検証方法を仕組みにする。</p><strong>制御する</strong></article>
+        <article class="layer ai-layer"><div><span>03</span><small>AIチーム</small></div><h3>企画・調査・執筆・画像・監査</h3><p>定義された役割を担当し、決められた契約で次工程へ渡す。</p><strong>実行する</strong></article>
+      </div>
+      <div class="scope-strip reveal" aria-label="Local AI Foundryの対象範囲">
+        <article><span>制作</span><p>文章・画像・成果物</p></article>
+        <article><span>開発</span><p>Prompt・DTO・Tooling</p></article>
+        <article><span>連携</span><p>Dify・n8n・Ollama・ComfyUI</p></article>
+        <article><span>検証</span><p>Gate・Retry・Review</p></article>
+        <article><span>管理</span><p>Evidence・State・Publication</p></article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section section-with-character" id="why">
-  <div class="shell section-character-grid">
-    <div class="section-content reveal">
-      <div class="section-heading">
-        <div><p class="kicker">03 / WHY IT IS RELIABLE</p><h2>AIは間違える。<br>だから、仕組みで確認する。</h2></div>
-        <p>工程ごとの受け渡し、成果物の検査、部分的な再試行。この3つを分けることで、AIの失敗を前提に扱います。</p>
+  <section class="section model-section" id="model">
+    <div class="shell">
+      <div class="section-heading compact-heading focused-heading reveal">
+        <div><p class="kicker">03 / 人とAIの役割 <span>HUMAN × AI</span></p><h2><span class="title-line">目標は「全自動」ではない。</span><strong class="title-line">任せる範囲を設計する。</strong></h2></div>
+        <p>AIを使う。しかし、目的・責任・承認を人間から消さない。7工程も、その考え方の中で動く。</p>
       </div>
-      <div class="grid three reliability-grid">
-        <article class="card"><span class="card-label">01 / CONTRACT</span><h3>曖昧に渡さない</h3><p>工程ごとに何を受け取り、何を返すかを決める。</p></article>
-        <article class="card"><span class="card-label">02 / VERIFY</span><h3>動いた ≠ 完成</h3><p>処理が終わったことと、成果物が合格したことを分ける。</p></article>
-        <article class="card"><span class="card-label">03 / RECOVER</span><h3>全部やり直さない</h3><p>問題のある工程を見つけ、必要な場所だけを戻す。</p></article>
+      <div class="model-grid">
+        <div class="comparison-board compact-comparison reveal">
+          <article class="comparison-column old-model"><span class="model-tag">全自動モデル</span><h3>AIに全部やらせる</h3><ol><li>AIが考える</li><li>AIが作る</li><li>AIが公開する</li><li>人間は結果を見る</li></ol></article>
+          <div class="comparison-axis" aria-hidden="true"><span>→</span></div>
+          <article class="comparison-column new-model"><span class="model-tag">LFモデル</span><h3>人間が任せ方を決める</h3><ol><li>人間が目的を決める</li><li>AIが担当を実行する</li><li>契約とGateで検査する</li><li>人間がレビューする</li><li>証拠を残す</li></ol></article>
+        </div>
+        <div class="model-visual-card reveal">
+          <img src="assets/human-ai-control-room.webp" alt="人間の判断、契約、検証、AIチームの工程を一つの管制室として表現したLocal AI Foundryのイメージ">
+          <div class="model-visual-overlay">
+            <div class="workflow-human"><span>人間</span><strong>判断 / 承認</strong></div>
+            <ol class="workflow-flow compact-flow" aria-label="Local AI Foundryの7工程">
+              <li><b>01</b><strong>企画</strong></li><li><b>02</b><strong>調査</strong></li><li><b>03</b><strong>執筆</strong></li><li><b>04</b><strong>確認</strong></li><li><b>05</b><strong>画像</strong></li><li><b>06</b><strong>監査</strong></li><li><b>07</b><strong>保存</strong></li>
+            </ol>
+            <div class="control-rail compact-rail"><span>契約</span><span>Gate</span><span>Review</span><span>変更管理</span><span>Evidence</span></div>
+            <div class="retry-loop"><span>失敗</span><i>↺</i><strong>必要な工程だけ戻す</strong></div>
+          </div>
+        </div>
       </div>
-      <a class="text-link" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/principles-public.md" target="_blank" rel="noopener noreferrer">基本原則を詳しく見る ↗</a>
     </div>
-    <aside class="character-panel check reveal">
-      <img src="assets/mascot-check.webp" alt="確認項目をチェックするLocal AI Foundryのマスコットキャラクター" loading="lazy">
-      <p class="speech">「動いた」と「ちゃんと完成した」は、<strong>別！</strong></p>
-    </aside>
-  </div>
-</section>
+  </section>
 
-<section class="section section-with-character alt" id="explore">
-  <div class="shell section-character-grid">
-    <aside class="character-panel explore reveal">
-      <img src="assets/mascot-explore.webp" alt="公開資料への入口を案内するLocal AI Foundryのマスコットキャラクター" loading="lazy">
-      <p class="speech">詳しい話はここから！<br><strong>知りたい深さ</strong>を選んでね💛</p>
-    </aside>
-    <div class="section-content reveal">
-      <div class="section-heading">
-        <div><p class="kicker">04 / EXPLORE</p><h2>知りたい深さへ、<br>ここから進む。</h2></div>
-        <p>全体構成、公開資料、現在地、これからの計画。知りたい内容に合わせて、公開ドキュメントへ進めます。</p>
+  <section class="section projects-section" id="projects">
+    <div class="shell">
+      <div class="section-heading compact-heading reveal">
+        <div>
+          <p class="kicker">04 / 実証プロジェクト <span>REFERENCE IMPLEMENTATIONS</span></p>
+          <h2><span class="title-line">一つの用途に閉じない。</span><strong class="title-line">別の仕事でも成立するかを試す。</strong></h2>
+        </div>
+        <p>LFは一つの巨大システムを作るだけではなく、複数のReference Implementation（RI）を並行して動かし、共通する制御パターンを実証していく。</p>
       </div>
-      <div class="grid two explore-grid">
-        <a class="explore-card" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/architecture-public.md" target="_blank" rel="noopener noreferrer">
-          <span class="explore-icon nodes" aria-hidden="true">⌬</span><span><strong>Architecture</strong><small>全体構成と責務境界を見る。</small></span><b>→</b>
-        </a>
-        <a class="explore-card" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/README-public.md" target="_blank" rel="noopener noreferrer">
-          <span class="explore-icon" aria-hidden="true">▤</span><span><strong>Documentation</strong><small>公開資料の入口から探す。</small></span><b>→</b>
-        </a>
-        <a class="explore-card" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">
-          <span class="explore-icon" aria-hidden="true">●</span><span><strong>Status</strong><small>プロジェクトの現在地を見る。</small></span><b>→</b>
-        </a>
-        <a class="explore-card" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/roadmap-public.md" target="_blank" rel="noopener noreferrer">
-          <span class="explore-icon" aria-hidden="true">↗</span><span><strong>Roadmap</strong><small>これから進む方向を見る。</small></span><b>→</b>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="section section-with-character" id="current">
-  <div class="shell section-character-grid">
-    <div class="section-content reveal">
-      <div class="section-heading">
-        <div><p class="kicker">05 / CURRENT</p><h2>今どこにいて、<br>次に何をするのか。</h2></div>
-        <p>Project State、最新Release、次のGateをまとめて表示。詳しい根拠は公開Statusから確認できます。</p>
-      </div>
-      <div class="grid three current-grid">
-        <article class="current-card"><span>PROJECT STATE</span><strong class="state-ok">Published</strong><small>CURRENT PUBLIC STATE</small></article>
-        <article class="current-card"><span>LATEST RELEASE</span><strong>v3.0</strong><small>VISUAL NAVIGATION</small></article>
-        <article class="current-card"><span>NEXT GATE</span><strong>Runtime Verification</strong><small>ACCEPTANCE PENDING</small></article>
-      </div>
-      <div class="current-actions">
-        <a class="button compact" href="releases/2026-08-07-v3.0.html">v3.0更新内容</a>
-        <a class="button compact" href="releases/index.html">Release History</a>
-        <a class="text-link" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">Status詳細 ↗</a>
-      </div>
-    </div>
-    <aside class="character-panel current reveal">
-      <img src="assets/mascot-current.webp" alt="現在地を案内するLocal AI Foundryのマスコットキャラクター" loading="lazy">
-      <p class="speech">今の位置と次のGateだけ、<strong>ここでサクッと確認！</strong></p>
-    </aside>
-  </div>
-</section>
+      <div class="ri-grid reveal">
+        <article class="ri-card ri-live">
+          <div class="ri-head"><span class="ri-no">RI#1</span><b>既存実装</b></div>
+          <p class="ri-kana">記事制作 / ARTICLE PRODUCTION</p>
+          <h3>企画から記事・画像・監査まで。</h3>
+          <p>最初のReference Implementation。Difyを中心に記事制作を分業し、Contract・DTO・Gate・Retry・Evidenceの候補を見つけた。</p>
+          <div class="ri-meta"><span>Dify</span><span>Ollama</span><span>ComfyUI</span></div>
+        </article>
 
-<section class="section follow-section" id="follow">
-  <div class="shell">
-    <div class="follow-head reveal">
-      <div><p class="kicker">06 / FOLLOW</p><h2>開発の続きを追う。</h2><p>日々の進捗、読み物、公開成果物、正式リリースへ最短で移動できます。</p></div>
-      <img class="follow-mascot" src="assets/mascot-explain.webp" alt="" aria-hidden="true" loading="lazy">
+        <article class="ri-card ri-active">
+          <div class="ri-head"><span class="ri-no">RI#2</span><b>Phase B</b></div>
+          <p class="ri-kana">ドキュメント制作 / DOCUMENTATION PRODUCTION</p>
+          <h3>別の業務で、同じ制御が必要か。</h3>
+          <p>Internal文書とPublication RuleからPublic候補を生成し、Review・Correction・Consistency・Evidenceを経てHuman Gateまで進める実証。</p>
+          <div class="ri-meta"><span>Python Runner</span><span>Ollama</span><span>Human Gate</span></div>
+        </article>
+
+        <article class="ri-card ri-next">
+          <div class="ri-head"><span class="ri-no">RI#3</span><b>構想中</b></div>
+          <p class="ri-kana">次の業務領域 / NEXT DOMAIN</p>
+          <h3>第三の仕事へ、Foundryを持ち出す。</h3>
+          <p>対象業務はまだ未確定。RI#1とRI#2で再現したControl Patternを、さらに別の業務へ適用してCore Candidateを絞り込む。</p>
+          <div class="ri-meta"><span>Concept</span><span>Next</span><span>Open</span></div>
+        </article>
+      </div>
+
+      <div class="parallel-board reveal" aria-label="Local AI Foundryの並行プロジェクト進行状況">
+        <img class="ri-guide" src="assets/ri-guide.webp" alt="" aria-hidden="true">
+        <div class="parallel-board-content">
+        <div class="parallel-board-head">
+          <div>
+            <span>並行プロジェクト</span>
+            <strong>いま、複数の線が同時に進んでいる。</strong>
+          </div>
+          <p>％ではなく、現在どの段階にいるかを表示</p>
+        </div>
+        <div class="phase-legend" aria-hidden="true">
+          <span>構想</span><span>設計</span><span>実装</span><span>実証</span><span>確定</span>
+        </div>
+
+        <div class="project-rail">
+          <div class="rail-title"><b>RI#1</b><span>記事制作</span><em>Runtime Verification待ち</em></div>
+          <div class="rail-track" aria-label="RI#1 記事制作: 実証段階">
+            <i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i><i></i>
+          </div>
+        </div>
+
+        <div class="project-rail">
+          <div class="rail-title"><b>RI#2</b><span>ドキュメント制作</span><em>Phase B / 実文書検証</em></div>
+          <div class="rail-track" aria-label="RI#2 ドキュメント制作: 実証段階">
+            <i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i><i></i>
+          </div>
+        </div>
+
+        <div class="project-rail">
+          <div class="rail-title"><b>WEB</b><span>公式HP v4.0</span><em>Prototype / Human Review</em></div>
+          <div class="rail-track" aria-label="公式HP v4.0: 実装段階">
+            <i class="done"></i><i class="done"></i><i class="current"></i><i></i><i></i>
+          </div>
+        </div>
+
+        <div class="project-rail">
+          <div class="rail-title"><b>CORE</b><span>Foundry Core</span><em>比較Evidence蓄積</em></div>
+          <div class="rail-track" aria-label="Foundry Core: 設計段階">
+            <i class="done"></i><i class="current"></i><i></i><i></i><i></i>
+          </div>
+        </div>
+
+        <div class="project-rail future">
+          <div class="rail-title"><b>RI#3</b><span>次期Reference Implementation</span><em>構想中</em></div>
+          <div class="rail-track" aria-label="RI#3: 構想段階">
+            <i class="current"></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
-    <div class="grid four follow-grid reveal">
-      <a class="follow-card x" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer"><span class="follow-icon">X</span><strong>X</strong><small>Daily Build Log</small><b>FOLLOW →</b></a>
-      <a class="follow-card note" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer"><span class="follow-icon">N</span><strong>NOTE</strong><small>Design Journal / Articles</small><b>READ →</b></a>
-      <a class="follow-card git" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer"><span class="follow-icon">⌘</span><strong>GitHub</strong><small>Public Repository</small><b>EXPLORE →</b></a>
-      <a class="follow-card releases" href="releases/index.html"><span class="follow-icon">↺</span><strong>Releases</strong><small>Official Release History</small><b>VIEW →</b></a>
+  </section>
+
+  <section class="section proof-section" id="proof">
+    <div class="shell">
+      <div class="section-heading compact-heading reveal">
+        <div><p class="kicker">05 / 実装と公開資料 <span>PROOF OF WORK</span></p><h2><span class="title-line">思想だけではない。</span><strong class="title-line">実装と現在地を公開する。</strong></h2></div>
+        <p>公開資料への導線は減らさない。重複した入口を整理し、「何を知りたいか」から辿れる形にまとめる。</p>
+      </div>
+      <div class="proof-system-grid">
+        <div class="proof-grid compact-proof">
+          <a class="proof-card reveal" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/architecture-public.md" target="_blank" rel="noopener noreferrer"><small>仕組みを知る / ARCHITECTURE</small><h3>アーキテクチャ</h3><p>全体構成と責務境界。</p><b>開く ↗</b></a>
+          <a class="proof-card reveal" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/principles-public.md" target="_blank" rel="noopener noreferrer"><small>考え方を知る / PRINCIPLES</small><h3>基本原則</h3><p>Contract・Verify・Recover。</p><b>開く ↗</b></a>
+          <a class="proof-card reveal" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer"><small>現在地を見る / STATUS</small><h3>公開ステータス</h3><p>Project StateとCurrent State。</p><b>開く ↗</b></a>
+          <a class="proof-card reveal" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/roadmap-public.md" target="_blank" rel="noopener noreferrer"><small>次を見る / ROADMAP</small><h3>ロードマップ</h3><p>次の検証と進行方向。</p><b>開く ↗</b></a>
+          <a class="proof-card reveal" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/governance/publication-governance.md" target="_blank" rel="noopener noreferrer"><small>公開境界を見る / PUBLICATION</small><h3>公開ガバナンス</h3><p>Internal / Publicの責務。</p><b>開く ↗</b></a>
+          <a class="proof-card reveal" href="https://fctaityo.github.io/releases/"><small>進化を追う / RELEASES</small><h3>更新履歴</h3><p>公式サイトとPublic Artifactの履歴。</p><b>開く →</b></a>
+        </div>
+        <div class="system-map compact-system reveal" aria-label="Local AI Foundryシステム構成の概念図">
+          <div class="system-core"><small>LOCAL AI</small><strong>FOUNDRY</strong><span>連携の中心</span></div>
+          <div class="system-node n-dify"><b>DIFY</b><small>Workflow</small></div>
+          <div class="system-node n-n8n"><b>n8n</b><small>連携</small></div>
+          <div class="system-node n-ollama"><b>OLLAMA</b><small>Local LLM</small></div>
+          <div class="system-node n-comfy"><b>COMFYUI</b><small>画像 / 動画</small></div>
+          <div class="system-node n-git"><b>GIT</b><small>証拠 / 変更管理</small></div>
+          <div class="system-node n-human"><b>人間</b><small>判断 / Review</small></div>
+          <svg viewBox="0 0 1000 520" preserveAspectRatio="none" aria-hidden="true"><path d="M500 255 C350 80, 180 90, 105 145"/><path d="M500 255 C650 80, 820 90, 895 145"/><path d="M500 255 C280 260, 170 320, 105 395"/><path d="M500 255 C720 260, 830 320, 895 395"/><path d="M500 255 C500 390, 500 430, 500 470"/><path d="M500 255 C500 130, 500 95, 500 55"/></svg>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="section current-section" id="current">
+    <div class="shell current-shell">
+      <div class="current-copy reveal">
+        <p class="kicker">06 / 現在地 <span>CURRENT STATE</span></p>
+        <h2><span class="title-line">現在の公開版と、</span><strong class="title-line">次に進めている再定義を</strong><strong class="title-line">分けて示す。</strong></h2>
+        <p>v4.0はまだ公開版ではない。現行v3.0を維持しながら、LFの新しい位置づけをHuman Reviewしている段階。</p>
+        <div class="current-actions"><a class="button compact primary" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">公開Status ↗</a><a class="button compact" href="https://fctaityo.github.io/releases/">更新履歴</a></div>
+      </div>
+      <div class="status-panel reveal">
+        <article><span>プロジェクト状態</span><strong class="ok">Published</strong></article>
+        <article><span>現在の公式HP</span><strong>v3.0</strong></article>
+        <article><span>次期構想</span><strong class="accent-text">v4.0</strong></article>
+        <article><span>Runtime</span><strong>Not Executed / PENDING</strong></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="finale">
+    <div class="finale-grid" aria-hidden="true"></div>
+    <div class="shell finale-layout single-finale">
+      <div class="finale-copy finale-panel reveal"><p class="kicker">LOCAL AI FOUNDRY <span>BUILD IN PUBLIC</span></p><h2><span class="title-line">AIを使う。</span><strong class="title-line">でも、人間を消さない。</strong></h2><p>Local AI Foundryは、作りながら進化を公開していく。</p><div class="finale-actions"><a class="button primary" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="button" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">NOTE ↗</a><a class="button" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">X ↗</a></div></div>
+    </div>
+  </section>
 </main>
 
-<footer class="site-footer">
-  <div class="shell footer-grid">
-    <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">LF</span><span class="brand-copy"><strong>LOCAL AI FOUNDRY</strong><small>CONTRACT-DRIVEN MULTI-AGENT PLATFORM</small></span></a>
-    <p>意味は自由。構造は厳格。</p>
-    <p>©2026 FC決死隊隊長</p>
-  </div>
-</footer>
+<footer class="site-footer"><div class="shell footer-grid"><div><strong>LOCAL AI FOUNDRY</strong><span>AIと仕事を設計するFoundry</span></div><div><a href="#home">TOP</a><a href="https://fctaityo.github.io/releases/">更新履歴</a><a href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/README-public.md" target="_blank" rel="noopener noreferrer">公開資料</a></div></div></footer>
 </body>
 </html>
