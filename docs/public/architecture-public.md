@@ -4,21 +4,22 @@
 
 本書は、Local AI Foundryの構成、境界、Workflow、主要データフローを公開するためのArchitecture文書である。
 
-本書はInternal `docs/architecture/architecture.md`を唯一の正本とする公開派生物であり、公開のために必要なMask、Generalization、文章調整だけを行う。公開版独自のArchitecture、Current State、実装計画、運用判断は保持しない。
+本書はInternal Architectureを唯一の正本とする公開派生物であり、公開のために必要なMask、Generalization、文章調整だけを行う。公開版独自のArchitecture、Current State、実装計画、運用判断は保持しない。
 
 公開文書の関係は次のとおりである。
 
-* 設計思想の公開入口: [基本原則](principles-public.md)
-* 公開Architectureの入口: 本書
-* `README-public.md`: Public Documentation全体への入口
+- 設計思想の公開入口: [基本原則](principles-public.md)
+- 用語の公開Reference: [Glossary](glossary-public.md)
+- 将来方向の公開Reference: [Project Roadmap](roadmap-public.md)
+- Public Documentation全体の入口: [Public Documentation Map](README-public.md)
 
-内部パス、環境固有値、実行時設定値、接続先、保存方式の詳細、Error Code、監査構成、未公開文書への直接導線は公開対象外とする。公開内容と内部正本が食い違う場合は、内部正本を基準として本書を更新する。
+Internal Repository固有Path、Working Evidence、Private Artifact、Configuration ID、時点付き実行値、内部運用手順、未公開文書への直接導線は公開対象外とする。公開内容とInternal正本が食い違う場合はInternal正本を基準として本書を更新する。
 
 ## 2. Local AI Foundryの概要
 
 Local AI Foundryは、人間がPurpose、Judgment、Responsibility、Approvalを保持し、明示した責務境界の内側でAIへ業務を委譲するHuman-Directed Foundryである。Contract、DTO / Handoff、Validation、Gate、Review、EvidenceおよびHuman Gateによって、Workflow完走ではなく成果物の成立を制御する。
 
-Article Productionは廃止せずReference Implementation #1（RI#1）として維持する。Documentation ProductionはReference Implementation #2（RI#2）として異なる業務と実装基盤上でControl Patternを実証する。Foundry Coreは未確定であり、RI間の比較EvidenceからCore Candidateを検証した後、別のHuman Decisionで確定する。RI#3はFuture / Undefinedであり、用途はHuman Decisionまで定義しない。
+Article Productionは廃止せずReference Implementation #1（RI#1）として維持する。Documentation ProductionはReference Implementation #2（RI#2）として異なる業務と実装基盤上でControl Patternを実証する。Foundry Coreは未確定であり、RI間の比較EvidenceからCore Candidateを検証した後、別のHuman Decisionで確定する。RI#3はFuture / Undefinedであり、用途は未定義である。
 
 ## 2.1 責務階層
 
@@ -37,36 +38,37 @@ Human AuthorityはFoundry Control Modelと各Reference Implementationの上位�
 
 Responsibility Boundary、Contract、DTO / Handoff、Normalize、Validation、Gate、Bounded Retry / Fail、Review、Evidence、Human Authority Boundaryは現時点のCore Candidateである。これはFoundry Coreの確定リストではない。
 
-## 2.2 Reference Implementationモデル
+## 2.2 Reference Implementationの現在位置
 
-| Reference Implementation | 位置付け |
-|---|---|
-| RI#1 — Article Production | 既存のArticle Production Workflowを最初のReference Implementationとして維持する。第5章以降の既存詳細は主としてRI#1のArchitectureを説明する。 |
-| RI#2 — Documentation Production | Documentationという異なる業務領域でControl Patternを検証するReference Implementation。検証継続中であり、Foundry Core確定を意味しない。 |
-| RI#3 — Future / Undefined | 次の業務領域。用途、Platform、Workflow、実装計画は未定義で、将来のHuman Decision対象とする。 |
+| Reference Implementation | 位置付け | Current Evidence |
+|---|---|---|
+| RI#1 — Article Production | 既存の7段階Article Production Workflow。従来の詳細設計と実装を最初のReference Implementationとして維持する | 既存Article Production ArchitectureとRepository Evidence |
+| RI#2 — Documentation Production | Internal DocumentationとPublication RuleからPublic候補、Validation、Review、Correction、Consistency、Evidence、Human Gateまでを扱う別業務 | Synthetic Live Validationによる比較Evidenceは取得済み。Real Document Copy実証は準備段階であり、完了またはFinal Acceptance済みとは扱わない |
+| RI#3 — Future / Undefined | 次の業務領域。用途、Platform、Workflow、実装計画は未定義 | Evidenceなし。将来のHuman Decision対象 |
 
-複数Reference Implementationで再現性、責務境界、失敗制御、Evidenceを比較し、Core Candidateを検証する。Foundry Coreは比較Evidenceだけで自動確定せず、Human Decisionによって正式に定義する。
+RI#2の成立済みEvidenceはControl Patternの比較Evidenceであり、Foundry Core決定またはProject Runtime Verificationではない。進行中の実証は完了扱いしない。
 
 ## 3. 解決する課題
 
-* LLM出力の揺らぎを、後続工程の暗黙知ではなくDTO契約で制御する
-* 壊れた中間成果物をWorkflow成功として後段へ流さない
-* 生成処理と、保存・外部実行処理を分離する
-* 成果物だけでなく、判断経路、契約判定、Retry履歴も保存する
-* HumanとAIの責務境界を明示し、AIへのDelegationがHuman Authorityを越えないようにする
-* 異なるReference Implementationを比較し、再利用可能なControl Patternを検証する
+- 異なる業務へAIを委譲してもHuman AuthorityとResponsibility Boundaryを維持する
+- Reference Implementation間の比較Evidenceから再利用可能なControl Patternを検証する
+- LLM出力の揺らぎを、後続工程の暗黙知ではなくDTO契約で制御する
+- 壊れた中間成果物をWorkflow成功として後段へ流さない
+- 生成処理と、保存・外部実行処理を分離する
+- 記事だけでなく、判断経路、契約判定、Retry履歴も保存する
+- 複数のローカルServiceを一体として起動・停止し、到達性を確認する
 
 ## 4. 設計原則
 
-設計思想の公開入口は[基本原則](principles-public.md)である。本書では、その原則をコンポーネント境界とデータフローへ適用した結果だけを扱う。
+設計思想の公開入口は[基本原則](principles-public.md)である。本書では、その原則をComponent境界とData Flowへ適用した結果だけを扱う。
 
 ### 4.1 Configuration Governance（構成管理統制）
 
-GUI、Draft、DSL、Git、Documentation、Runtimeは、同じ構成の異なる表現または実効状態であり、更新契機も異なる。
+GUI、Draft、DSL、Git、Documentation、Runtimeは同じ構成の異なる表現または実効状態であり、更新契機も異なる。
 
-Local AI FoundryはこれらをWorkflow全体で一括同期せず、Graph、Prompt、Code、Contract、LLM Node Parameters、Provider Settings等のConfiguration Item単位で正本と同期方向を判断する。
+Local AI FoundryはこれらをWorkflow全体で一括同期せず、Graph、Prompt、Code、Contract、LLM Node Parameters、Provider Settings等のConfiguration Itemごとに正本と同期方向を判断する。
 
-本章は構造上の位置付けだけを示し、個別の差分、現在の同期状態、Audit結果、内部運用手順は保持しない。
+本章は構造上の位置付けだけを示し、具体的な状態分類、同期手順、Audit結果、内部運用契約は保持しない。
 
 ```mermaid
 flowchart LR
@@ -80,9 +82,9 @@ flowchart LR
 
 <a id="architecture-overview"></a>
 
-## 5. 全体アーキテクチャ
+## 5. RI#1 Article Productionアーキテクチャ
 
-本章から第27章までの既存Article Production詳細は、RI#1のArchitectureとして維持する。
+本章以降のArticle、短文投稿、タグ、画像、保存に関する詳細はProject全体の唯一の業務定義ではなく、RI#1のCurrent Architectureである。
 
 ```mermaid
 flowchart LR
@@ -103,26 +105,26 @@ flowchart LR
   end
 ```
 
-Generation Workflowは企画、調査、執筆、レビュー、画像要求、最終監査を担当する。Integration Workflowは成果物受信、永続化、画像生成実行、結果返却を担当する。
-
 <a id="agent-responsibilities"></a>
 
-## 6. 7段階Agent構成と各責務
+## 6. RI#1 7段階Agent構成と各責務
 
 ```mermaid
 flowchart LR
   P["01 Planning"] --> R["02 Research"] --> WP["03 Writing Plan"] --> SW["Section Writing"] --> AS["Assembly"] --> AV["Artifact Validator"] --> V["04 Review"] --> IP["05 Image Prompt"] --> IR["06 Image Request"] --> A["07 Final Audit"] --> PK["Package Output"]
 ```
 
-| Stage                    | 責務                                             |
-| ------------------------ | ---------------------------------------------- |
-| Planning                 | 入力から制作ブリーフ、調査質問、執筆条件を作る                        |
-| Research                 | 既知情報、要確認事項、執筆可能な材料、避ける主張を整理する                  |
-| Writing                  | 本文なしのPlan、独立Section、意味非生成Assembly、配布メタデータを生成する |
-| Review                   | Writing成果物を最小Review DTOで受け、合否、問題、修正方針を返す       |
-| Image Prompt             | 画像生成向けの著作権配慮済みプロンプトを作る                         |
-| Image Generation Request | 画像生成実行に必要な要求を構成する                              |
-| Final Audit              | 最小Audit DTOを受け、公開前の合否と注意点を返す                   |
+| Stage | 責務 |
+|---|---|
+| Planning | 入力から制作ブリーフ、調査質問、執筆条件を作る |
+| Research | 既知情報、要確認事項、執筆可能な材料、避ける主張を整理する |
+| Writing | 本文なしのPlan、独立Section、意味非生成Assembly、配布メタデータを生成する |
+| Review | Writing成果物を最小Review DTOで受け、合否・問題・修正方針を返す |
+| Image Prompt | 画像生成向けの著作権配慮済みプロンプトを作る |
+| Image Generation Request | 画像生成実行に必要な要求を構成する |
+| Final Audit | 最小Audit DTOを受け、公開前の合否と注意点を返す |
+
+<a id="llm-runtime-parameters"></a>
 
 ### LLM Runtime Parameters（実行時設定）
 
@@ -130,13 +132,13 @@ Model Providerの既定値と各LLM Nodeの実行時設定は分離して管理�
 
 長文処理ではProvider既定値だけに依存せず、各Nodeの役割に応じてContext Window、推論モード、出力上限等を明示的に管理する。
 
-具体的な設定値、Node別割当、障害切り分け手順は内部仕様とする。
+具体的な設定値、Node別割当、障害切り分け条件はInternal運用情報として本書では保持しない。
 
 ## 7. Agent間通信モデル
 
 PlanningとResearchでは、LLM raw textを直後のNormalizeだけが読み、後続はNormalize済みDTOを参照する。
 
-WritingはPlanと複数Sectionへ分割し、各Sectionを独立して生成・検証する。Reviewにも独立した契約判定を持たせ、PackageによるStage救済を禁止する。Final Auditは記事全文、Validator結果、Review、画像要求、Package事前状態を受ける。
+WritingはPlanと複数Sectionへ分割し、各Sectionを独立して生成・検証する。必要な再生成は同一Stage内の有限Retryとして扱う。Reviewにも独立した契約判定と有限Retryを持たせ、PackageによるStage救済を禁止する。Final Auditは記事全文、Validator結果、Review、画像要求、Package事前状態を受ける。
 
 ```mermaid
 flowchart LR
@@ -169,7 +171,7 @@ GateはDTOを修正しない。前段の契約違反を後段で救済せず、�
 
 ## 11. Research限定Retry
 
-Research DTOの契約違反だけを対象に、有限回の再生成を行う。
+Research DTOの契約違反だけを対象に有限回の再生成を行う。
 
 循環Edgeを使わない有限Graphとし、初回PASS時はRetryしない。再生成後も契約を満たさない場合はWorkflowを停止する。
 
@@ -183,7 +185,7 @@ flowchart TD
   M --> W["Writingへ進む"]
 ```
 
-Retry制御情報はResearch DTOへ混入させず、業務データと監査情報を分離する。具体的なRetry Context、監査Field、停止Code、保存先は内部仕様とする。
+Retry制御情報はResearch DTOへ混入させず、業務データと監査情報を分離する。具体的なRetry Context、回数、監査Field、停止Code、保存先はInternal仕様とする。
 
 <a id="section-writing"></a>
 
@@ -204,13 +206,13 @@ flowchart LR
   AV -->|FAIL| F["Workflow停止"]
 ```
 
-具体的なSection数、縮退方式、再生成条件、検査項目、停止Codeは内部仕様とする。
+具体的なSection数、縮退方式、token budget、finish reason、再生成条件、検査項目、停止CodeはInternal仕様とする。
 
 ## 13. Package Output Final Guard（最終防御）
 
 外部送信直前に、主要成果物が公開・保存可能な状態かを再検査する。
 
-これはArtifact Validatorの代替ではなく最終防波堤であり、前段Stageの契約違反をPackageで救済しない。具体的な再検査Fieldと判定条件は内部仕様とする。
+これはArtifact Validatorの代替ではなく最終防波堤であり、前段Stageの契約違反をPackageで救済しない。具体的な再検査Fieldと判定条件はInternal仕様とする。
 
 ## 14. Generation WorkflowからIntegration WorkflowへのTransport（転送）
 
@@ -225,7 +227,7 @@ flowchart LR
   C --> J
 ```
 
-具体的なURL、Port、内部Path、一時保存方式、実行Command、入力互換方式は内部仕様とする。
+具体的なURL、Port、内部Path、一時保存方式、実行Command、入力互換方式はInternal仕様とする。
 
 ## 15. 原子的なPersistence（永続化）
 
@@ -233,7 +235,7 @@ flowchart LR
 
 保存後に内容と構成を再検証し、同名成果物や並行実行による衝突を避ける。保存処理の途中で失敗した場合も、既存成果物を破壊しない。
 
-具体的なstaging方式、rename手順、採番規則、再検証項目、実行識別子は内部仕様とする。
+具体的なstaging方式、rename手順、採番規則、実行識別子、File検証詳細はInternal仕様とする。
 
 ## 16. 画像生成
 
@@ -241,7 +243,7 @@ Integration Workflowの実行処理が画像生成Runtimeへ要求を送り、�
 
 利用可能な生成設定との差異は送信前に検証する。画像生成だけが失敗した場合は、主要なテキスト成果物の成功と画像生成失敗を分離して扱う。
 
-具体的なAPI Endpoint、poll方式、取得手順、Model、Sampler、Scheduler等の正規化方式は内部仕様とする。
+具体的なAPI Endpoint、poll方式、取得手順、Model設定の正規化方式はInternal仕様とする。
 
 ## 17. 起動・停止・Health Check（稼働確認）
 
@@ -263,7 +265,7 @@ flowchart TD
 
 停止処理は本プロジェクトが管理するServiceを停止し、他用途と共有するRuntimeは運用境界に従って扱う。
 
-具体的なScript名、Process判定、Port、Endpoint、待機時間、停止対象は内部仕様とする。
+具体的なScript名、Process条件、Port、Endpoint、待機時間、停止対象はInternal仕様とする。
 
 ## 18. Workflow成功と成果物成功の違い
 
@@ -279,7 +281,7 @@ Error Codeは、発生条件、Retry可否、Operator対応を機械的に識別
 
 監査情報は、契約判定、Retry、Agent間受け渡し、保存、画像生成結果を責務別に分離して残す。巨大本文を運用Logへ重複出力しない。
 
-具体的なError Code、File名、保存Path、Log Schema、Operator手順は内部仕様とする。
+具体的なError Code、File名、保存Path、Log Schema、Operator手順はInternal仕様とする。
 
 実運用で得られた知識はReviewとして保持し、設計変更が必要な場合は、判断記録、Architecture、Workflow、関連Documentationへ追跡可能な形で反映する。
 
@@ -322,21 +324,19 @@ stateDiagram-v2
 
 Rは実行責任、Aは最終責任、Cは参照、Iは通知・証跡受領を表す。実装上のComponent責務であり、組織上の職位を表さない。
 
-| 活動          | Generation Agent | Normalize | Contract Gate | Package Output | Integration Runtime | Image Runtime | Operator |
-| ----------- | ---------------- | --------- | ------------- | -------------- | ------------------- | ------------- | -------- |
-| 意味内容の生成     | R/A              | I         | I             | I              | I                   | I             | C        |
-| DTO構造補正     | I                | R/A       | C             | I              | I                   | I             | I        |
-| DTO合否判定     | I                | C         | R/A           | C              | I                   | I             | I        |
-| Stage再生成    | R                | C         | A             | I              | I                   | I             | I        |
-| 最終成果物Guard  | I                | I         | C             | R/A            | I                   | I             | I        |
-| Transport受信 | I                | I         | I             | C              | R/A                 | I             | I        |
-| 原子的保存・検証    | I                | I         | I             | C              | R/A                 | I             | I        |
-| 画像生成        | I                | I         | I             | C              | C                   | R/A           | I        |
-| 障害調査・再実行判断  | I                | I         | I             | I              | C                   | C             | R/A      |
+| 活動 | Generation Agent | Normalize | Contract Gate | Package Output | Integration Runtime | Image Runtime | Operator |
+|---|---|---|---|---|---|---|---|
+| 意味内容の生成 | R/A | I | I | I | I | I | C |
+| DTO構造補正 | I | R/A | C | I | I | I | I |
+| DTO合否判定 | I | C | R/A | C | I | I | I |
+| Research再生成 | R | C | A | I | I | I | I |
+| 最終成果物Guard | I | I | C | R/A | I | I | I |
+| Transport受信 | I | I | I | C | R/A | I | I |
+| 原子的保存・検証 | I | I | I | C | R/A | I | I |
+| 画像生成 | I | I | I | C | C | R/A | I |
+| 障害調査・再実行判断 | I | I | I | I | C | C | R/A |
 
 Normalizeが意味内容、Gateが修正、Integration RuntimeがDTO意味生成を担当することはない。
-
-このMatrixはRI#1内部の実装責務を示す。Project全体のPurpose、Judgment、Responsibility、Approvalに関するHuman Authorityは本表より上位の責務境界である。
 
 ## 22. Data Flow Diagram（データフロー図）
 
@@ -405,29 +405,28 @@ sequenceDiagram
 
 ## 24. 設計思想の変遷
 
-| 段階                       | 発見した問題                              | 設計上の対応                                                      |
-| ------------------------ | ----------------------------------- | ----------------------------------------------------------- |
-| 初期Multi-stage Workflow   | raw JSONと巨大Contextで後続AgentがStageを誤認 | Review、Audit向け最小DTOを導入                                      |
-| Contract Phase 1         | Workflow完走でも不完全成果物が成功扱い             | Package Output Final Guardを追加                               |
-| Contract Phase 2         | 前段の必須値欠落が後段へ波及                      | DTO、Normalize、Contract Gateを分離                              |
-| Research障害対応             | 正常なGate停止にも人間の再入力が必要                | 有限Research Retryを追加                                         |
-| Persistence障害対応          | 大容量Payloadが実行環境の制約へ衝突               | Transport境界と原子的Persistenceを採用                               |
-| Artifact Integrity Phase | 長文途中切断とReview Stage逸脱が保存成功扱い        | Section Writing、Artifact Validator、Review有限Retry、全文Auditを導入 |
-| Runtime Parameter調査      | Provider既定値だけでは長文処理を保証できない          | 各LLM NodeでRuntime Parametersを明示管理                           |
-| Foundry Repositioning     | Article Production固有設計と再利用可能なControl Patternの境界が曖昧 | Article ProductionをRI#1として維持し、複数RIの比較EvidenceでCore Candidateを検証するHuman-Directed Foundryへ再位置付け |
+| 段階 | 発見した問題 | 設計上の対応 |
+|---|---|---|
+| 初期7段階Workflow | raw JSONと巨大Contextで後続AgentがStageを誤認 | Review、Audit向け最小DTOを導入 |
+| Contract Phase 1 | Workflow完走でも不完全成果物が成功扱い | Package Output Final Guardを追加 |
+| Contract Phase 2 | 前段の必須値欠落が後段へ波及 | DTO、Normalize、Contract Gateを分離 |
+| Research障害対応 | 正常なGate停止にも人間の再入力が必要 | 有限Research Retryを追加 |
+| Persistence障害対応 | 大容量Payloadが実行環境の制約へ衝突 | Transport境界と原子的Persistenceを採用 |
+| Artifact Integrity Phase | 長文途中切断とReview Stage逸脱が保存成功扱い | Section Writing、Artifact Validator、Review有限Retry、全文Auditを導入 |
+| Runtime Parameter調査 | Provider既定値だけでは長文処理を保証できない | 各LLM NodeでRuntime Parametersを明示管理 |
 
-具体的な障害事象、内部値、Evidence ID、判断文書は公開対象外とする。
+具体的な障害値、Error文言、内部Evidence、判断文書への直接導線は公開対象外とする。
 
 ## 25. DTO Version方針
 
-* 現行DTOの一部は明示的なVersion Fieldを持たない
-* Field追加は、任意かつ既存Consumerが無視できる場合に限り後方互換とする
-* 必須Field追加、型変更、意味変更、階層移動は破壊的変更とする
-* 破壊的変更時はVersion識別子または新DTO名を採用し、Producer、Normalize、Gate、Consumer、Fixtureを同一変更単位で更新する
-* Normalizeは旧Versionの意味を推測して新Versionへ変換しない
-* Migrationは明示的なRuleだけを許可する
+- 現行DTOの一部は明示的なVersion Fieldを持たない
+- Field追加は、任意かつ既存Consumerが無視できる場合に限り後方互換とする
+- 必須Field追加、型変更、意味変更、階層移動は破壊的変更とする
+- 破壊的変更時はVersion識別子または新DTO名を採用し、Producer、Normalize、Gate、Consumer、Fixtureを同一変更単位で更新する
+- Normalizeは旧Versionの意味を推測して新Versionへ変換しない
+- Migrationは明示的なRuleだけを許可する
 
-現在のVersion未付与は既知の技術的負債であり、今後の契約更新時に共通表現を決定する。具体的な対象DTOと実施時期は内部計画へ委譲する。
+現在のVersion未付与は既知の技術的負債であり、今後の契約更新時に共通表現を決定する。具体的な対象DTO、Field、実施時期はInternal Planningへ委譲する。
 
 ## 26. Error Code Version方針
 
@@ -435,17 +434,17 @@ Error CodeはLog文言ではなく機械判定用Interfaceとして扱う。
 
 既存Codeの意味を変更せず、意味またはOperator対応が非互換に変わる場合は新Codeを追加する。廃止時は移行期間を設ける。
 
-具体的な命名規則、Code一覧、Retry可否、Operator対応は内部仕様とする。
+具体的な命名規則、Code一覧、Retry可否、Operator対応はInternal仕様とする。
 
 ## 27. テスト戦略
 
-* 静的検証: 構文、識別子、参照、到達性、出力、環境Key
-* Contract単体: 初回PASS、FAILからPASS、FAILからFAIL、意味転用禁止、有限Graph
-* Transport / Persistence: 小規模、通常、大規模、特殊文字、不正構造、空入力、並行実行
-* 統合: Generation Workflow、Integration Workflow、画像生成、成果物保存
-* 手動: Provider解決、UI実行履歴、最終成果物の意味品質
+- 静的検証: 構文、識別子、参照、到達性、出力、環境Key
+- Contract単体: 初回PASS、FAILからPASS、FAILからFAIL、意味転用禁止、有限Graph
+- Transport / Persistence: 小規模、通常、大規模、特殊文字、不正構造、空入力、並行実行
+- 統合: Generation Workflow、Integration Workflow、画像生成、成果物保存
+- 手動: Provider解決、UI実行履歴、最終成果物の意味品質
 
-具体的なTest名、Script、Fixture、件数、結果、実行環境は公開対象外とする。
+具体的なTest名、Script、Fixture、件数、結果、実行環境、Evidenceは公開対象外とする。
 
 ## 28. 現在の実装状況
 
@@ -453,29 +452,26 @@ Error CodeはLog文言ではなく機械判定用Interfaceとして扱う。
 
 公開可能な現在地は[Project Status](status-public.md)へ委譲する。
 
-Architectureには、実装状況の変化に左右されないStage境界、責務、データフローだけを残す。
-
 ## 29. 未実装項目
 
-未実装項目、優先順位、依存関係、完了条件はCurrent Planning情報であり、本書では保持しない。
+未実装項目、優先順位、依存関係、完了条件はPlanning責務であり、本書では保持しない。
 
-公開する計画情報がある場合は、公開対象として承認されたRoadmapまたはProject Statusへ委譲する。
+公開する計画情報は[Project Roadmap](roadmap-public.md)へ委譲する。
 
 ## 30. 将来拡張
 
-将来拡張時も、本書で定義したDTO Boundary、有限Retry、意味生成と構造補正の責務分離、成果物成功とWorkflow成功の分離に加え、Human Authority BoundaryとReference Implementation比較によるCore Candidate検証を維持する。
+将来拡張時も、本書で定義したDTO Boundaryと有限Retryを維持する。
 
-Foundry Coreは、単一Reference Implementationの都合や自動化の進行だけで確定しない。十分な比較Evidenceを得た後、Human Decisionによって定義する。
-
-具体的な次Domain、優先順位、時期、内部依存はPlanning文書へ委譲する。
+具体的な候補、優先順位、時期、内部依存は[Project Roadmap](roadmap-public.md)へ委譲する。
 
 ## 31. 関連文書
 
-* [Public Documentation Map](README-public.md)
-* [Project Status](status-public.md)
-* [基本原則](principles-public.md)
-* [Project Roadmap](roadmap-public.md)
-* [公開Architecture Decision Records](adr/)
-* [公開Configuration Audit](configuration-audits/)
+- [Public Documentation Map](README-public.md)
+- [Project Status](status-public.md)
+- [基本原則](principles-public.md)
+- [Glossary](glossary-public.md)
+- [Project Roadmap](roadmap-public.md)
+- [公開Architecture Decision Records](adr/)
+- [公開Configuration Audit](configuration-audits/)
 
-内部正本、内部契約、運用手順、Error Catalog、Handover、内部Reviewへの直接導線は公開版では保持しない。
+Internal正本、内部契約、運用手順、Error Catalog、Handover、内部Reviewへの直接導線は公開版では保持しない。

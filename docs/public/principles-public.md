@@ -2,7 +2,7 @@
 
 本書はLocal AI FoundryのProject Constitution（プロジェクト憲章）の公開版であり、公開可能な設計思想と基本原則を定義する。
 
-[Architecture](architecture-public.md)は構造、Glossaryは用語、[ADR](adr/)は重要な設計判断、Decision Logは運用・小規模判断を扱う。本書はそれら全体に適用する基本原則を定義する。
+[Architecture](architecture-public.md)は構造、[Glossary](glossary-public.md)は用語、[ADR](adr/)は重要な設計判断、Decision Logは運用・小規模判断を扱う。本書はそれら全体に適用する基本原則を定義する。
 
 [Public Documentationへ戻る](README-public.md)
 
