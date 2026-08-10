@@ -286,6 +286,7 @@ Project全体はいまどこにいるのか
 * 核となる問い：
 
   * Current Publication Reviewと、公開成果物から確認できなくなる判断履歴を、なぜ別々に管理するのか。
+  * Human側のDecision Historyを保持しながら、なぜAI / CODEXのPublication Executionをその履歴Artifactへ依存させてはいけないのか。
 * 扱うテーマ：
 
   * Publication Governance
@@ -293,6 +294,10 @@ Project全体はいまどこにいるのか
   * Publication Reflection Register（PRR）
   * Current Publication Review
   * Publication Decision History
+  * Human-approved Current Publication Decision
+  * Publication Execution Contract
+  * Human-controlled Decision History
+  * non-private Execution Context
   * 採用
   * 不採用
   * 保留
@@ -300,11 +305,17 @@ Project全体はいまどこにいるのか
   * Generalization
   * 委譲
   * Public / Internal / Private Boundary
+* 関連記録：
+
+  * War Diary：`WD-20260810-002`
+  * Bug Zoo：`BZ-20260810-017`
 * 記事の到達点：
 
   * Internal Publication Review Registryは、管理対象ごとの現在有効なPublication Review結果を保持する。
   * PRRは、公開物やGit履歴から確認できなくなる判断だけをPrivate Artifactとして保持する。
   * Current StateとDecision Historyを同じ台帳へ混ぜてはならない。
+  * Human側のDecision Historyを保持することと、AI / CODEXの実行条件をその履歴Artifactへ依存させることは別である。
+  * AI / CODEXへ渡すのは、現在の実行に必要なHuman-approved Current Publication Decisionとnon-private Execution Contextである。
   * Public Documentationは公開後の姿しか見せないため、消えた判断理由には別の保存責務が必要になる。
   * PRRは形式的に毎回作るものではなく、不採用・保留・Mask・Generalization・委譲等の判断が残る場合に必要となる。
 
@@ -338,12 +349,24 @@ Project全体はいまどこにいるのか
 * 核となる問い：
 
   * 成果物、Audit、Reviewが揃っても、なぜRepositoryへ正しく固定されたことを別途確認する必要があるのか。
+  * Reviewを高品質に保ったまま、なぜCorrectionのたびにComplete Semantic Reviewへ戻ってはいけないのか。
+  * Review PackageのHashが一致していても、なぜEvidenceの完全性は別途検証しなければならないのか。
 * 扱うテーマ：
 
   * Working Tree
   * Configuration Audit
   * Configuration Report
   * Review Package
+  * Review Convergence
+  * Complete Semantic Review
+  * Semantic Freeze
+  * Correction Batch
+  * Correction Verification
+  * Final Commit Boundary
+  * Package Integrity
+  * Direct Source Acquisition
+  * Source Integrity
+  * Truncation Marker Guard
   * Human Review
   * Repository Reflection
   * Commit Authorization
@@ -355,10 +378,15 @@ Project全体はいまどこにいるのか
 * 関連記録：
 
   * Configuration Management Note：`CM-20260802-003`
+  * War Diary：`WD-20260810-003`、`WD-20260810-004`
+  * Bug Zoo：`BZ-20260810-018`、`BZ-20260810-019`
 * 記事の到達点：
 
   * 成果物を生成したことと、正本へ正しく反映されたことは別である。
   * Human ReviewとCommit Authorizationは別である。
+  * One Evidence Setに対するComplete Semantic Reviewは一度で収束させ、Correction Artifactだけを理由にFinding探索を再開しない。
+  * Review Packageは内容だけでなくSource取得経路と収録後一致を検証し、表示・転送レイヤ由来の欠落をEvidenceとして固定しない。
+  * Hash一致はArtifactが不変であることを示せても、取得元が完全だったことまでは証明しない。
   * Commitが成功したことと、承認Scopeが正しく固定されたことも別である。
   * Repositoryから再取得して確認して初めて、Reflection結果を検証できる。
 
@@ -449,6 +477,8 @@ Project全体はいまどこにいるのか
   * PRR
   * Canonical Source
   * Repository Reflection
+  * Review Convergence
+  * Evidence Integrity
   * Published State Verification
   * Runtime Verification
   * Platform Drift
@@ -458,6 +488,8 @@ Project全体はいまどこにいるのか
   * 何を変更し、どの状態を採用し、何を正本とし、何をEvidenceとして承認するかという状態管理と変更管理である。
   * 壊れないWorkflowを運用し続けるには、WorkflowだけでなくProjectそのものを管理する必要がある。
   * Project全体の正式状態、現在の作業断面、公開判断、Repository Reflection、Runtime Evidenceは別責務として管理する必要がある。
+  * ReviewはFindingを増やし続けるためではなく、同じEvidence Setに対する判断を収束させるために設計する必要がある。
+  * EvidenceはHashだけでなく、どこから取得し、完全なSourceと一致しているかまで含めて信頼性を判断する必要がある。
   * AIが強くなるほど、人間の仕事は「全部を手で作ること」から「何を正しい状態として採用するかを判断すること」へ移る。
 
 ---
@@ -531,14 +563,32 @@ Project Evidenceが増えるたびに再評価し、独自理論を先に作ら�
 [DM-20260808-001 AI-Native Developmentの長期到達像とCapability Gap](development-model/DM-20260808-001-ai-native-development-target-and-capability-gaps.md)
 をWorking Modelとして参照する。
 
-### Season 3構想（未FIX）：AIと作ると、開発はどう変わるのか
+### Season 3構想（未FIX）：Human-Directed Foundryはどう成立するのか
+
+2026-08-10のADR-0013 Acceptedとv4.0 Public Documentation同期により、
+Local AI FoundryはArticle Production中心のProjectから、HumanがPurpose、Judgment、
+Responsibility、Approvalを保持し、複数業務をReference Implementationとして実証する
+Human-Directed Foundryへ正式に再位置付けされた。
+
+現時点ではArticle ProductionをRI#1、Documentation ProductionをRI#2として扱う。
+複数RIで観測された共通Control PatternはCore Candidateであり、Foundry Coreは未確定である。
+RI#3はFuture / Undefinedのまま維持する。RI#2の比較EvidenceはFoundry Core確定や
+Project Runtime Verificationを意味しない。
 
 * 中心となる問い：
 
-  * AIを開発工程へ深く組み込むと、人間側の仕事、責任、指示、承認、Governanceはどう変わるのか。
+  * 異なる業務をAIへ委譲するとき、Human Authorityを維持しながら、どのControl Patternを再利用可能なものとして検証できるのか。
 * Working Theme：
 
+  * Human-Directed Foundry
   * Human-AI Development Operating Model
+  * Reference Implementation Model
+  * RI#1 Article Production / RI#2 Documentation Production
+  * Core Candidate / Foundry Core Boundary
+  * Human Authority Boundary
+  * Automationそのものを目的にしない
+  * Review Convergence / Semantic Freeze
+  * Evidence Integrity / Direct Source
   * AIへの指示は意図ではなく工程で書く
   * AIチームは表現であって、設計ではない
   * 役職ではなく工程とAuthorityで責任を切る
@@ -550,13 +600,19 @@ Project Evidenceが増えるたびに再評価し、独自理論を先に作ら�
   * Human in the LoopではなくHuman Responsibility Boundary
 * 到達候補：
 
-  * AIができない仕事をHumanへ残すのではなく、最終責任を誰へ帰属させるべきかで責任境界を決める。
-  * AIがEvidence準備、Technical Verification、Candidate State Proposalを担い、HumanはPurpose、Risk Acceptance、Business Acceptance、不可逆なAuthorizationを保持するモデルを検証する。
+  * Automationそのものを目的にせず、人間が責任を持つ成果と判断を支援するためにAIへ業務を委譲する。
+  * Article ProductionをProject全体定義へ固定せずRI#1として維持し、RI#2との比較EvidenceからCore Candidateを検証する。
+  * 共通Patternが観測されてもFoundry Coreを先に確定せず、複数RIのEvidenceと独立したHuman Decisionを必要とする。
+  * AIがEvidence準備、Technical Verification、Candidate State Proposalを担い、HumanはPurpose、Judgment、Responsibility、Approvalを保持するモデルを検証する。
+  * ReviewとEvidenceの品質を落とさずに工程を収束させるControl Patternが、異なるReference Implementationでも再現できるか確認する。
   * Local AI Foundry独自の開発手法を先に宣言せず、既存Development Modelで説明できない差分がEvidenceとして残るかを確認する。
 * 昇格条件：
 
   * Season 2の実Evidenceを完了させる。
-  * Human Authorizationの複数事例を比較する。
+  * RI#1とRI#2の比較Evidenceを複数事例で整理する。
+  * Human Authority Boundaryが異なる業務でも維持できるか確認する。
+  * Review ConvergenceとEvidence Integrityが特定Workflow固有ではなく再利用可能なControl Patternか比較する。
+  * Core CandidateとFoundry Coreを混同せず、Core確定をHuman DecisionまでDeferredする。
   * Development Model比較を一次資料ベースで実施する。
   * 独自性ではなく再現可能なPracticeとして説明できるテーマを優先する。
 
@@ -595,6 +651,77 @@ Project Evidenceが増えるたびに再評価し、独自理論を先に作ら�
 ---
 
 ## Backlog（昇格待ち）
+
+### Reviewは、どこで終わるのか
+
+* 現状：
+
+  * Review Convergence RuleをInternal Governanceへ導入済み。
+  * One Evidence Setに対するComplete Semantic Review、Semantic Freeze、Correction Batch、Correction Verification、Final Commit Boundaryを実運用で適用済み。
+  * War Diary：`WD-20260810-003`
+  * Bug Zoo：`BZ-20260810-018`
+* 核となる問い：
+
+  * Review品質を落とさずに、なぜCorrectionのたびにSemantic Reviewを最初からやり直してはいけないのか。
+* 核となるテーマ：
+
+  * Complete Semantic Review
+  * Finding Classification
+  * Semantic Freeze
+  * Correction Batch
+  * Correction Verification
+  * Blocking Defect
+  * Human Final Disposition
+  * Commit Authorization
+* 記事の到達点候補：
+
+  * Reviewの品質とReview回数は同じではない。
+  * 同じEvidence Setに対してFinding探索を繰り返すと、品質向上ではなく終了条件の消失が起きる。
+  * Correctionは承認済みFindingを直す工程であり、それ自体を新しいSemantic Review Triggerにしない。
+* 統合候補：
+
+  * Season 2-09 Repository Reflection――「作った」と「反映された」は別
+  * Season 3構想：Human-Directed FoundryのReview Control Pattern
+* 昇格条件：
+
+  * 異なるReview Scopeでも同じConvergence Ruleが機能する事例を追加する。
+  * 単なる作業短縮ではなく、品質維持と停止条件の両立として一般化できること。
+
+### Hashが合ってもEvidenceは壊れる
+
+* 現状：
+
+  * Review Packageへ表示・転送レイヤ由来のtruncationが混入するNear Missを確認済み。
+  * Direct Source Acquisition、Source Integrity、Truncation Marker Guard、Package Integrity Gateを導入済み。
+  * Regression TestでArtificial truncationをINVALIDとして停止し、Source-authenticなmarkerは誤検出しないことを確認済み。
+  * War Diary：`WD-20260810-004`
+  * Bug Zoo：`BZ-20260810-019`
+* 核となる問い：
+
+  * SHA-256が一致しているのに、なぜEvidence Artifactが信用できない場合があるのか。
+* 核となるテーマ：
+
+  * Direct Source
+  * Source Acquisition Path
+  * Display / Transfer Layer
+  * Truncation
+  * Source-derived Content
+  * Hash Integrity
+  * Package Integrity
+  * Historical Snapshot Boundary
+* 記事の到達点候補：
+
+  * Hashは「そのArtifactが変わっていない」ことを確認できても、「元Sourceが完全だった」ことまでは保証しない。
+  * EvidenceのIntegrityには内容だけでなく取得経路とDirect Sourceとの一致が含まれる。
+  * Tool ResponseやConsole表示は人間向け表示であり、完全なEvidence Sourceとして再利用できるとは限らない。
+* 統合候補：
+
+  * Season 2-08 Canonical Sourceを失った日
+  * Season 2-09 Repository Reflection――「作った」と「反映された」は別
+* 昇格条件：
+
+  * Canonical Source問題とEvidence Generation Pipeline問題の違いを整理する。
+  * Hash、Source Integrity、Package Integrityの責務を混同せず説明できること。
 
 ### AIだからContractは後から育てられる
 

@@ -18,6 +18,20 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-08
 
+### 2026-08-10
+
+* [WD-20260810-001 Article ProductionからHuman-Directed Foundryへ再位置付けした](war-diary/WD-20260810-001-human-directed-foundry-repositioning.md)
+  Article ProductionをProject全体定義のまま固定せずRI#1として維持し、Documentation ProductionをRI#2、共通PatternをCore Candidateとして扱うHuman-Directed Foundryへ再位置付けした経緯を記録。Foundry Coreは未確定、RI#3はFuture / Undefinedとし、HumanがPurpose、Judgment、Responsibility、Approvalを保持する境界を正式化した。
+
+* [WD-20260810-002 Human側の判断履歴をPublication実行条件から外した](war-diary/WD-20260810-002-publication-execution-boundary.md)
+  Publication Execution ContractがHuman-controlled Decision HistoryやPrivate Operational Stateへ依存しないよう境界を修正し、AI / CODEXへはHuman-approved Current Publication Decisionとnon-private Execution Contextだけを渡す形へ整理した経緯を記録。
+
+* [WD-20260810-003 Reviewが終わらない構造をConvergence Ruleで止めた](war-diary/WD-20260810-003-review-convergence-rule.md)
+  Correction後のArtifactを新しいSemantic Reviewの起点として扱うとFinding探索が再開し続ける問題を整理し、One Evidence Setに対するComplete Semantic Review、Semantic Freeze、Correction Batch、Correction Verification、Final Commit Boundaryを導入した経緯を記録。
+
+* [WD-20260810-004 Review Packageへtruncationが混入したNear Miss](war-diary/WD-20260810-004-review-package-integrity-near-miss.md)
+  表示・転送レイヤで省略されたdiff断片がReview Packageへ取り込まれ、SHA-256一致だけでは破損を検出できなかったNear Missと、Direct Source Acquisition、Source Integrity、Truncation Marker Guardを導入するまでを記録。
+
 ### 2026-08-02
 
 * [WD-20260802-001 Project Snapshotでは作業断面へ戻れなかった](war-diary/WD-20260802-001-project-snapshot-and-active-work.md)

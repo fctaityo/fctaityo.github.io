@@ -59,6 +59,16 @@
 
 > Human in the Loopではない。Human Responsibility Boundaryである。
 
+> AIを使う。でも、人間を消さない。
+
+> 自動化は目的ではない。人間が責任を持つ成果と判断を支援するための手段である。
+
+> One Evidence Set = ONE Complete Semantic Review.
+
+> Correction Artifact ≠ New Semantic Review Trigger.
+
+> Hash Match ≠ Source Integrity PASS.
+
 > 制御できることと、良い結果を測れることは別である。
 
 > Information Architectureは整理術ではない。責務を定義するArchitectureである。
@@ -116,3 +126,38 @@ Publication Governanceの再整理により、Current Publication ReviewとPubli
 * PRRを更新履歴、Git差分、Current Publication Reviewの複製にしない。
 
 この整理により、「現在の公開判定」と「なぜその判定になったか」を同じ台帳へ混在させない。
+
+### 2026-08-10 Human-Directed FoundryとReview / Evidence Governance
+
+Local AI FoundryのPositioningと、人間・AI間の責任境界を再整理した。
+
+* Article ProductionをProject全体定義として固定せず、Reference Implementation #1として維持する。
+* Documentation ProductionをReference Implementation #2として扱い、異なる業務で共通Control Patternを比較する。
+* 共通PatternはCore Candidateであり、Foundry Coreは比較EvidenceとHuman Decisionなしに確定しない。
+* HumanはPurpose、Judgment、Responsibility、Approvalを保持する。
+* Automationそのものを目的にせず、人間が責任を持つ成果と判断を支援するために使用する。
+
+Publication Governanceでは、Human側のDecision HistoryとAI / CODEX向けExecution Contractを分離した。
+
+* Current Publication ReviewとDecision Historyは別責務として保持する。
+* Human-controlled Decision HistoryやPrivate Operational StateをPublication Executionの成立条件にしない。
+* AI / CODEXへはHuman-approved Current Publication Decisionと、現在の実行に必要なnon-private Execution Contextだけを渡す。
+
+Review運用では、品質を落とさずに収束させる境界を明文化した。
+
+* One Evidence Setに対するComplete Semantic Reviewは一度だけ行う。
+* Semantic Freeze後のCorrection Artifactを新しいSemantic Review Triggerにしない。
+* CorrectionはCorrection Verificationで確認し、Final Commit BoundaryではBlocking Defectだけを停止条件とする。
+* AIはFinding、Evidence、Risk、Recommended Dispositionを提示し、HumanがFinal DispositionとCommit Authorizationを決定する。
+
+Review PackageのNear Missから、Evidence IntegrityはHashだけでは成立しないことも確認した。
+
+* Actual DiffやCurrent Full TextはGit / FilesystemのDirect Sourceから取得する。
+* Tool Response、Chat Response、Console表示等の表示・転送レイヤをEvidence Sourceとして転記しない。
+* Source-derived ContentはPackage生成後にDirect Sourceとの一致を確認する。
+* Hash一致はSource Integrityの代替ではない。
+* truncation等の不完全性を確認したPackageはHuman ReviewやCommit Guardへ進めない。
+
+この一連の整理により、Local AI Foundryは「AIへ何を作らせるか」だけでなく、
+「何を人間が保持し、どこでAIを止め、何をEvidenceとして信頼し、どうReviewを終わらせるか」までを
+FoundryのControl Pattern候補として扱う段階へ進んだ。

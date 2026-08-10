@@ -41,6 +41,12 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 ## Review / Evidence / Artifact
 
+- [BZ-20260810-018 Correction ArtifactでSemantic Reviewが再起動する](bug-zoo/BZ-20260810-018-correction-reopens-semantic-review.md)  
+  Review後のCorrection Artifactを新しいEvidence Setとして扱い、Semantic ReviewとFinding探索が繰り返し再開されてCommitへ収束できなくなる。
+
+- [BZ-20260810-019 表示レイヤのtruncationがEvidenceへ混入する](bug-zoo/BZ-20260810-019-display-truncation-corrupts-evidence.md)  
+  Tool / Console / Chat等の表示結果をSourceとして再利用し、省略markerを含む不完全なdiffやFull TextをReview Artifactへ固定してしまう。
+
 - [BZ-20260725-004 Workflow Success偽装事件](bug-zoo/BZ-20260725-004-workflow-success-masked-artifact-failure.md)  
   Workflow SuccessをArtifact Successと同一視し、破損した成果物を正常終了の裏側へ隠した。
 
@@ -65,6 +71,11 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 - [BZ-20260731-016 Partial SourceをCanonical Sourceとして扱う](bug-zoo/BZ-20260731-016-partial-source-as-canonical-source.md)  
   正本やEvidenceの一部だけを取得した状態で判定・補完・再生成し、誤判定や変更対象外の消失を招く。
+
+## Governance / Responsibility Boundary
+
+- [BZ-20260810-017 Human側の判断履歴をAI実行条件へ混ぜる](bug-zoo/BZ-20260810-017-human-history-as-execution-dependency.md)  
+  Human-controlled Decision HistoryやPrivate Operational Stateの存在・状態をAI / CODEX側のPublication Execution前提にし、現在判断と履歴保存の責務を結合してしまう。
 
 ## Project Framing
 
