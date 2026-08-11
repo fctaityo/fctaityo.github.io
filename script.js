@@ -50,10 +50,7 @@
           observer.unobserve(entry.target);
         }
       }
-    }, {
-      threshold: .12,
-      rootMargin: '0px 0px -4% 0px'
-    });
+    }, { threshold: .12, rootMargin: '0px 0px -4% 0px' });
 
     revealItems.forEach(el => observer.observe(el));
   }
@@ -69,12 +66,10 @@
   if(heroWord && !reducedMotion){
     setInterval(() => {
       wordIndex = (wordIndex + 1) % heroWords.length;
-
       heroWord.animate(
         [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }],
         { duration: 420, easing: 'ease' }
       );
-
       setTimeout(() => {
         heroWord.textContent = heroWords[wordIndex];
       }, 200);
@@ -86,17 +81,17 @@
   updateScrollUI();
 })();
 
-/* Local AI Foundry v4.1 — Foundry Pulse / visitor counter */
+/* Local AI Foundry v4.1.2 — Foundry Pulse / visitor counter */
 (() => {
   const STATUS_URL = 'docs/public/status-public.md';
 
-  /* Free Visitor Counter:
-     - no API key
-     - CORS enabled
-     - POST /visit records a visit
-     - GET /visit?domain=... returns current stats
-  */
-  const VISITOR_API = 'https://visitor.6developer.com/visit';
+  /*
+   * CounterAPI.com public API
+   * NOTE: This is counterapi.com, NOT the retired counterapi.dev v1.
+   * JSONP is used so the counter does not depend on browser CORS behavior.
+   */
+  const COUNTER_ENDPOINT =
+    'https://counterapi.com/api/fctaityo.github.io/visit/foundry-home';
   const LIVE_HOSTS = new Set(['fctaityo.github.io']);
 
   const $ = (selector) => document.querySelector(selector);
@@ -135,9 +130,7 @@
         cache: 'no-store'
       });
 
-      if (!response.ok) {
-        throw new Error(`status ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`status ${response.status}`);
 
       const md = await response.text();
 
@@ -165,151 +158,140 @@
         '--'
       );
 
-      if(projectState) projectState.textContent = state;
-      if(runtime) runtime.textContent = runtimeValue;
-      if(acceptance) acceptance.textContent = `Acceptance: ${acceptanceValue}`;
-      if(updated) updated.textContent = updatedValue;
+      if (projectState) projectState.textContent = state;
+      if (runtime) runtime.textContent = runtimeValue;
+      if (acceptance) acceptance.textContent = `Acceptance: ${acceptanceValue}`;
+      if (updated) updated.textContent = updatedValue;
 
       sync.classList.add('synced');
       sync.classList.remove('fallback');
 
       const strong = sync.querySelector('strong');
-      if(strong) strong.textContent = 'SYNCED';
-    } catch(error) {
+      if (strong) strong.textContent = 'SYNCED';
+    } catch (error) {
       sync.classList.add('fallback');
       sync.classList.remove('synced');
 
       const strong = sync.querySelector('strong');
-      if(strong) strong.textContent = 'STATIC FALLBACK';
+      if (strong) strong.textContent = 'STATIC FALLBACK';
 
-      console.warn('[LF v4.1] Public Status sync failed:', error);
+      console.warn('[LF v4.1.2] Public Status sync failed:', error);
     }
   }
 
-  function extractVisitorCount(payload) {
-    const value = payload?.totalCount;
-    return Number.isFinite(Number(value)) ? Number(value) : null;
-  }
+  function jsonpCounter({ readOnly }) {
+    return new Promise((resolve, reject) => {
+      const callback =
+        `__lfCounter_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+      const script = document.createElement('script');
+      const timeoutMs = 10000;
 
-  async function fetchVisitorStats(domain) {
-    const response = await fetch(
-      `${VISITOR_API}?domain=${encodeURIComponent(domain)}&v=${Date.now()}`,
-      {
-        method: 'GET',
-        cache: 'no-store',
-        mode: 'cors'
-      }
-    );
+      const cleanup = () => {
+        clearTimeout(timer);
+        script.remove();
+        try { delete window[callback]; } catch (_) { window[callback] = undefined; }
+      };
 
-    if(!response.ok){
-      throw new Error(`visitor stats ${response.status}`);
-    }
+      window[callback] = (payload) => {
+        cleanup();
+        resolve(payload);
+      };
 
-    return response.json();
-  }
+      const params = new URLSearchParams({
+        callback,
+        noFormatting: 'true'
+      });
 
-  async function recordVisitor(domain) {
-    const response = await fetch(VISITOR_API, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        domain,
-        timezone: 'Asia/Tokyo',
-        page_path: location.pathname
-      })
+      if (readOnly) params.set('readOnly', 'true');
+
+      script.src = `${COUNTER_ENDPOINT}?${params.toString()}`;
+      script.async = true;
+
+      script.onerror = () => {
+        cleanup();
+        reject(new Error('CounterAPI JSONP load failed'));
+      };
+
+      const timer = setTimeout(() => {
+        cleanup();
+        reject(new Error('CounterAPI JSONP timeout'));
+      }, timeoutMs);
+
+      document.head.appendChild(script);
     });
+  }
 
-    if(!response.ok){
-      throw new Error(`visitor record ${response.status}`);
-    }
-
-    return response.json();
+  function extractCount(payload) {
+    const value = payload?.value;
+    return Number.isFinite(Number(value)) ? Number(value) : null;
   }
 
   async function syncVisitorCount() {
     const display = $('[data-visitor-count]');
     const note = $('[data-visitor-note]');
-
-    if(!display) return;
+    if (!display) return;
 
     const panel = display.closest('.visitor-counter-display');
 
-    if(!LIVE_HOSTS.has(location.hostname)){
+    if (!LIVE_HOSTS.has(location.hostname)) {
       display.textContent = '------';
-      if(note) note.textContent = 'LOCAL / COUNTER DISABLED';
+      if (note) note.textContent = 'LOCAL / COUNTER DISABLED';
       return;
     }
 
-    const domain = location.hostname;
     const today = jstDateKey();
     const storageKey = `lf-visit-counted:jst:${today}`;
 
     let alreadyCounted = false;
-
     try {
       alreadyCounted = localStorage.getItem(storageKey) === '1';
-    } catch(_) {}
+    } catch (_) {}
 
     try {
-      let payload;
+      const payload = await jsonpCounter({ readOnly: alreadyCounted });
+      const count = extractCount(payload);
 
-      if(alreadyCounted){
-        payload = await fetchVisitorStats(domain);
-      } else {
-        payload = await recordVisitor(domain);
-      }
-
-      const count = extractVisitorCount(payload);
-
-      if(count === null){
-        throw new Error('totalCount field not found');
+      if (count === null) {
+        throw new Error('CounterAPI value field not found');
       }
 
       display.textContent = String(count).padStart(6, '0');
       panel?.classList.add('live');
 
-      if(note){
+      if (note) {
         note.textContent = alreadyCounted
           ? '本日の訪問は加算済み'
           : '本日の初回訪問を加算';
       }
 
-      if(!alreadyCounted){
+      if (!alreadyCounted) {
         try {
           localStorage.setItem(storageKey, '1');
-        } catch(_) {}
+        } catch (_) {}
       }
-    } catch(error) {
-      /* One fallback attempt: if POST failed after the visit may already have been
-         recorded, GET the current total before declaring the counter unavailable. */
+    } catch (error) {
+      /*
+       * If increment failed, try one read-only request before giving up.
+       * This also lets the existing count display if a write is filtered.
+       */
       try {
-        const payload = await fetchVisitorStats(domain);
-        const count = extractVisitorCount(payload);
+        const payload = await jsonpCounter({ readOnly: true });
+        const count = extractCount(payload);
 
-        if(count === null){
-          throw new Error('fallback totalCount field not found');
-        }
+        if (count === null) throw new Error('Fallback count missing');
 
         display.textContent = String(count).padStart(6, '0');
         panel?.classList.add('live');
 
-        if(note){
-          note.textContent = '現在の来訪数を表示';
-        }
-      } catch(fallbackError) {
+        if (note) note.textContent = '現在の来訪数を表示';
+      } catch (fallbackError) {
         display.textContent = '------';
         panel?.classList.remove('live');
 
-        if(note){
-          note.textContent = 'Counter unavailable';
-        }
+        if (note) note.textContent = 'Counter unavailable';
 
         console.warn(
-          '[LF v4.1] Visitor counter failed:',
+          '[LF v4.1.2] Visitor counter failed:',
           error,
           fallbackError
         );
