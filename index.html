@@ -420,6 +420,70 @@
     padding:14px!important;
   }
 }
+
+/* Finale mascot — silent visual enhancement */
+.finale-girl{
+  position:absolute;
+  z-index:1;
+  right:clamp(24px,5vw,96px);
+  bottom:-8px;
+  width:clamp(260px,27vw,430px);
+  max-height:94%;
+  object-fit:contain;
+  object-position:right bottom;
+  pointer-events:none;
+  user-select:none;
+  opacity:.96;
+  filter:
+    drop-shadow(0 28px 46px rgba(0,0,0,.34))
+    drop-shadow(0 0 28px rgba(69,220,255,.12));
+}
+.finale::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  right:0;
+  top:0;
+  bottom:0;
+  width:min(46vw,720px);
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 72% 54%,rgba(69,220,255,.10),transparent 42%),
+    radial-gradient(circle at 82% 70%,rgba(158,132,255,.07),transparent 38%);
+}
+.single-finale{
+  position:relative;
+  z-index:2;
+}
+.finale-copy{
+  position:relative;
+  z-index:2;
+  max-width:min(760px,68%);
+}
+
+@media (max-width:1180px){
+  .finale-girl{
+    right:-24px;
+    width:clamp(230px,31vw,340px);
+    opacity:.78;
+  }
+  .finale-copy{
+    max-width:72%;
+  }
+}
+
+@media (max-width:900px){
+  .finale-girl{
+    display:none;
+  }
+  .finale-copy{
+    max-width:none;
+  }
+  .finale::after{
+    display:none;
+  }
+}
+
 </style>
 <script src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
 <script src="script.js?v=4.1.4" defer></script>
@@ -738,6 +802,7 @@
 
   <section class="finale">
     <div class="finale-grid" aria-hidden="true"></div>
+    <img class="finale-girl" src="assets/ri-guide.webp" alt="" aria-hidden="true">
     <div class="shell finale-layout single-finale">
       <div class="finale-copy finale-panel reveal"><p class="kicker">LOCAL AI FOUNDRY <span>BUILD IN PUBLIC</span></p><h2><span class="title-line">AIを使う。</span><strong class="title-line">でも、人間を消さない。</strong></h2><p>Local AI Foundryは、作りながら進化を公開していく。</p><div class="finale-actions"><a class="button primary" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="button" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">NOTE ↗</a><a class="button" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">X ↗</a></div></div>
     </div>
