@@ -81,18 +81,24 @@
   updateScrollUI();
 })();
 
-/* Local AI Foundry v4.1.2 — Foundry Pulse / visitor counter */
+/* Local AI Foundry v4.1.3 — Foundry Pulse / visitor counter */
 (() => {
   const STATUS_URL = 'docs/public/status-public.md';
+  const LIVE_HOSTS = new Set(['fctaityo.github.io']);
 
   /*
-   * CounterAPI.com public API
-   * NOTE: This is counterapi.com, NOT the retired counterapi.dev v1.
-   * JSONP is used so the counter does not depend on browser CORS behavior.
+   * CounterAPI.com official browser embed.
+   * The service's current documentation recommends:
+   *   <script src="https://counterapi.com/c.js"></script>
+   *   <div class="counterapi"></div>
+   *
+   * We load that official client dynamically only after configuring
+   * our existing counter element.
    */
-  const COUNTER_ENDPOINT =
-    'https://counterapi.com/api/fctaityo.github.io/visit/foundry-home';
-  const LIVE_HOSTS = new Set(['fctaityo.github.io']);
+  const COUNTER_LIBRARY = 'https://counterapi.com/c.js?ns=fctaityo.github.io';
+  const COUNTER_NAMESPACE = 'fctaityo.github.io';
+  const COUNTER_ACTION = 'view';
+  const COUNTER_KEY = 'foundry-home';
 
   const $ = (selector) => document.querySelector(selector);
 
@@ -175,58 +181,19 @@
       const strong = sync.querySelector('strong');
       if (strong) strong.textContent = 'STATIC FALLBACK';
 
-      console.warn('[LF v4.1.2] Public Status sync failed:', error);
+      console.warn('[LF v4.1.3] Public Status sync failed:', error);
     }
   }
 
-  function jsonpCounter({ readOnly }) {
-    return new Promise((resolve, reject) => {
-      const callback =
-        `__lfCounter_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-      const script = document.createElement('script');
-      const timeoutMs = 10000;
+  function normalizeCounterText(text) {
+    const digits = String(text || '').replace(/[^\d]/g, '');
+    if (!digits) return null;
 
-      const cleanup = () => {
-        clearTimeout(timer);
-        script.remove();
-        try { delete window[callback]; } catch (_) { window[callback] = undefined; }
-      };
-
-      window[callback] = (payload) => {
-        cleanup();
-        resolve(payload);
-      };
-
-      const params = new URLSearchParams({
-        callback,
-        noFormatting: 'true'
-      });
-
-      if (readOnly) params.set('readOnly', 'true');
-
-      script.src = `${COUNTER_ENDPOINT}?${params.toString()}`;
-      script.async = true;
-
-      script.onerror = () => {
-        cleanup();
-        reject(new Error('CounterAPI JSONP load failed'));
-      };
-
-      const timer = setTimeout(() => {
-        cleanup();
-        reject(new Error('CounterAPI JSONP timeout'));
-      }, timeoutMs);
-
-      document.head.appendChild(script);
-    });
+    const value = Number(digits);
+    return Number.isFinite(value) ? value : null;
   }
 
-  function extractCount(payload) {
-    const value = payload?.value;
-    return Number.isFinite(Number(value)) ? Number(value) : null;
-  }
-
-  async function syncVisitorCount() {
+  function syncVisitorCount() {
     const display = $('[data-visitor-count]');
     const note = $('[data-visitor-note]');
     if (!display) return;
@@ -247,13 +214,35 @@
       alreadyCounted = localStorage.getItem(storageKey) === '1';
     } catch (_) {}
 
-    try {
-      const payload = await jsonpCounter({ readOnly: alreadyCounted });
-      const count = extractCount(payload);
+    /*
+     * Configure the existing <strong data-visitor-count> as the official
+     * CounterAPI widget. noCss/noIcon/noLink keep our visual design intact.
+     */
+    display.classList.add('counterapi');
+    display.setAttribute('ns', COUNTER_NAMESPACE);
+    display.setAttribute('action', COUNTER_ACTION);
+    display.setAttribute('key', COUNTER_KEY);
+    display.setAttribute('noCss', 'true');
+    display.setAttribute('noIcon', 'true');
+    display.setAttribute('noLink', 'true');
+    display.setAttribute('noAnim', 'true');
+    display.setAttribute('noFormatting', 'true');
 
-      if (count === null) {
-        throw new Error('CounterAPI value field not found');
-      }
+    if (alreadyCounted) {
+      display.setAttribute('readOnly', 'true');
+    } else {
+      display.removeAttribute('readOnly');
+    }
+
+    display.textContent = '------';
+    if (note) note.textContent = 'CONNECTING...';
+
+    let resolved = false;
+    const startedAt = Date.now();
+
+    const finish = (count) => {
+      if (resolved) return;
+      resolved = true;
 
       display.textContent = String(count).padStart(6, '0');
       panel?.classList.add('live');
@@ -269,34 +258,48 @@
           localStorage.setItem(storageKey, '1');
         } catch (_) {}
       }
-    } catch (error) {
-      /*
-       * If increment failed, try one read-only request before giving up.
-       * This also lets the existing count display if a write is filtered.
-       */
-      try {
-        const payload = await jsonpCounter({ readOnly: true });
-        const count = extractCount(payload);
+    };
 
-        if (count === null) throw new Error('Fallback count missing');
+    const fail = (reason) => {
+      if (resolved) return;
+      resolved = true;
 
-        display.textContent = String(count).padStart(6, '0');
-        panel?.classList.add('live');
+      display.textContent = '------';
+      panel?.classList.remove('live');
+      if (note) note.textContent = 'Counter unavailable';
 
-        if (note) note.textContent = '現在の来訪数を表示';
-      } catch (fallbackError) {
-        display.textContent = '------';
-        panel?.classList.remove('live');
+      console.warn('[LF v4.1.3] Visitor counter failed:', reason);
+    };
 
-        if (note) note.textContent = 'Counter unavailable';
+    /*
+     * The official client updates the widget asynchronously.
+     * Poll only the existing element; no API implementation is duplicated here.
+     */
+    const timer = setInterval(() => {
+      const count = normalizeCounterText(display.textContent);
 
-        console.warn(
-          '[LF v4.1.2] Visitor counter failed:',
-          error,
-          fallbackError
-        );
+      if (count !== null) {
+        clearInterval(timer);
+        finish(count);
+        return;
       }
-    }
+
+      if (Date.now() - startedAt > 12000) {
+        clearInterval(timer);
+        fail(new Error('CounterAPI widget timeout'));
+      }
+    }, 120);
+
+    const library = document.createElement('script');
+    library.src = `${COUNTER_LIBRARY}&v=${Date.now()}`;
+    library.async = true;
+
+    library.onerror = () => {
+      clearInterval(timer);
+      fail(new Error('CounterAPI official library failed to load'));
+    };
+
+    document.head.appendChild(library);
   }
 
   syncPublicStatus();
