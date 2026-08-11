@@ -18,6 +18,11 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-08
 
+### 2026-08-11
+
+* [WD-20260811-001 Formal Current Sourceを壊さずHuman Working Sidecarを作った](war-diary/WD-20260811-001-human-working-sidecar-stm.md)
+  Codexが実装を担当できない時間帯でもHuman + ChatGPTで安全に前倒しできる作業を可視化するためSTMを導入。Formal Current Source（正式な現在地正本）とSTM Working Overlay（STM上の作業進捗）を分離し、Mainline（本線）、Separate Scope（別作業範囲）、Codex待ち、Working Artifact（作業中成果物）をHuman側で扱う一方、`status.md` / `active-work.md`の実ファイル編集はCodex側責務へ戻した経緯を記録。
+
 ### 2026-08-10
 
 * [WD-20260810-001 Article ProductionからHuman-Directed Foundryへ再位置付けした](war-diary/WD-20260810-001-human-directed-foundry-repositioning.md)

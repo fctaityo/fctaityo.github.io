@@ -35,6 +35,9 @@ Configuration Management Notesは、正本、差分、同期、検証、反映�
 * [CM-20260802-002 Project SnapshotとActive Work Snapshotを分離する](configuration-management/CM-20260802-002-project-snapshot-and-active-work.md)
   Project全体の正式状態と、現在作業中のInitiativeの復帰地点を別Artifactとして管理し、異なる更新Triggerを混在させない運用を整理する。
 
+* [CM-20260811-001 Formal Current SourceとHuman Working Sidecarを分離する](configuration-management/CM-20260811-001-formal-current-source-and-human-working-sidecar.md)
+  `status.md` / `active-work.md`のFormal Current Source（正式な現在地正本）を変更せず、Humanが今できるTask、Codex待ち、Authorization待ち、Working Artifact（作業中成果物）を扱うSide Task Matrix（STM）をHuman Working Sidecar（人間向け補助作業盤）として運用する境界を整理する。
+
 ## Review / Repository Reflection
 
 * [CM-20260802-003 Review PackageからRepository Reflectionまでの境界](configuration-management/CM-20260802-003-review-package-and-repository-reflection.md)
