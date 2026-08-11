@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050914">
+<meta name="description" content="Local AI Foundry v4.1 — Human × AI責務境界のCurrent Architecture同期、FOUNDRY PULSE、来訪者カウンターを追加したマイナーリリース。">
+<title>v4.1 Control Pulse Release — Local AI Foundry</title>
+<style>
+:root{--bg:#050914;--panel:#0a1424;--text:#eef6ff;--muted:#9aabc1;--cyan:#41dbff;--green:#57f1a8;--violet:#9e84ff;--line:rgba(117,183,255,.18)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 8%,rgba(65,219,255,.08),transparent 28%),var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}a{color:inherit}.shell{width:min(980px,calc(100% - 40px));margin:auto}
+header{padding:28px 0;border-bottom:1px solid var(--line)}header a{color:var(--cyan);text-decoration:none;font-weight:800}
+.hero{padding:88px 0 42px}.kicker{color:var(--green);font-size:13px;letter-spacing:.18em;font-weight:900}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:12px 0 20px;letter-spacing:-.04em}.hero h1 strong{color:var(--cyan)}.lead{max-width:820px;color:var(--muted);font-size:20px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.meta span{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#c8d6e5}
+.version-callout{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:30px;padding:18px 20px;border:1px solid rgba(87,241,168,.3);border-left:4px solid var(--green);border-radius:15px;background:linear-gradient(90deg,rgba(87,241,168,.08),rgba(65,219,255,.04))}
+.version-callout strong{font:900 36px/1 "Segoe UI",sans-serif}.version-callout span{color:var(--muted)}
+section{padding:36px 0;border-top:1px solid var(--line)}h2{font-size:29px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:21px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.card strong{display:block;font-size:18px}.card p{margin:6px 0 0;color:var(--muted)}
+ul{color:var(--muted)}li+li{margin-top:7px}.story{padding:22px;border-left:3px solid var(--cyan);background:rgba(65,219,255,.035);font-size:20px}.story strong{color:var(--cyan)}
+footer{padding:32px 0 52px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.lead{font-size:18px}.version-callout{grid-template-columns:1fr;gap:6px}.hero h1{font-size:43px}}
+</style></head>
+<body>
+<header><div class="shell"><a href="../index.html">← LOCAL AI FOUNDRY</a>　<a href="index.html">RELEASE HISTORY</a></div></header>
+<main class="shell">
+<section class="hero">
+<p class="kicker">2026.08.11 / LOCAL AI FOUNDRY v4.1 / MINOR RELEASE</p>
+<h1>Foundryの「いま」を、<br><strong>動いて見える形へ。</strong></h1>
+<p class="lead">v4.0で確立したHuman-Directed FoundryのVisual Storyを維持したまま、Human × AIの責務表現をCurrent Architectureへ同期し、FOUNDRY PULSEと来訪者カウンターを追加しました。</p>
+<div class="version-callout"><strong>v4.1</strong><span>Current Website Version — Control Pulse Release</span></div>
+<div class="meta"><span>Human × AI</span><span>Core Candidate</span><span>Foundry Pulse</span><span>Visitor Counter</span><span>Responsive UX</span></div>
+</section>
+<section><h2>Why Changed</h2>
+<p>v4.0のHuman × AI節では、RI#1 Article Production固有の7工程がLocal AI Foundry全体の標準Workflowのように見える余地がありました。v4.1では、Project全体では業務非依存のControl Patternを示し、7-stage Article Production WorkflowはRI#1固有の実装例として所属を明確化しました。</p>
+</section>
+<section><h2>What Changed</h2><div class="grid">
+<div class="card"><strong>Human × AI Responsibility</strong><p>目的・境界・判断・承認をHumanに残し、Delegation、Validation、Retry、Review、Evidenceへつなぐ業務非依存のControl Patternへ整理。</p></div>
+<div class="card"><strong>RI#1 Seven-stage Ownership</strong><p>企画・調査・執筆・確認・画像・監査・保存の7工程をRI#1 Article Production固有の実装例として明示。</p></div>
+<div class="card"><strong>FOUNDRY PULSE</strong><p>Public StatusからProject State、Runtime、Acceptance、Snapshot更新日を取得し、Foundry全体の現在地を小型管制盤として表示。</p></div>
+<div class="card"><strong>Visitor Counter</strong><p>公式Host上だけで有効になる軽量Public Counterを追加。同一ブラウザではJST基準で1日1回だけ加算。</p></div>
+<div class="card"><strong>Parallel Project View Preserved</strong><p>既存のRI#1 / RI#2 / WEB / CORE / RI#3進行ボードは変更せず、その役割を維持。</p></div>
+<div class="card"><strong>Responsive Composition</strong><p>Human × AI節を広幅・中幅・Mobileの3段階で再構成し、横スクロールを抑制。</p></div>
+</div></section>
+<section><h2>Counter Semantics</h2><ul>
+<li>本番Host `fctaityo.github.io` でのみCounterAPI v1を使用する。</li>
+<li>同一ブラウザではJSTの日付単位で1回だけ加算する。</li>
+<li>別ブラウザ、別端末、localStorage削除等は別カウントになる可能性がある。</li>
+<li>厳密なUnique User Analyticsではなく、Website上の軽量な来訪カウンターとして扱う。</li>
+</ul></section>
+<section><h2>Preserved</h2><ul>
+<li>v4.0のHero、Brand Identity、Visual Story</li>
+<li>既存の並行プロジェクトPhase Graph</li>
+<li>Public Documentationへの導線</li>
+<li>Project StateとRuntime Acceptanceを混同しない表示</li>
+<li>Foundry Coreを確定済みとして扱わない境界</li>
+</ul></section>
+<section><h2>Verification Scope</h2><ul>
+<li>Human × AI責務境界とRI#1 7工程の所属</li>
+<li>Desktop / Narrow Desktop / Mobile Responsive Layout</li>
+<li>FOUNDRY PULSE Static Fallback / Public Status Sync</li>
+<li>Visitor Counter Local Disable / Live Host Enable</li>
+<li>JST日付キーによる1日1回判定</li>
+<li>既存Parallel Project View保持</li>
+<li>Internal Anchor / Public Documentation / Release links</li>
+</ul></section>
+</main>
+<footer><div class="shell">LOCAL AI FOUNDRY — v4.1 Control Pulse Release</div></footer>
+</body></html>

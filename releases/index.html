@@ -8,50 +8,25 @@
   <title>Release History — Local AI Foundry</title>
   <style>
     :root{--bg:#050914;--panel:#0a1220;--text:#eef6ff;--muted:#9aabc1;--cyan:#29d9ff;--green:#57f1a8;--line:rgba(117,183,255,.18);--line-strong:rgba(41,217,255,.34)}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}
     body:before{content:"";position:fixed;inset:0;z-index:-2;background-image:linear-gradient(rgba(44,124,196,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(44,124,196,.05) 1px,transparent 1px);background-size:48px 48px}
     body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 10%,rgba(41,217,255,.08),transparent 28%),radial-gradient(circle at 85% 30%,rgba(70,104,255,.07),transparent 30%)}
-    .shell{width:min(1080px,calc(100% - 40px));margin:auto}
-    .header{padding:30px 0;border-bottom:1px solid var(--line);backdrop-filter:blur(14px);background:rgba(5,9,20,.72);position:sticky;top:0;z-index:10}
-    a{color:inherit}.back{color:var(--cyan);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.06em}
-    .hero{padding:104px 0 58px}.kicker{margin:0;font-size:14px;letter-spacing:.22em;color:var(--cyan);font-weight:800}
-    .hero h1{font-size:clamp(46px,8vw,82px);line-height:.95;margin:14px 0 26px;letter-spacing:-.04em}
-    .hero-copy{max-width:760px;color:var(--muted);font-size:20px}.hero-copy strong{color:var(--text)}
-    .history-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;margin:0 0 32px;padding:28px 30px;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:16px;background:linear-gradient(145deg,rgba(15,28,48,.88),rgba(7,14,26,.96))}
-    .history-intro h2{margin:0;font-size:28px;line-height:1.25}.history-intro p{margin:0;color:var(--muted)}
-    .history{display:grid;gap:22px;padding-bottom:90px}
-    .release{position:relative;display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:start;padding:32px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(15,28,48,.92),rgba(7,14,26,.97));text-decoration:none;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
-    .release:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:transparent;transition:background .2s ease}
-    .release:hover,.release:focus-visible{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 18px 42px rgba(0,0,0,.22);outline:none}
-    .release:hover:before,.release:focus-visible:before{background:var(--cyan)}
-    .release.latest{border-color:rgba(87,241,168,.35);background:linear-gradient(145deg,rgba(12,38,47,.97),rgba(7,17,29,.98))}
-    .release.latest:before{background:linear-gradient(var(--green),var(--cyan))}
-    .date-block{display:grid;gap:6px}time{font-weight:800;color:var(--cyan)}
-    .version{font-size:13px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
-    .theme{display:block;margin-bottom:6px;color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-    .latest .theme{color:var(--green)}
-    h2{font-size:25px;line-height:1.25;margin:0 0 10px}.release p{margin:0;color:var(--muted)}
-    .keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.keywords span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d7e9;font-size:12px;letter-spacing:.05em;background:rgba(255,255,255,.02)}
-    .release b{align-self:center;color:var(--cyan);font-size:14px;white-space:nowrap}
-    .footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
-    @media(max-width:760px){body{font-size:16px}.hero{padding-top:72px}.history-intro{grid-template-columns:1fr}.release{grid-template-columns:1fr;gap:14px;padding:26px}.release b{margin-top:4px}h2{font-size:22px}}
+    .shell{width:min(1080px,calc(100% - 40px));margin:auto}.header{padding:30px 0;border-bottom:1px solid var(--line);backdrop-filter:blur(14px);background:rgba(5,9,20,.72);position:sticky;top:0;z-index:10}
+    a{color:inherit}.back{color:var(--cyan);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:.06em}.hero{padding:104px 0 58px}.kicker{margin:0;font-size:14px;letter-spacing:.22em;color:var(--cyan);font-weight:800}
+    .hero h1{font-size:clamp(46px,8vw,82px);line-height:.95;margin:14px 0 26px;letter-spacing:-.04em}.hero-copy{max-width:760px;color:var(--muted);font-size:20px}.hero-copy strong{color:var(--text)}
+    .history-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;margin:0 0 32px;padding:28px 30px;border:1px solid var(--line);border-left:4px solid var(--cyan);border-radius:16px;background:linear-gradient(145deg,rgba(15,28,48,.88),rgba(7,14,26,.96))}.history-intro h2{margin:0;font-size:28px;line-height:1.25}.history-intro p{margin:0;color:var(--muted)}
+    .history{display:grid;gap:22px;padding-bottom:90px}.release{position:relative;display:grid;grid-template-columns:150px 1fr auto;gap:28px;align-items:start;padding:32px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(15,28,48,.92),rgba(7,14,26,.97));text-decoration:none;overflow:hidden;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.release:before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:transparent;transition:background .2s ease}.release:hover,.release:focus-visible{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:0 18px 42px rgba(0,0,0,.22);outline:none}.release:hover:before,.release:focus-visible:before{background:var(--cyan)}.release.latest{border-color:rgba(87,241,168,.35);background:linear-gradient(145deg,rgba(12,38,47,.97),rgba(7,17,29,.98))}.release.latest:before{background:linear-gradient(var(--green),var(--cyan))}
+    .date-block{display:grid;gap:6px}time{font-weight:800;color:var(--cyan)}.version{font-size:13px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}.theme{display:block;margin-bottom:6px;color:var(--cyan);font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.latest .theme{color:var(--green)}h2{font-size:25px;line-height:1.25;margin:0 0 10px}.release p{margin:0;color:var(--muted)}.keywords{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.keywords span{padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d7e9;font-size:12px;letter-spacing:.05em;background:rgba(255,255,255,.02)}.release b{align-self:center;color:var(--cyan);font-size:14px;white-space:nowrap}.footer{padding:30px 0 50px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:760px){body{font-size:16px}.hero{padding-top:72px}.history-intro{grid-template-columns:1fr}.release{grid-template-columns:1fr;gap:14px;padding:26px}.release b{margin-top:4px}h2{font-size:22px}}
   </style>
 </head>
 <body>
   <header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a></div></header>
   <main class="shell">
-    <section class="hero">
-      <p class="kicker">RELEASE HISTORY</p><h1>進化の記録。</h1>
-      <p class="hero-copy">Local AI Foundryのリリースは、単なるバージョン更新ではありません。<strong>設計思想・運用・公開体系が、どのように育ってきたか</strong>を時系列で記録しています。</p>
-    </section>
-    <section class="history-intro" aria-labelledby="history-guide-title">
-      <h2 id="history-guide-title">何を変えたかだけでなく、<br>なぜ変えたかを残す。</h2>
-      <p>各リリースには、その時点で取り組んだテーマ、設計上の意味、関連キーワードを記載しています。実装、Governance、Documentation、Public Releaseが一つの流れとしてどう積み上がったかを確認できます。</p>
-    </section>
+    <section class="hero"><p class="kicker">RELEASE HISTORY</p><h1>進化の記録。</h1><p class="hero-copy">Local AI Foundryのリリースは、単なるバージョン更新ではありません。<strong>設計思想・運用・公開体系が、どのように育ってきたか</strong>を時系列で記録しています。</p></section>
+    <section class="history-intro" aria-labelledby="history-guide-title"><h2 id="history-guide-title">何を変えたかだけでなく、<br>なぜ変えたかを残す。</h2><p>各リリースには、その時点で取り組んだテーマ、設計上の意味、関連キーワードを記載しています。実装、Governance、Documentation、Public Releaseが一つの流れとしてどう積み上がったかを確認できます。</p></section>
     <section class="history" aria-label="リリース一覧">
-      <a class="release latest" href="2026-08-09-v4.0.html"><div class="date-block"><time datetime="2026-08-09">2026.08.09</time><span class="version">v4.0</span></div><div><span class="theme">Human-Directed Foundry Repositioning</span><h2>記事自動生成から、AIと仕事を設計するFoundryへ。</h2><p>LFの位置づけとWebsite Information Architectureを全面再定義。Human / Governance / AI Team、Reference Implementation、並行Project可視化を中心に、プロジェクトの進化そのものを見せる公式HPへ刷新。</p><div class="keywords"><span>Repositioning</span><span>Human-directed</span><span>Reference Implementation</span><span>Governance</span><span>Project Visualization</span><span>Mobile UX</span></div></div><b>詳細を見る →</b></a>
+      <a class="release latest" href="2026-08-11-v4.1.html"><div class="date-block"><time datetime="2026-08-11">2026.08.11</time><span class="version">v4.1</span></div><div><span class="theme">Control Pulse Release</span><h2>Foundryの「いま」を、動いて見える形へ。</h2><p>Human × AIの責務境界をCurrent Architectureへ同期し、FOUNDRY PULSEと来訪者カウンターを追加。既存の並行Project表示を維持しながら、Project全体とWebsite双方の現在地をより視覚的に提示。</p><div class="keywords"><span>Human × AI</span><span>Core Candidate</span><span>Foundry Pulse</span><span>Visitor Counter</span><span>Responsive UX</span></div></div><b>詳細を見る →</b></a>
+      <a class="release" href="2026-08-09-v4.0.html"><div class="date-block"><time datetime="2026-08-09">2026.08.09</time><span class="version">v4.0</span></div><div><span class="theme">Human-Directed Foundry Repositioning</span><h2>記事自動生成から、AIと仕事を設計するFoundryへ。</h2><p>LFの位置づけとWebsite Information Architectureを全面再定義。Human / Governance / AI Team、Reference Implementation、並行Project可視化を中心に、プロジェクトの進化そのものを見せる公式HPへ刷新。</p><div class="keywords"><span>Repositioning</span><span>Human-directed</span><span>Reference Implementation</span><span>Governance</span><span>Project Visualization</span><span>Mobile UX</span></div></div><b>詳細を見る →</b></a>
       <a class="release" href="2026-08-07-v3.0.html"><div class="date-block"><time datetime="2026-08-07">2026.08.07</time><span class="version">v3.0</span></div><div><span class="theme">Visual Navigation &amp; Mascot Experience</span><h2>読むトップページから、見て分かる入口へ。</h2><p>公式ホームページを7つの主要Presentationへ再構成。Mascot Guide、固定External Link、Explore、Current Snapshot、独立Demoを導入。</p><div class="keywords"><span>Website UX</span><span>Visual Navigation</span><span>Mascot</span><span>Accessibility</span><span>Demo</span></div></div><b>詳細を見る →</b></a>
       <a class="release" href="https://fctaityo.github.io/releases/2026-08-05-v2.14.html"><div class="date-block"><time datetime="2026-08-05">2026.08.05</time><span class="version">v2.14</span></div><div><span class="theme">Public Knowledge &amp; Publication Restructuring</span><h2>知識の入口を増やし、公開管理を内側へ戻す。</h2><p>GlossaryとProject Roadmapを公開し、Publication Registryを廃止。Public Repository、Documentation導線、CSS構成を整理。</p><div class="keywords"><span>Glossary</span><span>Roadmap</span><span>Publication</span><span>Public Documentation</span><span>Website Refactoring</span></div></div><b>詳細を見る →</b></a>
       <a class="release" href="https://fctaityo.github.io/releases/2026-08-04-v2.13.html"><div class="date-block"><time datetime="2026-08-04">2026.08.04</time><span class="version">v2.13</span></div><div><span class="theme">Architecture Public Documentation</span><h2>公開アーキテクチャを、ひとつの体系へ。</h2><p>Architecture、MCP Extension、Dify → n8n → ComfyUI Output Pipelineを公開し、Publication Governanceによる公開管理体系を確立。</p><div class="keywords"><span>Architecture</span><span>MCP Extension</span><span>Output Pipeline</span><span>Publication</span><span>Governance</span></div></div><b>詳細を見る →</b></a>

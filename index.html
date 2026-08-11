@@ -6,9 +6,422 @@
 <meta name="theme-color" content="#050914">
 <meta name="description" content="Local AI Foundryは、人間が目的と責任を持ち、AIへ仕事を委譲し、契約・検証・証拠によって成果物として成立させるためのローカルAI開発・制作基盤です。">
 <title>Local AI Foundry — AIと仕事を設計するFoundry</title>
-<link rel="stylesheet" href="styles.css?v=4.0-prototype-r12">
-<link rel="stylesheet" href="styles-r13-hotfix.css?v=4.0-r13">
-<script src="script.js?v=4.0-prototype-r12" defer></script>
+<link rel="stylesheet" href="styles.css?v=4.1">
+<style id="lf-v41-integrated">
+/* Integrated legacy hotfix rules + Local AI Foundry v4.1 additions.
+   Keep root frontend files fixed: index.html / styles.css / script.js. */
+/* =========================================================
+   Local AI Foundry Official Website v4.0 — r13 final hotfix
+
+   Scope:
+   - Enforce the agreed 12px minimum for visible micro-copy.
+   - No layout, color, typography-family, or animation changes.
+   ========================================================= */
+
+@media (max-width:760px) {
+  .phase-legend span {
+    font-size:12px!important;
+  }
+
+  .version-beacon span,
+  .version-beacon em {
+    font-size:12px!important;
+  }
+}
+
+@media (max-width:380px) {
+  .hero-evolution {
+    font-size:12px!important;
+  }
+}
+
+/* Local AI Foundry v4.1 — additive styles.
+   Integrated in index.html after styles.css. */
+
+/* Human × AI: business-agnostic control pattern */
+.control-pattern-label{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  margin-bottom:8px;padding:9px 12px;border:1px solid rgba(158,132,255,.28);
+  border-radius:10px;background:rgba(158,132,255,.055)
+}
+.control-pattern-label span{color:#b8aaff;font-size:11px;font-weight:900;letter-spacing:.12em}
+.control-pattern-label strong{font-size:12px;text-align:right;color:#d9d1ff}
+.control-cycle{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:6px;list-style:none;padding:0;margin:10px 0
+}
+.control-cycle li{
+  position:relative;min-width:0;padding:12px 7px;border:1px solid rgba(69,220,255,.18);
+  border-radius:10px;text-align:center;background:rgba(7,21,35,.86)
+}
+.control-cycle li:not(:last-child)::after{
+  content:"›";position:absolute;right:-7px;top:50%;transform:translate(50%,-50%);
+  z-index:2;color:var(--cyan);font-size:16px
+}
+.control-cycle b,.control-cycle strong,.control-cycle small{display:block}
+.control-cycle b{font-size:10px;color:#617b92}
+.control-cycle strong{margin-top:3px;font-size:12px;color:#f2f7fb}
+.control-cycle small{margin-top:5px;font-size:9px;line-height:1.3;color:#6f879d}
+
+/* RI#1 ownership of the seven-stage Article Production workflow */
+.ri-stage-strip{
+  display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:14px 0 5px;
+  padding:9px 10px;border:1px solid rgba(69,220,255,.2);border-radius:10px;
+  background:rgba(69,220,255,.035)
+}
+.ri-stage-strip span{font-size:10px;font-weight:800;color:#d8f7ff;white-space:nowrap}
+.ri-stage-strip i{font-style:normal;color:#426c7c;font-size:10px}
+.ri-stage-note{margin:0 0 12px;color:#6f98a8;font-size:10px}
+
+/* FOUNDRY PULSE */
+.foundry-pulse{
+  position:relative;margin:18px 0 12px;padding:22px;border:1px solid rgba(69,220,255,.24);
+  border-radius:20px;overflow:hidden;
+  background:
+    radial-gradient(circle at 85% 0%,rgba(158,132,255,.10),transparent 32%),
+    radial-gradient(circle at 0% 100%,rgba(87,241,168,.07),transparent 35%),
+    linear-gradient(180deg,rgba(8,22,37,.98),rgba(5,14,26,.98));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.015)
+}
+.foundry-pulse::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.14;
+  background-image:linear-gradient(rgba(69,220,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(69,220,255,.06) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,#000,transparent 84%)
+}
+.pulse-head{position:relative;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+.pulse-kicker{margin:0 0 5px;color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.14em}
+.pulse-live-dot{
+  display:inline-block;width:8px;height:8px;margin-right:4px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 0 0 rgba(87,241,168,.45);
+  animation:lfPulse 1.8s infinite
+}
+.pulse-head h3{margin:0;font-size:26px;letter-spacing:-.025em}
+.pulse-head>div>p:last-child{max-width:760px;margin:5px 0 0;color:var(--muted);font-size:12px}
+.pulse-sync{
+  min-width:150px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
+  background:rgba(5,13,24,.78);text-align:right
+}
+.pulse-sync span,.pulse-sync strong{display:block}
+.pulse-sync span{font-size:9px;letter-spacing:.12em;color:#657f94}
+.pulse-sync strong{margin-top:2px;font-size:11px;color:var(--orange)}
+.pulse-sync.synced strong{color:var(--green)}
+.pulse-sync.fallback strong{color:var(--orange)}
+.pulse-grid{
+  position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:16px
+}
+.pulse-cell{
+  min-width:0;padding:13px 12px;border:1px solid rgba(128,177,220,.15);border-radius:12px;
+  background:rgba(5,14,25,.77)
+}
+.pulse-cell small,.pulse-cell strong,.pulse-cell span{display:block}
+.pulse-cell small{font-size:9px;letter-spacing:.1em;color:#657f94}
+.pulse-cell strong{
+  margin-top:7px;font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.pulse-cell span{margin-top:5px;font-size:10px;color:#7690a7}
+.pulse-state strong{color:var(--green)}
+.pulse-web strong{color:var(--cyan)}
+.pulse-visitors strong{
+  font-variant-numeric:tabular-nums;letter-spacing:.08em;color:#d7ceff;
+  text-shadow:0 0 18px rgba(158,132,255,.35)
+}
+.pulse-wave{
+  position:relative;height:34px;margin:14px -8px -8px;display:flex;align-items:center;gap:7px;
+  overflow:hidden;opacity:.58
+}
+.pulse-wave::before{
+  content:"";position:absolute;left:0;right:0;top:50%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent)
+}
+.pulse-wave i{
+  display:block;width:8px;border-radius:999px;background:linear-gradient(var(--cyan),var(--violet));
+  animation:lfWave 2.2s ease-in-out infinite;box-shadow:0 0 14px rgba(69,220,255,.18)
+}
+.pulse-wave i:nth-child(1){height:8px;animation-delay:-.1s}.pulse-wave i:nth-child(2){height:17px;animation-delay:-.3s}
+.pulse-wave i:nth-child(3){height:29px;animation-delay:-.55s}.pulse-wave i:nth-child(4){height:13px;animation-delay:-.8s}
+.pulse-wave i:nth-child(5){height:23px;animation-delay:-1.05s}.pulse-wave i:nth-child(6){height:10px;animation-delay:-1.3s}
+.pulse-wave i:nth-child(7){height:31px;animation-delay:-1.55s}.pulse-wave i:nth-child(8){height:16px;animation-delay:-1.8s}
+.pulse-wave i:nth-child(9){height:7px;animation-delay:-2.05s}
+
+@keyframes lfPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(87,241,168,.42)}
+  50%{box-shadow:0 0 0 7px rgba(87,241,168,0)}
+}
+@keyframes lfWave{
+  0%,100%{transform:scaleY(.55);opacity:.45}
+  50%{transform:scaleY(1);opacity:1}
+}
+
+@media (max-width:1100px){
+  .pulse-grid{grid-template-columns:repeat(3,1fr)}
+  .control-cycle{grid-template-columns:repeat(5,minmax(110px,1fr));overflow-x:auto;padding-bottom:4px}
+}
+@media (max-width:760px){
+  .pulse-head{grid-template-columns:1fr}.pulse-sync{text-align:left;min-width:0}
+  .pulse-grid{grid-template-columns:repeat(2,1fr)}
+  .foundry-pulse{padding:17px}
+  .pulse-head h3{font-size:22px}
+  .control-pattern-label{display:block}.control-pattern-label strong{display:block;margin-top:4px;text-align:left}
+  .control-cycle{display:flex;overflow-x:auto;gap:6px;scroll-snap-type:x proximity}
+  .control-cycle li{min-width:148px;scroll-snap-align:start}
+}
+@media (max-width:480px){
+  .pulse-grid{grid-template-columns:1fr 1fr}
+  .pulse-cell{padding:11px 10px}
+  .pulse-cell strong{font-size:13px}
+  .ri-stage-strip{gap:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pulse-live-dot,.pulse-wave i{animation:none}
+}
+
+
+/* Standalone Visitor Counter */
+.visitor-counter{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;
+  margin:18px 0 12px;padding:18px 22px;border:1px solid rgba(158,132,255,.30);border-radius:18px;overflow:hidden;
+  background:linear-gradient(110deg,rgba(9,20,35,.98),rgba(18,18,45,.96));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.018),0 18px 50px rgba(0,0,0,.12)
+}
+.visitor-counter::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.24;
+  background:linear-gradient(90deg,transparent,rgba(69,220,255,.08),transparent 54%),
+    repeating-linear-gradient(90deg,transparent 0 44px,rgba(158,132,255,.07) 45px 46px)
+}
+.visitor-counter-copy,.visitor-counter-display{position:relative}
+.visitor-counter-kicker{margin:0 0 4px;color:#b8aaff;font-size:10px;font-weight:900;letter-spacing:.16em}
+.visitor-counter-dot{display:inline-block;width:7px;height:7px;margin-right:5px;border-radius:50%;background:var(--violet);box-shadow:0 0 14px rgba(158,132,255,.75)}
+.visitor-counter-copy h3{margin:0;font-size:23px;letter-spacing:-.025em}
+.visitor-counter-copy>p:last-child{max-width:720px;margin:4px 0 0;color:var(--muted);font-size:11px}
+.visitor-counter-display{min-width:270px;padding:12px 16px;border:1px solid rgba(69,220,255,.22);border-radius:13px;text-align:right;background:rgba(3,10,20,.80)}
+.visitor-counter-display small,.visitor-counter-display strong,.visitor-counter-display span{display:block}
+.visitor-counter-display small{font-size:9px;letter-spacing:.14em;color:#698399}
+.visitor-counter-display strong{
+  margin-top:2px;color:#e3dcff;font-family:"Roboto Mono","SFMono-Regular",Consolas,monospace;font-size:clamp(32px,4vw,48px);
+  line-height:1;letter-spacing:.12em;font-variant-numeric:tabular-nums;text-shadow:0 0 24px rgba(158,132,255,.38)
+}
+.visitor-counter-display span{margin-top:6px;color:#7d97ab;font-size:9px;letter-spacing:.08em}
+.visitor-counter-display.live strong{color:var(--cyan);text-shadow:0 0 24px rgba(69,220,255,.38)}
+.visitor-counter-display.live span{color:var(--green)}
+
+/* Pulse now contains only Foundry status cells; visitor count is the separate counter above. */
+.pulse-grid{grid-template-columns:repeat(5,1fr)}
+
+@media (max-width:900px){
+  .visitor-counter{grid-template-columns:1fr;gap:12px}
+  .visitor-counter-display{min-width:0;text-align:left}
+  .pulse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .visitor-counter{padding:16px}
+  .visitor-counter-display strong{font-size:34px;letter-spacing:.08em}
+  .pulse-grid{grid-template-columns:1fr}
+}
+
+/* v4.1 responsive Human × AI composition.
+   Wide desktop: comparison + visual stay side by side.
+   Mid width: comparison stays on top, CORE visual moves to a full-width row.
+   Mobile: everything stacks; no internal horizontal/vertical scrolling. */
+
+/* Shared safety: the visual itself never owns a scrollbar. */
+.model-visual-card{
+  position:relative!important;
+  isolation:isolate;
+  overflow:hidden!important;
+  min-width:0;
+}
+.model-visual-card>img{
+  display:block;
+  width:100%;
+  max-width:none;
+  object-fit:cover;
+  z-index:0;
+}
+.model-visual-overlay{
+  z-index:2!important;
+  overflow:visible!important;
+  background:rgba(5,13,24,.965)!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,255,255,.012)!important;
+}
+
+/* A — Wide desktop: preserve the current side-by-side composition.
+   Reserve the character corridor at the left of the artwork. */
+@media (min-width:1321px){
+  .model-grid{
+    grid-template-columns:minmax(0,.9fr) minmax(620px,1.1fr)!important;
+    align-items:stretch;
+  }
+  .model-visual-card{
+    min-height:520px;
+  }
+  .model-visual-card>img{
+    position:absolute!important;
+    inset:0!important;
+    height:100%!important;
+    object-position:center center!important;
+  }
+  .model-visual-overlay{
+    position:absolute!important;
+    top:64px!important;
+    right:18px!important;
+    bottom:18px!important;
+    left:184px!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+  }
+  .control-cycle{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:6px!important;
+    overflow:visible!important;
+    padding-bottom:0!important;
+  }
+  .control-cycle li{min-width:0!important;padding:12px 6px!important}
+  .control-cycle strong{font-size:11px}
+  .control-cycle small{font-size:9px}
+}
+
+/* B — Laptop / narrow desktop: stop forcing three visual columns.
+   The two comparison cards stay together; CORE becomes a full-width row. */
+@media (min-width:761px) and (max-width:1320px){
+  .model-grid{
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+  }
+  .comparison-board{
+    width:100%;
+  }
+  .model-visual-card{
+    min-height:540px;
+    aspect-ratio:auto!important;
+  }
+  .model-visual-card>img{
+    position:absolute!important;
+    inset:0!important;
+    height:100%!important;
+    object-position:center center!important;
+  }
+  /* Character is in the left part of the artwork: reserve ~24% for her. */
+  .model-visual-overlay{
+    position:absolute!important;
+    top:80px!important;
+    right:24px!important;
+    bottom:24px!important;
+    left:24%!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+  }
+  .control-cycle{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    gap:7px!important;
+    overflow:visible!important;
+    padding-bottom:0!important;
+  }
+  .control-cycle li{min-width:0!important}
+  .control-rail{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+}
+
+/* C — Mobile / tablet portrait: image and information become separate blocks.
+   No overlay, no horizontal scrolling, no hidden content. */
+@media (max-width:760px){
+  .model-grid{
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+  }
+  .comparison-board{
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+  }
+  .comparison-axis{
+    min-height:26px;
+    transform:rotate(90deg);
+  }
+  .model-visual-card{
+    display:block!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    border-radius:18px;
+  }
+  .model-visual-card>img{
+    position:relative!important;
+    inset:auto!important;
+    height:auto!important;
+    aspect-ratio:16/10;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  .model-visual-overlay{
+    position:relative!important;
+    inset:auto!important;
+    width:auto!important;
+    height:auto!important;
+    margin:0!important;
+    padding:16px!important;
+    border-radius:0 0 18px 18px!important;
+  }
+  .control-pattern-label{
+    display:block!important;
+  }
+  .control-pattern-label strong{
+    display:block!important;
+    margin-top:5px!important;
+    text-align:left!important;
+  }
+  .control-cycle{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;
+    overflow:visible!important;
+    padding:0!important;
+    margin:10px 0!important;
+    scroll-snap-type:none!important;
+  }
+  .control-cycle li{
+    min-width:0!important;
+    scroll-snap-align:none!important;
+    padding:12px 8px!important;
+  }
+  .control-cycle li:not(:last-child)::after{display:none!important}
+  .control-cycle li:last-child{
+    grid-column:1 / -1;
+  }
+  .control-rail{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .control-rail span:last-child{
+    grid-column:1 / -1;
+  }
+  .retry-loop{
+    flex-wrap:wrap;
+  }
+}
+
+@media (max-width:480px){
+  .control-cycle{
+    grid-template-columns:1fr!important;
+  }
+  .control-cycle li:last-child{
+    grid-column:auto;
+  }
+  .control-rail{
+    grid-template-columns:1fr!important;
+  }
+  .control-rail span:last-child{
+    grid-column:auto;
+  }
+  .model-visual-overlay{
+    padding:14px!important;
+  }
+}
+</style>
+<script src="script.js?v=4.1" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">本文へ移動</a>
@@ -50,8 +463,8 @@
         <span>記事自動生成</span><i>→</i><span>AIチーム</span><i>→</i><strong data-hero-word>人間主導のFoundry</strong>
       </div>
       <div class="hero-copy reveal">
-        <a class="version-beacon" href="releases/2026-08-09-v4.0.html" aria-label="Local AI Foundry v4.0 リリース詳細">
-          <span>CURRENT VERSION</span><strong>v4.0</strong><em>REPOSITIONING RELEASE</em><b>詳細 →</b>
+        <a class="version-beacon" href="releases/2026-08-11-v4.1.html" aria-label="Local AI Foundry v4.1 リリース詳細">
+          <span>CURRENT VERSION</span><strong>v4.1</strong><em>CONTROL PULSE RELEASE</em><b>詳細 →</b>
         </a>
         <p class="eyebrow"><span>LOCAL AI FOUNDRY</span><em>再定義 / REPOSITIONING</em></p>
         <h1><span>LOCAL AI</span><br>FOUNDRY</h1>
@@ -63,8 +476,8 @@
         </div>
         <div class="hero-state-row">
           <div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div>
-          <div class="state-chip accent"><span>現在の公式HP</span><strong>v4.0</strong></div>
-          <div class="state-chip"><span>リリース</span><strong>2026.08.09</strong></div>
+          <div class="state-chip accent"><span>現在の公式HP</span><strong>v4.1</strong></div>
+          <div class="state-chip"><span>リリース</span><strong>2026.08.11</strong></div>
         </div>
       </div>
 
@@ -107,7 +520,7 @@
       <div class="layer-stack compact-layers reveal">
         <article class="layer human-layer"><div><span>01</span><small>人間</small></div><h3>目的・判断・責任</h3><p>何を作り、どこまでAIへ任せ、何を承認するかを決める。</p><strong>決める</strong></article>
         <article class="layer governance-layer"><div><span>02</span><small>制御・管理</small></div><h3>契約・Gate・Review・Evidence</h3><p>AIの仕事を曖昧にせず、止める条件と検証方法を仕組みにする。</p><strong>制御する</strong></article>
-        <article class="layer ai-layer"><div><span>03</span><small>AIチーム</small></div><h3>企画・調査・執筆・画像・監査</h3><p>定義された役割を担当し、決められた契約で次工程へ渡す。</p><strong>実行する</strong></article>
+        <article class="layer ai-layer"><div><span>03</span><small>AIチーム</small></div><h3>委譲された業務の分担・実行・再試行</h3><p>定義された責務を担当し、決められた契約の中で実行し、検証済みの結果を次へ渡す。</p><strong>実行する</strong></article>
       </div>
       <div class="scope-strip reveal" aria-label="Local AI Foundryの対象範囲">
         <article><span>制作</span><p>文章・画像・成果物</p></article>
@@ -123,23 +536,28 @@
     <div class="shell">
       <div class="section-heading compact-heading focused-heading reveal">
         <div><p class="kicker">03 / 人とAIの役割 <span>HUMAN × AI</span></p><h2><span class="title-line">目標は「全自動」ではない。</span><strong class="title-line">任せる範囲を設計する。</strong></h2></div>
-        <p>AIを使う。しかし、目的・責任・承認を人間から消さない。7工程も、その考え方の中で動く。</p>
+        <p>AIを使う。しかし、目的・責任・承認を人間から消さない。業務ごとの工程は変わっても、人間が境界を決め、AIの仕事を検証し、最後に判断する。</p>
       </div>
       <div class="model-grid">
         <div class="comparison-board compact-comparison reveal">
           <article class="comparison-column old-model"><span class="model-tag">全自動モデル</span><h3>AIに全部やらせる</h3><ol><li>AIが考える</li><li>AIが作る</li><li>AIが公開する</li><li>人間は結果を見る</li></ol></article>
           <div class="comparison-axis" aria-hidden="true"><span>→</span></div>
-          <article class="comparison-column new-model"><span class="model-tag">LFモデル</span><h3>人間が任せ方を決める</h3><ol><li>人間が目的を決める</li><li>AIが担当を実行する</li><li>契約とGateで検査する</li><li>人間がレビューする</li><li>証拠を残す</li></ol></article>
+          <article class="comparison-column new-model"><span class="model-tag">LFモデル</span><h3>人間が任せ方を決める</h3><ol><li>人間が目的と境界を決める</li><li>AIへ担当を委譲する</li><li>契約とGateで検査する</li><li>必要な工程だけ再試行する</li><li>人間がレビュー・承認する</li><li>Evidenceを残す</li></ol></article>
         </div>
         <div class="model-visual-card reveal">
           <img src="assets/human-ai-control-room.webp" alt="人間の判断、契約、検証、AIチームの工程を一つの管制室として表現したLocal AI Foundryのイメージ">
           <div class="model-visual-overlay">
-            <div class="workflow-human"><span>人間</span><strong>判断 / 承認</strong></div>
-            <ol class="workflow-flow compact-flow" aria-label="Local AI Foundryの7工程">
-              <li><b>01</b><strong>企画</strong></li><li><b>02</b><strong>調査</strong></li><li><b>03</b><strong>執筆</strong></li><li><b>04</b><strong>確認</strong></li><li><b>05</b><strong>画像</strong></li><li><b>06</b><strong>監査</strong></li><li><b>07</b><strong>保存</strong></li>
+            <div class="control-pattern-label"><span>CORE CANDIDATE</span><strong>RI間で共通性を検証中のControl Pattern</strong></div>
+            <div class="workflow-human"><span>人間</span><strong>目的 / 境界 / 判断 / 承認</strong></div>
+            <ol class="control-cycle" aria-label="業務非依存のHuman-directed Control Pattern">
+              <li><b>01</b><strong>境界を決める</strong><small>Purpose / Responsibility</small></li>
+              <li><b>02</b><strong>AIへ委譲する</strong><small>Delegation / Handoff</small></li>
+              <li><b>03</b><strong>業務を実行する</strong><small>Task / Generation</small></li>
+              <li><b>04</b><strong>検証・再試行する</strong><small>Contract / Gate / Retry</small></li>
+              <li><b>05</b><strong>人間が判断する</strong><small>Review / Approval / Evidence</small></li>
             </ol>
-            <div class="control-rail compact-rail"><span>契約</span><span>Gate</span><span>Review</span><span>変更管理</span><span>Evidence</span></div>
-            <div class="retry-loop"><span>失敗</span><i>↺</i><strong>必要な工程だけ戻す</strong></div>
+            <div class="control-rail compact-rail"><span>責務境界</span><span>契約</span><span>Validation</span><span>Review</span><span>Evidence</span></div>
+            <div class="retry-loop"><span>失敗</span><i>↺</i><strong>必要な責務だけ戻す</strong></div>
           </div>
         </div>
       </div>
@@ -162,6 +580,10 @@
           <p class="ri-kana">記事制作 / ARTICLE PRODUCTION</p>
           <h3>企画から記事・画像・監査まで。</h3>
           <p>最初のReference Implementation。Difyを中心に記事制作を分業し、Contract・DTO・Gate・Retry・Evidenceの候補を見つけた。</p>
+          <div class="ri-stage-strip" aria-label="RI#1 Article Productionの7工程">
+            <span>企画</span><i>→</i><span>調査</span><i>→</i><span>執筆</span><i>→</i><span>確認</span><i>→</i><span>画像</span><i>→</i><span>監査</span><i>→</i><span>保存</span>
+          </div>
+          <div class="ri-stage-note">7-stage Article Production Workflow — RI#1固有の実装例</div>
           <div class="ri-meta"><span>Dify</span><span>Ollama</span><span>ComfyUI</span></div>
         </article>
 
@@ -181,6 +603,38 @@
           <div class="ri-meta"><span>Concept</span><span>Next</span><span>Open</span></div>
         </article>
       </div>
+
+      <aside class="visitor-counter reveal" aria-labelledby="visitor-counter-title">
+        <div class="visitor-counter-copy">
+          <p class="visitor-counter-kicker"><span class="visitor-counter-dot" aria-hidden="true"></span> VISITOR COUNTER</p>
+          <h3 id="visitor-counter-title">FOUNDRYに来た人。</h3>
+          <p>公式HPへの来訪を、Foundryの稼働記録みたいに刻む。同じブラウザではJST基準で1日1回だけ加算する軽量カウンター。</p>
+        </div>
+        <div class="visitor-counter-display" aria-live="polite">
+          <small>TOTAL VISITS / 来訪数</small>
+          <strong data-visitor-count>------</strong>
+          <span data-visitor-note>CONNECTING...</span>
+        </div>
+      </aside>
+
+      <aside class="foundry-pulse reveal" aria-labelledby="foundry-pulse-title">
+        <div class="pulse-head">
+          <div>
+            <p class="pulse-kicker"><span class="pulse-live-dot" aria-hidden="true"></span> FOUNDRY PULSE</p>
+            <h3 id="foundry-pulse-title">LFの「いま」を、一目で。</h3>
+            <p>Public Status（公開ステータス）から取得できるCurrent Snapshot（現在地）を表示。並行プロジェクトの進行段階とは別の、Foundry全体の管制盤。</p>
+          </div>
+          <div class="pulse-sync" data-pulse-sync><span>PUBLIC STATUS</span><strong>CONNECTING...</strong></div>
+        </div>
+        <div class="pulse-grid">
+          <article class="pulse-cell pulse-state"><small>PROJECT STATE</small><strong data-pulse-project-state>Published</strong><span>Project全体のState</span></article>
+          <article class="pulse-cell"><small>RUNTIME</small><strong data-pulse-runtime>Not Executed</strong><span data-pulse-acceptance>Acceptance: PENDING</span></article>
+          <article class="pulse-cell"><small>CORE</small><strong>Core Candidate</strong><span>比較Evidenceを蓄積中</span></article>
+          <article class="pulse-cell pulse-web"><small>WEBSITE</small><strong>v4.1</strong><span>Minor Release</span></article>
+          <article class="pulse-cell"><small>PUBLIC SNAPSHOT</small><strong data-pulse-updated>--</strong><span>Public Status更新日</span></article>
+        </div>
+        <div class="pulse-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </aside>
 
       <div class="parallel-board reveal" aria-label="Local AI Foundryの並行プロジェクト進行状況">
         <img class="ri-guide" src="assets/ri-guide.webp" alt="" aria-hidden="true">
@@ -211,8 +665,8 @@
         </div>
 
         <div class="project-rail">
-          <div class="rail-title"><b>WEB</b><span>公式HP v4.0</span><em>Website Release</em></div>
-          <div class="rail-track" aria-label="公式HP v4.0: 確定段階">
+          <div class="rail-title"><b>WEB</b><span>公式HP v4.1</span><em>Website Release</em></div>
+          <div class="rail-track" aria-label="公式HP v4.1: 確定段階">
             <i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i>
           </div>
         </div>
@@ -268,14 +722,14 @@
     <div class="shell current-shell">
       <div class="current-copy reveal">
         <p class="kicker">06 / 現在地 <span>CURRENT STATE</span></p>
-        <h2><span class="title-line">公式HPはv4.0へ。</span><strong class="title-line">LFの進化を、現在の姿として見せる。</strong></h2>
-        <p>記事自動生成を出発点としたLFは、複数のReference ImplementationとHuman-directedな制御モデルを扱うFoundryへスコープを拡張。公式HP v4.0は、その現在の位置づけをPresentation Layerとして示す。</p>
-        <div class="current-actions"><a class="button compact primary" href="releases/2026-08-09-v4.0.html">v4.0更新内容</a><a class="button compact" href="releases/index.html">更新履歴</a><a class="button compact" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">公開Status ↗</a></div>
+        <h2><span class="title-line">公式HPはv4.1へ。</span><strong class="title-line">LFの「いま」が、動いて見える。</strong></h2>
+        <p>v4.1ではHuman × AIの責務境界をCurrent Architectureへ合わせ、FOUNDRY PULSEと来訪者カウンターを追加。既存の並行プロジェクト表示を残したまま、Foundry全体の現在地をより動的に見せる。</p>
+        <div class="current-actions"><a class="button compact primary" href="releases/2026-08-11-v4.1.html">v4.1更新内容</a><a class="button compact" href="releases/index.html">更新履歴</a><a class="button compact" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">公開Status ↗</a></div>
       </div>
       <div class="status-panel reveal">
         <article><span>プロジェクト状態</span><strong class="ok">Published</strong></article>
-        <article><span>現在の公式HP</span><strong class="accent-text">v4.0</strong></article>
-        <article><span>Website Release</span><strong>2026.08.09</strong></article>
+        <article><span>現在の公式HP</span><strong class="accent-text">v4.1</strong></article>
+        <article><span>Website Release</span><strong>2026.08.11</strong></article>
         <article><span>Runtime</span><strong>Not Executed / PENDING</strong></article>
       </div>
     </div>
