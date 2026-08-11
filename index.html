@@ -421,7 +421,8 @@
   }
 }
 </style>
-<script src="script.js?v=4.1.3" defer></script>
+<script src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+<script src="script.js?v=4.1.4" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">本文へ移動</a>
@@ -608,11 +609,11 @@
         <div class="visitor-counter-copy">
           <p class="visitor-counter-kicker"><span class="visitor-counter-dot" aria-hidden="true"></span> VISITOR COUNTER</p>
           <h3 id="visitor-counter-title">FOUNDRYに来た人。</h3>
-          <p>公式HPへの来訪を、Foundryの稼働記録みたいに刻む。同じブラウザではJST基準で1日1回だけ加算する軽量カウンター。</p>
+          <p>公式HPへの来訪を、Foundryの稼働記録みたいに刻む。同一訪問者の同日中の重複アクセスをまとめるUV方式の軽量カウンター。</p>
         </div>
         <div class="visitor-counter-display" aria-live="polite">
-          <small>TOTAL VISITS / 来訪数</small>
-          <strong data-visitor-count>------</strong>
+          <small>TOTAL VISITORS / 来訪者数</small>
+          <strong id="busuanzi_site_uv" data-visitor-count>------</strong>
           <span data-visitor-note>CONNECTING...</span>
         </div>
       </aside>

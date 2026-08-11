@@ -81,45 +81,14 @@
   updateScrollUI();
 })();
 
-/* Local AI Foundry v4.1.3 — Foundry Pulse / visitor counter */
+/* Local AI Foundry v4.1.4 — Foundry Pulse / Busuanzi visitor counter */
 (() => {
   const STATUS_URL = 'docs/public/status-public.md';
-  const LIVE_HOSTS = new Set(['fctaityo.github.io']);
-
-  /*
-   * CounterAPI.com official browser embed.
-   * The service's current documentation recommends:
-   *   <script src="https://counterapi.com/c.js"></script>
-   *   <div class="counterapi"></div>
-   *
-   * We load that official client dynamically only after configuring
-   * our existing counter element.
-   */
-  const COUNTER_LIBRARY = 'https://counterapi.com/c.js?ns=fctaityo.github.io';
-  const COUNTER_NAMESPACE = 'fctaityo.github.io';
-  const COUNTER_ACTION = 'view';
-  const COUNTER_KEY = 'foundry-home';
-
   const $ = (selector) => document.querySelector(selector);
 
   function textMatch(source, regex, fallback = '--') {
     const match = source.match(regex);
     return match?.[1]?.trim() || fallback;
-  }
-
-  function jstDateKey(date = new Date()) {
-    const parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'Asia/Tokyo',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    }).formatToParts(date);
-
-    const values = Object.fromEntries(
-      parts.map(({ type, value }) => [type, value])
-    );
-
-    return `${values.year}-${values.month}-${values.day}`;
   }
 
   async function syncPublicStatus() {
@@ -181,127 +150,63 @@
       const strong = sync.querySelector('strong');
       if (strong) strong.textContent = 'STATIC FALLBACK';
 
-      console.warn('[LF v4.1.3] Public Status sync failed:', error);
+      console.warn('[LF v4.1.4] Public Status sync failed:', error);
     }
   }
 
-  function normalizeCounterText(text) {
-    const digits = String(text || '').replace(/[^\d]/g, '');
-    if (!digits) return null;
-
-    const value = Number(digits);
-    return Number.isFinite(value) ? value : null;
-  }
-
-  function syncVisitorCount() {
-    const display = $('[data-visitor-count]');
+  function syncVisitorDisplay() {
+    const display = document.getElementById('busuanzi_site_uv');
     const note = $('[data-visitor-note]');
     if (!display) return;
 
     const panel = display.closest('.visitor-counter-display');
+    let settled = false;
 
-    if (!LIVE_HOSTS.has(location.hostname)) {
-      display.textContent = '------';
-      if (note) note.textContent = 'LOCAL / COUNTER DISABLED';
-      return;
-    }
+    const apply = () => {
+      if (settled) return true;
 
-    const today = jstDateKey();
-    const storageKey = `lf-visit-counted:jst:${today}`;
+      const raw = String(display.textContent || '').replace(/[^\d]/g, '');
+      if (!raw) return false;
 
-    let alreadyCounted = false;
-    try {
-      alreadyCounted = localStorage.getItem(storageKey) === '1';
-    } catch (_) {}
+      const count = Number(raw);
+      if (!Number.isFinite(count)) return false;
 
-    /*
-     * Configure the existing <strong data-visitor-count> as the official
-     * CounterAPI widget. noCss/noIcon/noLink keep our visual design intact.
-     */
-    display.classList.add('counterapi');
-    display.setAttribute('ns', COUNTER_NAMESPACE);
-    display.setAttribute('action', COUNTER_ACTION);
-    display.setAttribute('key', COUNTER_KEY);
-    display.setAttribute('noCss', 'true');
-    display.setAttribute('noIcon', 'true');
-    display.setAttribute('noLink', 'true');
-    display.setAttribute('noAnim', 'true');
-    display.setAttribute('noFormatting', 'true');
-
-    if (alreadyCounted) {
-      display.setAttribute('readOnly', 'true');
-    } else {
-      display.removeAttribute('readOnly');
-    }
-
-    display.textContent = '------';
-    if (note) note.textContent = 'CONNECTING...';
-
-    let resolved = false;
-    const startedAt = Date.now();
-
-    const finish = (count) => {
-      if (resolved) return;
-      resolved = true;
+      settled = true;
+      observer.disconnect();
 
       display.textContent = String(count).padStart(6, '0');
       panel?.classList.add('live');
 
       if (note) {
-        note.textContent = alreadyCounted
-          ? '本日の訪問は加算済み'
-          : '本日の初回訪問を加算';
+        note.textContent = '累計ユニーク訪問者';
       }
-
-      if (!alreadyCounted) {
-        try {
-          localStorage.setItem(storageKey, '1');
-        } catch (_) {}
-      }
+      return true;
     };
 
-    const fail = (reason) => {
-      if (resolved) return;
-      resolved = true;
+    const observer = new MutationObserver(() => {
+      apply();
+    });
 
+    observer.observe(display, {
+      childList: true,
+      subtree: true,
+      characterData: true
+    });
+
+    if (apply()) return;
+
+    // Busuanzi is loaded with defer before this script, but network latency can vary.
+    // Fail visually only after enough time for the external counter to respond.
+    setTimeout(() => {
+      if (settled) return;
+      observer.disconnect();
       display.textContent = '------';
       panel?.classList.remove('live');
       if (note) note.textContent = 'Counter unavailable';
-
-      console.warn('[LF v4.1.3] Visitor counter failed:', reason);
-    };
-
-    /*
-     * The official client updates the widget asynchronously.
-     * Poll only the existing element; no API implementation is duplicated here.
-     */
-    const timer = setInterval(() => {
-      const count = normalizeCounterText(display.textContent);
-
-      if (count !== null) {
-        clearInterval(timer);
-        finish(count);
-        return;
-      }
-
-      if (Date.now() - startedAt > 12000) {
-        clearInterval(timer);
-        fail(new Error('CounterAPI widget timeout'));
-      }
-    }, 120);
-
-    const library = document.createElement('script');
-    library.src = `${COUNTER_LIBRARY}&v=${Date.now()}`;
-    library.async = true;
-
-    library.onerror = () => {
-      clearInterval(timer);
-      fail(new Error('CounterAPI official library failed to load'));
-    };
-
-    document.head.appendChild(library);
+      console.warn('[LF v4.1.4] Busuanzi visitor counter did not resolve in time.');
+    }, 15000);
   }
 
   syncPublicStatus();
-  syncVisitorCount();
+  syncVisitorDisplay();
 })();
