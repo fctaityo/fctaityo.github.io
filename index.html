@@ -421,81 +421,119 @@
   }
 }
 
-/* Finale mascot — silent visual enhancement */
-.current-copy .title-line{
-  display:block;
-}
-.current-copy .title-break{
-  display:block;
+/* Editorial line breaks + integrated finale panel */
+.fixed-editorial-title > .title-line{
+  display:block!important;
+  width:max-content!important;
+  max-width:none!important;
+  white-space:nowrap!important;
 }
 
-.finale-girl{
-  position:absolute;
-  z-index:1;
-  right:max(20px, calc((100vw - var(--shell)) / 2 - 22px));
-  bottom:-8px;
-  width:clamp(250px,24vw,390px);
-  max-height:94%;
-  object-fit:contain;
-  object-position:right bottom;
-  pointer-events:none;
-  user-select:none;
-  opacity:.96;
-  border-radius:26px;
-  clip-path:inset(0 round 26px);
-  filter:
-    drop-shadow(0 28px 46px rgba(0,0,0,.34))
-    drop-shadow(0 0 28px rgba(69,220,255,.12));
+/* Finale: copy and mascot live inside one shared panel, like the parallel board. */
+.finale{
+  padding:72px 0;
 }
-.finale::after{
+.finale-frame{
+  position:relative;
+  min-height:520px;
+  overflow:hidden;
+  border:1px solid rgba(69,220,255,.24);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 82% 42%,rgba(69,220,255,.11),transparent 34%),
+    linear-gradient(180deg,rgba(8,22,37,.98),rgba(5,14,26,.98));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.015),0 24px 70px rgba(0,0,0,.18);
+}
+.finale-frame::before{
   content:"";
   position:absolute;
-  z-index:0;
-  right:0;
-  top:0;
-  bottom:0;
-  width:min(40vw,620px);
+  inset:0;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 68% 54%,rgba(69,220,255,.10),transparent 40%),
-    radial-gradient(circle at 80% 70%,rgba(158,132,255,.07),transparent 34%);
-}
-.single-finale{
-  position:relative;
-  z-index:2;
+  opacity:.20;
+  background-image:
+    linear-gradient(rgba(69,220,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(69,220,255,.055) 1px,transparent 1px);
+  background-size:58px 58px;
+  mask-image:linear-gradient(to right,#000 0%,rgba(0,0,0,.7) 58%,transparent 92%);
 }
 .finale-copy{
   position:relative;
+  z-index:3;
+  width:min(70%,800px);
+  max-width:none;
+  padding:54px 42px;
+}
+.finale-copy h2{
+  text-wrap:initial;
+}
+.finale-art{
+  position:absolute;
   z-index:2;
-  max-width:min(760px,66%);
+  right:0;
+  top:0;
+  bottom:0;
+  width:min(42%,500px);
+  overflow:hidden;
+  border-radius:40% 0 0 0;
+  mask-image:linear-gradient(to left,#000 78%,transparent 100%);
+}
+.finale-art::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 70% 45%,rgba(69,220,255,.09),transparent 55%);
+}
+.finale-art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:42% center;
+  opacity:.96;
+  filter:saturate(.92) contrast(1.03);
 }
 
-@media (max-width:1180px){
-  .finale-girl{
-    right:max(8px, calc((100vw - var(--shell)) / 2 - 8px));
-    width:clamp(220px,28vw,320px);
-    opacity:.84;
+@media (max-width:1100px){
+  .finale-frame{min-height:480px}
+  .finale-copy{width:68%;padding:46px 34px}
+  .finale-art{width:44%}
+}
+
+@media (max-width:860px){
+  .fixed-editorial-title > .title-line{
+    width:auto!important;
+    max-width:100%!important;
+    white-space:normal!important;
+  }
+  .finale-frame{
+    min-height:0;
+    display:grid;
+    grid-template-columns:1fr;
   }
   .finale-copy{
-    max-width:70%;
+    width:100%;
+    padding:34px 28px 28px;
+  }
+  .finale-art{
+    position:relative;
+    right:auto;
+    top:auto;
+    bottom:auto;
+    width:100%;
+    height:360px;
+    border-radius:0 0 26px 26px;
+    mask-image:linear-gradient(to top,#000 72%,transparent 100%);
+  }
+  .finale-art img{
+    object-position:42% 38%;
   }
 }
 
-@media (max-width:900px){
-  .current-copy .title-break{
-    display:inline;
-  }
-  .finale-girl{
-    display:none;
-  }
-  .finale-copy{
-    max-width:none;
-  }
-  .finale::after{
-    display:none;
-  }
+@media (max-width:580px){
+  .finale{padding:58px 0}
+  .finale-copy{padding:28px 22px 22px}
+  .finale-art{height:300px}
 }
-
 </style>
 <script src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
 <script src="script.js?v=4.1.4" defer></script>
@@ -646,7 +684,7 @@
       <div class="section-heading compact-heading reveal">
         <div>
           <p class="kicker">04 / 実証プロジェクト <span>REFERENCE IMPLEMENTATIONS</span></p>
-          <h2><span class="title-line">一つの用途に閉じない。</span><strong class="title-line">別の仕事でも成立するかを試す。</strong></h2>
+          <h2 class="fixed-editorial-title projects-editorial-title"><span class="title-line">一つの用途に閉じない。</span><strong class="title-line">別の仕事でも</strong><strong class="title-line">成立するかを試す。</strong></h2>
         </div>
         <p>LFは一つの巨大システムを作るだけではなく、複数のReference Implementation（RI）を並行して動かし、共通する制御パターンを実証していく。</p>
       </div>
@@ -799,7 +837,7 @@
     <div class="shell current-shell">
       <div class="current-copy reveal">
         <p class="kicker">06 / 現在地 <span>CURRENT STATE</span></p>
-        <h2><span class="title-line">公式HPはv4.1へ。</span><strong class="title-line">LFの「いま」が、<span class="title-break">動いて見える。</span></strong></h2>
+        <h2 class="fixed-editorial-title current-editorial-title"><span class="title-line">v4.1へ。</span><strong class="title-line">LFの「いま」が、</strong><strong class="title-line">動いて見える。</strong></h2>
         <p>v4.1ではHuman × AIの責務境界をCurrent Architectureへ合わせ、FOUNDRY PULSEと来訪者カウンターを追加。既存の並行プロジェクト表示を残したまま、Foundry全体の現在地をより動的に見せる。</p>
         <div class="current-actions"><a class="button compact primary" href="releases/2026-08-11-v4.1.html">v4.1更新内容</a><a class="button compact" href="releases/index.html">更新履歴</a><a class="button compact" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">公開Status ↗</a></div>
       </div>
@@ -814,9 +852,11 @@
 
   <section class="finale">
     <div class="finale-grid" aria-hidden="true"></div>
-    <img class="finale-girl" src="assets/ri-guide.webp" alt="" aria-hidden="true">
-    <div class="shell finale-layout single-finale">
-      <div class="finale-copy finale-panel reveal"><p class="kicker">LOCAL AI FOUNDRY <span>BUILD IN PUBLIC</span></p><h2><span class="title-line">AIを使う。</span><strong class="title-line">でも、人間を消さない。</strong></h2><p>Local AI Foundryは、作りながら進化を公開していく。</p><div class="finale-actions"><a class="button primary" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="button" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">NOTE ↗</a><a class="button" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">X ↗</a></div></div>
+    <div class="shell">
+      <div class="finale-frame reveal">
+        <div class="finale-copy"><p class="kicker">LOCAL AI FOUNDRY <span>BUILD IN PUBLIC</span></p><h2><span class="title-line">AIを使う。</span><strong class="title-line">でも、人間を消さない。</strong></h2><p>Local AI Foundryは、作りながら進化を公開していく。</p><div class="finale-actions"><a class="button primary" href="https://github.com/fctaityo/fctaityo.github.io" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a class="button" href="https://note.com/taityo_fc" target="_blank" rel="noopener noreferrer">NOTE ↗</a><a class="button" href="https://x.com/fctaityo" target="_blank" rel="noopener noreferrer">X ↗</a></div></div>
+        <div class="finale-art" aria-hidden="true"><img src="assets/ri-guide.webp" alt=""></div>
+      </div>
     </div>
   </section>
 </main>
