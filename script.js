@@ -12,14 +12,17 @@
   function updateScrollUI(){
     const y = window.scrollY || document.documentElement.scrollTop;
     header?.classList.toggle('scrolled', y > 16);
+
     if(progress){
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       progress.style.width = `${Math.min(100, (y / max) * 100)}%`;
     }
+
     let currentId = '';
     for(const section of sections){
       if(section.getBoundingClientRect().top <= 130) currentId = section.id;
     }
+
     navLinks.forEach(link =>
       link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`)
     );
@@ -47,7 +50,10 @@
           observer.unobserve(entry.target);
         }
       }
-    }, { threshold: .12, rootMargin: '0px 0px -4% 0px' });
+    }, {
+      threshold: .12,
+      rootMargin: '0px 0px -4% 0px'
+    });
 
     revealItems.forEach(el => observer.observe(el));
   }
@@ -63,10 +69,12 @@
   if(heroWord && !reducedMotion){
     setInterval(() => {
       wordIndex = (wordIndex + 1) % heroWords.length;
+
       heroWord.animate(
         [{ opacity: 1 }, { opacity: 0 }, { opacity: 1 }],
         { duration: 420, easing: 'ease' }
       );
+
       setTimeout(() => {
         heroWord.textContent = heroWords[wordIndex];
       }, 200);
@@ -81,7 +89,14 @@
 /* Local AI Foundry v4.1 — Foundry Pulse / visitor counter */
 (() => {
   const STATUS_URL = 'docs/public/status-public.md';
-  const COUNTER_BASE = 'https://api.counterapi.dev/v1/local-ai-foundry/websitevisits';
+
+  /* Free Visitor Counter:
+     - no API key
+     - CORS enabled
+     - POST /visit records a visit
+     - GET /visit?domain=... returns current stats
+  */
+  const VISITOR_API = 'https://visitor.6developer.com/visit';
   const LIVE_HOSTS = new Set(['fctaityo.github.io']);
 
   const $ = (selector) => document.querySelector(selector);
@@ -119,7 +134,10 @@
       const response = await fetch(`${STATUS_URL}?v=${Date.now()}`, {
         cache: 'no-store'
       });
-      if (!response.ok) throw new Error(`status ${response.status}`);
+
+      if (!response.ok) {
+        throw new Error(`status ${response.status}`);
+      }
 
       const md = await response.text();
 
@@ -147,96 +165,155 @@
         '--'
       );
 
-      if (projectState) projectState.textContent = state;
-      if (runtime) runtime.textContent = runtimeValue;
-      if (acceptance) acceptance.textContent = `Acceptance: ${acceptanceValue}`;
-      if (updated) updated.textContent = updatedValue;
+      if(projectState) projectState.textContent = state;
+      if(runtime) runtime.textContent = runtimeValue;
+      if(acceptance) acceptance.textContent = `Acceptance: ${acceptanceValue}`;
+      if(updated) updated.textContent = updatedValue;
 
       sync.classList.add('synced');
       sync.classList.remove('fallback');
-      sync.querySelector('strong').textContent = 'SYNCED';
-    } catch (error) {
+
+      const strong = sync.querySelector('strong');
+      if(strong) strong.textContent = 'SYNCED';
+    } catch(error) {
       sync.classList.add('fallback');
       sync.classList.remove('synced');
-      sync.querySelector('strong').textContent = 'STATIC FALLBACK';
+
+      const strong = sync.querySelector('strong');
+      if(strong) strong.textContent = 'STATIC FALLBACK';
+
       console.warn('[LF v4.1] Public Status sync failed:', error);
     }
   }
 
-  function extractCount(payload) {
-    const candidates = [
-      payload?.count,
-      payload?.value,
-      payload?.counter?.count,
-      payload?.counter?.value,
-      payload?.data?.count,
-      payload?.data?.value
-    ];
+  function extractVisitorCount(payload) {
+    const value = payload?.totalCount;
+    return Number.isFinite(Number(value)) ? Number(value) : null;
+  }
 
-    const found = candidates.find(
-      (value) => Number.isFinite(Number(value))
+  async function fetchVisitorStats(domain) {
+    const response = await fetch(
+      `${VISITOR_API}?domain=${encodeURIComponent(domain)}&v=${Date.now()}`,
+      {
+        method: 'GET',
+        cache: 'no-store',
+        mode: 'cors'
+      }
     );
 
-    return found === undefined ? null : Number(found);
+    if(!response.ok){
+      throw new Error(`visitor stats ${response.status}`);
+    }
+
+    return response.json();
+  }
+
+  async function recordVisitor(domain) {
+    const response = await fetch(VISITOR_API, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        domain,
+        timezone: 'Asia/Tokyo',
+        page_path: location.pathname
+      })
+    });
+
+    if(!response.ok){
+      throw new Error(`visitor record ${response.status}`);
+    }
+
+    return response.json();
   }
 
   async function syncVisitorCount() {
     const display = $('[data-visitor-count]');
     const note = $('[data-visitor-note]');
-    if (!display) return;
+
+    if(!display) return;
 
     const panel = display.closest('.visitor-counter-display');
 
-    if (!LIVE_HOSTS.has(location.hostname)) {
+    if(!LIVE_HOSTS.has(location.hostname)){
       display.textContent = '------';
-      if (note) note.textContent = 'LOCAL / COUNTER DISABLED';
+      if(note) note.textContent = 'LOCAL / COUNTER DISABLED';
       return;
     }
 
+    const domain = location.hostname;
     const today = jstDateKey();
     const storageKey = `lf-visit-counted:jst:${today}`;
 
-    let increment = false;
-    try {
-      increment = localStorage.getItem(storageKey) !== '1';
-    } catch (_) {
-      increment = true;
-    }
-
-    const url = increment ? `${COUNTER_BASE}/up` : `${COUNTER_BASE}/`;
+    let alreadyCounted = false;
 
     try {
-      const response = await fetch(url, {
-        cache: 'no-store',
-        mode: 'cors'
-      });
+      alreadyCounted = localStorage.getItem(storageKey) === '1';
+    } catch(_) {}
 
-      if (!response.ok) throw new Error(`counter ${response.status}`);
+    try {
+      let payload;
 
-      const payload = await response.json();
-      const count = extractCount(payload);
+      if(alreadyCounted){
+        payload = await fetchVisitorStats(domain);
+      } else {
+        payload = await recordVisitor(domain);
+      }
 
-      if (count === null) throw new Error('count field not found');
+      const count = extractVisitorCount(payload);
+
+      if(count === null){
+        throw new Error('totalCount field not found');
+      }
 
       display.textContent = String(count).padStart(6, '0');
       panel?.classList.add('live');
 
-      if (note) {
-        note.textContent = increment
-          ? '本日の初回訪問を加算'
-          : '本日の訪問は加算済み';
+      if(note){
+        note.textContent = alreadyCounted
+          ? '本日の訪問は加算済み'
+          : '本日の初回訪問を加算';
       }
 
-      if (increment) {
+      if(!alreadyCounted){
         try {
           localStorage.setItem(storageKey, '1');
-        } catch (_) {}
+        } catch(_) {}
       }
-    } catch (error) {
-      display.textContent = '------';
-      panel?.classList.remove('live');
-      if (note) note.textContent = 'Counter unavailable';
-      console.warn('[LF v4.1] Visitor counter failed:', error);
+    } catch(error) {
+      /* One fallback attempt: if POST failed after the visit may already have been
+         recorded, GET the current total before declaring the counter unavailable. */
+      try {
+        const payload = await fetchVisitorStats(domain);
+        const count = extractVisitorCount(payload);
+
+        if(count === null){
+          throw new Error('fallback totalCount field not found');
+        }
+
+        display.textContent = String(count).padStart(6, '0');
+        panel?.classList.add('live');
+
+        if(note){
+          note.textContent = '現在の来訪数を表示';
+        }
+      } catch(fallbackError) {
+        display.textContent = '------';
+        panel?.classList.remove('live');
+
+        if(note){
+          note.textContent = 'Counter unavailable';
+        }
+
+        console.warn(
+          '[LF v4.1] Visitor counter failed:',
+          error,
+          fallbackError
+        );
+      }
     }
   }
 
