@@ -422,12 +422,19 @@
 }
 
 /* Finale mascot — silent visual enhancement */
+.current-copy .title-line{
+  display:block;
+}
+.current-copy .title-break{
+  display:block;
+}
+
 .finale-girl{
   position:absolute;
   z-index:1;
-  right:clamp(24px,5vw,96px);
+  right:max(20px, calc((100vw - var(--shell)) / 2 - 22px));
   bottom:-8px;
-  width:clamp(260px,27vw,430px);
+  width:clamp(250px,24vw,390px);
   max-height:94%;
   object-fit:contain;
   object-position:right bottom;
@@ -445,11 +452,11 @@
   right:0;
   top:0;
   bottom:0;
-  width:min(46vw,720px);
+  width:min(40vw,620px);
   pointer-events:none;
   background:
-    radial-gradient(circle at 72% 54%,rgba(69,220,255,.10),transparent 42%),
-    radial-gradient(circle at 82% 70%,rgba(158,132,255,.07),transparent 38%);
+    radial-gradient(circle at 68% 54%,rgba(69,220,255,.10),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(158,132,255,.07),transparent 34%);
 }
 .single-finale{
   position:relative;
@@ -458,21 +465,24 @@
 .finale-copy{
   position:relative;
   z-index:2;
-  max-width:min(760px,68%);
+  max-width:min(760px,66%);
 }
 
 @media (max-width:1180px){
   .finale-girl{
-    right:-24px;
-    width:clamp(230px,31vw,340px);
-    opacity:.78;
+    right:max(8px, calc((100vw - var(--shell)) / 2 - 8px));
+    width:clamp(220px,28vw,320px);
+    opacity:.84;
   }
   .finale-copy{
-    max-width:72%;
+    max-width:70%;
   }
 }
 
 @media (max-width:900px){
+  .current-copy .title-break{
+    display:inline;
+  }
   .finale-girl{
     display:none;
   }
@@ -787,7 +797,7 @@
     <div class="shell current-shell">
       <div class="current-copy reveal">
         <p class="kicker">06 / 現在地 <span>CURRENT STATE</span></p>
-        <h2><span class="title-line">公式HPはv4.1へ。</span><strong class="title-line">LFの「いま」が、動いて見える。</strong></h2>
+        <h2><span class="title-line">公式HPはv4.1へ。</span><strong class="title-line">LFの「いま」が、<span class="title-break">動いて見える。</span></strong></h2>
         <p>v4.1ではHuman × AIの責務境界をCurrent Architectureへ合わせ、FOUNDRY PULSEと来訪者カウンターを追加。既存の並行プロジェクト表示を残したまま、Foundry全体の現在地をより動的に見せる。</p>
         <div class="current-actions"><a class="button compact primary" href="releases/2026-08-11-v4.1.html">v4.1更新内容</a><a class="button compact" href="releases/index.html">更新履歴</a><a class="button compact" href="https://github.com/fctaityo/fctaityo.github.io/blob/main/docs/public/status-public.md" target="_blank" rel="noopener noreferrer">公開Status ↗</a></div>
       </div>
