@@ -432,3 +432,25 @@ loadProjection();
   syncPublicStatus();
   syncVisitorDisplay();
 })();
+
+
+/* Local AI Foundry v4.2.1 — Hero version synchronization hotfix */
+(() => {
+  const beacon = document.querySelector('.version-beacon');
+  if (beacon) {
+    beacon.href = 'releases/2026-08-13-v4.2.html';
+    beacon.setAttribute('aria-label', 'Local AI Foundry v4.2 リリース詳細');
+    const version = beacon.querySelector('strong');
+    const release = beacon.querySelector('em');
+    if (version) version.textContent = 'v4.2';
+    if (release) release.textContent = 'REFERENCE TELEMETRY RELEASE';
+  }
+
+  document.querySelectorAll('.hero-state-row .state-chip').forEach(chip => {
+    const label = chip.querySelector('span')?.textContent?.trim();
+    const value = chip.querySelector('strong');
+    if (!value) return;
+    if (label === '現在の公式HP') value.textContent = 'v4.2';
+    if (label === 'リリース') value.textContent = '2026.08.13';
+  });
+})();
