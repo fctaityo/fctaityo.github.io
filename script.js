@@ -77,7 +77,7 @@
 <article class="project-line ri1-line" id="ri1-line">
 <div aria-label="RI#1 記事制作の詳細を開く" class="ri1-rail-row" role="button" tabindex="0">
 <button aria-controls="ri1-telemetry" aria-expanded="false" class="line-toggle" id="ri1-toggle" type="button">
-<span class="line-id"><i>⬡</i><b>RI#1</b></span><span class="line-name"><strong>記事制作</strong><small>Article Production</small></span><span class="line-state">PARTIAL</span><span aria-hidden="true" class="chevron">⌄</span>
+<span class="line-id"><i>⬡</i><b>RI#1</b></span><span class="line-name"><strong>記事制作</strong><small>Article Production</small></span><span class="line-state" data-overall="">PARTIAL</span><span aria-hidden="true" class="chevron">⌄</span>
 </button>
 <div aria-label="RI#1 記事制作: 実証段階" class="stage-rail">
 <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-segment"></div>
@@ -92,23 +92,23 @@
 <aside class="operator-card boot-item" style="--boot:0">
 <span class="operator-label">FOUNDRY OPERATOR</span>
 <div class="operator-art"><img alt="Foundry Operator" src="assets/ri1-operator.webp"/></div>
-<div class="operator-comment"><small>OPERATOR COMMENT</small><p>Repository Verified（検証済み）。Live（反映）は未適用、Runtime（実行時）は未実行。</p></div>
+<div class="operator-comment"><small>OPERATOR COMMENT</small><p data-operator-comment="">Repository（リポジトリ）は検証済み。Live（実環境）は検証済み。Runtime（実行時）は未実行。</p></div>
 </aside>
 <div class="telemetry-main">
 <header class="telemetry-head boot-item" style="--boot:1"><div><p>RI #1 / ARTICLE PRODUCTION</p><h3 id="telemetry-title">BUILD TELEMETRY</h3></div><div class="projection-badge"><span></span>PUBLIC PROJECTION</div><button aria-label="管制盤を閉じる" class="panel-close" data-close-ri1="" type="button">×</button></header>
 <div class="status-grid">
 <article class="status-card amber boot-item" style="--boot:2"><small>OVERALL</small><strong data-overall="">PARTIAL</strong></article>
 <article class="status-card green boot-item" style="--boot:3"><small>REPOSITORY</small><strong data-repository="">VERIFIED</strong></article>
-<article class="status-card pink boot-item" style="--boot:4"><small>PRIMARY BLOCKER</small><span>Live</span><strong data-live="">NOT APPLIED</strong></article>
-<article class="status-card orange boot-item" style="--boot:5"><small>NEXT REQUIRED</small><span>Runtime</span><strong data-runtime="">NOT EXECUTED</strong></article>
+<article class="status-card pink boot-item" style="--boot:4"><small>PRIMARY BLOCKER</small><span data-primary-layer="">Runtime</span><strong data-primary-state="">NOT EXECUTED</strong></article>
+<article class="status-card orange boot-item" style="--boot:5"><small>NEXT REQUIRED</small><span data-next-layer="">Runtime</span><strong data-next-state="">NOT EXECUTED</strong></article>
 <article class="status-card purple boot-item" style="--boot:6"><small>FORMAL RV</small><strong data-formal-rv="">0 / 3</strong></article>
 <article class="status-card amber boot-item" style="--boot:7"><small>RUNTIME ACCEPTANCE</small><strong data-acceptance="">PENDING</strong></article>
-<article class="status-card cyan wide boot-item" style="--boot:8"><small>FRESHNESS</small><strong data-freshness="">FRESHNESS GAP</strong><span data-freshness-reason="">STALE FORMAL SNAPSHOT</span></article>
+<article class="status-card cyan wide boot-item" style="--boot:8"><small>FRESHNESS</small><strong data-freshness="">CURRENT</strong><span data-freshness-reason="">SOURCE_MANIFEST_MATCH</span></article>
 </div>
-<div class="pipeline-block boot-item" style="--boot:9"><p class="micro-title">PIPELINE PROGRESSION</p><div class="pipeline"><span class="ok">DESIGN <i>✓</i></span><b>→</b><span class="ok">REPOSITORY <i>✓</i></span><b>→</b><span class="blocked">LIVE <i>!</i></span><b>→</b><span class="next">RUNTIME <i>◎</i></span><b>→</b><span class="pending">ACCEPTANCE</span></div></div>
+<div class="pipeline-block boot-item" style="--boot:9"><p class="micro-title">PIPELINE PROGRESSION</p><div class="pipeline"><span class="ok" data-pipeline-stage="design">DESIGN <i>✓</i></span><b>→</b><span class="ok" data-pipeline-stage="repository">REPOSITORY <i>✓</i></span><b>→</b><span class="ok" data-pipeline-stage="live">LIVE <i>✓</i></span><b>→</b><span class="next" data-pipeline-stage="runtime">RUNTIME <i>◎</i></span><b>→</b><span class="pending" data-pipeline-stage="acceptance">ACCEPTANCE</span></div></div>
 <div class="telemetry-lower">
 <div class="contract-block boot-item" style="--boot:10"><p class="micro-title">AGENT CONTRACTS</p><div class="contract-row"><span>Structured Output</span><strong data-structured="">20 / 20 VERIFIED</strong></div><div class="contract-row"><span>Raw Gate</span><strong data-raw-gate="">20 / 20 VERIFIED</strong></div><div class="contract-row"><span>Formal Capabilities</span><strong data-capabilities="">14</strong></div></div>
-<div class="evidence-block boot-item" style="--boot:11"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span>PARTIAL</span></div><ul><li><span>Evidence Binding</span><strong>PARTIAL</strong></li><li><span>Formal RV</span><strong>0 / 3</strong></li><li><span>Acceptance</span><strong>PENDING</strong></li></ul></div>
+<div class="evidence-block boot-item" style="--boot:11"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span data-evidence-binding="">PARTIAL</span></div><ul><li><span>Evidence Binding</span><strong data-evidence-binding="">PARTIAL</strong></li><li><span>Formal RV</span><strong data-formal-rv="">0 / 3</strong></li><li><span>Acceptance</span><strong data-acceptance="">PENDING</strong></li></ul></div>
 </div>
 <footer class="telemetry-foot boot-item" style="--boot:12"><span>PUBLIC BOUNDARY</span><p>公開可能なCurrent Projection（現在地の公開投影）のみ表示。</p></footer>
 </div>
@@ -116,7 +116,7 @@
 </div>
 </div>
 </article>
-<div aria-label="RI Guide" class="guide-mascot"><img alt="RI#1 Guide" src="assets/ri1-guide.webp"/><div aria-hidden="true" class="guide-orbit"></div></div><div aria-hidden="true" class="guide-open-dock"><span class="guide-open-label">RI#1 GUIDE</span><div class="guide-open-art"><img alt="" src="assets/ri1-guide.webp"/></div><div class="guide-open-status"><small>CURRENT</small><strong>RUNTIME</strong></div><div class="guide-open-orbit"></div></div>
+<div aria-label="RI Guide" class="guide-mascot"><img alt="RI#1 Guide" src="assets/ri1-guide.webp"/><div aria-hidden="true" class="guide-orbit"></div></div><div aria-hidden="true" class="guide-open-dock"><span class="guide-open-label">RI#1 GUIDE</span><div class="guide-open-art"><img alt="" src="assets/ri1-guide.webp"/></div><div class="guide-open-status"><small>CURRENT</small><strong data-current-stage="">RUNTIME</strong></div><div class="guide-open-orbit"></div></div>
 <article class="project-line other-line"><div class="line-static"><span class="line-id"><i>◉</i><b>RI#2</b></span><span class="line-name"><strong>ドキュメント制作</strong><small>Reference Implementation</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="g"></i><i class="c"></i><i class="v"></i><i></i></div></article>
 <article class="project-line other-line"><div class="line-static"><span class="line-id"><i>▽</i><b>WEB</b></span><span class="line-name"><strong>公式HP</strong><small>Website Presentation</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="c"></i><i class="c"></i><i></i><i></i></div></article>
 <article class="project-line other-line"><div class="line-static"><span class="line-id"><i>⬡</i><b>CORE</b></span><span class="line-name"><strong>Foundry Core</strong><small>Core Candidate / Evidence</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="v"></i><i></i><i></i><i></i></div></article>
@@ -143,21 +143,125 @@ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
 let isOpen=false, bootTimer=0, guideTimer=0;
 const qsa=s=>[...root.querySelectorAll(s)];
 function setText(sel,val){qsa(sel).forEach(el=>{el.textContent=String(val)})}
+const COMPLETE_STATES=new Set(['VERIFIED','PASS','COMPLETE','ACCEPTED','N/A','NOT REQUIRED']);
+const BLOCKING_STATES=new Set(['FAILED','NOT APPLIED','NOT IMPLEMENTED','BLOCKED','UNKNOWN']);
+const norm=v=>String(v??'').trim().toUpperCase();
+const isComplete=v=>COMPLETE_STATES.has(norm(v));
+const isBlocking=v=>BLOCKING_STATES.has(norm(v));
+const layerLabel=key=>({repository:'Repository',live:'Live',runtime:'Runtime',acceptance:'Acceptance',complete:'Complete'}[key]||String(key||''));
+const stateJa=value=>({
+ 'VERIFIED':'検証済み','PASS':'合格','COMPLETE':'完了','ACCEPTED':'受入済み',
+ 'PARTIAL':'一部成立','NOT APPLIED':'未反映','NOT EXECUTED':'未実行',
+ 'NOT IMPLEMENTED':'未実装','FAILED':'失敗','PENDING':'保留中','UNKNOWN':'不明',
+ 'N/A':'対象外','NOT REQUIRED':'不要'
+}[norm(value)]||String(value??'不明'));
+function currentSequence(r){
+ return [
+  {key:'repository',state:r.repository},
+  {key:'live',state:r.live},
+  {key:'runtime',state:r.runtime},
+  {key:'acceptance',state:r.runtime_acceptance}
+ ];
+}
+function resolvePrimary(r){
+ const explicit=r.primary_blocker;
+ if(explicit?.layer&&explicit?.state)return{key:String(explicit.layer).toLowerCase(),state:explicit.state};
+ return currentSequence(r).find(item=>item.state&&!isComplete(item.state))||{key:'complete',state:'VERIFIED'};
+}
+function resolveNext(r){
+ const explicit=r.next_required;
+ if(explicit?.layer&&explicit?.state)return{key:String(explicit.layer).toLowerCase(),state:explicit.state};
+ return currentSequence(r).find(item=>item.state&&!isComplete(item.state))||{key:'complete',state:'VERIFIED'};
+}
+function renderPipeline(r){
+ const stages=[
+  {key:'design',label:'DESIGN',state:'VERIFIED'},
+  {key:'repository',label:'REPOSITORY',state:r.repository},
+  {key:'live',label:'LIVE',state:r.live},
+  {key:'runtime',label:'RUNTIME',state:r.runtime},
+  {key:'acceptance',label:'ACCEPTANCE',state:r.runtime_acceptance}
+ ];
+ const currentIndex=stages.findIndex(stage=>!isComplete(stage.state));
+ qsa('[data-pipeline-stage]').forEach(el=>{
+  const index=stages.findIndex(stage=>stage.key===el.dataset.pipelineStage);
+  if(index<0)return;
+  const stage=stages[index];
+  el.classList.remove('ok','blocked','next','pending');
+  let tone='pending',icon='';
+  if(isComplete(stage.state)){tone='ok';icon='✓'}
+  else if(index===currentIndex){
+   if(isBlocking(stage.state)){tone='blocked';icon='!'}
+   else{tone='next';icon='◎'}
+  }
+  el.classList.add(tone);
+  el.textContent=stage.label;
+  if(icon){
+   const i=document.createElement('i');
+   i.textContent=icon;
+   el.append(' ',i);
+  }
+ });
+}
+function renderStageRail(r){
+ const nodes=qsa('.stage-rail .rail-node');
+ const segments=qsa('.stage-rail .rail-segment');
+ const energy=root.querySelector('.stage-rail .energy-beam');
+ let phaseIndex=2;
+ let currentStage='IMPLEMENTATION';
+ if(isComplete(r.repository)&&isComplete(r.live)){phaseIndex=3;currentStage='RUNTIME'}
+ if(isComplete(r.runtime)){phaseIndex=4;currentStage='ACCEPTANCE'}
+ const allComplete=isComplete(r.repository)&&isComplete(r.live)&&isComplete(r.runtime)&&isComplete(r.runtime_acceptance);
+ if(allComplete)currentStage='COMPLETE';
+ const pulseParts=nodes.flatMap(node=>[...node.querySelectorAll('.orb,.orb-ring')]);
+ nodes.forEach((node,index)=>{
+  node.classList.toggle('done',allComplete||index<phaseIndex);
+  node.classList.toggle('current',!allComplete&&index===phaseIndex);
+ });
+ segments.forEach((segment,index)=>{
+  segment.classList.toggle('done',allComplete||index<phaseIndex);
+  segment.classList.toggle('current',!allComplete&&index===phaseIndex);
+ });
+ if(!allComplete&&nodes[phaseIndex]&&pulseParts.length)nodes[phaseIndex].append(...pulseParts);
+ if(energy&&!allComplete)energy.style.left=`${10+(phaseIndex*20)}%`;
+ const rail=root.querySelector('.stage-rail');
+ if(rail)rail.setAttribute('aria-label',`RI#1 記事制作: ${currentStage}`);
+ setText('[data-current-stage]',currentStage);
+}
+function renderOperatorComment(r){
+ const comment=[
+  `Repository（リポジトリ）は${stateJa(r.repository)}。`,
+  `Live（実環境）は${stateJa(r.live)}。`,
+  `Runtime（実行時）は${stateJa(r.runtime)}。`
+ ];
+ if(isComplete(r.runtime)||norm(r.runtime_acceptance)!=='PENDING'){
+  comment.push(`Acceptance（受入れ）は${stateJa(r.runtime_acceptance)}。`);
+ }
+ setText('[data-operator-comment]',comment.join(''));
+}
 function bindProjection(DATA){
  const r=DATA?.ri1||{};
- if(DATA?.project_state) setText('[data-project-state]',DATA.project_state);
- if(r.overall) setText('[data-overall]',r.overall);
- if(r.repository) setText('[data-repository]',r.repository);
- if(r.live) setText('[data-live]',r.live);
- if(r.runtime) setText('[data-runtime]',r.runtime);
- if(r.formal_rv) setText('[data-formal-rv]',`${r.formal_rv.passed} / ${r.formal_rv.required}`);
- if(r.runtime_acceptance) setText('[data-acceptance]',r.runtime_acceptance);
- if(r.freshness?.state) setText('[data-freshness]',r.freshness.state);
- if(r.freshness?.reason) setText('[data-freshness-reason]',r.freshness.reason);
+ if(DATA?.project_state)setText('[data-project-state]',DATA.project_state);
+ if(r.overall)setText('[data-overall]',r.overall);
+ if(r.repository)setText('[data-repository]',r.repository);
+ if(r.runtime)setText('[data-runtime]',r.runtime);
+ if(r.formal_rv)setText('[data-formal-rv]',`${r.formal_rv.passed} / ${r.formal_rv.required}`);
+ if(r.runtime_acceptance)setText('[data-acceptance]',r.runtime_acceptance);
+ if(r.freshness?.state)setText('[data-freshness]',r.freshness.state);
+ if(r.freshness?.reason)setText('[data-freshness-reason]',r.freshness.reason);
+ const primary=resolvePrimary(r),next=resolveNext(r);
+ setText('[data-primary-layer]',layerLabel(primary.key));
+ setText('[data-primary-state]',primary.state);
+ setText('[data-next-layer]',layerLabel(next.key));
+ setText('[data-next-state]',next.state);
+ const evidenceBinding=r.evidence_binding||r.overall;
+ if(evidenceBinding)setText('[data-evidence-binding]',evidenceBinding);
  const s=r.agent_contracts?.structured_output,g=r.agent_contracts?.raw_gate;
  if(s)setText('[data-structured]',`${s.verified} / ${s.total} VERIFIED`);
  if(g)setText('[data-raw-gate]',`${g.verified} / ${g.total} VERIFIED`);
- if(Number.isFinite(r.formal_capability_count)) setText('[data-capabilities]',r.formal_capability_count);
+ if(Number.isFinite(r.formal_capability_count))setText('[data-capabilities]',r.formal_capability_count);
+ renderPipeline(r);
+ renderStageRail(r);
+ renderOperatorComment(r);
 }
 async function loadProjection(){
  try{
