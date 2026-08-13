@@ -10,7 +10,7 @@
 .s13-projects-section>.s13-dashboard{width:100%;margin:0;isolation:isolate}
 .s13-dashboard .ri-section{padding:0;min-height:0;background:transparent}
 .s13-dashboard .circuit-bg{position:absolute}
-.s13-dashboard .shell{width:min(1880px,calc(100% - 48px));margin:auto}
+.s13-dashboard .shell{width:min(1180px,calc(100% - 48px));margin:auto}
 @media(max-width:760px){.s13-projects-section{padding:42px 0}.s13-dashboard .shell{width:calc(100% - 20px)}}
 `;
   document.head.appendChild(style);
