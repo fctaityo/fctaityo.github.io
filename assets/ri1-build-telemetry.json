@@ -1,0 +1,30 @@
+{
+  "schema_version": "LF-RI1-PUBLIC-PROJECTION-0.5",
+  "project_state": "Published",
+  "ri1": {
+    "overall": "PARTIAL",
+    "repository": "VERIFIED",
+    "live": "NOT APPLIED",
+    "runtime": "NOT EXECUTED",
+    "formal_rv": {
+      "passed": 0,
+      "required": 3
+    },
+    "runtime_acceptance": "PENDING",
+    "freshness": {
+      "state": "FRESHNESS GAP",
+      "reason": "STALE_FORMAL_SNAPSHOT"
+    },
+    "agent_contracts": {
+      "structured_output": {
+        "verified": 20,
+        "total": 20
+      },
+      "raw_gate": {
+        "verified": 20,
+        "total": 20
+      }
+    },
+    "formal_capability_count": 14
+  }
+}
