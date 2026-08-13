@@ -186,6 +186,40 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&isOpen){e.preventDe
 loadProjection();
 })();
 
+
+/* Local AI Foundry v4.2.0 — Current Website / Release synchronization */
+(() => {
+  const current = document.getElementById('current');
+  if (!current) return;
+
+  const titleLead = current.querySelector('.current-editorial-title .title-line');
+  if (titleLead) titleLead.textContent = 'v4.2へ。';
+
+  const currentCopy = current.querySelector('.current-copy');
+  if (currentCopy) {
+    const description = [...currentCopy.children].find(
+      el => el.tagName === 'P' && !el.classList.contains('kicker')
+    );
+    if (description) {
+      description.textContent = 'v4.2ではReference Implementationの現在地を、Formal IVM由来のPublic Projection（公開投影）で可視化。RI#1のCurrent NodeからInline Telemetry（直下管制盤）を展開し、公開可能な実装状態・Runtime（実行時）・Evidence（証拠）の境界を動いて見える形へ更新。';
+    }
+  }
+
+  const releaseLink = current.querySelector('.current-actions a[href*="releases/"]');
+  if (releaseLink) {
+    releaseLink.href = 'releases/2026-08-13-v4.2.html';
+    releaseLink.textContent = 'v4.2更新内容';
+  }
+
+  current.querySelectorAll('.status-panel article').forEach(article => {
+    const label = article.querySelector('span')?.textContent?.trim();
+    const value = article.querySelector('strong');
+    if (!value) return;
+    if (label === '現在の公式HP') value.textContent = 'v4.2';
+    if (label === 'Website Release') value.textContent = '2026.08.13';
+  });
+})();
+
 (() => {
   const header = document.querySelector('[data-header]');
   const menuToggle = document.querySelector('[data-menu-toggle]');
@@ -269,7 +303,7 @@ loadProjection();
   updateScrollUI();
 })();
 
-/* Local AI Foundry v4.1.4 — Foundry Pulse / Busuanzi visitor counter */
+/* Local AI Foundry v4.2.0 — Reference Telemetry Release */
 (() => {
   const STATUS_URL = 'docs/public/status-public.md';
   const $ = (selector) => document.querySelector(selector);
@@ -338,7 +372,7 @@ loadProjection();
       const strong = sync.querySelector('strong');
       if (strong) strong.textContent = 'STATIC FALLBACK';
 
-      console.warn('[LF v4.1.4] Public Status sync failed:', error);
+      console.warn('[LF v4.2.0] Public Status sync failed:', error);
     }
   }
 
@@ -391,7 +425,7 @@ loadProjection();
       display.textContent = '------';
       panel?.classList.remove('live');
       if (note) note.textContent = 'Counter unavailable';
-      console.warn('[LF v4.1.4] Busuanzi visitor counter did not resolve in time.');
+      console.warn('[LF v4.2.0] Busuanzi visitor counter did not resolve in time.');
     }, 15000);
   }
 

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050914">
+<meta name="description" content="Local AI Foundry v4.2 — RI#1のReference Implementation現在地をFormal IVM由来のPublic ProjectionとInline Build Telemetryで可視化したマイナーリリース。">
+<title>v4.2 Reference Telemetry Release — Local AI Foundry</title>
+<style>
+:root{--bg:#050914;--panel:#0a1424;--text:#eef6ff;--muted:#9aabc1;--cyan:#41dbff;--green:#57f1a8;--violet:#9e84ff;--pink:#ff63b8;--orange:#ff8b6d;--line:rgba(117,183,255,.18)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 8%,rgba(65,219,255,.08),transparent 28%),var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}a{color:inherit}.shell{width:min(980px,calc(100% - 40px));margin:auto}
+header{padding:28px 0;border-bottom:1px solid var(--line)}header a{color:var(--cyan);text-decoration:none;font-weight:800}
+.hero{padding:88px 0 42px}.kicker{color:var(--green);font-size:13px;letter-spacing:.18em;font-weight:900}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:12px 0 20px;letter-spacing:-.04em}.hero h1 strong{color:var(--cyan)}.lead{max-width:840px;color:var(--muted);font-size:20px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}.meta span{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#c8d6e5}
+.version-callout{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:30px;padding:18px 20px;border:1px solid rgba(87,241,168,.3);border-left:4px solid var(--green);border-radius:15px;background:linear-gradient(90deg,rgba(87,241,168,.08),rgba(65,219,255,.04))}
+.version-callout strong{font:900 36px/1 "Segoe UI",sans-serif}.version-callout span{color:var(--muted)}
+section{padding:36px 0;border-top:1px solid var(--line)}h2{font-size:29px;margin:0 0 15px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{padding:21px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.card strong{display:block;font-size:18px}.card p{margin:6px 0 0;color:var(--muted)}
+ul{color:var(--muted)}li+li{margin-top:7px}.story{padding:22px;border-left:3px solid var(--cyan);background:rgba(65,219,255,.035);font-size:20px}.story strong{color:var(--cyan)}
+.boundary{display:grid;gap:8px}.boundary div{display:grid;grid-template-columns:180px 1fr;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:rgba(10,20,36,.7)}.boundary b{color:var(--cyan)}.boundary span{color:var(--muted)}
+footer{padding:32px 0 52px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.lead{font-size:18px}.version-callout{grid-template-columns:1fr;gap:6px}.hero h1{font-size:43px}.boundary div{grid-template-columns:1fr;gap:2px}}
+</style></head>
+<body>
+<header><div class="shell"><a href="../index.html">← LOCAL AI FOUNDRY</a>　<a href="index.html">RELEASE HISTORY</a></div></header>
+<main class="shell">
+<section class="hero">
+<p class="kicker">2026.08.13 / LOCAL AI FOUNDRY v4.2 / MINOR RELEASE</p>
+<h1>実証プロジェクトを、<br><strong>クリックして開く管制盤へ。</strong></h1>
+<p class="lead">v4.2では、Reference Implementation（実証実装）の進行表示を「現在地を見る」だけのRailから、Current Node（現在ノード）を起点に詳細をInline Expand / Collapse（直下開閉）できるBuild Telemetry（構築管制盤）へ拡張しました。</p>
+<div class="version-callout"><strong>v4.2</strong><span>Current Website Version — Reference Telemetry Release</span></div>
+<div class="meta"><span>Reference Implementation</span><span>Build Telemetry</span><span>Public Projection</span><span>Formal IVM</span><span>Inline Expand</span><span>Accessibility</span></div>
+</section>
+<section><h2>Why Changed</h2>
+<p>従来のParallel Project Viewは「どの段階にいるか」を素早く確認する用途には有効でしたが、RI#1がなぜPARTIALなのか、次に何が必要なのか、Runtime（実行時）やEvidence（証拠）がどの状態なのかをWebsite上では追えませんでした。v4.2では、進行Railを壊さず、その直下に公開可能なTelemetryを展開できる構造へ変更しました。</p>
+</section>
+<section><h2>What Changed</h2><div class="grid">
+<div class="card"><strong>RI#1 Inline Telemetry</strong><p>RI#1の横ライン全体を操作対象とし、Current Node付近を含む自然なクリック領域から詳細管制盤を直下展開。</p></div>
+<div class="card"><strong>Current Node → Energy Beam</strong><p>現在地の発光PulseからEnergy Beamを通してTelemetryを起動。Panel Border Trace、Scan、Card Bootを連動させた。</p></div>
+<div class="card"><strong>Formal IVM Public Projection</strong><p>Website用の値を手入力せず、Formal IVMから公開可能項目だけを投影。架空の進捗率やEvidence数を実装値として持ち込まない。</p></div>
+<div class="card"><strong>Guide / Operator Separation</strong><p>Parallel側のGuideとTelemetry内のOperatorを別役割・別Cropとして配置し、開閉状態に応じた見せ方を整理。</p></div>
+<div class="card"><strong>FOUNDRY PULSE Refinement</strong><p>Repository、Project State、RI#1、Acceptance、Runtime、Formal RVを横方向へ均等配置し、Current Snapshotの情報密度を改善。</p></div>
+<div class="card"><strong>Interaction &amp; Accessibility</strong><p>Native button、ARIA、Enter / Space、Escape Close、Focus復帰、prefers-reduced-motionへ対応。</p></div>
+</div></section>
+<section><h2>Current Public Telemetry</h2><div class="boundary">
+<div><b>OVERALL</b><span>PARTIAL</span></div>
+<div><b>REPOSITORY</b><span>VERIFIED</span></div>
+<div><b>PRIMARY BLOCKER</b><span>Live — NOT APPLIED</span></div>
+<div><b>NEXT REQUIRED</b><span>Runtime — NOT EXECUTED</span></div>
+<div><b>FORMAL RV</b><span>0 / 3</span></div>
+<div><b>RUNTIME ACCEPTANCE</b><span>PENDING</span></div>
+<div><b>FRESHNESS</b><span>FRESHNESS GAP / STALE_FORMAL_SNAPSHOT</span></div>
+<div><b>AGENT CONTRACTS</b><span>Structured Output 20 / 20 VERIFIED / Raw Gate 20 / 20 VERIFIED</span></div>
+<div><b>FORMAL CAPABILITIES</b><span>14</span></div>
+</div></section>
+<section><h2>Publication Boundary</h2><ul>
+<li>Formal IVMからPublic Projection（公開投影）した項目のみWebsiteへ表示する。</li>
+<li>Baseline ID、Commit SHA、Run ID、Session ID、Internal Path、Raw EvidenceはWebsiteへ表示しない。</li>
+<li>モックで用いた85%、72%、42%、Evidence 12 / 28、Test RUNNING、仮更新日時などの架空値は実装へ持ち込まない。</li>
+<li>Freshness Warningは隠さず、Formal Snapshotが古い場合はその状態を表示する。</li>
+</ul></section>
+<section><h2>Preserved</h2><ul>
+<li>v4.1のHuman × AI責務境界とFOUNDRY PULSEの役割</li>
+<li>Project State `Published` とRuntime Acceptanceを混同しない表示</li>
+<li>RI#1 / RI#2 / WEB / CORE / RI#3のParallel Project構造</li>
+<li>Public Documentationへの導線</li>
+<li>HumanがWebsite Commit / Pushを行うPublication Boundary</li>
+</ul></section>
+<section><h2>Verification Scope</h2><ul>
+<li>Desktop / Narrow Desktop / Mobileでの横幅・見切れ・内部Scrollbar</li>
+<li>RI#1全ラインクリック、Current Node付近クリック、Enter / Space開閉</li>
+<li>Current Node Pulse / Energy Beam / Telemetry Boot sequence</li>
+<li>Guide Closed / Open状態とOperator表示</li>
+<li>Escape Close / Focus復帰 / reduced-motion</li>
+<li>Public Projection値と架空値混入の境界</li>
+</ul></section>
+</main>
+<footer><div class="shell">LOCAL AI FOUNDRY — v4.2 Reference Telemetry Release</div></footer>
+</body></html>
