@@ -4,7 +4,7 @@
   "ri1": {
     "overall": "PARTIAL",
     "repository": "VERIFIED",
-    "live": "NOT APPLIED",
+    "live": "VERIFIED",
     "runtime": "NOT EXECUTED",
     "formal_rv": {
       "passed": 0,
@@ -12,8 +12,8 @@
     },
     "runtime_acceptance": "PENDING",
     "freshness": {
-      "state": "FRESHNESS GAP",
-      "reason": "STALE_FORMAL_SNAPSHOT"
+      "state": "CURRENT",
+      "reason": "SOURCE_MANIFEST_MATCH"
     },
     "agent_contracts": {
       "structured_output": {
