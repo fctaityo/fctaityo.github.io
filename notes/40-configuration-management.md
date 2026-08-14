@@ -42,3 +42,13 @@ Configuration Management Notesは、正本、差分、同期、検証、反映�
 
 * [CM-20260802-003 Review PackageからRepository Reflectionまでの境界](configuration-management/CM-20260802-003-review-package-and-repository-reflection.md)
   Working Tree、Audit、Report、Review Package、Human Review、Commit、Local Commit Verifyを分離し、AIがEvidenceを準備しHumanがRepository反映を承認する運用境界を整理する。
+
+## Human Authorization / Execution Control
+
+* [CM-20260815-001 Human Decision BoundaryとMechanical Continuationを分離する](configuration-management/CM-20260815-001-human-decision-boundary-and-mechanical-continuation.md)
+  Humanが意味・Risk・採用・公開・Runtime Authorizationを判断する境界と、承認済みScope内でAI / CODEXがTest、Verify、Currentization、Binding Synchronizationを自律継続する境界を分離し、Human Gateを機械処理へ増殖させない運用を整理する。
+
+## Currentization / Binding Synchronization
+
+* [CM-20260815-002 Dependent CurrentizationとBinding Synchronizationを漏らさない](configuration-management/CM-20260815-002-dependent-currentization-and-binding-synchronization.md)
+  Publish等でCurrent Identityが変わった時、Launcher、Current Source、Derived View等のDependent Consumerを取り残さず同期し、Semantic MatchとExecution Bindingを別々に検証する実務手順を整理する。
