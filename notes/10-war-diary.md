@@ -18,6 +18,11 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-08
 
+### 2026-08-14
+
+* [WD-20260814-001 Formal RVがContract Propagationの穴を連続で露呈した](war-diary/WD-20260814-001-formal-rv-exposed-contract-propagation-gaps.md)
+  Formal RV-01でHuman-defined Test Caseとは別のgeneric fixtureを選択できたInput Binding Mismatch、Correct Contract下でConclusion Retryが623→698文字へ増加したFailure、Deterministic Retry Correction、Live Apply / Publish後のCanonical Launcher旧Target残存までを一連のExecution Binding問題として記録。Fresh RV-01はまだ未実行で、Repository / Draft / Published / Launcher / Current SourceをそろえたClean Stopまでを一次記録として固定した。
+
 ### 2026-08-11
 
 * [WD-20260811-001 Formal Current Sourceを壊さずHuman Working Sidecarを作った](war-diary/WD-20260811-001-human-working-sidecar-stm.md)
