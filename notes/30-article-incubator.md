@@ -60,56 +60,54 @@ Season 1では、AI Workflowを壊れにくくするための設計を扱った�
 
 Season 2では、設計されたWorkflowを継続的に変更、検証、同期、公開するための
 Configuration Management、Project State Governance、正本管理、Human Authorization、
-Publication Governance、Repository Reflection、Runtime Verificationを扱う。
+Repository Reflection、Execution Binding、Runtime Verificationを扱う。
+
+2026-08-14〜15のRI #1 Formal Runtime Verificationでは、
+Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gateの境界で、
+「ContractやHuman Decisionが存在すること」と「その決定がExecution Pointまで正しく届くこと」が別問題であると確認した。
+
+このEvidenceを受け、05以降の旧構成を再評価した。
+
+従来の「Governance要素を一項目ずつ説明する構成」から、
+**何が壊れたか → どの境界が不足したか → 誰が何を担当すべきか**
+という因果の流れへ再構成する。
 
 ### Current Position
 
-現在の執筆位置は **04 Current Snapshotは進捗表ではない**。
+01〜05の記事本文がRepository上に存在する。
 
-01〜03で、
+現在の次執筆対象は **06 Human Decisionは多ければ安全になるわけではない**。
 
-```text
-Configurationを管理対象として定義する
-↓
-正式にRegistrationする
-↓
-AuditでExpectedとActualの差を判断可能にする
-```
+05 `「最新」はCurrentではない` は本文作成とFact Checkを完了しており、
+次の記事ではLatest / Currentの説明を繰り返さず、
+「Currentを誰が決めるか」「決めた後、どこまでAIが自律継続するか」へ進む。
 
-まで進んだ。
-
-04では、その結果を踏まえて、
+### Current Plan
 
 ```text
-Project全体はいまどこにいるのか
+01 Configurationはコードではない
 ↓
-現在の作業はどこから再開するのか
-```
-
-を別責務として扱う。
-
-04以降のCurrent Planは次のとおり。
-
-```text
-04 Current Snapshot
+02 Configuration Registrationとは何か
 ↓
-05 Active Baseline
+03 Auditは犯人探しではない
 ↓
-06 Human Publish Decision
+04 Current Snapshotは進捗表ではない
 ↓
-07 Publication Review / PRR
+05 「最新」はCurrentではない
 ↓
-08 Canonical Source
+06 Human Decisionは多ければ安全になるわけではない
 ↓
-09 Repository Reflection
+07 Canonical Sourceを失った日
 ↓
-10 Published State Verification
+08 「作った」「反映した」「Published」は全部別
 ↓
-11 Runtime Verification
+09 Humanが決めた値を、AIにもう一度考えさせるな
 ↓
-12 Platform Drift
+10 文字数はLLMに数えさせるな（笑）
 ↓
-13 Season 2総括
+11 Publishしても、実行するまで分からない
+↓
+12 壊れない運用とは「境界を決める」こと
 ```
 
 未執筆記事の題名とScopeは、Project Evidenceが増えた場合に再評価できる。
@@ -175,8 +173,7 @@ Project全体はいまどこにいるのか
 
 * Current Status：
 
-  * Writing Ready
-  * Season 2の現在執筆対象
+  * Article Body Exists
 * 核となる問い：
 
   * なぜCurrent Snapshotは単なる作業一覧では不十分なのか。
@@ -227,103 +224,89 @@ Project全体はいまどこにいるのか
   * Current Snapshotは一つへ集約することより、「何の現在値なのか」を明確にすることが重要である。
 * Scope Boundary：
 
-  * Active BaselineのCandidate / Active / Historicalの詳細は05へ送る。
-  * Human AuthorizationとPublish承認責任の詳細は06へ送る。
+  * Candidate / Active / HistoricalとLatest / Currentの詳細は05へ送る。
+  * Human Decision Boundaryの詳細は06へ送る。
   * AuditのExpected / Actual / Drift判定方法は03へ戻し、04では再説明しない。
   * Active Workを日報、Backlog、全Commit履歴へ拡張しない。
 
-### 05 Active Baselineは「最新」ではない
+### 05 「最新」はCurrentではない
 
+* Current Status：
+
+  * Article Body Exists
+  * Fact Check PASS
 * 核となる問い：
 
-  * 複数のDraft、Commit、Import結果が存在する中で、何を現在採用中の基準として扱うのか。
+  * 新しいCommit、Draft、Published Workflow、Runtime Evidenceが増え続ける中で、何をCurrentとして扱うのか。
 * 扱うテーマ：
 
-  * Candidate Baseline
+  * Latest
+  * Current
+  * Candidate
+  * Active
+  * Historical
   * Active Baseline
-  * Historical Baseline
-  * Baseline ID
-  * Current Snapshot
-  * Transition Evidence
-  * 一意性
+  * Current Candidate Binding
+  * Evidence Binding
 * 記事の到達点：
 
-  * 最新のものが正本とは限らない。
-  * Active Baselineは、「最も新しいもの」ではなく、現在採用されている唯一の基準状態を明示する。
-  * Candidateが存在しても、Human DecisionなしにActiveへ昇格してはならない。
-  * Baselineは正しさそのものを自動証明するものではなく、何を現在の判断基準として採用しているかを固定する。
+  * `Latest`は時刻やRevisionとして新しいという意味であり、`Current`は現在の判断基準として採用されているという意味である。
+  * Candidateが新しくても、Currentであるとは限らない。
+  * Historicalは失敗作置き場ではなく、過去Evidenceの意味を理解するための基準になる。
+  * 最新のRuntime Evidenceであっても、Current CandidateへBindingされていなければCurrent Candidate Runtime Evidenceではない。
+  * Currentとは、最新であることではなく、現在採用されているという意味である。
+* Scope Boundary：
 
-### 06 Human Publish Decisionが最後の責任を持つ
+  * 「誰が採用を決めるか」とHuman Gateの詳細は06へ送る。
+  * Formal Test Input BindingやFixed Decision Bindingは09へ送る。
+  * Runtime結果そのものの評価は11へ送る。
 
-* Scope：
+### 06 Human Decisionは多ければ安全になるわけではない
 
-  * Dify WorkflowのPublishとProject State Transitionを中心に扱う。
-  * Public DocumentationのPublication Governanceは07で扱う。
+* Current Status：
+
+  * Next Writing Target
 * 核となる問い：
 
-  * Test、Import、Semantic VerificationがPASSしても、なぜAIだけでPublishを決めてはいけないのか。
+  * Humanが責任を持つProjectで、どこにHuman Decisionを置き、どこからAIへ自律継続させるべきか。
+  * Human Gateは多いほど安全になるのか。
 * 扱うテーマ：
 
+  * Human Decision Boundary
+  * Human Responsibility Boundary
   * Human Authorization
-  * Publish Decision
-  * State Transition
-  * Entry Condition
-  * Evidence
-  * Allowed Next State
-  * 自己承認の禁止
-* 記事の到達点：
-
-  * Evidenceを揃えることと、公開を承認することは別である。
-  * AIは状態候補を提示できるが、自分で承認してはならない。
-  * 最終的なPublish責任はHuman Decisionに残す。
-
-### 07 PRR――公開物から消える判断を資産化する
-
-* Scope：
-
-  * Public Documentation / WebsiteのPublication Governanceを扱う。
-  * Dify Workflow Publishとは区別する。
-* 核となる問い：
-
-  * Current Publication Reviewと、公開成果物から確認できなくなる判断履歴を、なぜ別々に管理するのか。
-  * Human側のDecision Historyを保持しながら、なぜAI / CODEXのPublication Executionをその履歴Artifactへ依存させてはいけないのか。
-* 扱うテーマ：
-
-  * Publication Governance
-  * Internal Publication Review Registry
-  * Publication Reflection Register（PRR）
-  * Current Publication Review
-  * Publication Decision History
-  * Human-approved Current Publication Decision
-  * Publication Execution Contract
-  * Human-controlled Decision History
-  * non-private Execution Context
-  * 採用
-  * 不採用
-  * 保留
-  * Mask
-  * Generalization
-  * 委譲
-  * Public / Internal / Private Boundary
+  * Authorized Envelope
+  * Mechanical Continuation
+  * Publish / Live Change
+  * Runtime Authorization
+  * Risk Acceptance
+  * Test / Verify / Currentization
+  * HGやりすぎ問題
 * 関連記録：
 
-  * War Diary：`WD-20260810-002`
-  * Bug Zoo：`BZ-20260810-017`
+  * War Diary：`WD-20260814-001`
+  * Bug Zoo：`BZ-20260814-023`
+  * Configuration Management Note：`CM-20260815-001`
+  * Development Model Note：`DM-20260815-002`
 * 記事の到達点：
 
-  * Internal Publication Review Registryは、管理対象ごとの現在有効なPublication Review結果を保持する。
-  * PRRは、公開物やGit履歴から確認できなくなる判断だけをPrivate Artifactとして保持する。
-  * Current StateとDecision Historyを同じ台帳へ混ぜてはならない。
-  * Human側のDecision Historyを保持することと、AI / CODEXの実行条件をその履歴Artifactへ依存させることは別である。
-  * AI / CODEXへ渡すのは、現在の実行に必要なHuman-approved Current Publication Decisionとnon-private Execution Contextである。
-  * Public Documentationは公開後の姿しか見せないため、消えた判断理由には別の保存責務が必要になる。
-  * PRRは形式的に毎回作るものではなく、不採用・保留・Mask・Generalization・委譲等の判断が残る場合に必要となる。
+  * Human GateはWorkflowの節目ではなく、Authority Boundaryへ置く。
+  * Purpose、Meaning、Risk、Adoption、Publish、Runtime Authorization等はHuman Decisionに残す。
+  * Human-approved Scope内のTest、Correction Verification、Post-Commit Verification、Currentization、Binding Synchronizationまで毎回Humanへ戻さない。
+  * Human-DirectedはHuman-operatedを意味しない。
+  * Humanは意味と責任を決め、AI / CODEXはその決定の内側を完遂する。
+* Scope Boundary：
 
-### 08 Canonical Sourceを失った日
+  * Public Documentation固有のPRR運用は本編から外し、Backlogへ送る。
+  * Humanが決めた具体値をExecution Pointへ固定する問題は09へ送る。
+  * Season 3ではRI #1だけでなくRI #2を含むHuman-AI Operating Modelとして再一般化する。
+
+### 07 Canonical Sourceを失った日
 
 * 核となる問い：
 
   * Partial Sourceを正本として扱うと、なぜ既存内容が失われるのか。
+  * 「覚えている」「一部見えている」はなぜCanonical Sourceの代わりにならないのか。
 * 扱うテーマ：
 
   * Single Source of Truth
@@ -334,6 +317,7 @@ Project全体はいまどこにいるのか
   * Full File Replacement
   * Minimal Change
   * Diff Verification
+  * Direct Source
 * 関連記録：
 
   * Bug Zoo：`BZ-20260731-016`
@@ -343,199 +327,251 @@ Project全体はいまどこにいるのか
   * 一部だけ見えている情報から、ファイル全体を再構成してはならない。
   * 変更前に正本全文を取得し、変更後に差分を確認する必要がある。
   * AIの記憶や会話履歴は、Canonical Sourceの代替にはならない。
+  * Single Source of Truthは「全部を一つに書く」ことではなく、責務ごとに何を正本として信頼するかを固定することである。
+* Scope Boundary：
 
-### 09 Repository Reflection――「作った」と「反映された」は別
+  * Hash / truncation / Evidence Package IntegrityはBacklogの独立テーマとして保持する。
+  * Reflection後に各状態へ正しく届いたかは08へ送る。
+
+### 08 「作った」「反映した」「Published」は全部別
 
 * 核となる問い：
 
-  * 成果物、Audit、Reviewが揃っても、なぜRepositoryへ正しく固定されたことを別途確認する必要があるのか。
-  * Reviewを高品質に保ったまま、なぜCorrectionのたびにComplete Semantic Reviewへ戻ってはいけないのか。
-  * Review PackageのHashが一致していても、なぜEvidenceの完全性は別途検証しなければならないのか。
+  * 成果物を作ったこと、Repositoryへ固定したこと、DraftへApplyしたこと、Publishしたこと、Published Stateを検証したことは、なぜ別々に確認しなければならないのか。
 * 扱うテーマ：
 
-  * Working Tree
-  * Configuration Audit
-  * Configuration Report
-  * Review Package
-  * Review Convergence
-  * Complete Semantic Review
-  * Semantic Freeze
-  * Correction Batch
-  * Correction Verification
-  * Final Commit Boundary
-  * Package Integrity
-  * Direct Source Acquisition
-  * Source Integrity
-  * Truncation Marker Guard
+  * Working Artifact
   * Human Review
   * Repository Reflection
   * Commit Authorization
   * Local Commit Verify
-  * GitHub Read Verify
-  * 期待した変更
-  * 意図しない変更
-  * 既存内容維持
+  * Draft Apply
+  * Published Workflow
+  * Published State Verification
+  * Repository / Draft / Published Semantic Verification
+  * Dependent Currentization
+  * Canonical Launcher
+  * Semantic Equivalence
+  * Execution Binding
 * 関連記録：
 
   * Configuration Management Note：`CM-20260802-003`
-  * War Diary：`WD-20260810-003`、`WD-20260810-004`
-  * Bug Zoo：`BZ-20260810-018`、`BZ-20260810-019`
+  * Configuration Management Note：`CM-20260815-002`
+  * War Diary：`WD-20260814-001`
+  * Bug Zoo：`BZ-20260814-021`
 * 記事の到達点：
 
-  * 成果物を生成したことと、正本へ正しく反映されたことは別である。
-  * Human ReviewとCommit Authorizationは別である。
-  * One Evidence Setに対するComplete Semantic Reviewは一度で収束させ、Correction Artifactだけを理由にFinding探索を再開しない。
-  * Review Packageは内容だけでなくSource取得経路と収録後一致を検証し、表示・転送レイヤ由来の欠落をEvidenceとして固定しない。
-  * Hash一致はArtifactが不変であることを示せても、取得元が完全だったことまでは証明しない。
-  * Commitが成功したことと、承認Scopeが正しく固定されたことも別である。
-  * Repositoryから再取得して確認して初めて、Reflection結果を検証できる。
+  * `作った ≠ Repositoryへ固定された ≠ Draftへ反映された ≠ Publishedされた ≠ Published Stateが検証された`。
+  * Publish操作はPublished状態への変更操作であって、検証そのものではない。
+  * Repository / Draft / PublishedのSemantic MatchがPASSしても、Launcher等のExecution Binding PASSを意味しない。
+  * Publish等で新Identityが生成された場合は、依存するConsumerをCurrentizeする必要がある。
+  * Historical ReferenceはCurrentizationせず、当時の事実として保持する。
+* Scope Boundary：
 
-### 10 Publishして終わりではない
+  * Review ConvergenceとEvidence Package Integrityの詳細はBacklogまたはSeason 3へ送る。
+  * Human Gateの境界は06へ戻す。
+  * Runtimeで実際に何が起きたかは11へ送る。
+
+### 09 Humanが決めた値を、AIにもう一度考えさせるな
 
 * 核となる問い：
 
-  * DraftをPublishした後、何を確認しなければならないのか。
+  * HumanまたはCanonical Contractが一意に決めたTest InputやTargetを、なぜExecution側で再探索・再選択させてはいけないのか。
+* 中心事例：
+
+  * Formal Test ID `RV-01`にはExact Inputが定義済みだった。
+  * しかし修正前Launcherではgeneric E2E fixtureを選択できた。
+  * Formal Input Binding MismatchとしてRunを無効化し、Test IDからExact Inputを機械的に解決する方式へ修正した。
 * 扱うテーマ：
 
-  * Draft Workflow
-  * Published Workflow
-  * Revision
-  * Publish判定
-  * Published State Verification
-  * Repository / Draft / Published Semantic Verification
-  * Project State `Published`
+  * Fixed Decision Binding（Working Name）
+  * Formal Test ID
+  * Exact Input
+  * Machine-readable Binding
+  * Pre-Execution Match
+  * Contract Propagation
+  * Consumer Binding
+  * Execution Point
+  * Mismatch STOP
+* 関連記録：
+
+  * War Diary：`WD-20260814-001`
+  * Bug Zoo：`BZ-20260814-020`
+  * Bug Zoo：`BZ-20260814-021`
+  * Configuration Management Note：`CM-20260815-002`
+  * Development Model Note：`DM-20260815-002`
 * 記事の到達点：
 
-  * Publish操作は、Published状態への変更操作であって、検証そのものではない。
-  * Published Workflowの実体と対象Baselineを再確認して初めて、Published Stateを確定できる。
-  * Published State VerificationとRuntime Verificationは別Gateである。
+  * Humanが値を決めたことと、その値以外をExecution Pointで選択不能にしたことは別である。
+  * 決定前はAIが候補生成・比較・推奨を行ってよい。
+  * 決定後は同じ判断を再度AIへ委譲せず、Machine-readable Bindingで固定する。
+  * Contractは書かれているだけでなく、Consumerへ伝播しExecution Pointで効いていることを確認する。
+* Scope Boundary：
 
-### 11 Runtime Verificationが最後の砦
+  * `Fixed Decision Binding`はWorking Nameとして扱い、正式Architecture名とは断定しない。
+  * Machine / LLMの一般的な責務分離は10へ送る。
+  * `Contract Closure`をFoundry Coreとして先取りしない。
+
+### 10 文字数はLLMに数えさせるな（笑）
+
+* 核となる問い：
+
+  * CodeやGateが正確に知っている文字数、範囲、差分を、なぜLLMへ再推定させてはいけないのか。
+* 中心事例：
+
+  ```text
+  Conclusion Initial
+  623
+
+  Conclusion Retry
+  698
+
+  Expected Range
+  240–420
+  ```
+
+  * Machineは623文字を計測できた。
+  * 上限420文字、最低203文字削減も計算できた。
+  * Retry Promptにはそれらが十分に渡らず、モデルは前回出力を約370文字と誤認した。
+* 扱うテーマ：
+
+  * Deterministic Control Boundary（Working Name）
+  * Machine-measured Fact
+  * Count
+  * Compare
+  * Range
+  * Delta
+  * Direction
+  * Deterministic Retry Correction Payload
+  * Semantic Rewrite
+  * Retry Strategy
+  * Horizontal Correction
+* 関連記録：
+
+  * War Diary：`WD-20260814-001`
+  * Bug Zoo：`BZ-20260814-022`
+  * Development Model Note：`DM-20260815-002`
+* 記事の到達点：
+
+  * Machineが正確に知っている事実をLLMへ推定させない。
+  * `Count / Compare / Delta / Direction`はMachineが担当し、`Meaning-preserving Rewrite / Compression / Expansion`はLLMが担当する。
+  * 固定割合の「20％短縮」のようなHeuristicはContract-derivedでなければ安全ではない。
+  * 「意味は自由。構造は厳格。」をExecution Controlへ拡張すると、Deterministic ControlとSemantic Generationの境界が見える。
+* Scope Boundary：
+
+  * LLMが悪い／使えないという結論にしない。
+  * 今回のFailureはRetry Strategy側とModel Instruction Following側の`MIXED`として扱う。
+  * Deterministic Control Boundaryを正式Foundry Coreと断定しない。
+
+### 11 Publishしても、実行するまで分からない
 
 * Current Evidence State：
 
-  * Project Stateは`Published`まで到達済み。
-  * Runtime Verificationは未実施。
-  * Runtime Acceptanceは`PENDING`。
-  * 本記事は、実Runtime Evidenceが成立した後に最終構成を確定する。
+  * Project Stateは`Published`。
+  * Historical Correct-Contract Formal RV-01には`FAILED` Evidenceが存在する。
+  * Retry Correction後のCurrent Candidate Runtimeは、この構成更新時点では`NOT EXECUTED`。
+  * Fresh Formal RV-01の成功結果を先取りしない。
 * 核となる問い：
 
-  * Static Test、Import、Semantic Graph一致、Published State Verificationだけでは、なぜ不十分なのか。
+  * Repository、Draft、Published、Launcher、Formal Input Bindingが一致しても、なぜRuntime Acceptanceは完了しないのか。
 * 扱うテーマ：
 
+  * Published State Verification
   * Runtime Verification
+  * Exact Input Binding
+  * Effective Runtime Value
   * Raw Output Contract
   * Normalize後DTO
   * Contract Gate
-  * 実LLM実行
   * Runtime Evidence
+  * Current Candidate Binding
   * Runtime Acceptance
+* 関連記録：
+
+  * War Diary：`WD-20260814-001`
+  * Development Model Note：`DM-20260815-002`
 * 記事の到達点：
 
-  * Graphが正しく、Published状態まで一致していても、Runtimeの実出力は契約を破る可能性がある。
-  * 実際に動かした結果を確認しない限り、WorkflowのRuntime受け入れは完了しない。
-  * Runtime Verificationの実Evidenceが得られるまでは、成功談を先取りしない。
+  * Static Test、Repository Verification、Semantic Graph一致、Published State Verificationは、Runtime Successの代替ではない。
+  * RuntimeではLLM出力、Retry、Effective Parameter、Transport等、実行しなければ観測できない事象がある。
+  * 過去Runが存在してもCurrent CandidateへBindingされていなければCurrent Runtime Evidenceにはならない。
+  * 実Runtime Evidenceを確認して初めてRuntime Acceptanceを判断できる。
+* Scope Boundary：
 
-### 12 Difyのバージョンアップで契約が壊れた日
+  * Fresh Formal RV-01のCurrent Candidate結果が得られるまでは最終構成をFIXしない。
+  * Season 1-08 `Runtimeを見ないレビューはレビューではない`の再説明にせず、Season 2では`Published ≠ Runtime Accepted`というLifecycle / State問題を中心にする。
+
+### 12 壊れない運用とは「境界を決める」こと
 
 * 核となる問い：
 
-  * Platform側の制約変更は、既存Workflowへどのように影響するのか。
+  * Season 2で増えたConfiguration、State、Source、Authorization、Binding、Runtimeの仕組みを、何のために分けてきたのか。
 * 扱うテーマ：
 
-  * Dify Version
-  * Selector制約
-  * Code Node
-  * DTO field
-  * `finish_reason`
-  * Import Compatibility
-  * Platform Drift
-  * Compatibility Verification
+  * Configuration / State Boundary
+  * Project State / Active Work Boundary
+  * Latest / Current Boundary
+  * Human Decision / Mechanical Continuation
+  * Canonical / Partial Source
+  * Repository / Draft / Published
+  * Semantic / Execution Binding
+  * Deterministic / Semantic Responsibility
+  * Published / Runtime Acceptance
+  * Human Responsibility Boundary
 * 記事の到達点：
 
-  * Workflowが昨日動いたことは、今日も動く保証にならない。
-  * Platform VersionとPlatform側の制約もConfigurationとして追跡する必要がある。
-  * Platform変更時は、既存Workflowの契約と互換性を再確認する。
+  * Season 2の本質はGovernance Artifactを増やすことではない。
+  * 同じ言葉に見える状態や工程を、責務の異なる境界へ分離することで運用が壊れにくくなる。
+  * HumanはMeaning、Risk、Authorityを保持し、MachineはBinding、Count、Compare、Synchronize、Verifyを担い、LLMはSemantic Workを担うという役割分担候補が見え始めた。
+  * Human-Directed FoundryはHumanが全操作を行うモデルではなく、Humanが責任境界を保持したままAIへ仕事を委譲するモデルとして検証を続ける。
+  * RI #1で見えたPatternをFoundry Coreへ昇格するには、RI #2等の横断Evidenceが必要である。
+* 関連記録：
 
-### 13 Season 2総括：AI開発は状態管理と変更管理になる
+  * War Diary：`WD-20260814-001`
+  * Bug Zoo：`BZ-20260814-020`〜`023`
+  * Configuration Management Note：`CM-20260815-001`、`CM-20260815-002`
+  * Development Model Note：`DM-20260815-002`
+* Scope Boundary：
 
-* 核となる問い：
-
-  * Workflowが完成に近づくほど、なぜ作業の中心がAI調整から状態管理と変更管理へ移るのか。
-* 扱うテーマ：
-
-  * Configuration Management
-  * Registration
-  * Audit
-  * Project State
-  * Current Snapshot
-  * Active Work
-  * Active Baseline
-  * Human Authorization
-  * Publication Governance
-  * Publication Review Registry
-  * PRR
-  * Canonical Source
-  * Repository Reflection
-  * Review Convergence
-  * Evidence Integrity
-  * Published State Verification
-  * Runtime Verification
-  * Platform Drift
-* 記事の到達点：
-
-  * AI Workflow開発の後半で支配的になるのは、Prompt Engineeringだけではない。
-  * 何を変更し、どの状態を採用し、何を正本とし、何をEvidenceとして承認するかという状態管理と変更管理である。
-  * 壊れないWorkflowを運用し続けるには、WorkflowだけでなくProjectそのものを管理する必要がある。
-  * Project全体の正式状態、現在の作業断面、公開判断、Repository Reflection、Runtime Evidenceは別責務として管理する必要がある。
-  * ReviewはFindingを増やし続けるためではなく、同じEvidence Setに対する判断を収束させるために設計する必要がある。
-  * EvidenceはHashだけでなく、どこから取得し、完全なSourceと一致しているかまで含めて信頼性を判断する必要がある。
-  * AIが強くなるほど、人間の仕事は「全部を手で作ること」から「何を正しい状態として採用するかを判断すること」へ移る。
+  * `Contract Closure`等のWorking Modelを採用済みArchitectureとして断定しない。
+  * Season 3のHuman-AI Development Operating Modelを先取りせず、Season 2ではRI #1の具体Evidenceから得た境界までで閉じる。
 
 ---
 
 ## Season 2構成の軸
 
-Season 2は以下の順序で積み上げる。
+Season 2は以下の流れで積み上げる。
 
-1. 管理対象を定義する  
-   ConfigurationとConfiguration Registration
+1. **Configuration Plane**
+   管理対象を定義し、Registrationし、Expected / ActualをAuditする。
+   `01 → 02 → 03`
 
-2. 差分を検出する  
-   Configuration AuditとDrift
+2. **State Plane**
+   Projectの現在地と作業地点を分け、LatestとCurrentを分ける。
+   `04 → 05`
 
-3. Project全体の現在地を判断可能にする  
-   Project StateとProject State Current Snapshot
+3. **Authority Plane**
+   Humanが本当に判断すべき場所と、AIが自律継続すべき場所を分ける。
+   `06`
 
-4. 現在作業中の復帰地点を保持する  
-   Active Work Current Snapshot、Active Initiative、Completed Checkpoint、Next Action
+4. **Source / Reflection Plane**
+   Canonical Sourceを守り、作成・Repository Reflection・Draft・Published・Execution Bindingを分ける。
+   `07 → 08`
 
-5. 採用中の基準を固定する  
-   Candidate / Active / Historical Baseline
+5. **Control / Contract Plane**
+   Human-decided ValueをExecutionへ固定し、Deterministic FactとSemantic Workを分ける。
+   `09 → 10`
 
-6. 最終判断の責任を分離する  
-   Human AuthorizationとDify Publish Decision
+6. **Runtime Plane**
+   Published StateとRuntime Acceptanceを分け、実Runtime Evidenceで確認する。
+   `11`
 
-7. 公開判断のCurrent StateとDecision Historyを分離する  
-   Internal Publication Review RegistryとPrivate PRR
-
-8. 正本を守る  
-   Canonical Source、Minimal Change、Partial Source禁止
-
-9. 承認済み成果物を正本へ固定し、再確認する  
-   Repository ReflectionとVerify
-
-10. Published状態を確認する  
-    Published State Verification
-
-11. 実動作を確認する  
-    Runtime VerificationとRuntime Acceptance
-
-12. 外部変化を管理する  
-    Platform Version、Platform Drift、Compatibility
+7. **Season Synthesis**
+   個別Artifactではなく、責任境界を設計することがSeason 2全体を貫いていたと整理する。
+   `12`
 
 Season 1が「壊れない設計」を扱ったのに対し、
-Season 2は「壊れない状態を維持する運用」を扱う。
+Season 2は「壊れない状態と責任境界をどう維持するか」を扱う。
 
 ---
 
@@ -551,6 +587,7 @@ Season 2は「壊れない状態を維持する運用」を扱う。
 * 記事公開後も正本Documentationまたは公開可能なEvidenceへ誘導できる。
 * 前後記事と主要な問いが重複していない。
 * Evidenceが未成立の将来結果を成功済みとして先取りしていない。
+* Working NameやCore Candidateを採用済みArchitectureとして先取りしていない。
 
 ---
 
@@ -559,9 +596,13 @@ Season 2は「壊れない状態を維持する運用」を扱う。
 Season 2以降の長期展開は、現時点では確定シリーズではない。
 Project Evidenceが増えるたびに再評価し、独自理論を先に作らない。
 
-詳細な長期到達像とCapability Gapは、
+長期到達像とCapability Gapは、
 [DM-20260808-001 AI-Native Developmentの長期到達像とCapability Gap](development-model/DM-20260808-001-ai-native-development-target-and-capability-gaps.md)
 をWorking Modelとして参照する。
+
+RI #1 Formal Runtime Verificationから得られたHuman-Directed Execution Model候補は、
+[DM-20260815-002 Human-Directed FoundryにおけるContract ClosureとDeterministic Control Boundary](development-model/DM-20260815-002-contract-closure-and-deterministic-control-boundary.md)
+を参照する。
 
 ### Season 3構想（未FIX）：Human-Directed Foundryはどう成立するのか
 
@@ -586,6 +627,13 @@ Project Runtime Verificationを意味しない。
   * RI#1 Article Production / RI#2 Documentation Production
   * Core Candidate / Foundry Core Boundary
   * Human Authority Boundary
+  * Human Decision Boundary / Mechanical Continuation
+  * Authorized Envelope
+  * Human-directed ≠ Human-operated
+  * Fixed Decision Binding（Working Name）
+  * Contract Propagation（Working Name）
+  * Deterministic Control Boundary（Working Name）
+  * Contract Closure（Working Name / Not Adopted Architecture）
   * Automationそのものを目的にしない
   * Review Convergence / Semantic Freeze
   * Evidence Integrity / Direct Source
@@ -604,13 +652,16 @@ Project Runtime Verificationを意味しない。
   * Article ProductionをProject全体定義へ固定せずRI#1として維持し、RI#2との比較EvidenceからCore Candidateを検証する。
   * 共通Patternが観測されてもFoundry Coreを先に確定せず、複数RIのEvidenceと独立したHuman Decisionを必要とする。
   * AIがEvidence準備、Technical Verification、Candidate State Proposalを担い、HumanはPurpose、Judgment、Responsibility、Approvalを保持するモデルを検証する。
-  * ReviewとEvidenceの品質を落とさずに工程を収束させるControl Patternが、異なるReference Implementationでも再現できるか確認する。
+  * Humanが毎Stepを操作するのではなく、Authorized Envelope内でAIが自律継続できるOperating Modelを検証する。
+  * Fixed Decision Binding、Contract Propagation、Deterministic Control Boundaryが異なるRIでも再現するか確認する。
   * Local AI Foundry独自の開発手法を先に宣言せず、既存Development Modelで説明できない差分がEvidenceとして残るかを確認する。
 * 昇格条件：
 
   * Season 2の実Evidenceを完了させる。
   * RI#1とRI#2の比較Evidenceを複数事例で整理する。
   * Human Authority Boundaryが異なる業務でも維持できるか確認する。
+  * Human Decision Boundary / Mechanical Continuationが異なる業務でも安全に機能するか確認する。
+  * Fixed Decision Binding、Contract Propagation、Deterministic Control BoundaryがRI #1固有ではないことを確認する。
   * Review ConvergenceとEvidence Integrityが特定Workflow固有ではなく再利用可能なControl Patternか比較する。
   * Core CandidateとFoundry Coreを混同せず、Core確定をHuman DecisionまでDeferredする。
   * Development Model比較を一次資料ベースで実施する。
@@ -652,6 +703,61 @@ Project Runtime Verificationを意味しない。
 
 ## Backlog（昇格待ち）
 
+### PRR――公開物から消える判断を資産化する
+
+* 現状：
+
+  * Internal Publication Review RegistryとPrivate PRRの責務分離を実施済み。
+  * Human-controlled Decision HistoryをAI / CODEX側Publication Executionの成立条件から外した。
+  * War Diary：`WD-20260810-002`
+  * Bug Zoo：`BZ-20260810-017`
+* 核となる問い：
+
+  * Current Publication Reviewと、公開成果物から消えるDecision Historyをなぜ別責務へ分けるのか。
+* 核となるテーマ：
+
+  * Publication Governance
+  * Internal Publication Review Registry
+  * Publication Reflection Register（PRR）
+  * Current State / Decision History
+  * Public / Internal / Private Boundary
+  * Human-approved Current Publication Decision
+  * non-private Execution Context
+* 記事の到達点候補：
+
+  * PRRは公開物やGit履歴から確認できなくなる判断を保持するPrivate Artifactである。
+  * Current Publication ReviewとDecision Historyを同じ台帳へ混ぜない。
+  * Human側の履歴保存責務をAI / CODEXのExecution Dependencyへしない。
+* 本編から外した理由：
+
+  * 価値は高いがPublic Documentation固有のPublication Governance比重が大きく、Season 2本編をGovernance Artifactのカタログへ戻してしまう。
+  * Human Decision Boundaryの一般論は06へ残し、PRR固有論は独立候補として保持する。
+
+### Difyのバージョンアップで契約が壊れた日
+
+* 核となる問い：
+
+  * Platform側の制約変更は、既存Workflowへどのように影響するのか。
+* 扱うテーマ：
+
+  * Dify Version
+  * Selector制約
+  * Code Node
+  * DTO field
+  * `finish_reason`
+  * Import Compatibility
+  * Platform Drift
+  * Compatibility Verification
+* 記事の到達点候補：
+
+  * Workflowが昨日動いたことは、今日も動く保証にならない。
+  * Platform VersionとPlatform側の制約もConfigurationとして追跡する必要がある。
+  * Platform変更時は、既存Workflowの契約と互換性を再確認する。
+* 本編から外した理由：
+
+  * 単独テーマとして強いが、現在のSeason 2本線であるState / Authority / Source / Execution Binding / Runtimeの因果線から外れる。
+  * Runtime Observability、Regression、Compatibilityを扱うSeason 4側へ接続できる候補として保持する。
+
 ### Reviewは、どこで終わるのか
 
 * 現状：
@@ -680,7 +786,7 @@ Project Runtime Verificationを意味しない。
   * Correctionは承認済みFindingを直す工程であり、それ自体を新しいSemantic Review Triggerにしない。
 * 統合候補：
 
-  * Season 2-09 Repository Reflection――「作った」と「反映された」は別
+  * Season 2-08 `「作った」「反映した」「Published」は全部別`
   * Season 3構想：Human-Directed FoundryのReview Control Pattern
 * 昇格条件：
 
@@ -716,8 +822,8 @@ Project Runtime Verificationを意味しない。
   * Tool ResponseやConsole表示は人間向け表示であり、完全なEvidence Sourceとして再利用できるとは限らない。
 * 統合候補：
 
-  * Season 2-08 Canonical Sourceを失った日
-  * Season 2-09 Repository Reflection――「作った」と「反映された」は別
+  * Season 2-07 `Canonical Sourceを失った日`
+  * Season 2-08 `「作った」「反映した」「Published」は全部別`
 * 昇格条件：
 
   * Canonical Source問題とEvidence Generation Pipeline問題の違いを整理する。
@@ -732,6 +838,7 @@ Project Runtime Verificationを意味しない。
   * Status Artifactの章構成・表示順リファクタリング実施
   * Active Work Current Snapshotを後付けで導入し、ADR-0012、CFG-D005、CM-20260802-002へ発展
   * Project State、Baseline、Runtime状態、Workflowを変えずにDocumentation Contractを進化させた事例が複数存在する
+  * Formal RVの実運用からFixed Decision Binding、Contract Propagation、Deterministic Control Boundary等のWorking Hypothesisが追加された
 * 核となるテーマ：
 
   * 人間中心のProjectでは、変更・レビュー・整合性確認のコストが高いため、将来必要になりそうな管理体系まで事前に整備することが多い。
@@ -742,14 +849,14 @@ Project Runtime Verificationを意味しない。
 * 関連する記事候補：
 
   * Season 2-04 Current Snapshotは進捗表ではない
-  * Season 2-13 Season 2総括：AI開発は状態管理と変更管理になる
+  * Season 2-12 壊れない運用とは「境界を決める」こと
   * Season 3構想：Evidenceを基にContract / Governanceを後から育てる
 * 昇格条件：
 
   * Status Artifact、Active Work以外にも、運用上の必要から後付けでContract化した事例を整理すること。
   * 人間中心のProjectとの違いを、単なるAIの処理速度ではなく、管理コストと変更容易性の違いとして一般化できること。
   * 「運用で回す対象」と「Contractとして固定する対象」の判断基準を整理できること。
-  * 独立記事にするか、Season 2-04またはSeason 2-13へ吸収するかを再評価すること。
+  * 独立記事にするか、Season 2-12またはSeason 3へ吸収するかを再評価すること。
 
 ### AIへの指示は意図ではなく工程で書く
 
