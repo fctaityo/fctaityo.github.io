@@ -73,6 +73,14 @@
 
 > Information Architectureは整理術ではない。責務を定義するArchitectureである。
 
+> Humanが決めた値を、AIにもう一度考えさせない。
+
+> 機械が知っている事実を、LLMに推定させない。
+
+> Contractは、書いた場所ではなく、実行地点まで届いて初めて効く。
+
+> Humanは意味と責任を決める。AIは、その決定の内側を完遂する。
+
 ## 珍言
 
 > 「git diffください」
@@ -161,3 +169,25 @@ Review PackageのNear Missから、Evidence IntegrityはHashだけでは成立�
 この一連の整理により、Local AI Foundryは「AIへ何を作らせるか」だけでなく、
 「何を人間が保持し、どこでAIを止め、何をEvidenceとして信頼し、どうReviewを終わらせるか」までを
 FoundryのControl Pattern候補として扱う段階へ進んだ。
+
+### 2026-08-15 Formal RV反省花火とExecution Boundary
+
+RI #1 Formal Runtime Verificationでは、Contract、Human Decision、Repository Verificationが存在していても、
+その意味がExecution Pointまで機械的にBindingされなければ、実行時に別の値や古い値が使われ得ることを確認した。
+
+今回の一次記録・障害整理・運用整理・Development Model整理を通じて、次の原則候補が強くなった。
+
+* HumanまたはCanonical Contractが一意に決めた値を、Execution側で再探索・再選択させない。
+* Count、Range、Delta、Hash、ID、Binding等、Machineが正確に扱えるControl FactをLLMへ再推定させない。
+* ContractはDefinitionだけで完了とせず、必要なConsumerへ伝播し、Execution Pointで拘束されることを確認する。
+* Human Decision BoundaryとMechanical Continuationを分離し、既承認Scope内のTest、Verify、Currentization、Binding Synchronizationを不要なHuman Gateへ戻さない。
+* Publish等でCurrent Identityが変わった場合は、Launcher、Current Source、Derived View等のDependent ConsumerをCurrentizeし、Semantic MatchとExecution Bindingを別々に検証する。
+
+この整理から、`Fixed Decision Binding`、`Contract Propagation`、`Deterministic Control Boundary`、`Contract Closure`等のWorking Nameが生まれた。
+
+ただし、これらは現時点ではWorking Model / Not Adopted Architectureである。
+RI #2を含む横断EvidenceなしにFoundry Coreへ昇格させない。
+
+また、この時点のFresh Formal RV-01 Current Candidate Runtimeは未実行であり、成功結果を先取りしない。
+
+今回Hall of Fameへ追加するのは、Working Nameそのものではなく、名称が将来変わっても残る責任境界の短い原則だけとする。
