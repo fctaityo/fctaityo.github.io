@@ -36,3 +36,8 @@ Seasonをまたいで育つ長期的な開発思想、Human-AI Responsibility Bo
 
 * [DM-20260808-001 AI-Native Developmentの長期到達像とCapability Gap](development-model/DM-20260808-001-ai-native-development-target-and-capability-gaps.md)  
   Season 1〜2で成立したControl Planeを起点に、Human-AI Development Operating ModelとContinuous Assuranceへ向かう長期到達像を整理し、Evaluation、Risk、Observability、Recovery、Provenance、Security、Human Responsibility Boundaryの不足をGapとして記録する。
+
+## Human-Directed Execution Model
+
+* [DM-20260815-002 Human-Directed FoundryにおけるContract ClosureとDeterministic Control Boundary](development-model/DM-20260815-002-contract-closure-and-deterministic-control-boundary.md)  
+  RI #1 Formal Runtime Verificationで観測されたFixed Decision Binding、Contract Propagation、Deterministic Control Boundary、Human Decision Boundaryを横断整理し、Contract ClosureをFoundry横断Capability候補として検討する。StatusはWorking Model / Not Adopted Architectureであり、RI #2を含む横断Evidenceを昇格条件とする。
