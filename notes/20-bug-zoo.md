@@ -27,6 +27,12 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 ## Contract / DTO
 
+- [BZ-20260814-020 Humanが決めた値をAIが再選択する](bug-zoo/BZ-20260814-020-human-decision-reselection.md)  
+  HumanまたはCanonical Contractが一意に決めた値をExecution側が再探索・再選択でき、Formal Test等で別Inputや別Targetを使える状態になる。
+
+- [BZ-20260814-021 ContractがExecution Pointまで届かない](bug-zoo/BZ-20260814-021-contract-not-propagated-to-execution-point.md)  
+  ContractやCurrent Targetは正本上で正しいのに、Draft、Published、Launcher、Runtime Request等のConsumerへ同じ値が伝播せず、実効値が乖離する。
+
 - [BZ-20260725-001 Normalize事件](bug-zoo/BZ-20260725-001-normalize-crossed-boundary.md)  
   Normalizeが型変換を超えて意味を書き換えかけた。
 
@@ -58,6 +64,9 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 ## Retry / Runtime / Transport
 
+- [BZ-20260814-022 機械が知っている事実をLLMに推定させる](bug-zoo/BZ-20260814-022-machine-fact-redelegated-to-llm.md)  
+  CodeやGateが正確に計測できる文字数、範囲、超過量等をLLMへ再推定させ、Deterministic ControlとSemantic Generationの責務を混在させる。
+
 - [BZ-20260725-005 Retry無限保険化事件](bug-zoo/BZ-20260725-005-retry-as-insurance.md)  
   Retryを有限の復旧手段ではなく、最終的な成功を保証する保険として扱いかけた。
 
@@ -73,6 +82,9 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
   正本やEvidenceの一部だけを取得した状態で判定・補完・再生成し、誤判定や変更対象外の消失を招く。
 
 ## Governance / Responsibility Boundary
+
+- [BZ-20260814-023 Human Gateを機械処理へ増殖させる](bug-zoo/BZ-20260814-023-human-gate-overuse.md)  
+  Human Decisionが不要なTest、Verify、Currentization、既承認TargetへのBinding同期まで毎回Humanへ戻し、Humanを判断者ではなくContinuation承認ボタンにする。
 
 - [BZ-20260810-017 Human側の判断履歴をAI実行条件へ混ぜる](bug-zoo/BZ-20260810-017-human-history-as-execution-dependency.md)  
   Human-controlled Decision HistoryやPrivate Operational Stateの存在・状態をAI / CODEX側のPublication Execution前提にし、現在判断と履歴保存の責務を結合してしまう。
