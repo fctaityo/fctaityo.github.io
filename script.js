@@ -759,3 +759,342 @@ loadProjection();
     if (label === 'リリース') value.textContent = '2026.08.13';
   });
 })();
+
+
+/* LF-RI3-DASHBOARD-HOTFIX-BEGIN v1 */
+/* Local AI Foundry — Multi-RI Pulse + RI#3 Visual Telemetry Hotfix
+   Scope: Website presentation only. No Project State / Runtime / Repository mutation.
+   Applied after the existing S13 dashboard scripts. */
+(() => {
+  'use strict';
+
+  const root = document.querySelector('.s13-dashboard');
+  if (!root || root.dataset.multiRiPulse === 'v1') return;
+  root.dataset.multiRiPulse = 'v1';
+
+  const board = root.querySelector('.parallel-board');
+  const pulse = root.querySelector('.foundry-pulse');
+  const projectCards = root.querySelector('.project-cards');
+  if (!board || !pulse || !projectCards) return;
+
+  const style = document.createElement('style');
+  style.id = 'lf-multi-ri-pulse-ri3-hotfix';
+  style.textContent = `
+/* ===== Multi-RI Foundry Pulse ===== */
+.s13-dashboard .foundry-pulse.lf-pulse-v2{
+  width:100%;max-width:100%;min-height:138px;padding:14px 16px;
+  display:grid!important;grid-template-columns:minmax(190px,.72fr) minmax(0,2.5fr) 58px!important;
+  grid-template-areas:"brand console radar";gap:14px!important;align-items:stretch!important;
+  overflow:hidden;
+}
+.s13-dashboard .lf-pulse-v2 .pulse-left{grid-area:brand;align-self:center;min-width:0}
+.s13-dashboard .lf-pulse-v2 .pulse-left>span{display:block;margin-bottom:2px;font-size:12px!important}
+.s13-dashboard .lf-pulse-v2 .pulse-left svg{height:52px!important}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-console{grid-area:console;min-width:0;display:grid;grid-template-rows:auto 1fr;gap:8px}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-view-label{display:flex;align-items:baseline;gap:8px;min-width:0}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-view-label small{font-size:12px;color:#71879e;font-weight:900;letter-spacing:.08em}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-view-label strong{font-size:13px;color:#eef7ff;white-space:nowrap}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-view-label span{font-size:12px;color:#66dfff;white-space:nowrap}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-tabs{display:grid;grid-template-columns:repeat(4,auto);gap:5px;flex:0 0 auto}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-tab{
+  min-height:32px;padding:5px 10px;border:1px solid rgba(92,139,193,.30);border-radius:7px;
+  background:rgba(3,14,28,.78);color:#8fa6bc;font-size:12px;font-weight:900;letter-spacing:.02em;
+  cursor:pointer;transition:border-color .18s ease,color .18s ease,background .18s ease,box-shadow .18s ease
+}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-tab:hover,.s13-dashboard .lf-pulse-v2 .lf-pulse-tab:focus-visible{border-color:#69e9ff;color:#fff;outline:none;box-shadow:0 0 14px rgba(33,231,255,.16)}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-tab[aria-selected="true"]{border-color:rgba(33,231,255,.78);color:#fff;background:linear-gradient(180deg,rgba(21,98,152,.42),rgba(21,49,109,.30));box-shadow:0 0 18px rgba(33,231,255,.18),inset 0 0 14px rgba(33,231,255,.05)}
+.s13-dashboard .lf-pulse-v2 .lf-pulse-metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;min-width:0}
+.s13-dashboard .lf-pulse-v2 .pulse-metric{padding:8px 9px!important;border:1px solid rgba(106,139,178,.14)!important;border-radius:8px;background:rgba(2,11,23,.46);min-width:0;text-align:left}
+.s13-dashboard .lf-pulse-v2 .pulse-metric small{font-size:11px!important;color:#7f93aa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong{font-size:13px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong.ok{color:var(--green)}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong.warn{color:var(--amber)}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong.hot{color:#ff916c}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong.rv{color:#b99dff}
+.s13-dashboard .lf-pulse-v2 .pulse-metric strong.info{color:#63dcff}
+.s13-dashboard .lf-pulse-v2 .radar{grid-area:radar;align-self:center}
+
+/* ===== RI cards ===== */
+.s13-dashboard [data-open-ri1] mark{color:#66e6ff;border-color:rgba(33,231,255,.58);background:rgba(33,231,255,.08)}
+.s13-dashboard [data-open-ri3]{border-color:rgba(143,108,255,.72)!important;box-shadow:0 0 0 1px rgba(143,108,255,.09),0 0 30px rgba(143,108,255,.16),inset 0 0 20px rgba(143,108,255,.045)!important}
+.s13-dashboard [data-open-ri3] .project-icon{color:var(--violet)}
+.s13-dashboard [data-open-ri3] mark{color:#c7b5ff;border-color:rgba(143,108,255,.60);background:rgba(143,108,255,.10)}
+.s13-dashboard [data-open-ri3] b{white-space:nowrap}
+.s13-dashboard [data-open-ri3] mark{flex:0 0 auto}
+
+/* ===== RI#3 rail / telemetry ===== */
+.s13-dashboard .ri3-line{z-index:8;border-color:rgba(143,108,255,.42);box-shadow:inset 0 0 20px rgba(143,108,255,.025);margin-top:0}
+.s13-dashboard .ri3-rail-row{min-height:54px;position:relative;cursor:pointer}
+.s13-dashboard .ri3-line .line-toggle{border-color:rgba(143,108,255,.62);background:linear-gradient(110deg,rgba(21,16,55,.98),rgba(5,17,38,.94));box-shadow:0 0 20px rgba(143,108,255,.12)}
+.s13-dashboard .ri3-line .line-toggle:hover,.s13-dashboard .ri3-line .line-toggle:focus-visible,.s13-dashboard .ri3-rail-row:hover .line-toggle,.s13-dashboard .ri3-rail-row:hover .stage-rail,.s13-dashboard .ri3-rail-row:focus-within .line-toggle,.s13-dashboard .ri3-rail-row:focus-within .stage-rail{border-color:#c5b5ff;box-shadow:0 0 28px rgba(143,108,255,.26),inset 0 0 18px rgba(33,231,255,.04)}
+.s13-dashboard .ri3-line .line-state{color:#bfa8ff}
+.s13-dashboard .ri3-line .telemetry-panel{border-color:rgba(143,108,255,.70);box-shadow:0 0 0 1px rgba(33,231,255,.13),0 0 38px rgba(143,108,255,.15),inset 0 0 50px rgba(33,231,255,.028)}
+.s13-dashboard .ri3-line .telemetry-panel:before{background:linear-gradient(90deg,transparent 0 12%,#8f6cff 23%,#48eaff 50%,#8f6cff 77%,transparent 88%);background-size:260% 100%}
+.s13-dashboard .ri3-line .operator-label,.s13-dashboard .ri3-line .telemetry-head p{color:#c1afff}
+.s13-dashboard .ri3-line .projection-badge span{background:var(--violet);box-shadow:0 0 12px var(--violet)}
+.s13-dashboard .status-card.current{border-color:rgba(143,108,255,.38)}.s13-dashboard .status-card.current strong{color:#c4b0ff}
+.s13-dashboard .status-card.disabled{border-color:rgba(255,120,90,.30)}.s13-dashboard .status-card.disabled strong{color:#ff916c}
+.s13-dashboard .status-card.waiting{border-color:rgba(255,199,67,.32)}.s13-dashboard .status-card.waiting strong{color:var(--amber)}
+.s13-dashboard .ri3-stage-rail .rail-segment.done{background:linear-gradient(90deg,rgba(85,242,181,.84),rgba(33,231,255,.58))}
+.s13-dashboard .ri3-stage-rail .rail-segment.current{background:linear-gradient(90deg,#5a7cff,#a665ff)}
+.s13-dashboard .ri3-stage-rail .rail-node.current{box-shadow:0 0 12px white,0 0 30px var(--violet),0 0 55px var(--cyan)}
+.s13-dashboard .ri3-line .ri3-pipeline{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:5px}
+.s13-dashboard .ri3-line .ri3-pipeline span{min-height:40px;border:1px solid rgba(85,126,176,.28);display:flex;align-items:center;justify-content:center;gap:7px;border-radius:6px;background:#041020;color:#6f8194;font-size:12px;font-weight:800;text-align:center}
+.s13-dashboard .ri3-line .ri3-pipeline b{font-weight:400;color:#65829e}
+.s13-dashboard .ri3-line .ri3-pipeline span.ok{border-color:rgba(85,242,181,.55);color:var(--green);background:rgba(85,242,181,.04)}
+.s13-dashboard .ri3-line .ri3-pipeline span.next{border-color:rgba(143,108,255,.80);color:white;background:linear-gradient(180deg,rgba(91,76,190,.38),rgba(25,72,180,.20));box-shadow:0 0 15px rgba(143,108,255,.22),inset 0 0 15px rgba(33,231,255,.06)}
+.s13-dashboard .ri3-line .ri3-pipeline span.pending{color:#75879b}
+
+/* Selected drawer rules extended to RI#3. */
+.s13-dashboard .parallel-board.ri-open #ri3-telemetry{grid-template-rows:0fr!important;opacity:0!important;transform:translateY(-18px)!important;pointer-events:none!important}
+.s13-dashboard .parallel-board.ri3-open #ri3-telemetry{grid-template-rows:1fr!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .energy-beam{height:72px!important;opacity:1!important}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .chevron{transform:rotate(180deg)}
+.s13-dashboard .parallel-board.ri3-open .ri1-line,.s13-dashboard .parallel-board.ri3-open .ri2-line{opacity:.34;filter:saturate(.48) brightness(.70);transform:translateY(2px)}
+.s13-dashboard .parallel-board.ri1-open .ri3-line,.s13-dashboard .parallel-board.ri2-open .ri3-line{opacity:.34;filter:saturate(.48) brightness(.70);transform:translateY(2px)}
+.s13-dashboard .parallel-board.ri3-open .ri3-line{border-color:rgba(174,151,255,.80);box-shadow:0 0 0 1px rgba(143,108,255,.15),0 0 30px rgba(143,108,255,.16),inset 0 0 24px rgba(33,231,255,.035)}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .telemetry-panel{animation:consoleBoot .95s var(--ease) both}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .panel-scan{opacity:1;animation:panelScan 2.8s ease-in-out .55s infinite}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .trace-a{opacity:1;animation:traceA 1.1s var(--ease) .18s both}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .trace-b{opacity:1;animation:traceB 1.1s var(--ease) .32s both}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .boot-item{animation:bootItem .48s var(--ease) both;animation-delay:calc(.28s + (var(--boot) * 55ms))}
+.s13-dashboard .parallel-board.ri3-open .ri3-line .operator-art img{animation:operatorIn .85s var(--ease) .25s both}
+
+@media(max-width:1540px){
+  .s13-dashboard .foundry-pulse.lf-pulse-v2{grid-template-columns:minmax(170px,.62fr) minmax(0,2.6fr) 58px!important}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .s13-dashboard .foundry-pulse.lf-pulse-v2{grid-template-columns:1fr 58px!important;grid-template-areas:"brand radar" "console console"}
+  .s13-dashboard .lf-pulse-v2 .pulse-left{align-self:end}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-toolbar{align-items:flex-start}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-tabs{grid-template-columns:repeat(4,1fr);width:min(430px,100%)}
+  .s13-dashboard .ri3-line .ri3-pipeline{grid-template-columns:1fr}
+  .s13-dashboard .ri3-line .ri3-pipeline b{display:none}
+}
+@media(max-width:620px){
+  .s13-dashboard .foundry-pulse.lf-pulse-v2{grid-template-columns:1fr!important;grid-template-areas:"brand" "console";padding:14px 12px!important}
+  .s13-dashboard .lf-pulse-v2 .radar{display:none}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-toolbar{display:grid;grid-template-columns:1fr;gap:8px}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-tabs{grid-template-columns:1fr 1fr;width:100%;gap:6px}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-tab{min-height:38px;font-size:13px}
+  .s13-dashboard .lf-pulse-v2 .lf-pulse-metrics{grid-template-columns:1fr 1fr;gap:6px}
+  .s13-dashboard .lf-pulse-v2 .pulse-metric{padding:9px 8px!important}
+  .s13-dashboard [data-open-ri3] b{white-space:normal}
+}
+@media(max-width:390px){
+  .s13-dashboard .lf-pulse-v2 .pulse-metric strong{font-size:12px!important}
+  .s13-dashboard .lf-pulse-v2 .pulse-metric small{font-size:11px!important}
+}
+`;
+  document.head.appendChild(style);
+
+  const pulseViews = {
+    overview: {
+      title: 'OVERVIEW', sub: 'FOUNDRY CURRENT', metrics: [
+        ['PROJECT STATE','Published','info'],['MAINLINE','RI#1','ok'],['PARALLEL CURRENT','RI#3','rv'],
+        ['RI#2','READY','ok'],['CORE','CANDIDATE','warn'],['PUBLIC SITE','CURRENT','info']
+      ]
+    },
+    ri1: {
+      title: 'RI#1', sub: 'ARTICLE PRODUCTION', metrics: [
+        ['OVERALL','PARTIAL','warn'],['REPOSITORY','VERIFIED','ok'],['LIVE','VERIFIED','ok'],
+        ['RUNTIME','NOT EXECUTED','hot'],['CURRENT RV','0 / 3','rv'],['ACCEPTANCE','PENDING','warn']
+      ]
+    },
+    ri2: {
+      title: 'RI#2', sub: 'DOCUMENT TRANSFORMATION', metrics: [
+        ['OVERALL','READY','ok'],['WORKFLOW','PASS','ok'],['ARTIFACT','PASS','ok'],
+        ['PUBLICATION','NOT AUTHORIZED','warn'],['HUMAN REVIEW','READY','ok'],['PHASE','PHASE B','rv']
+      ]
+    },
+    ri3: {
+      title: 'RI#3', sub: 'VISUAL ASSET PRODUCTION', metrics: [
+        ['DEVELOPMENT','CURRENT','rv'],['CONTRACT','READY','ok'],['MOCK RUN','PASS','ok'],
+        ['OFFLINE TEST','PASS','ok'],['LIVE PREFLIGHT','PENDING','warn'],['GENERATION','DISABLED','hot']
+      ]
+    }
+  };
+
+  pulse.classList.add('lf-pulse-v2');
+  pulse.innerHTML = `
+    <div class="pulse-left"><span>FOUNDRY PULSE</span><svg aria-hidden="true" viewBox="0 0 320 62"><polyline class="pulse-shadow" points="0,35 12,35 20,25 30,47 42,32 52,36 63,20 74,44 86,34 100,34 110,27 120,37 132,35 143,18 152,46 162,32 174,34 185,26 196,40 208,34 218,33 228,20 240,44 253,31 265,35 278,26 289,42 301,34 320,34"></polyline><polyline class="pulse-line" points="0,35 12,35 20,25 30,47 42,32 52,36 63,20 74,44 86,34 100,34 110,27 120,37 132,35 143,18 152,46 162,32 174,34 185,26 196,40 208,34 218,33 228,20 240,44 253,31 265,35 278,26 289,42 301,34 320,34"></polyline></svg></div>
+    <div class="lf-pulse-console">
+      <div class="lf-pulse-toolbar">
+        <div class="lf-pulse-view-label"><small>VIEW</small><strong data-pulse-view-title>OVERVIEW</strong><span data-pulse-view-sub>FOUNDRY CURRENT</span></div>
+        <div class="lf-pulse-tabs" role="tablist" aria-label="Foundry Pulse表示切替">
+          <button class="lf-pulse-tab" type="button" role="tab" aria-selected="true" data-pulse-view="overview">OVERVIEW</button>
+          <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-pulse-view="ri1">RI#1</button>
+          <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-pulse-view="ri2">RI#2</button>
+          <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-pulse-view="ri3">RI#3</button>
+        </div>
+      </div>
+      <div class="lf-pulse-metrics" data-pulse-metrics></div>
+    </div>
+    <div aria-hidden="true" class="radar"><i></i><b></b><em></em></div>`;
+
+  let pulseView = 'overview';
+  const pulseMetricBox = pulse.querySelector('[data-pulse-metrics]');
+  function renderPulse(view) {
+    const data = pulseViews[view] || pulseViews.overview;
+    pulseView = view in pulseViews ? view : 'overview';
+    pulse.querySelector('[data-pulse-view-title]').textContent = data.title;
+    pulse.querySelector('[data-pulse-view-sub]').textContent = data.sub;
+    pulse.querySelectorAll('[data-pulse-view]').forEach(btn => {
+      btn.setAttribute('aria-selected', String(btn.dataset.pulseView === pulseView));
+    });
+    pulseMetricBox.innerHTML = data.metrics.map(([label,value,tone]) =>
+      `<div class="pulse-metric"><small>${label}</small><strong class="${tone||''}">${value}</strong></div>`
+    ).join('');
+  }
+  pulse.addEventListener('click', event => {
+    const tab = event.target.closest('[data-pulse-view]');
+    if (tab) renderPulse(tab.dataset.pulseView);
+  });
+  pulse.addEventListener('keydown', event => {
+    const tab = event.target.closest('[data-pulse-view]');
+    if (!tab || !['ArrowLeft','ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    const tabs = [...pulse.querySelectorAll('[data-pulse-view]')];
+    const index = tabs.indexOf(tab);
+    const next = tabs[(index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+    next.focus();
+    renderPulse(next.dataset.pulseView);
+  });
+  renderPulse('overview');
+
+  /* Cards: RI#1 is formal mainline; RI#3 is now an active parallel build. */
+  const ri1Card = projectCards.querySelector('[data-open-ri1]');
+  const ri2Card = projectCards.querySelector('[data-open-ri2]');
+  if (ri1Card) {
+    const mark = ri1Card.querySelector('mark');
+    if (mark) mark.textContent = 'MAINLINE';
+    ri1Card.addEventListener('click', () => renderPulse('ri1'));
+  }
+  if (ri2Card) ri2Card.addEventListener('click', () => renderPulse('ri2'));
+
+  const oldRi3Card = [...projectCards.children].find(el => el.textContent.includes('RI#3'));
+  if (oldRi3Card) {
+    const ri3Card = document.createElement('button');
+    ri3Card.type = 'button';
+    ri3Card.className = 'project-card active-card';
+    ri3Card.dataset.openRi3 = '';
+    ri3Card.innerHTML = `<span class="project-icon violet">⬢</span><span><b><em>RI#3</em> 画像制作</b><small>Visual Asset Production /<br>Phase 1–2</small></span><mark>BUILDING</mark><i class="card-trace"></i>`;
+    oldRi3Card.replaceWith(ri3Card);
+  }
+
+  /* Replace the old static RI#3 future row with a real rail and telemetry drawer. */
+  const oldRi3Line = [...board.querySelectorAll('.project-line')].find(el => el.textContent.includes('RI#3'));
+  if (oldRi3Line && !oldRi3Line.classList.contains('ri3-line')) {
+    oldRi3Line.outerHTML = `
+<article class="project-line ri3-line" id="ri3-line">
+  <div aria-label="RI#3 画像制作の詳細を開く" class="ri3-rail-row" role="button" tabindex="0">
+    <button aria-controls="ri3-telemetry" aria-expanded="false" class="line-toggle" id="ri3-toggle" type="button">
+      <span class="line-id"><i>✣</i><b>RI#3</b></span><span class="line-name"><strong>画像制作</strong><small>Visual Asset Production</small></span><span class="line-state">BUILDING</span><span aria-hidden="true" class="chevron">⌄</span>
+    </button>
+    <div aria-label="RI#3 画像制作: 実装段階" class="stage-rail ri3-stage-rail">
+      <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-segment"></div><div class="rail-segment"></div>
+      <div class="rail-node n1 done"><span></span></div><div class="rail-node n2 done"><span></span></div><div class="rail-node n3 current"><span class="orb"></span><b class="orb-ring r1"></b><b class="orb-ring r2"></b><b class="orb-ring r3"></b></div><div class="rail-node n4"><span></span></div><div class="rail-node n5"><span></span></div>
+      <div aria-hidden="true" class="energy-beam" style="left:50%"><i></i><b></b><em></em></div>
+    </div>
+  </div>
+  <div aria-hidden="true" aria-labelledby="ri3-telemetry-title" class="telemetry-reveal" id="ri3-telemetry" inert role="region">
+    <div class="telemetry-reveal-inner">
+      <section class="telemetry-panel ri3-telemetry-panel">
+        <div aria-hidden="true" class="panel-grid"></div><div aria-hidden="true" class="panel-noise"></div><div aria-hidden="true" class="panel-scan"></div><div aria-hidden="true" class="edge-trace trace-a"></div><div aria-hidden="true" class="edge-trace trace-b"></div>
+        <aside class="operator-card boot-item" style="--boot:0">
+          <span class="operator-label">VISUAL OPERATOR</span>
+          <div class="operator-art"><img alt="Foundry Visual Operator" src="assets/ri1-operator.webp"/></div>
+          <div class="operator-comment"><small>OPERATOR COMMENT</small><p>Design（設計）・Contract（契約）・Mock Runner（模擬実行）まで成立。実ComfyUI接続はRead-only Preflight（読み取り専用事前確認）待ち。Live Generation（実画像生成）はまだ無効。</p></div>
+        </aside>
+        <div class="telemetry-main">
+          <header class="telemetry-head boot-item" style="--boot:1"><div><p>RI #3 / VISUAL ASSET PRODUCTION</p><h3 id="ri3-telemetry-title">VISUAL TELEMETRY</h3></div><div class="projection-badge"><span></span>PUBLIC PROJECTION</div><button aria-label="RI#3管制盤を閉じる" class="panel-close" data-close-ri3 type="button">×</button></header>
+          <div class="status-grid">
+            <article class="status-card current boot-item" style="--boot:2"><small>DEVELOPMENT</small><strong>CURRENT</strong></article>
+            <article class="status-card green boot-item" style="--boot:3"><small>DESIGN</small><strong>PASS</strong></article>
+            <article class="status-card green boot-item" style="--boot:4"><small>CONTRACT</small><strong>READY</strong></article>
+            <article class="status-card green boot-item" style="--boot:5"><small>MOCK RUN</small><strong>PASS</strong></article>
+            <article class="status-card waiting boot-item" style="--boot:6"><small>ENV PREFLIGHT</small><strong>PENDING</strong></article>
+            <article class="status-card disabled boot-item" style="--boot:7"><small>LIVE GENERATION</small><strong>DISABLED</strong></article>
+          </div>
+          <div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">VISUAL PRODUCTION PROGRESSION</p><div class="ri3-pipeline"><span class="ok">FOUNDATION ✓</span><b>→</b><span class="ok">CONTRACT ✓</span><b>→</b><span class="ok">MOCK ✓</span><b>→</b><span class="next">PREFLIGHT ◎</span><b>→</b><span class="pending">LIVE</span><b>→</b><span class="pending">HUMAN REVIEW</span></div></div>
+          <div class="telemetry-lower">
+            <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CONTROL BOUNDARY</p><div class="contract-row"><span>Python Reference Runner</span><strong>READY</strong></div><div class="contract-row"><span>Repository Write</span><strong>DISABLED</strong></div><div class="contract-row"><span>Publication Automation</span><strong>DISABLED</strong></div></div>
+            <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span>PARTIAL</span></div><ul><li><span>Offline Test</span><strong>PASS</strong></li><li><span>Mock Run</span><strong>PASS</strong></li><li><span>Human PC Preflight</span><strong>PENDING</strong></li></ul></div>
+          </div>
+          <footer class="telemetry-foot boot-item" style="--boot:11"><span>PUBLIC BOUNDARY</span><p>公開可能な開発段階だけを表示。Model・Context・内部ID・環境固有識別子は投影しない。</p></footer>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>`;
+  }
+
+  const ri3Line = board.querySelector('.ri3-line');
+  const ri3Row = board.querySelector('.ri3-rail-row');
+  const ri3Toggle = board.querySelector('#ri3-toggle');
+  const ri3Reveal = board.querySelector('#ri3-telemetry');
+  const ri3Panel = board.querySelector('.ri3-telemetry-panel');
+  const ri3Close = board.querySelector('[data-close-ri3]');
+  const ri3Triggers = [...root.querySelectorAll('[data-open-ri3]')];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let ri3Open = false;
+  let bootTimer = 0;
+  let guideTimer = 0;
+
+  function closeExistingRiPanels() {
+    if (board.classList.contains('ri1-open')) root.querySelector('[data-close-ri1]')?.click();
+    if (board.classList.contains('ri2-open')) root.querySelector('[data-close-ri2]')?.click();
+  }
+  function scrollRi3() {
+    if (!ri3Row) return;
+    const top = ri3Row.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top, behavior: reduce.matches ? 'auto' : 'smooth' });
+  }
+  function openRi3({scroll=true}={}) {
+    if (ri3Open) { if (scroll) scrollRi3(); return; }
+    closeExistingRiPanels();
+    clearTimeout(bootTimer); clearTimeout(guideTimer);
+    ri3Open = true;
+    board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri1-open','ri2-open','ri3-open','ri-open');
+    board.classList.add('ri-open','ri3-open','ri-booting');
+    ri3Toggle?.setAttribute('aria-expanded','true');
+    ri3Reveal?.setAttribute('aria-hidden','false'); if (ri3Reveal) ri3Reveal.inert = false;
+    root.querySelectorAll('[data-guide-label]').forEach(el => el.textContent = 'RI#3 GUIDE');
+    root.querySelectorAll('[data-current-stage]').forEach(el => el.textContent = 'IMPLEMENTATION');
+    requestAnimationFrame(() => requestAnimationFrame(() => board.classList.add('ri-energized')));
+    guideTimer = window.setTimeout(() => board.classList.add('guide-open-ready'), reduce.matches ? 0 : 620);
+    bootTimer = window.setTimeout(() => board.classList.remove('ri-booting'), 1250);
+    renderPulse('ri3');
+    document.dispatchEvent(new CustomEvent('lf:ri3-opened'));
+    if (scroll) window.setTimeout(scrollRi3,90);
+  }
+  function closeRi3({focusToggle=true}={}) {
+    if (!ri3Open) return;
+    ri3Open = false;
+    clearTimeout(bootTimer); clearTimeout(guideTimer);
+    board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri3-open','ri-open');
+    ri3Toggle?.setAttribute('aria-expanded','false');
+    ri3Reveal?.setAttribute('aria-hidden','true'); if (ri3Reveal) ri3Reveal.inert = true;
+    if (focusToggle) window.setTimeout(() => ri3Toggle?.focus({preventScroll:true}), reduce.matches ? 0 : 300);
+  }
+
+  ri3Toggle?.addEventListener('click', e => { e.stopPropagation(); ri3Open ? closeRi3({focusToggle:false}) : openRi3({scroll:true}); });
+  ri3Row?.addEventListener('click', e => { if (e.target.closest('#ri3-telemetry')) return; ri3Open ? closeRi3({focusToggle:false}) : openRi3({scroll:true}); });
+  ri3Row?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ri3Open ? closeRi3({focusToggle:false}) : openRi3({scroll:true}); } });
+  ri3Close?.addEventListener('click', e => { e.stopPropagation(); closeRi3({focusToggle:true}); });
+  ri3Triggers.forEach(t => t.addEventListener('click', () => openRi3({scroll:true})));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && ri3Open) { e.preventDefault(); closeRi3({focusToggle:true}); } });
+  document.addEventListener('lf:ri1-opened', () => { if (ri3Open) closeRi3({focusToggle:false}); renderPulse('ri1'); });
+  document.addEventListener('lf:ri2-opened', () => { if (ri3Open) closeRi3({focusToggle:false}); renderPulse('ri2'); });
+
+  /* Pulse follows detail-card intent, but Pulse tabs alone never open a drawer. */
+  root.querySelectorAll('[data-open-ri1]').forEach(el => el.addEventListener('click', () => renderPulse('ri1')));
+  root.querySelectorAll('[data-open-ri2]').forEach(el => el.addEventListener('click', () => renderPulse('ri2')));
+
+  /* Public projection fallback may be replaced later by a generated RI#3 JSON. Until then these are
+     deliberately presentation-safe Human+ChatGPT Current facts, not a new SSOT. */
+})();
+
+/* LF-RI3-DASHBOARD-HOTFIX-END v1 */
