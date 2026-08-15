@@ -217,6 +217,38 @@ const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
 let isOpen=false, bootTimer=0, guideTimer=0;
 const qsa=s=>[...root.querySelectorAll(s)];
 function setText(sel,val){qsa(sel).forEach(el=>{el.textContent=String(val)})}
+function resolveRi2CurrentIndex(r){
+ const publication=String(r?.publication||'').trim().toUpperCase();
+ const humanGate=String(r?.human_gate||'').trim().toUpperCase();
+ const artifact=String(r?.artifact||'').trim().toUpperCase();
+ const workflow=String(r?.workflow||'').trim().toUpperCase();
+ if(publication==='AUTHORIZED' || publication==='PUBLISHED' || publication==='PASS') return 5;
+ if(humanGate==='READY' || publication==='NOT AUTHORIZED') return 5;
+ if(artifact==='PASS') return 4;
+ if(workflow==='PASS') return 3;
+ return 2;
+}
+function renderRi2Rail(r){
+ const rail=root.querySelector('.ri2-stage-rail');
+ if(!rail) return;
+ const currentIndex=Math.max(1,Math.min(5,resolveRi2CurrentIndex(r)));
+ const segments=[...rail.querySelectorAll('.rail-segment')];
+ const nodes=[...rail.querySelectorAll('.rail-node')];
+ segments.forEach((seg,idx)=>{
+  seg.classList.remove('done','current');
+  if(idx < currentIndex-1) seg.classList.add('done');
+  else if(idx===currentIndex-1) seg.classList.add('current');
+ });
+ nodes.forEach((node,idx)=>{
+  node.classList.remove('done','current');
+  if(idx < currentIndex-1) node.classList.add('done');
+  else if(idx===currentIndex-1) node.classList.add('current');
+ });
+ const beam=rail.querySelector('.energy-beam');
+ if(beam){
+  beam.style.left=`${10 + ((currentIndex-1) * 20)}%`;
+ }
+}
 const COMPLETE_STATES=new Set(['VERIFIED','PASS','COMPLETE','ACCEPTED','N/A','NOT REQUIRED']);
 const BLOCKING_STATES=new Set(['FAILED','NOT APPLIED','NOT IMPLEMENTED','BLOCKED','UNKNOWN']);
 const norm=v=>String(v??'').trim().toUpperCase();
@@ -412,6 +444,7 @@ function bindProjection(DATA){
  if(r.evidence?.files)setText('[data-ri2-evidence-files]',`${r.evidence.files.verified} / ${r.evidence.files.total}`);
  const comment=`Source Binding（Sourceひも付け）からSemantic Review（意味レビュー）まで${r.workflow==='PASS'?'完了':'進行'}。Public Candidate（公開候補）はArtifact ${r.artifact||'UNKNOWN'}。Publication（公開）は${r.publication==='NOT AUTHORIZED'?'未承認':'現在状態 '+r.publication}で、現在はHuman Review（人間レビュー）${r.human_gate==='READY'?'待ち':'確認中'}。`;
  setText('[data-ri2-operator-comment]',comment);
+ renderRi2Rail(r);
 }
 async function loadProjection(){
  try{
