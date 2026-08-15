@@ -49,7 +49,7 @@
 <div class="pulse-metric"><small>RI#1</small><strong class="warn" data-overall="">PARTIAL</strong></div>
 <div class="pulse-metric compact"><small>ACCEPTANCE</small><strong class="pending" data-acceptance="">PENDING</strong></div>
 <div class="pulse-metric"><small>RUNTIME</small><strong class="hot" data-runtime="">NOT EXECUTED</strong></div>
-<div class="pulse-metric compact"><small>FORMAL RV</small><strong class="rv" data-formal-rv="">0 / 3</strong></div>
+<div class="pulse-metric compact"><small>CURRENT RV</small><strong class="rv" data-formal-rv="">0 / 3</strong></div>
 <div aria-hidden="true" class="radar"><i></i><b></b><em></em></div>
 </section>
 </div>
@@ -101,14 +101,14 @@
 <article class="status-card green boot-item" style="--boot:3"><small>REPOSITORY</small><strong data-repository="">VERIFIED</strong></article>
 <article class="status-card pink boot-item" style="--boot:4"><small>PRIMARY BLOCKER</small><span data-primary-layer="">Runtime</span><strong data-primary-state="">NOT EXECUTED</strong></article>
 <article class="status-card orange boot-item" style="--boot:5"><small>NEXT REQUIRED</small><span data-next-layer="">Runtime</span><strong data-next-state="">NOT EXECUTED</strong></article>
-<article class="status-card purple boot-item" style="--boot:6"><small>FORMAL RV</small><strong data-formal-rv="">0 / 3</strong></article>
+<article class="status-card purple boot-item" style="--boot:6"><small>CURRENT RV</small><strong data-formal-rv="">0 / 3</strong></article>
 <article class="status-card amber boot-item" style="--boot:7"><small>RUNTIME ACCEPTANCE</small><strong data-acceptance="">PENDING</strong></article>
 <article class="status-card cyan wide boot-item" style="--boot:8"><small>FRESHNESS</small><strong data-freshness="">CURRENT</strong><span data-freshness-reason="">SOURCE_MANIFEST_MATCH</span></article>
 </div>
 <div class="pipeline-block boot-item" style="--boot:9"><p class="micro-title">PIPELINE PROGRESSION</p><div class="pipeline"><span class="ok" data-pipeline-stage="design">DESIGN <i>✓</i></span><b>→</b><span class="ok" data-pipeline-stage="repository">REPOSITORY <i>✓</i></span><b>→</b><span class="ok" data-pipeline-stage="live">LIVE <i>✓</i></span><b>→</b><span class="next" data-pipeline-stage="runtime">RUNTIME <i>◎</i></span><b>→</b><span class="pending" data-pipeline-stage="acceptance">ACCEPTANCE</span></div></div>
 <div class="telemetry-lower">
 <div class="contract-block boot-item" style="--boot:10"><p class="micro-title">AGENT CONTRACTS</p><div class="contract-row"><span>Structured Output</span><strong data-structured="">20 / 20 VERIFIED</strong></div><div class="contract-row"><span>Raw Gate</span><strong data-raw-gate="">20 / 20 VERIFIED</strong></div><div class="contract-row"><span>Formal Capabilities</span><strong data-capabilities="">14</strong></div></div>
-<div class="evidence-block boot-item" style="--boot:11"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span data-evidence-binding="">PARTIAL</span></div><ul><li><span>Evidence Binding</span><strong data-evidence-binding="">PARTIAL</strong></li><li><span>Formal RV</span><strong data-formal-rv="">0 / 3</strong></li><li><span>Acceptance</span><strong data-acceptance="">PENDING</strong></li></ul></div>
+<div class="evidence-block boot-item" style="--boot:11"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span data-evidence-binding="">PARTIAL</span></div><ul><li><span>Evidence Binding</span><strong data-evidence-binding="">PARTIAL</strong></li><li><span>Current RV</span><strong data-formal-rv="">0 / 3</strong></li><li><span>Acceptance</span><strong data-acceptance="">PENDING</strong></li></ul></div>
 </div>
 <footer class="telemetry-foot boot-item" style="--boot:12"><span>PUBLIC BOUNDARY</span><p>公開可能なCurrent Projection（現在地の公開投影）のみ表示。</p></footer>
 </div>
