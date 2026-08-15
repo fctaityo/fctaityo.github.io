@@ -1,0 +1,29 @@
+{
+  "schema_version": "LF-RI2-PUBLIC-PROJECTION-0.1",
+  "ri2": {
+    "overall": "READY",
+    "phase": "PHASE B",
+    "workflow": "PASS",
+    "artifact": "PASS",
+    "publication": "NOT AUTHORIZED",
+    "human_gate": "READY",
+    "workflow_mode": "SOURCE-PRESERVING",
+    "architecture_revision": "v0.34",
+    "contracts": {
+      "source_binding": "PASS",
+      "deterministic_validation": "PASS",
+      "semantic_review": "PASS"
+    },
+    "evidence": {
+      "binding": "PASS",
+      "gates": {
+        "passed": 8,
+        "total": 8
+      },
+      "files": {
+        "verified": 38,
+        "total": 38
+      }
+    }
+  }
+}
