@@ -911,8 +911,8 @@ loadProjection();
     },
     ri3: {
       title: 'RI#3', sub: 'VISUAL ASSET PRODUCTION', metrics: [
-        ['DEVELOPMENT','CURRENT','rv'],['CONTRACT','READY','ok'],['MOCK RUN','PASS','ok'],
-        ['OFFLINE TEST','PASS','ok'],['LIVE PREFLIGHT','PENDING','warn'],['GENERATION','DISABLED','hot']
+        ['DEVELOPMENT','CURRENT','rv'],['LIVE GENERATION','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],
+        ['GATE PASS','20 / 21','ok'],['HUMAN REVIEW','ACTIVE','rv'],['ACCEPTANCE','PENDING','warn']
       ]
     }
   };
@@ -980,7 +980,7 @@ loadProjection();
     ri3Card.type = 'button';
     ri3Card.className = 'project-card active-card';
     ri3Card.dataset.openRi3 = '';
-    ri3Card.innerHTML = `<span class="project-icon violet">⬢</span><span><b><em>RI#3</em> 画像制作</b><small>Visual Asset Production /<br>Phase 1–2</small></span><mark>BUILDING</mark><i class="card-trace"></i>`;
+    ri3Card.innerHTML = `<span class="project-icon violet">⬢</span><span><b><em>RI#3</em> 画像制作</b><small>Visual Asset Production /<br>Human Runtime</small></span><mark>VALIDATING</mark><i class="card-trace"></i>`;
     oldRi3Card.replaceWith(ri3Card);
   }
 
@@ -991,12 +991,12 @@ loadProjection();
 <article class="project-line ri3-line" id="ri3-line">
   <div aria-label="RI#3 画像制作の詳細を開く" class="ri3-rail-row" role="button" tabindex="0">
     <button aria-controls="ri3-telemetry" aria-expanded="false" class="line-toggle" id="ri3-toggle" type="button">
-      <span class="line-id"><i>✣</i><b>RI#3</b></span><span class="line-name"><strong>画像制作</strong><small>Visual Asset Production</small></span><span class="line-state">BUILDING</span><span aria-hidden="true" class="chevron">⌄</span>
+      <span class="line-id"><i>✣</i><b>RI#3</b></span><span class="line-name"><strong>画像制作</strong><small>Visual Asset Production</small></span><span class="line-state">VALIDATING</span><span aria-hidden="true" class="chevron">⌄</span>
     </button>
-    <div aria-label="RI#3 画像制作: 実装段階" class="stage-rail ri3-stage-rail">
-      <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-segment"></div><div class="rail-segment"></div>
-      <div class="rail-node n1 done"><span></span></div><div class="rail-node n2 done"><span></span></div><div class="rail-node n3 current"><span class="orb"></span><b class="orb-ring r1"></b><b class="orb-ring r2"></b><b class="orb-ring r3"></b></div><div class="rail-node n4"><span></span></div><div class="rail-node n5"><span></span></div>
-      <div aria-hidden="true" class="energy-beam" style="left:50%"><i></i><b></b><em></em></div>
+    <div aria-label="RI#3 画像制作: 実証段階 / Human Review継続中" class="stage-rail ri3-stage-rail">
+      <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-segment"></div>
+      <div class="rail-node n1 done"><span></span></div><div class="rail-node n2 done"><span></span></div><div class="rail-node n3 done"><span></span></div><div class="rail-node n4 current"><span class="orb"></span><b class="orb-ring r1"></b><b class="orb-ring r2"></b><b class="orb-ring r3"></b></div><div class="rail-node n5"><span></span></div>
+      <div aria-hidden="true" class="energy-beam" style="left:70%"><i></i><b></b><em></em></div>
     </div>
   </div>
   <div aria-hidden="true" aria-labelledby="ri3-telemetry-title" class="telemetry-reveal" id="ri3-telemetry" inert role="region">
@@ -1006,24 +1006,24 @@ loadProjection();
         <aside class="operator-card boot-item" style="--boot:0">
           <span class="operator-label">VISUAL OPERATOR</span>
           <div class="operator-art"><img alt="Foundry Visual Operator" src="assets/ri1-operator.webp"/></div>
-          <div class="operator-comment"><small>OPERATOR COMMENT</small><p>Design（設計）・Contract（契約）・Mock Runner（模擬実行）まで成立。実ComfyUI接続はRead-only Preflight（読み取り専用事前確認）待ち。Live Generation（実画像生成）はまだ無効。</p></div>
+          <div class="operator-comment"><small>OPERATOR COMMENT</small><p>Human PC上でLive Generation（実画像生成）とEvidence（証拠）採取まで実施。v0.49を基準にHuman Review（人間レビュー）を継続中。CENTER・腕・FULL BODY・CANVAS FILLの生成品質を次版へ持ち越し、Production Acceptance（本番受入れ）は未成立。</p></div>
         </aside>
         <div class="telemetry-main">
           <header class="telemetry-head boot-item" style="--boot:1"><div><p>RI #3 / VISUAL ASSET PRODUCTION</p><h3 id="ri3-telemetry-title">VISUAL TELEMETRY</h3></div><div class="projection-badge"><span></span>PUBLIC PROJECTION</div><button aria-label="RI#3管制盤を閉じる" class="panel-close" data-close-ri3 type="button">×</button></header>
           <div class="status-grid">
             <article class="status-card current boot-item" style="--boot:2"><small>DEVELOPMENT</small><strong>CURRENT</strong></article>
-            <article class="status-card green boot-item" style="--boot:3"><small>DESIGN</small><strong>PASS</strong></article>
-            <article class="status-card green boot-item" style="--boot:4"><small>CONTRACT</small><strong>READY</strong></article>
-            <article class="status-card green boot-item" style="--boot:5"><small>MOCK RUN</small><strong>PASS</strong></article>
-            <article class="status-card waiting boot-item" style="--boot:6"><small>ENV PREFLIGHT</small><strong>PENDING</strong></article>
-            <article class="status-card disabled boot-item" style="--boot:7"><small>LIVE GENERATION</small><strong>DISABLED</strong></article>
+            <article class="status-card green boot-item" style="--boot:3"><small>LIVE GENERATION</small><strong>EXECUTED</strong></article>
+            <article class="status-card green boot-item" style="--boot:4"><small>RUNTIME EVIDENCE</small><strong>CAPTURED</strong></article>
+            <article class="status-card green boot-item" style="--boot:5"><small>GATE RESULT</small><strong>20 / 21 PASS</strong></article>
+            <article class="status-card current boot-item" style="--boot:6"><small>HUMAN REVIEW</small><strong>ACTIVE</strong></article>
+            <article class="status-card waiting boot-item" style="--boot:7"><small>PRODUCTION ACCEPTANCE</small><strong>PENDING</strong></article>
           </div>
-          <div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">VISUAL PRODUCTION PROGRESSION</p><div class="ri3-pipeline"><span class="ok">FOUNDATION ✓</span><b>→</b><span class="ok">CONTRACT ✓</span><b>→</b><span class="ok">MOCK ✓</span><b>→</b><span class="next">PREFLIGHT ◎</span><b>→</b><span class="pending">LIVE</span><b>→</b><span class="pending">HUMAN REVIEW</span></div></div>
+          <div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">VISUAL PRODUCTION PROGRESSION</p><div class="ri3-pipeline"><span class="ok">FOUNDATION ✓</span><b>→</b><span class="ok">LIVE ✓</span><b>→</b><span class="ok">EVIDENCE ✓</span><b>→</b><span class="next">HUMAN REVIEW ◎</span><b>→</b><span class="pending">ACCEPTANCE</span></div></div>
           <div class="telemetry-lower">
-            <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CONTROL BOUNDARY</p><div class="contract-row"><span>Python Reference Runner</span><strong>READY</strong></div><div class="contract-row"><span>Repository Write</span><strong>DISABLED</strong></div><div class="contract-row"><span>Publication Automation</span><strong>DISABLED</strong></div></div>
-            <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span>PARTIAL</span></div><ul><li><span>Offline Test</span><strong>PASS</strong></li><li><span>Mock Run</span><strong>PASS</strong></li><li><span>Human PC Preflight</span><strong>PENDING</strong></li></ul></div>
+            <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT GENERATION CONTRACT</p><div class="contract-row"><span>Full-canvas Native</span><strong>ACTIVE</strong></div><div class="contract-row"><span>OpenPose-first</span><strong>ACTIVE</strong></div><div class="contract-row"><span>Composite Path</span><strong>DISABLED</strong></div></div>
+            <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span>20 / 21</span></div><ul><li><span>Human PC Runs</span><strong>21</strong></li><li><span>Blocking Gate Pass</span><strong>20 / 21</strong></li><li><span>Acceptance</span><strong>PENDING</strong></li></ul></div>
           </div>
-          <footer class="telemetry-foot boot-item" style="--boot:11"><span>PUBLIC BOUNDARY</span><p>公開可能な開発段階だけを表示。Model・Context・内部ID・環境固有識別子は投影しない。</p></footer>
+          <footer class="telemetry-foot boot-item" style="--boot:11"><span>PUBLIC BOUNDARY</span><p>公開可能なHuman Runtime / Evidence / Review段階だけを表示。Model・Context・内部ID・環境固有識別子は投影しない。</p></footer>
         </div>
       </section>
     </div>
@@ -1062,7 +1062,7 @@ loadProjection();
     ri3Toggle?.setAttribute('aria-expanded','true');
     ri3Reveal?.setAttribute('aria-hidden','false'); if (ri3Reveal) ri3Reveal.inert = false;
     root.querySelectorAll('[data-guide-label]').forEach(el => el.textContent = 'RI#3 GUIDE');
-    root.querySelectorAll('[data-current-stage]').forEach(el => el.textContent = 'IMPLEMENTATION');
+    root.querySelectorAll('[data-current-stage]').forEach(el => el.textContent = 'VALIDATION');
     requestAnimationFrame(() => requestAnimationFrame(() => board.classList.add('ri-energized')));
     guideTimer = window.setTimeout(() => board.classList.add('guide-open-ready'), reduce.matches ? 0 : 620);
     bootTimer = window.setTimeout(() => board.classList.remove('ri-booting'), 1250);
