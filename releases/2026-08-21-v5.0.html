@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050914">
+<meta name="description" content="Local AI Foundry v5.0。RI#1〜RI#4の実証Evidenceを横断し、Foundry Core ExtractionへProject Vectorを更新したMajor Release。">
+<title>v5.0 — Cross-RI Core Extraction | Local AI Foundry</title>
+<style>
+:root{--bg:#050914;--panel:#091525;--text:#eef7ff;--muted:#92a8be;--cyan:#36dff7;--green:#56f0bd;--violet:#9f83ff;--amber:#ffc75a;--line:rgba(117,183,255,.18)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 75% 0,rgba(86,240,189,.06),transparent 30%),var(--bg);color:var(--text);font:17px/1.75 Inter,"Segoe UI","Noto Sans JP",sans-serif}a{color:inherit}.shell{width:min(980px,calc(100% - 40px));margin:auto}.header{padding:24px 0;border-bottom:1px solid var(--line);background:rgba(5,9,20,.82);position:sticky;top:0;backdrop-filter:blur(16px)}.back{color:var(--cyan);text-decoration:none;font-weight:800;font-size:14px}.hero{padding:84px 0 42px}.kicker{color:var(--green);font-size:13px;font-weight:900;letter-spacing:.18em;margin:0}.hero h1{font-size:clamp(52px,8vw,86px);line-height:.94;letter-spacing:-.05em;margin:15px 0 24px}.hero h1 span{display:block;color:var(--green)}.lead{font-size:21px;color:var(--muted);max-width:800px}.lead strong{color:var(--text)}.decision{margin:26px 0 0;padding:22px 24px;border:1px solid rgba(86,240,189,.3);border-left:4px solid var(--green);border-radius:14px;background:linear-gradient(145deg,rgba(9,35,37,.65),rgba(8,17,31,.9))}.decision small,.decision strong{display:block}.decision small{color:var(--green);font-weight:900;letter-spacing:.12em}.decision strong{font-size:22px;margin-top:5px}.section{padding:34px 0;border-top:1px solid rgba(117,183,255,.12)}h2{font-size:32px;line-height:1.25;margin:0 0 18px}.ri{display:grid;grid-template-columns:110px 1fr 180px;gap:20px;align-items:start;padding:20px 0;border-top:1px solid rgba(117,183,255,.12)}.ri:first-of-type{border-top:0}.ri b{color:var(--cyan)}.ri h3{margin:0 0 6px;font-size:20px}.ri p{margin:0;color:var(--muted)}.state{font-size:12px;font-weight:900;text-align:right}.state.frozen{color:var(--amber)}.state.verified{color:var(--green)}.state.frontier{color:#c7b9ff}.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center}.node{padding:19px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}.node span{font-size:11px;color:#7890a6}.node strong{display:block;margin-top:6px;font-size:17px}.node:last-child{border-color:rgba(86,240,189,.34)}.node:last-child strong{color:var(--green)}.arrow{color:var(--cyan);font-size:22px}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.principles article{padding:17px;border:1px solid var(--line);border-radius:12px;background:rgba(9,21,37,.75)}.principles strong{color:var(--cyan)}.principles p{margin:6px 0 0;color:var(--muted);font-size:14px}.footer{margin-top:40px;padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:720px){.hero{padding-top:58px}.ri{grid-template-columns:1fr}.state{text-align:left}.flow{grid-template-columns:1fr}.arrow{transform:rotate(90deg);text-align:center}.principles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header"><div class="shell"><a class="back" href="../index.html">← LOCAL AI FOUNDRY</a></div></header>
+<main class="shell">
+<section class="hero">
+<p class="kicker">LOCAL AI FOUNDRY v5.0 / 2026.08.21</p>
+<h1>複数の実証から、<span>Foundry Coreへ。</span></h1>
+<p class="lead">v4.0で宣言したHuman-Directed Foundryを、実証の数で前へ進める。RI#1〜RI#4で得たEvidenceを横断し、<strong>「どのPlatformを使うか」ではなく「AIへどう仕事を任せるか」</strong>を共通Control Modelとして抽出するMajor Release。</p>
+<div class="decision"><small>HUMAN DECISION</small><strong>RI#1固有開発を凍結。Project VectorをFoundry Core Extractionへ。</strong></div>
+</section>
+<section class="section"><h2>Reference Implementationsの役割を再定義</h2>
+<div class="ri"><b>RI#1</b><div><h3>Article Production</h3><p>Dify中心の最初の実証。LFのControl Patternの原型を生んだ。追加固有開発を停止し、今後はHistorical Benchmarkとして保存する。</p></div><span class="state frozen">FROZEN</span></div>
+<div class="ri"><b>RI#2</b><div><h3>Documentation Production</h3><p>Python RunnerでSource-preserving TransformationとRuntime Capabilityを実証。Platform-independentなControl Planeの可能性を広げた。</p></div><span class="state verified">CORE CONTRIBUTOR</span></div>
+<div class="ri"><b>RI#3</b><div><h3>Visual Asset Production</h3><p>FoundryConsole + ComfyUIでVisual Domainへ展開。Technical GateとHuman Quality Acceptanceが別責務であることを実機で確認した。</p></div><span class="state verified">RUNTIME VALIDATED</span></div>
+<div class="ri"><b>RI#4</b><div><h3>Research-Grounded Long-form</h3><p>Live Research、Task Fulfillment、Review Integrity、Temporal Entity Integrity、Sample Loopを統合。現在のText Domain Frontier。</p></div><span class="state frontier">CURRENT FRONTIER</span></div>
+</section>
+<section class="section"><h2>次に作るのは、もう一つのRIではない。</h2><div class="flow"><div class="node"><span>01</span><strong>Cross-RI Evidence</strong></div><div class="arrow">→</div><div class="node"><span>02</span><strong>Common Control Pattern</strong></div><div class="arrow">→</div><div class="node"><span>03</span><strong>Foundry Core Candidate</strong></div></div></section>
+<section class="section"><h2>v5.0で守る境界</h2><div class="principles"><article><strong>DomainをCoreへ混ぜない</strong><p>画像のFraming RuleやゲームのTemporal Entity RuleはRI側。再利用できるGate FrameworkだけをCore候補にする。</p></article><article><strong>PlatformをCoreにしない</strong><p>Dify、Ollama、ComfyUI、SearchはProcessing / Adapter。CoreはHuman AuthorityとControlの側に置く。</p></article><article><strong>CODEXを必須依存にしない</strong><p>CODEXはRepository ImplementationとFormal Reflectionを強くするActor。Project Architectureそのものの単一依存にはしない。</p></article></div></section>
+</main>
+<footer class="footer"><div class="shell">Local AI Foundry v5.0 — Cross-RI Core Extraction</div></footer>
+</body>
+</html>
