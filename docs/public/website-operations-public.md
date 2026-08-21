@@ -21,7 +21,7 @@
 
 Publicationの契約は`docs/governance/publication-governance.md`を参照する。
 
-Internal Publication Review RegistryおよびPublication Reflection Register（PRR）はInternal Repositoryで管理し、Public Repositoryまたは公式ホームページへ配置しない。
+Internal Publication Review RegistryはInternal Repositoryで管理する。Human-controlled Private HistoryはPublication Executionの外部責務であり、Public Repositoryまたは公式ホームページへ配置しない。
 
 ## 責務境界
 
@@ -30,15 +30,15 @@ Internal Publication Review RegistryおよびPublication Reflection Register（P
 | Internal Repository                  | 唯一の正本                                 |
 | Publication Governance               | 公開契約・公開統制                             |
 | Internal Publication Review Registry | 各管理対象のCurrent Publication Review      |
-| Publication Reflection Register（PRR） | 公開成果物から確認できなくなるPublication Review判断履歴 |
+| Human-controlled Private History       | Humanが必要に応じてPublication Executionの外部で保持する判断履歴 |
 | Public Repository                    | 承認済み公開成果物                             |
 | Website                              | Presentation Layer、概要、告知、公開導線         |
 
 本書はWebsiteの表示と公開導線だけを扱う。
 
-公開可否、Mask / Generalization、PRR要否またはCurrent Publication Reviewを本書で決定または保持しない。
+公開可否、Mask / Generalization、Human-controlled Private Historyの管理またはCurrent Publication Reviewを本書で決定・保持しない。
 
-Internal Publication Review RegistryおよびPRRの内容をWebsiteへ複製しない。
+Internal Publication Review RegistryおよびHuman-controlled Private Historyの内容をWebsiteへ複製しない。
 
 ## バージョン運用
 
@@ -118,11 +118,11 @@ Commitは公開準備であり公開完了ではない。承認されたPublic R
 
 `releases/index.html`は、公式サイトの正式リリースを時系列で一覧化する。各正式リリースは、日付、バージョン、Theme、Keywords、要約および詳細ページへの導線を持つ。
 
-詳細ページには、公開利用者へ影響する変更、改善理由、検証結果を簡潔に記載する。内部実装値、Prompt、非公開Evidence、環境固有情報、Internal Publication Review RegistryまたはPRRの内容は掲載しない。
+詳細ページには、公開利用者へ影響する変更、改善理由、検証結果を簡潔に記載する。内部実装値、Prompt、非公開Evidence、環境固有情報、Internal Publication Review RegistryまたはHuman-controlled Private Historyの内容は掲載しない。
 
-ReleasesページはGit履歴、Internal Publication Review RegistryまたはPRRの複製ではない。
+ReleasesページはGit履歴、Internal Publication Review RegistryまたはHuman-controlled Private Historyの複製ではない。
 
-Gitが技術的な変更記録、Internal Publication Review RegistryがCurrent Publication Review、PRRが公開成果物から確認できなくなる判断履歴を保持するのに対し、Releasesページは公開上意味のある変更を人間が理解できる単位で説明する。
+Gitが技術的な変更記録、Internal Publication Review RegistryがCurrent Publication Reviewを保持するのに対し、Releasesページは公開上意味のある変更を人間が理解できる単位で説明する。Human-controlled Private Historyはこの責務分担およびPublication Executionの外部にある。
 
 Historical Releaseは、そのRelease時点で公開された内容を保持する。後続変更によって過去Releaseの事実を自動的に書き換えない。
 
@@ -144,7 +144,7 @@ GitHub Releasesは、配布物、タグ、外部利用者へ固定して告知�
 
 公式サイトは、プロジェクトの価値、公開可能な設計、公開上の現在地、主要な更新および次に進む導線を示す。
 
-Commit一覧、Internal Publication Review Registry、PRR、内部変更履歴またはPublic Documentation本文の代替にはしない。
+Commit一覧、Internal Publication Review Registry、Human-controlled Private History、内部変更履歴またはPublic Documentation本文の代替にはしない。
 
 ## Documentationとの関係
 
@@ -154,7 +154,7 @@ Commit一覧、Internal Publication Review Registry、PRR、内部変更履歴�
 
 内部DocumentationをPublic Repositoryまたは公式サイトから直接リンクしない。
 
-Internal Publication Review RegistryおよびPRRも内部Documentationとして扱い、Public Repositoryまたは公式サイトへ公開しない。
+Internal Publication Review Registryは内部Documentationとして扱う。Human-controlled Private HistoryもPublic Repositoryまたは公式サイトへ公開しない。
 
 ### Public Documentation
 
@@ -177,7 +177,7 @@ Public Documentationは、Internal Repositoryの正本からPublication Governan
 * Version更新時はReleasesページを同時に更新する。
 * 正式リリースごとに必要なReleaseページを作成する。
 * Website更新は、承認されたPublication ScopeのPresentation Reflectionとして実施する。
-* Website更新だけでPublication Classification、Publication Review、PRRまたはInternal Publication Review Registry更新を代替しない。
+* Website更新だけでPublication Classification、Publication ReviewまたはInternal Publication Review Registry更新を代替しない。
 * Historical ReleaseとCurrent Publication構造を混同しない。
 
 ## Publication and Documentation Flow
@@ -191,11 +191,9 @@ Mask / Generalization要否判定
 ↓
 Human Review
 ↓
+Human-approved Current Publication Decision
+↓
 Internal Publication Review Registry Update
-↓
-PRR要否判定
-↓
-PRR Recording（必要な場合のみ）
 ↓
 Public Artifact作成
 ↓
@@ -214,11 +212,11 @@ Release Complete
 
 Internal Publication Review Registryは、各管理対象のCurrent Publication Reviewを保持する。
 
-PRRは、不採用・保留理由、Mask・Generalization・委譲その他の公開成果物から確認できなくなる判断が存在する場合だけ作成する。
+Human-controlled Private HistoryはPublication Executionの外部責務である。Humanが必要に応じて保持する場合も、Publication Executionの入力、Gate、依存または完了条件として扱わない。
 
-工程の一部が対象外の場合は省略できるが、公開内容とInternal Repositoryの正本との対応確認、必要なPublication Review、PRR要否判定およびWebsiteの導線確認は省略しない。
+工程の一部が対象外の場合は省略できるが、公開内容とInternal Repositoryの正本との対応確認、必要なPublication Review、Human-approved Current Publication DecisionおよびWebsiteの導線確認は省略しない。
 
-Internal Publication Review RegistryおよびPRRはInternal Repositoryで管理し、Public RepositoryまたはWebsiteへ配置しない。
+Internal Publication Review RegistryはInternal Repositoryで管理する。Human-controlled Private HistoryはPublication Executionの外部責務とし、Public RepositoryまたはWebsiteへ配置しない。
 
 Push未実施のCommitは公開されていない。正式リリースは、承認されたPush後のGitHub Pages反映確認をもって完了する。
 
@@ -229,11 +227,11 @@ Documentation編集のみを目的とする作業では、Humanが指定した�
 1. Internal Repositoryだけを正本とする。
 2. Publication Governanceに従って公開対象と境界を確定する。
 3. Internal Publication Review Registryは各管理対象のCurrent Publication Reviewを保持する。
-4. PRRは必要な場合だけ内部で作成し、Public Repositoryまたは公式サイトへ掲載しない。
+4. Human-controlled Private HistoryはPublication Executionの外部責務とし、入力、Gate、依存または完了条件にしない。Public Repositoryまたは公式サイトへ掲載しない。
 5. Public Repositoryの成果物は承認済み公開成果物として扱う。
 6. 公式サイトは概要と公開導線に集中し、内部仕様を転載しない。
 7. 公開先が存在しない文書へのリンクを作らない。
-8. Internal Publication Review RegistryまたはPRRへの公開リンクを作らない。
+8. Internal Publication Review RegistryまたはHuman-controlled Private Historyへの公開リンクを作らない。
 9. 正式リリースではトップページ、Releases一覧、詳細ページのバージョンと日付を一致させる。
 10. 更新履歴は公開上意味のある変更だけを記録する。
 11. Historical ReleaseとCurrent Publication構造を区別する。
@@ -241,7 +239,7 @@ Documentation編集のみを目的とする作業では、Humanが指定した�
 13. Commit前に差分、リンク、構文、対象ファイルを確認する。
 14. PushはHuman Authorizationがある場合だけ実施する。
 15. Push後にGitHubのCommit SHAとGitHub Pages反映状態を確認する。
-16. Internal Documentation、Public Artifact、Internal Publication Review Registry、PRR、Websiteの責務を混在させない。
+16. Internal Documentation、Public Artifact、Internal Publication Review Registry、Human-controlled Private History、Websiteの責務を混在させない。
 
 ## Verification and Definition of Done
 
@@ -249,7 +247,7 @@ Website Reflectionは次をすべて満たした場合に完了とする。
 
 * Websiteへ反映するPublication ScopeがHuman Review済みである。
 * WebsiteがPresentation Layerの責務に限定されている。
-* 内部情報、Internal Publication Review Registry、PRR内容および非公開Evidenceが掲載されていない。
+* 内部情報、Internal Publication Review Registry、Human-controlled Private Historyおよび非公開Evidenceが掲載されていない。
 * Public Artifactへのリンクが有効である。
 * Websiteの表示が承認済みPublic Artifactと矛盾していない。
 * Version更新要否が判定されている。
@@ -260,5 +258,5 @@ Website Reflectionは次をすべて満たした場合に完了とする。
 * GitHub最新版とGitHub Pages反映を確認している。
 * 意図しない変更がない。
 * 削除済みPublication Registryへの参照が存在しない。
-* Internal Publication Review RegistryまたはPRRへの公開リンクが存在しない。
+* Internal Publication Review RegistryまたはHuman-controlled Private Historyへの公開リンクが存在しない。
 * Internal Repositoryが唯一の正本であることを維持している。

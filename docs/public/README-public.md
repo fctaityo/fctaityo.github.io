@@ -9,10 +9,26 @@
 
 Internal Repositoryを唯一の正本とし、このPublic Repositoryに配置されたDocumentationは承認済みの公開成果物として扱う。
 
+## Current Positioning
+
+Local AI Foundryは現在、4つのReference Implementation（RI）から得たCross-RI Evidenceを比較し、再利用可能な制御構造をFoundry Coreへ抽出する段階にある。
+
+- RI #1 — Article Production: `FROZEN / HISTORICAL BENCHMARK`
+- RI #2 — Documentation Production
+- RI #3 — Visual Asset Production
+  - FoundryConsoleはHuman-facing Control Surface / Current Implementationであり、RI #3そのものの名称ではない。
+- RI #4 — Research-Grounded Long-form Content Production
+  - Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
+- Current Vector — `Cross-RI Evidence → Foundry Core Extraction`
+- Confirmed Foundry Core — `FC-CORE-001 Runtime Capability Calibration`のみ。その他の再利用可能なパターンは引き続きCore Candidateである。
+
+現在地は[Project Status](status-public.md)、構造と責務境界は[Architecture](architecture-public.md)、進行方向は[Roadmap](roadmap-public.md)、用語の正確な意味は[Glossary](glossary-public.md)を参照する。
+
 ## 最初に読む
 
 * [Project Status](status-public.md): 公開可能な範囲で現在地と次の主要Gateを確認する
 * [Architecture](architecture-public.md): システム全体の構造と責務境界を確認する
+* [Roadmap](roadmap-public.md): Cross-RI EvidenceとFoundry Core Extractionの進行方向を確認する
 * [基本原則](principles-public.md): Local AI Foundryの設計思想を確認する
 * [Glossary](glossary-public.md): Local AI Foundryで使用するProject固有用語を確認する
 * [Publication Governance](../governance/publication-governance.md): 公開契約、責務境界、分類、公開フローを確認する

@@ -1,5 +1,11 @@
 # Dify → n8n → ComfyUI Output Pipeline
 
+> **Scope: RI #1 Article Production / Historical Reference Architecture**
+>
+> 本書はRI #1 Article Productionを起点とする成果物出力Pipelineの設計を、Historical / Reference Architectureとして保持する。Local AI Foundry全体の唯一のCurrent Architectureを示す文書ではない。現在のProject-wide ArchitectureとFoundry Coreの方向は[Architecture](architecture-public.md)および[Roadmap](roadmap-public.md)を参照する。
+>
+> Historical / Referenceとして保持することは、Dify、n8n、ComfyUIが廃止または削除されたことを意味しない。
+
 ## Purpose
 
 本書は、Local AI Foundryにおける成果物出力パイプラインの公開版である。
@@ -78,7 +84,8 @@ Runtime構成、実装方式、保存構造、接続方法、Workflow定義お�
 
 ## Related Documents
 
-- Architecture
+- [Architecture](architecture-public.md)
+- [Roadmap](roadmap-public.md)
 - MCP Extension
 - Publication Governance
 - Documentation Information Architecture
