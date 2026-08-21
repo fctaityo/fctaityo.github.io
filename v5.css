@@ -156,27 +156,40 @@
 }
 @media(prefers-reduced-motion:reduce){.v5-core-live{animation:none}}
 
+
 /* =========================================================
-   v5.0.6 — Mobile wordmark parity from approved desktop reference
-   Desktop rules are untouched.
-   Source asset: 659x233 px. Preserve the asset aspect ratio exactly.
-   Desktop reference h1: 118 px => wordmark width 5.584746em.
+   v5.0.7 — Mobile LOCAL AI image / FOUNDRY text restore
+   Desktop is untouched.
+   Only the outlined LOCAL AI span is replaced by the approved image.
+   FOUNDRY remains the original H1 text at the canonical mobile font size.
    ========================================================= */
 @media(max-width:760px){
   .hero.v5-hero h1{
-    width:min(5.584746em,100%)!important;
-    aspect-ratio:659 / 233!important;
+    width:auto!important;
+    aspect-ratio:auto!important;
+    background:none!important;
+    color:#f5f8fc!important;
+    -webkit-text-fill-color:#f5f8fc!important;
+    -webkit-text-stroke:0!important;
+    text-shadow:none!important;
+    overflow:visible!important;
+  }
+  .hero.v5-hero h1 span{
+    display:block!important;
+    width:min(4.96em,100%)!important;
+    aspect-ratio:953 / 179!important;
+    margin:0 0 .08em 0!important;
     background-image:url("assets/hero-local-ai-outline.png")!important;
     background-repeat:no-repeat!important;
-    background-position:left top!important;
+    background-position:left center!important;
     background-size:contain!important;
     color:transparent!important;
     -webkit-text-fill-color:transparent!important;
     -webkit-text-stroke:0!important;
     text-shadow:none!important;
+    letter-spacing:0!important;
     overflow:hidden!important;
   }
-  .hero.v5-hero h1 span,
   .hero.v5-hero h1 br{
     display:none!important;
   }
