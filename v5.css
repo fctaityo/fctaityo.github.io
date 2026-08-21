@@ -155,22 +155,3 @@
   .s13-dashboard.v5-dashboard .lf-pulse-v2 .lf-pulse-tabs{grid-template-columns:1fr 1fr!important}
 }
 @media(prefers-reduced-motion:reduce){.v5-core-live{animation:none}}
-
-/* =========================================================
-   v5.0.2 — mobile hero wordmark font fallback hotfix
-   Desktop wordmark is intentionally untouched.
-   On mobile, Segoe UI is usually unavailable, so pin the
-   outlined "LOCAL AI" to a stable native Latin fallback.
-   ========================================================= */
-@media(max-width:760px){
-  .hero.v5-hero h1 span{
-    font-family:Arial,"Helvetica Neue",Helvetica,Roboto,sans-serif!important;
-    font-weight:900!important;
-    font-variation-settings:normal!important;
-    font-synthesis:none!important;
-    color:transparent!important;
-    -webkit-text-fill-color:transparent!important;
-    -webkit-text-stroke:1px rgba(255,255,255,.82)!important;
-    text-shadow:none!important;
-  }
-}
