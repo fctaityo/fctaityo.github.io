@@ -18,6 +18,11 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-08
 
+### 2026-08-21
+
+* [WD-20260821-001 RI #1を止め、Cross-RI Evidenceへ進んだ](war-diary/WD-20260821-001-ri1-freeze-cross-ri-foundry-core-transition.md)
+  Fresh Formal RV-01を未実行のままRI #1 Article Productionを`FROZEN / HISTORICAL BENCHMARK`として保持し、未完了のRuntime Acceptanceを成功・失敗へ書き換えずHistorical Evidenceとして保存。RI #2〜RI #4の比較Evidenceと`FC-CORE-001 Runtime Capability Calibration`のConfirmed Core化を受け、ProjectのCurrent VectorをRI #1完遂からCross-RI Evidence → Foundry Core Extractionへ移したHuman Decisionを記録。
+
 ### 2026-08-14
 
 * [WD-20260814-001 Formal RVがContract Propagationの穴を連続で露呈した](war-diary/WD-20260814-001-formal-rv-exposed-contract-propagation-gaps.md)
