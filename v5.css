@@ -156,41 +156,37 @@
 }
 @media(prefers-reduced-motion:reduce){.v5-core-live{animation:none}}
 
-
 /* =========================================================
-   v5.0.7 — Mobile LOCAL AI image / FOUNDRY text restore
-   Desktop is untouched.
-   Only the outlined LOCAL AI span is replaced by the approved image.
-   FOUNDRY remains the original H1 text at the canonical mobile font size.
+   v5.0.8 — mobile hero wordmark full-image fix
+   Desktop remains untouched.
+   On mobile only, replace the full two-line hero wordmark block
+   (LOCAL AI / FOUNDRY) with one fixed image asset.
    ========================================================= */
-@media(max-width:760px){
-  .hero.v5-hero h1{
-    width:auto!important;
-    aspect-ratio:auto!important;
-    background:none!important;
-    color:#f5f8fc!important;
-    -webkit-text-fill-color:#f5f8fc!important;
-    -webkit-text-stroke:0!important;
-    text-shadow:none!important;
-    overflow:visible!important;
-  }
-  .hero.v5-hero h1 span{
+@media (max-width:760px){
+  .hero.v5-hero .hero-copy h1{
+    position:relative!important;
     display:block!important;
-    width:min(4.96em,100%)!important;
-    aspect-ratio:953 / 179!important;
-    margin:0 0 .08em 0!important;
-    background-image:url("assets/hero-local-ai-outline.png")!important;
-    background-repeat:no-repeat!important;
-    background-position:left center!important;
-    background-size:contain!important;
+    width:min(100%,659px)!important;
+    aspect-ratio:659 / 233!important;
+    margin:0 0 22px 0!important;
+    font-size:0!important;
+    line-height:0!important;
+    letter-spacing:0!important;
     color:transparent!important;
     -webkit-text-fill-color:transparent!important;
     -webkit-text-stroke:0!important;
     text-shadow:none!important;
-    letter-spacing:0!important;
     overflow:hidden!important;
   }
-  .hero.v5-hero h1 br{
+  .hero.v5-hero .hero-copy h1::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    display:block;
+    background:url("assets/hero-wordmark-mobile.png") no-repeat left top / contain;
+  }
+  .hero.v5-hero .hero-copy h1 span,
+  .hero.v5-hero .hero-copy h1 br{
     display:none!important;
   }
 }
