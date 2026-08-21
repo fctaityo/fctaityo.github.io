@@ -156,21 +156,34 @@
 }
 @media(prefers-reduced-motion:reduce){.v5-core-live{animation:none}}
 
+
 /* =========================================================
-   v5.0.2 — mobile hero wordmark font fallback hotfix
-   Desktop wordmark is intentionally untouched.
-   On mobile, Segoe UI is usually unavailable, so pin the
-   outlined "LOCAL AI" to a stable native Latin fallback.
+   v5.0.5 — mobile hero wordmark image fix
+   Desktop remains unchanged.
+   Mobile replaces the outlined "LOCAL AI" text with a fixed image asset
+   so the glyph shape matches the approved desktop wordmark.
    ========================================================= */
 @media(max-width:760px){
   .hero.v5-hero h1 span{
-    font-family:Arial,"Helvetica Neue",Helvetica,Roboto,sans-serif!important;
-    font-weight:900!important;
-    font-variation-settings:normal!important;
-    font-synthesis:none!important;
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    aspect-ratio:953 / 179!important;
+    margin:0 0 .04em 0!important;
+    background-image:url("assets/hero-local-ai-outline.png")!important;
+    background-repeat:no-repeat!important;
+    background-position:left center!important;
+    background-size:contain!important;
     color:transparent!important;
     -webkit-text-fill-color:transparent!important;
-    -webkit-text-stroke:1px rgba(255,255,255,.82)!important;
+    -webkit-text-stroke:0!important;
     text-shadow:none!important;
+    font-size:0!important;
+    line-height:0!important;
+    letter-spacing:0!important;
+    overflow:hidden!important;
+  }
+  .hero.v5-hero h1 br{
+    display:none!important;
   }
 }
