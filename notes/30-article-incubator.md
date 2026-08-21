@@ -74,13 +74,19 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 
 ### Current Position
 
-01〜05の記事本文がRepository上に存在する。
+01〜11の記事本文がRepository上に存在する。
 
-現在の次執筆対象は **06 Human Decisionは多ければ安全になるわけではない**。
+現在の次執筆対象は **12 止めることも、運用である**。
 
-05 `「最新」はCurrentではない` は本文作成とFact Checkを完了しており、
-次の記事ではLatest / Currentの説明を繰り返さず、
-「Currentを誰が決めるか」「決めた後、どこまでAIが自律継続するか」へ進む。
+当初は、Retry Correction後のCurrent Candidateに対するFresh Formal RV-01を実行し、
+そのCurrent Runtime Evidenceを得てからSeason 2の最終構成をFIXする想定だった。
+
+しかし、その後ProjectはRI #1単体の完遂からCross-RI Evidenceの比較へ進み、
+Human DecisionによりRI #1 Article Productionを`FROZEN / HISTORICAL BENCHMARK`として保持する方針へ移行した。
+Fresh Formal RV-01は`NOT EXECUTED`のままであり、成功結果を後から補うこともしない。
+
+Season 2の最終話では、この未完了状態を失敗や成功へ書き換えるのではなく、
+Current Purposeが変わった時に「続けない」と判断することも運用の一部である、という実Evidenceを扱う。
 
 ### Current Plan
 
@@ -107,7 +113,7 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 ↓
 11 Publishしても、実行するまで分からない
 ↓
-12 壊れない運用とは「境界を決める」こと
+12 止めることも、運用である
 ```
 
 未執筆記事の題名とScopeは、Project Evidenceが増えた場合に再評価できる。
@@ -265,7 +271,7 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 
 * Current Status：
 
-  * Next Writing Target
+  * Article Body Exists
 * 核となる問い：
 
   * Humanが責任を持つProjectで、どこにHuman Decisionを置き、どこからAIへ自律継続させるべきか。
@@ -299,7 +305,7 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 
   * Public Documentation固有のPRR運用は本編から外し、Backlogへ送る。
   * Humanが決めた具体値をExecution Pointへ固定する問題は09へ送る。
-  * Season 3ではRI #1だけでなくRI #2を含むHuman-AI Operating Modelとして再一般化する。
+  * Season 3ではRI #1〜RI #4のCross-RI Evidenceを基にHuman-AI Operating ModelとFoundry Core Candidateを再一般化する。
 
 ### 07 Canonical Sourceを失った日
 
@@ -469,8 +475,9 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 
   * Project Stateは`Published`。
   * Historical Correct-Contract Formal RV-01には`FAILED` Evidenceが存在する。
-  * Retry Correction後のCurrent Candidate Runtimeは、この構成更新時点では`NOT EXECUTED`。
-  * Fresh Formal RV-01の成功結果を先取りしない。
+  * Fresh Formal RV-01は実行されず、`NOT EXECUTED`のまま保持する。
+  * RI #1 Article Productionは`FROZEN / HISTORICAL BENCHMARK`として保持する。
+  * Runtime AcceptanceはHistorical Stateとして`PENDING`のままであり、Freezeによって`PASS`へ書き換えない。
 * 核となる問い：
 
   * Repository、Draft、Published、Launcher、Formal Input Bindingが一致しても、なぜRuntime Acceptanceは完了しないのか。
@@ -498,18 +505,38 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
   * 実Runtime Evidenceを確認して初めてRuntime Acceptanceを判断できる。
 * Scope Boundary：
 
-  * Fresh Formal RV-01のCurrent Candidate結果が得られるまでは最終構成をFIXしない。
+  * 実行されなかったFresh Formal RV-01の結果を推測・補完しない。
+  * Remaining Gateを実行せずRI #1をFreezeしたHuman Decisionそのものは12へ送る。
   * Season 1-08 `Runtimeを見ないレビューはレビューではない`の再説明にせず、Season 2では`Published ≠ Runtime Accepted`というLifecycle / State問題を中心にする。
 
-### 12 壊れない運用とは「境界を決める」こと
+### 12 止めることも、運用である
 
+* Current Status：
+
+  * Season 2 Final / Next Writing Target
+* Current Evidence State：
+
+  * RI #1 Article Productionは`FROZEN / HISTORICAL BENCHMARK`。
+  * Fresh Formal RV-01は`NOT EXECUTED`。
+  * RI #1 Runtime AcceptanceはHistorical Stateとして`PENDING`のまま保持する。
+  * RI #1を`Failed`や`Deleted`へ分類し直さず、既存Historical Evidenceを保存する。
+  * ProjectのCurrent Vectorは`Cross-RI Evidence → Foundry Core Extraction`へ移行した。
+  * RI #2〜RI #4の比較Evidenceが加わり、RI #1単体の完遂だけをProjectの目的とする前提はCurrentではなくなった。
 * 核となる問い：
 
-  * Season 2で増えたConfiguration、State、Source、Authorization、Binding、Runtimeの仕組みを、何のために分けてきたのか。
+  * 実行可能なRemaining Gateが残っていても、「実行しない」という判断は運用として成立するのか。
+  * Current Purposeが変わった時、古いRemaining Gateを消化すること自体を目的にしてよいのか。
+  * `Freeze`、`Failed`、`Deleted`、`Complete`は、なぜ同じ意味ではないのか。
 * 扱うテーマ：
 
+  * Gate ≠ Purpose
+  * Current Purpose
+  * Remaining Gate Re-evaluation
+  * Human Decision / Human Authority
+  * Continue / Stop Decision
+  * Freeze ≠ Failed ≠ Deleted
+  * Historical Evidence Preservation
   * Configuration / State Boundary
-  * Project State / Active Work Boundary
   * Latest / Current Boundary
   * Human Decision / Mechanical Continuation
   * Canonical / Partial Source
@@ -518,13 +545,16 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
   * Deterministic / Semantic Responsibility
   * Published / Runtime Acceptance
   * Human Responsibility Boundary
+  * Cross-RI Transition
 * 記事の到達点：
 
-  * Season 2の本質はGovernance Artifactを増やすことではない。
-  * 同じ言葉に見える状態や工程を、責務の異なる境界へ分離することで運用が壊れにくくなる。
-  * HumanはMeaning、Risk、Authorityを保持し、MachineはBinding、Count、Compare、Synchronize、Verifyを担い、LLMはSemantic Workを担うという役割分担候補が見え始めた。
-  * Human-Directed FoundryはHumanが全操作を行うモデルではなく、Humanが責任境界を保持したままAIへ仕事を委譲するモデルとして検証を続ける。
-  * RI #1で見えたPatternをFoundry Coreへ昇格するには、RI #2等の横断Evidenceが必要である。
+  * Season 2の本質はGovernance Artifactを増やすことではなく、責務と状態の境界を分け、Currentな判断を壊さず維持することにある。
+  * GateはCurrentな問いへ答えるための手段であり、残っているGateをすべて消化すること自体がProjectの目的ではない。
+  * Current Purposeが変わった場合、Human AuthorityはRemaining Gateを再評価し、継続だけでなく停止を選択できる。
+  * 停止を選んでも、`NOT EXECUTED`や`PENDING`を`PASS`や`COMPLETE`へ書き換える必要はない。
+  * 未完了のHistorical Stateを正直に保存したまま、Project全体は次のCurrent Vectorへ進める。
+  * RI #1はここで止まるが、そのEvidenceはRI #2〜RI #4との比較材料として残り、Foundry Coreを考える次のSeasonへ接続する。
+  * 「境界を決める」という旧12のテーマは失われず、その境界があるからこそHumanが「どこまで続け、どこで止めるか」を責任を持って判断できる、という形でSeason 2を閉じる。
 * 関連記録：
 
   * War Diary：`WD-20260814-001`
@@ -533,8 +563,11 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
   * Development Model Note：`DM-20260815-002`
 * Scope Boundary：
 
+  * RI #1を`Failed`、`Deleted`、`Runtime Accepted`として扱わない。
+  * Fresh Formal RV-01を実行済みとして扱わない。
   * `Contract Closure`等のWorking Modelを採用済みArchitectureとして断定しない。
-  * Season 3のHuman-AI Development Operating Modelを先取りせず、Season 2ではRI #1の具体Evidenceから得た境界までで閉じる。
+  * Core CandidateをFoundry Coreへ先取り昇格しない。
+  * Foundry Coreの定義やCross-RI Extractionの詳細はSeason 3へ送り、Season 2では「正しく止める」Human Authorityまでで閉じる。
 
 ---
 
@@ -567,11 +600,12 @@ Season 2は以下の流れで積み上げる。
    `11`
 
 7. **Season Synthesis**
-   個別Artifactではなく、責任境界を設計することがSeason 2全体を貫いていたと整理する。
+   責任境界を設計することがSeason 2全体を貫いていたと整理し、
+   その運用上の帰結として、Human Authorityが継続だけでなく停止も選択できることを確認する。
    `12`
 
 Season 1が「壊れない設計」を扱ったのに対し、
-Season 2は「壊れない状態と責任境界をどう維持するか」を扱う。
+Season 2は「壊れない状態と責任境界を維持し、必要なら未完了を偽らず正しく止める運用」を扱う。
 
 ---
 
@@ -588,6 +622,7 @@ Season 2は「壊れない状態と責任境界をどう維持するか」を扱
 * 前後記事と主要な問いが重複していない。
 * Evidenceが未成立の将来結果を成功済みとして先取りしていない。
 * Working NameやCore Candidateを採用済みArchitectureとして先取りしていない。
+* Human DecisionによるFreezeを扱う場合、未完了のRuntime / Acceptanceを成功扱いせずHistorical Evidenceとして保持している。
 
 ---
 
@@ -604,68 +639,124 @@ RI #1 Formal Runtime Verificationから得られたHuman-Directed Execution Mode
 [DM-20260815-002 Human-Directed FoundryにおけるContract ClosureとDeterministic Control Boundary](development-model/DM-20260815-002-contract-closure-and-deterministic-control-boundary.md)
 を参照する。
 
-### Season 3構想（未FIX）：Human-Directed Foundryはどう成立するのか
+### Season 3構想（未FIX）：AIに仕事を任せる仕組みを作る — Reference ImplementationからFoundry Coreへ
 
-2026-08-10のADR-0013 Acceptedとv4.0 Public Documentation同期により、
-Local AI FoundryはArticle Production中心のProjectから、HumanがPurpose、Judgment、
-Responsibility、Approvalを保持し、複数業務をReference Implementationとして実証する
-Human-Directed Foundryへ正式に再位置付けされた。
+Local AI Foundryは、Article Productionだけを完成させるProjectから、
+異なる業務をReference Implementationとして実証し、そこから再利用可能なControl Structureを抽出する段階へ進んだ。
 
-現時点ではArticle ProductionをRI#1、Documentation ProductionをRI#2として扱う。
-複数RIで観測された共通Control PatternはCore Candidateであり、Foundry Coreは未確定である。
-RI#3はFuture / Undefinedのまま維持する。RI#2の比較EvidenceはFoundry Core確定や
-Project Runtime Verificationを意味しない。
+現在のReference Implementationは次のとおり。
+
+* RI #1 — Article Production
+  * `FROZEN / HISTORICAL BENCHMARK`
+* RI #2 — Documentation Production
+  * Current Evidence Source / Core Contributor
+* RI #3 — Visual Asset Production
+  * Human Runtime Validated / Core Contributor
+  * FoundryConsoleはHuman-facing Control Surface / Current Implementationであり、RI #3そのものの名称ではない。
+* RI #4 — Research-Grounded Long-form Content Production
+  * Current Frontier / Active Validation
+  * Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
+
+ProjectのCurrent Vectorは、
+
+```text
+Cross-RI Evidence
+→
+Foundry Core Extraction
+```
+
+である。
+
+現時点でConfirmed Foundry Coreとなっているのは、
+`FC-CORE-001 Runtime Capability Calibration`だけである。
+
+その中心ルールは、AI Model / Runtime / Hardwareの能力を静的値や推測だけで決めず、
+Current Runtimeを観測・測定し、Evidence-backed Effective Capabilityを決定して、
+その結果をDownstream ProcessingへBindingすることである。
+
+それ以外のHuman Authority、Deterministic Gate、Review Integrity、Evidence / Observability、
+Human-facing Control Surface、Technical GateとHuman Acceptanceの分離等は、
+Cross-RI Evidenceを増やしながら検証するCore Candidateとして扱う。
+
+**RIを増やすことが目的ではない。共通する制御構造を見つける。**
+
+RIはそのためのEvidence Generatorであり、各RI固有の実装をそのままCoreへ持ち込まない。
 
 * 中心となる問い：
 
-  * 異なる業務をAIへ委譲するとき、Human Authorityを維持しながら、どのControl Patternを再利用可能なものとして検証できるのか。
+  * 異なる仕事をAIへ委譲したとき、複数のReference Implementationで繰り返し必要になった制御構造のうち、何をEvidence付きでFoundry Coreへ昇格できるのか。
+* Current Operating Evidence：
+
+  * HumanはPurpose、Judgment、Responsibility、Authorization、Acceptanceを保持する。
+  * Human + ChatGPTはArchitecture、Design、Prototype、Runtime Proof、Review、Core Candidate整理を進められる。
+  * CODEXはActual Repository上のFormal Implementation、Verification、Currentization、Internal Canonical Sourceに基づくPublic Projection等を担う実行主体として利用する。
+  * Human + ChatGPTからCODEXへのHandoff / Instruction、CODEXからのTerminal Reportという同期経路は実運用で成立している。
+  * NOTEや公式HP等のPublic-native ArtifactはHuman + ChatGPT側で作成・編集し、Internal Canonical Sourceから派生するPublic Projectionと責務を混同しない。
+  * この役割分担自体を、現時点でFoundry CoreのConfirmed Capabilityとしては扱わない。
 * Working Theme：
 
-  * Human-Directed Foundry
-  * Human-AI Development Operating Model
   * Reference Implementation Model
-  * RI#1 Article Production / RI#2 Documentation Production
-  * Core Candidate / Foundry Core Boundary
+  * Cross-RI Evidence
+  * Foundry Core Extraction
+  * Core Candidate / Confirmed Core Boundary
+  * Runtime Capability Calibration
   * Human Authority Boundary
   * Human Decision Boundary / Mechanical Continuation
-  * Authorized Envelope
-  * Human-directed ≠ Human-operated
+  * Technical Gate / Human Acceptance Separation
+  * Deterministic Validation
+  * Review Integrity / Review Convergence
+  * Evidence / Observability
+  * Human-facing Control Surface
   * Fixed Decision Binding（Working Name）
   * Contract Propagation（Working Name）
   * Deterministic Control Boundary（Working Name）
   * Contract Closure（Working Name / Not Adopted Architecture）
-  * Automationそのものを目的にしない
-  * Review Convergence / Semantic Freeze
-  * Evidence Integrity / Direct Source
-  * AIへの指示は意図ではなく工程で書く
-  * AIチームは表現であって、設計ではない
-  * 役職ではなく工程とAuthorityで責任を切る
-  * Aggregator等の責務境界
+  * Adapter / Processing Plane Boundary
+  * Dify / n8n / Ollama / ComfyUI / Searchの再配置可能性
+  * Human + ChatGPT / CODEX Handoff
   * Evidenceを基にContract / Governanceを後から育てる
-  * Documentation IAは最初には作れなかった
-  * 問題が起きるたびにルールを増やすべきか
-  * Agile / Spiral / Kanban / XP / Prototype等との比較
-  * Human in the LoopではなくHuman Responsibility Boundary
+  * Automationそのものを目的にしない
+  * Human-directed ≠ Human-operated
+* Working Outline：
+
+  以下はEvidenceの増加に応じて変更できるWorking Outlineであり、題名・順序は未FIXとする。
+
+  ```text
+  01 記事を作らないなら、何を作るの？
+  02 Reference Implementationは完成品ではない
+  03 別の仕事でも、同じところで壊れた
+  04 AIに任せる前に、実行環境を測れ
+  05 Gateを通った。でも、人間はOKを出さなかった
+  06 画面を作ったら、AIの裏側を見なくて済んだ
+  07 検索できても、正しい記事になるとは限らない
+  08 Difyもn8nもComfyUIも、Foundryそのものではない
+  09 共通していたものだけをCoreへ持っていく
+  10 AIごとに、得意な仕事を分ければいい
+  11 やり方を決めすぎない。成立条件を決める
+  12 Foundry Coreとは何か
+  ```
+
+  Season 3をRI #1からRI #4までの単純な開発日誌にはしない。
+  各RIの具体Evidenceを使いながら、再利用可能なDelegation / Controlの問いへ到達する構成を優先する。
 * 到達候補：
 
-  * Automationそのものを目的にせず、人間が責任を持つ成果と判断を支援するためにAIへ業務を委譲する。
-  * Article ProductionをProject全体定義へ固定せずRI#1として維持し、RI#2との比較EvidenceからCore Candidateを検証する。
-  * 共通Patternが観測されてもFoundry Coreを先に確定せず、複数RIのEvidenceと独立したHuman Decisionを必要とする。
-  * AIがEvidence準備、Technical Verification、Candidate State Proposalを担い、HumanはPurpose、Judgment、Responsibility、Approvalを保持するモデルを検証する。
-  * Humanが毎Stepを操作するのではなく、Authorized Envelope内でAIが自律継続できるOperating Modelを検証する。
-  * Fixed Decision Binding、Contract Propagation、Deterministic Control Boundaryが異なるRIでも再現するか確認する。
-  * Local AI Foundry独自の開発手法を先に宣言せず、既存Development Modelで説明できない差分がEvidenceとして残るかを確認する。
+  * RI固有Implementationと再利用可能なControl Structureを分離する。
+  * Technical Gate PASSとHuman Acceptanceを分離する。
+  * Runtime / Adapter CapabilityとFoundry Coreを分離する。
+  * Core昇格を「便利そうだから」ではなくCross-RI EvidenceとHuman Decisionで判断する。
+  * `FC-CORE-001`がなぜConfirmed Coreになったのかを、Originと再利用可能性を含めて説明できる。
+  * Dify、n8n、Ollama、ComfyUI、Search等をFoundryそのものと決め打ちせず、交換可能なAdapter / Processing Planeとして扱えるか検証する。
+  * Humanが全Stepを操作しなくても、Authority Boundaryと成立条件を保ったままAIへ仕事を委譲できるOperating Modelを検証する。
 * 昇格条件：
 
-  * Season 2の実Evidenceを完了させる。
-  * RI#1とRI#2の比較Evidenceを複数事例で整理する。
-  * Human Authority Boundaryが異なる業務でも維持できるか確認する。
-  * Human Decision Boundary / Mechanical Continuationが異なる業務でも安全に機能するか確認する。
-  * Fixed Decision Binding、Contract Propagation、Deterministic Control BoundaryがRI #1固有ではないことを確認する。
-  * Review ConvergenceとEvidence Integrityが特定Workflow固有ではなく再利用可能なControl Patternか比較する。
-  * Core CandidateとFoundry Coreを混同せず、Core確定をHuman DecisionまでDeferredする。
-  * Development Model比較を一次資料ベースで実施する。
-  * 独自性ではなく再現可能なPracticeとして説明できるテーマを優先する。
+  * Season 2を`止めることも、運用である`まで実Evidenceで閉じる。
+  * RI #1〜RI #4の比較Evidenceを複数のControl Patternについて整理する。
+  * `FC-CORE-001`とCore Candidateの違いをEvidence付きで説明できる。
+  * 一つのRIだけで観測されたPatternをCoreへ先取り昇格しない。
+  * Human Authority Boundary、Technical Gate / Human Acceptance、Evidence / Observability等が異なる業務でどう現れるか比較する。
+  * Runtime / Workflow / Integration / Domain AdapterとFoundry Coreの責務差を検証する。
+  * Human + ChatGPT / CODEXの分業を、会話上の役割名ではなく実際のHandoffとFormal Reflection Evidenceから説明する。
+  * Development Model比較を一次資料ベースで実施し、独自性を先に宣言しない。
 
 ### Season 4構想（未FIX）：Continuous Assurance
 
@@ -694,7 +785,7 @@ Project Runtime Verificationを意味しない。
   * AIの自律範囲をRiskに比例させ、Human Authorizationを必要な場所へ集中させる。
 * 昇格条件：
 
-  * Season 2-11の実Runtime Evidenceが成立する。
+  * RI #2〜RI #4を含む複数RIでRuntime / Outcome Evidenceが蓄積される。
   * 複数RunのTraceとOutcomeを比較できる。
   * EvaluationまたはRegressionの実験Evidenceが存在する。
   * Recovery、Security、Provenanceの少なくとも一部について実Project Evidenceが存在する。
@@ -787,7 +878,7 @@ Project Runtime Verificationを意味しない。
 * 統合候補：
 
   * Season 2-08 `「作った」「反映した」「Published」は全部別`
-  * Season 3構想：Human-Directed FoundryのReview Control Pattern
+  * Season 3構想：Cross-RI Evidence / Foundry Core ExtractionにおけるReview Control Pattern
 * 昇格条件：
 
   * 異なるReview Scopeでも同じConvergence Ruleが機能する事例を追加する。
@@ -849,7 +940,7 @@ Project Runtime Verificationを意味しない。
 * 関連する記事候補：
 
   * Season 2-04 Current Snapshotは進捗表ではない
-  * Season 2-12 壊れない運用とは「境界を決める」こと
+  * Season 2-12 止めることも、運用である
   * Season 3構想：Evidenceを基にContract / Governanceを後から育てる
 * 昇格条件：
 
