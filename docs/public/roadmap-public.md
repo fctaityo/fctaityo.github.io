@@ -54,7 +54,7 @@ Current Status、Current Initiative、Project State、Runtime結果および日�
 
 Local AI Foundryは単一Workflowや自動化そのものの完成を目的としない。
 
-HumanがPurpose、Judgment、Responsibility、Approvalを保持し、複数の業務をReference Implementationとして実証するHuman-Directed Foundryへ発展する。異なるRIの比較EvidenceからCore Candidateを検証し、Foundry Coreは後続のHuman Decisionで確定する。
+HumanがPurpose、Judgment、Responsibility、Approvalを保持し、複数の業務をReference Implementationとして実証するHuman-Directed Foundryへ発展する。異なるRIの比較EvidenceからCore Candidateを検証し、Foundry Core CapabilityをHuman Decisionにより段階的に抽出する。
 
 ---
 
@@ -66,22 +66,23 @@ HumanがPurpose、Judgment、Responsibility、Approvalを保持し、複数の�
 Human-Directed Foundry
       │
       ▼
-Reference Implementation実証
- ├─ RI#1 Article Production
+RI Evidence
+ ├─ RI#1 Article Production / Historical Benchmark
  ├─ RI#2 Documentation Production
- └─ RI#3 Next Domain / Undefined
+ ├─ RI#3 Visual Asset Production
+ └─ RI#4 Research-Grounded Long-form Content Production
       │
       ▼
-RI間の比較Evidence
+Cross-RI Evidence
       │
       ▼
-Core Candidate検証
+Core Candidate Evaluation
       │
       ▼
-Foundry Core Decision（Human Decision）
+Foundry Core Capability Extraction（Human Decision）
       │
       ▼
-次Domainへの展開
+FC-CORE-001 confirmed / additional extraction continues
 ```
 
 ## 5.2 Evolution Stages
@@ -101,11 +102,12 @@ Foundry Core Decision（Human Decision）
 
 | Area | Direction |
 |---|---|
-| RI#1 Article Production | 既存実装を最初のReference Implementationとして維持し、Article固有責務とCore Candidateを分離する |
+| RI#1 Article Production | Historical BenchmarkとしてEvidenceを保存し、Article固有責務と再利用可能なPatternを区別する |
 | RI#2 Documentation Production | Documentationという異なる業務領域でControl Patternを実証し、RI間比較に必要なEvidenceを蓄積する |
-| RI#3 Next Domain | 用途を未定義のまま維持し、Human Decisionまで具体化しない |
+| RI#3 Visual Asset Production | Visual Asset Productionで比較Evidenceを蓄積する。FoundryConsoleはControl Surface / Current Implementationとして扱う |
+| RI#4 Research-Grounded Long-form Content Production | Research-groundedな長文制作で比較Evidenceを蓄積する。Temporal Entity IntegrityはCurrent Package / Capabilityとして扱う |
 | Core Candidate | RI間で再現性、責務境界、失敗制御、Evidenceを比較検証する |
-| Foundry Core | 十分な比較Evidenceの後、独立したHuman Decisionで定義する |
+| Foundry Core | Capability単位の比較EvidenceとHuman Decisionによって段階的に定義する。FC-CORE-001は確認済みで、追加抽出を継続する |
 
 ---
 

@@ -198,8 +198,10 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Architecture Layer | Projectを責務単位で分離した構造レイヤ。 |
 | Component | Architecture上で責務を持つ独立要素。 |
 | Data Flow | Component間で受け渡されるデータの流れ。 |
-| Core Candidate | 複数Reference Implementationの比較Evidenceによって再利用可能性を検証中のControl Pattern。Foundry Core確定要素ではない。 |
-| Foundry Core | 複数Reference Implementationの比較EvidenceとHuman Decisionを経て正式定義する共通Control Model。現時点では未確定。 |
+| Core Candidate | 複数Reference Implementationの比較Evidenceによって再利用可能性を検証中で、まだFoundry Coreへ確定していないControl Pattern。 |
+| Foundry Core | 複数Reference Implementationの比較EvidenceとHuman Decisionを経てCapability単位で正式定義する共通Control Model。FC-CORE-001は確定済みで、その他のPatternはCore Candidateである。 |
+| Foundry Core Extraction | Cross-RI Evidenceから再利用可能なCapabilityを分離し、Human DecisionでFoundry Coreへ正式化するProjectの方向。 |
+| Runtime Capability Calibration | Current Model / Runtime / Hardware capabilityを観測・実測し、Evidence-backed Effective Capabilityとして確定して後続処理へBindingするControl Pattern。FC-CORE-001。 |
 | Human Authority Boundary | Humanが保持するPurpose、Judgment、Responsibility、Approvalと、AIへ委譲できる責務との境界。 |
 | Human-Directed Foundry | HumanがPurpose、Judgment、Responsibility、Approvalを保持し、Contract、Validation、Review、Evidence、Governanceの下でAIへ業務を委譲するProject Positioning。 |
 | Internal Documentation | Internal Repositoryで管理するDocumentation。Project運用の正本を保持する。 |

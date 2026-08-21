@@ -19,34 +19,39 @@ Internal Repository固有Path、Working Evidence、Private Artifact、Configurat
 
 Local AI Foundryは、人間がPurpose、Judgment、Responsibility、Approvalを保持し、明示した責務境界の内側でAIへ業務を委譲するHuman-Directed Foundryである。Contract、DTO / Handoff、Validation、Gate、Review、EvidenceおよびHuman Gateによって、Workflow完走ではなく成果物の成立を制御する。
 
-Article Productionは廃止せずReference Implementation #1（RI#1）として維持する。Documentation ProductionはReference Implementation #2（RI#2）として異なる業務と実装基盤上でControl Patternを実証する。Foundry Coreは未確定であり、RI間の比較EvidenceからCore Candidateを検証した後、別のHuman Decisionで確定する。RI#3はFuture / Undefinedであり、用途は未定義である。
+Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmarkとして保存する。Documentation ProductionはRI#2、Visual Asset ProductionはRI#3、Research-Grounded Long-form Content ProductionはRI#4として比較Evidenceを提供する。FoundryConsoleはRI#3のHuman-facing Control Surface / Current Implementationであり、RIそのものではない。Temporal Entity IntegrityはRI#4のCurrent Package / Capabilityであり、RIそのものではない。
+
+Current VectorはCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001 Runtime Capability Calibration`だけが現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
 
 ## 2.1 責務階層
 
 ```mermaid
 flowchart TD
-  H["Human Authority<br/>Purpose / Judgment / Responsibility / Approval"] --> F["Foundry Control Model<br/>Core Candidates under validation"]
-  F --> R1["RI#1 Article Production"]
+  H["Human Authority<br/>Purpose / Judgment / Responsibility / Approval"] --> F["Foundry Core<br/>FC-CORE-001 + Core Candidates"]
+  F --> R1["RI#1 Article Production<br/>Historical Benchmark"]
   F --> R2["RI#2 Documentation Production"]
-  F --> R3["RI#3 Future / Undefined"]
+  F --> R3["RI#3 Visual Asset Production<br/>FoundryConsole Control Surface"]
+  F --> R4["RI#4 Research-Grounded Long-form Content<br/>Temporal Entity Integrity"]
   R1 --> I["Infrastructure / Runtime / Tooling"]
   R2 --> I
   R3 --> I
+  R4 --> I
 ```
 
 Human AuthorityはFoundry Control Modelと各Reference Implementationの上位責務である。AI DelegationはHuman Authority Boundaryを越えず、Purposeの設定、最終判断、責任、Approval / Human Gateを代替しない。
 
-Responsibility Boundary、Contract、DTO / Handoff、Normalize、Validation、Gate、Bounded Retry / Fail、Review、Evidence、Human Authority Boundaryは現時点のCore Candidateである。これはFoundry Coreの確定リストではない。
+`FC-CORE-001 Runtime Capability Calibration`は、Current Model / Runtime / Hardware capabilityを観測・実測し、Evidence-backed Effective Capabilityとして確定し、後続処理へBindingするControl Patternである。Gate、Retry、Validation、Human Decisionを一般概念として取り込むものではない。それらを含むその他の共通Patternは、個別にCore確定したとは扱わない。
 
 ## 2.2 Reference Implementationの現在位置
 
 | Reference Implementation | 位置付け | Current Evidence |
 |---|---|---|
-| RI#1 — Article Production | 既存の7段階Article Production Workflow。従来の詳細設計と実装を最初のReference Implementationとして維持する | 既存Article Production ArchitectureとRepository Evidence |
-| RI#2 — Documentation Production | Internal DocumentationとPublication RuleからPublic候補、Validation、Review、Correction、Consistency、Evidence、Human Gateまでを扱う別業務 | Synthetic Live Validationによる比較Evidenceは取得済み。Real Document Copy実証は準備段階であり、完了またはFinal Acceptance済みとは扱わない |
-| RI#3 — Future / Undefined | 次の業務領域。用途、Platform、Workflow、実装計画は未定義 | Evidenceなし。将来のHuman Decision対象 |
+| RI#1 — Article Production | `FROZEN / HISTORICAL BENCHMARK`として実装と実行Evidenceを保存する | Article Production ArchitectureとHistorical Evidence |
+| RI#2 — Documentation Production | Documentationを対象にControl Patternを実証する業務RI | 比較Evidenceを保持し、継続評価する |
+| RI#3 — Visual Asset Production | Visual Asset Productionの業務RI。FoundryConsoleはHuman-facing Control Surface / Current Implementation | Visual Asset ProductionのHuman Runtime Evidence |
+| RI#4 — Research-Grounded Long-form Content Production | Research-groundedな長文Content Productionの業務RI。Temporal Entity IntegrityはCurrent Package / Capability | Current CapabilityのValidation Evidence |
 
-RI#2の成立済みEvidenceはControl Patternの比較Evidenceであり、Foundry Core決定またはProject Runtime Verificationではない。進行中の実証は完了扱いしない。
+RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #4の状態もProject State Transitionを意味しない。FC-CORE-001以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
 
 ## 3. 解決する課題
 
@@ -84,7 +89,7 @@ flowchart LR
 
 ## 5. RI#1 Article Productionアーキテクチャ
 
-本章以降のArticle、短文投稿、タグ、画像、保存に関する詳細はProject全体の唯一の業務定義ではなく、RI#1のCurrent Architectureである。
+本章以降のArticle、短文投稿、タグ、画像、保存に関する詳細はProject全体の唯一の業務定義ではなく、RI#1のFrozen実装を保存するHistorical Benchmark Architectureである。
 
 ```mermaid
 flowchart LR

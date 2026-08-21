@@ -14,75 +14,71 @@ Internal Publication Review RegistryおよびPublication Reflection Register（P
 
 ## 現在地（要約）
 
-Workflowの設計、実装、Import、Publishおよび意味上の一致確認までは完了している。
+Project Stateは`Published`を維持している。RI #1 Article ProductionはHistorical Benchmarkとして保存され、現在のProject方向はCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。
 
-現在は、Published Workflowを実際に動かす前に、何を入力し、何を確認し、どの状態を合格とするかを決めている段階である。
+RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Productionの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementation、Temporal Entity IntegrityはRI #4のCurrent Package / Capabilityである。
 
-Published Workflowは固定済みである。
-
-Runtime Verificationはまだ実行していない。
+`FC-CORE-001 Runtime Capability Calibration`は最初の確認済みFoundry Core Capabilityである。Website v5はCurrent Presentationであり、Internal Repositoryの正本を代替しない。
 
 ## 30秒Current Snapshot
 
 | 確認項目    | 現在値                                                                                             |
 | ------- | ----------------------------------------------------------------------------------------------- |
-| 現在地     | Project State: `Published`<br>Current Baseline: Active<br>Repository / Draft / Publishedの整合確認済み |
-| 目的      | Published Workflowを固定し、Runtime VerificationとRuntime Acceptanceの明示承認に備える                         |
-| 最近完了    | Publish、Published Workflow作成、Repository / Published Semantic Verification PASS                  |
-| 残りGate  | Runtime Verification、Runtime Acceptance                                                         |
-| Blocker | なし。Runtime実行はHuman Authorization未成立のため未実施                                                       |
-| 次の一歩    | Runtime Verificationの対象、入力、必須Run、Acceptance条件を確認する                                              |
-| Human判断 | Published Workflowに対するRuntime VerificationのScopeと実行を承認するか                                       |
+| 現在地 | Project State: `Published`<br>Current Baseline: Active<br>RI #1: Historical Benchmark |
+| 目的 | Cross-RI Evidenceから再利用可能なFoundry Core Capabilityを抽出する |
+| 最近完了 | RI #1〜RI #4の位置付けとFC-CORE-001をCurrent Sourceへ反映 |
+| 残りGate | Public Projection CandidateのHuman / AI Reviewと、承認後のPublication実行 |
+| Blocker | Public Projection Candidateは未承認・未公開 |
+| 次の一歩 | Public Projection CandidateのHuman / AI Complete Review |
+| Human判断 | Current CandidateのSemantic Approvalと、後続Publication実行のAuthorizationを個別に行う |
 
 ## Current Baseline
 
-| Representation     | 公開情報                            | 確認状態   |
-| ------------------ | ------------------------------- | ------ |
-| Baseline           | Active Baseline                 | Active |
-| Repository         | 対象BaselineのRepository状態         | 確認済み   |
-| Workflow DSL       | Internal Repository上の対象Workflow | 確認済み   |
-| Draft Workflow     | 対象Draft Workflow                | 検証済み   |
-| Draft Graph        | DAG、Maximum DepthおよびPath制約      | PASS   |
-| Semantic Graph     | Repository / Draft / Published  | MATCH  |
-| UI Checklist       | 必須Checklist                     | PASS   |
-| Published Workflow | 対象Published Workflow            | PASS   |
+| Representation | 公開情報 | 確認状態 |
+|---|---|---|
+| Project State | `Published` | Unchanged |
+| Active Baseline | Current Project Baseline | Active |
+| Current Vector | Cross-RI Evidence → Foundry Core Extraction | Current |
+| RI #1 | Article Production / Historical Benchmark | Frozen |
+| RI #2〜RI #4 | Documentation / Visual Asset / Research-Grounded Long-form Content Production | Current Evidence Sources |
+| Foundry Core | FC-CORE-001 confirmed。その他はCore Candidate | Capability-based |
+| Website v5 | Public Presentation | Current |
 
 内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
 
+## Reference Implementation Status
+
+| Reference Implementation | 公開Current State |
+|---|---|
+| RI #1 Article Production | `FROZEN / HISTORICAL BENCHMARK` |
+| RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
+| RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
+| RI #4 Research-Grounded Long-form Content Production | Temporal Entity IntegrityをCurrent Package / Capabilityとして検証中 |
+| Foundry Core | FC-CORE-001 confirmed。追加CapabilityはCandidate |
+
 ## Runtime Status
 
-**Runtime Status:** Not Executed
+RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。これはCurrent Publication MainlineのRuntime Gateではなく、本Public Currentizationも新しいRuntime実行やRuntime Acceptanceを意味しない。
 
-| 確認項目                 | 公開情報                   | 確認状態         |
-| -------------------- | ---------------------- | ------------ |
-| Runtime Verification | Run未実施                 | Not Executed |
-| Runtime Acceptance   | Acceptance Evidence未確定 | `PENDING`    |
-
-### `Runtime Verified`へ進むGate
-
-1. 対象Published WorkflowをRuntime Verification対象として明示承認する。
-2. 実行入力、必須RunおよびAcceptance条件を確定する。
-3. Runtime実行前にRepository / Draft / PublishedのBaseline不変を確認する。
-4. 必須Runtime RunとAcceptance EvidenceがPASSした場合だけ`Runtime Verified`へ進む。
-
-Runtime実行承認はまだ存在しない。
-
-本SnapshotはRuntime実行権限を付与しない。
+| 確認項目 | 公開情報 | 確認状態 |
+|---|---|---|
+| RI #1 Runtime | Historical Evidence | Frozen |
+| Current Publication Work | Documentation Projection / Review | Runtime対象外 |
+| Project Runtime Acceptance | Publicationによる変更なし | Unchanged |
 
 ## Transition Information
 
-> **公開Current Snapshot:** Active BaselineのPublishとPublished Verificationは完了した。
-> Project Stateは`Published`である。Runtimeは未実施である。
+> **公開Current Snapshot:** Project Stateは`Published`であり、Current VectorはFoundry Core Extractionである。
 
 | 確認項目                | 現在値                                             |
 | ------------------- | ----------------------------------------------- |
-| Current Phase       | Runtime Verification Preparation                |
+| Current Phase       | Cross-RI Evidence / Foundry Core Extraction     |
 | Project State       | `Published`                                     |
 | Transition Evidence | Internal Repositoryで管理                          |
 | Baseline            | Active                                          |
-| Allowed Next States | `Runtime Verified`、`Blocked`、`Cancelled`        |
-| Next State Gate     | Runtime実行の明示承認、必須Run完了、Acceptance Evidence PASS |
-| Snapshot Updated    | `2026-08-02`                                    |
+| Allowed Next States | Human-authorized Project State Contractに従う      |
+| Next State Gate     | Human Decisionと必要Evidence                      |
+| Snapshot Updated    | `2026-08-21`                                    |
 
 ### その他の許可Transition
 
