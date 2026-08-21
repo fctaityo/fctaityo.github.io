@@ -156,33 +156,27 @@
 }
 @media(prefers-reduced-motion:reduce){.v5-core-live{animation:none}}
 
-
 /* =========================================================
-   v5.0.5 — mobile hero wordmark image fix
-   Desktop remains unchanged.
-   Mobile replaces the outlined "LOCAL AI" text with a fixed image asset
-   so the glyph shape matches the approved desktop wordmark.
+   v5.0.6 — Mobile wordmark parity from approved desktop reference
+   Desktop rules are untouched.
+   Source asset: 659x233 px. Preserve the asset aspect ratio exactly.
+   Desktop reference h1: 118 px => wordmark width 5.584746em.
    ========================================================= */
 @media(max-width:760px){
-  .hero.v5-hero h1 span{
-    display:block!important;
-    width:100%!important;
-    max-width:100%!important;
-    aspect-ratio:953 / 179!important;
-    margin:0 0 .04em 0!important;
+  .hero.v5-hero h1{
+    width:min(5.584746em,100%)!important;
+    aspect-ratio:659 / 233!important;
     background-image:url("assets/hero-local-ai-outline.png")!important;
     background-repeat:no-repeat!important;
-    background-position:left center!important;
+    background-position:left top!important;
     background-size:contain!important;
     color:transparent!important;
     -webkit-text-fill-color:transparent!important;
     -webkit-text-stroke:0!important;
     text-shadow:none!important;
-    font-size:0!important;
-    line-height:0!important;
-    letter-spacing:0!important;
     overflow:hidden!important;
   }
+  .hero.v5-hero h1 span,
   .hero.v5-hero h1 br{
     display:none!important;
   }
