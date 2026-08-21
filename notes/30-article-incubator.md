@@ -557,10 +557,10 @@ Current Purposeが変わった時に「続けない」と判断することも�
   * 「境界を決める」という旧12のテーマは失われず、その境界があるからこそHumanが「どこまで続け、どこで止めるか」を責任を持って判断できる、という形でSeason 2を閉じる。
 * 関連記録：
 
-  * War Diary：`WD-20260814-001`
+  * War Diary：`WD-20260814-001`、`WD-20260821-001`
   * Bug Zoo：`BZ-20260814-020`〜`023`
   * Configuration Management Note：`CM-20260815-001`、`CM-20260815-002`
-  * Development Model Note：`DM-20260815-002`
+  * Development Model Note：`DM-20260815-002`、`DM-20260821-003`
 * Scope Boundary：
 
   * RI #1を`Failed`、`Deleted`、`Runtime Accepted`として扱わない。
@@ -637,6 +637,11 @@ Project Evidenceが増えるたびに再評価し、独自理論を先に作ら�
 
 RI #1 Formal Runtime Verificationから得られたHuman-Directed Execution Model候補は、
 [DM-20260815-002 Human-Directed FoundryにおけるContract ClosureとDeterministic Control Boundary](development-model/DM-20260815-002-contract-closure-and-deterministic-control-boundary.md)
+を参照する。
+
+RI #1 FreezeからCross-RI Evidence / Foundry Core Extractionへ移ったCurrent Transitionは、
+[WD-20260821-001 RI #1を止め、Cross-RI Evidenceへ進んだ](war-diary/WD-20260821-001-ri1-freeze-cross-ri-foundry-core-transition.md)と
+[DM-20260821-003 RI #1 Freeze / Cross-RI Evidence / Foundry Core Transition](development-model/DM-20260821-003-ri1-freeze-cross-ri-foundry-core-transition.md)
 を参照する。
 
 ### Season 3構想（未FIX）：AIに仕事を任せる仕組みを作る — Reference ImplementationからFoundry Coreへ
