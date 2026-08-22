@@ -308,13 +308,13 @@
       <div class="v5-core-shell">
         <div class="v5-core-head">
           <div><p class="v5-core-kicker">05 / 次のベクトル　FOUNDRY CORE</p><h2>作る対象から、<strong>制御構造へ。</strong></h2></div>
-          <p>各RIのDomain固有ロジックをCoreへ混ぜない。複数の業務で再現したHuman Authority・Contract・Deterministic Gate・Runtime Capability・Review Integrity・EvidenceをPlatform-independentなCore Candidateとして抽出する。</p>
+          <p>各RIのDomain固有ロジックをCoreへ混ぜない。Runtime Capability Calibration、Delegation Contract Binding、Deterministic Technical Gate、Evidence Traceabilityを確認済みCoreとし、その他のPatternを継続評価する。</p>
         </div>
         <div class="v5-core-console">
           <div class="v5-core-console-head"><div><i class="v5-core-live"></i><strong>CORE EXTRACTION CONSOLE</strong></div><span>CROSS-RI EVIDENCE / CURRENT VECTOR</span></div>
-          <div class="v5-core-flow"><div class="v5-core-node"><span>01 / EVIDENCE</span><strong>Reference Implementations</strong><small>記事・文書・画像・Research Long-form。異なるDomainで成功と失敗を採る。</small></div><div class="v5-core-arrow">→</div><div class="v5-core-node"><span>02 / EXTRACTION</span><strong>Common Control Pattern</strong><small>Domainを越えて再現した責務・Gate・Runtime Controlを比較する。</small></div><div class="v5-core-arrow">→</div><div class="v5-core-node target"><span>03 / NEXT</span><strong>Foundry Core Candidate</strong><small>DifyやComfyUIそのものではなく、AIへの任せ方を制御する共通層へ。</small></div></div>
-          <div class="v5-core-signals"><span>Human Authority</span><span>Contract</span><span>Deterministic Gate</span><span class="confirmed">Runtime Capability</span><span>Review Integrity</span><span>Evidence</span></div>
-          <div class="v5-core-decision"><strong>v5.0 Human Decision:</strong> RI#1固有開発を凍結。RI#1〜RI#4のCross-RI Evidenceを基準にFoundry Core Extractionへ進む。</div>
+          <div class="v5-core-flow"><div class="v5-core-node"><span>01 / EVIDENCE</span><strong>Reference Implementations</strong><small>記事・文書・画像・Research Long-form。異なるDomainで成功と失敗を採る。</small></div><div class="v5-core-arrow">→</div><div class="v5-core-node"><span>02 / EXTRACTION</span><strong>Common Control Pattern</strong><small>Domainを越えて再現した責務・Gate・Runtime Controlを比較する。</small></div><div class="v5-core-arrow">→</div><div class="v5-core-node target"><span>03 / CURRENT</span><strong>4 Confirmed Cores</strong><small>FC-CORE-001〜004。その他のPatternはCandidateとして継続評価する。</small></div></div>
+          <div class="v5-core-signals"><span>Human Authority</span><span class="confirmed">Delegation Contract</span><span class="confirmed">Deterministic Gate</span><span class="confirmed">Runtime Capability</span><span>Review Integrity / STRONG CANDIDATE</span><span class="confirmed">Evidence Traceability</span></div>
+          <div class="v5-core-decision"><strong>Phase 3C Human Decision:</strong> FC-CORE-001〜004をConfirmed Coreとして採用。Review Binding IntegrityはCANDIDATE — STRONGとして継続評価する。</div>
           <div class="v5-core-guide" aria-hidden="true"><img src="assets/ri-guide.webp" alt=""></div>
         </div>
       </div>`;
@@ -343,7 +343,7 @@
   const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.0へ。</span><strong class="title-line">4つの実証から、</strong><strong class="title-line">Coreを取り出す。</strong>';
   const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#1をHistorical Benchmarkとして凍結し、RI#2〜RI#4で得られたEvidenceを横断する。Websiteの主語も「RI#1の完成」から「Foundry Core Extraction」へ更新した。';
   const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.0更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
-  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.0</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Current Frontier</span><strong>RI#4 / Active Validation</strong></article>';
+  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.0</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 
   const coreNav = qs('.main-nav a[href="#core-vector"]');
   const coreSection = qs('#core-vector');

@@ -21,13 +21,13 @@ Local AI Foundryは、人間がPurpose、Judgment、Responsibility、Approvalを
 
 Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmarkとして保存する。Documentation ProductionはRI#2、Visual Asset ProductionはRI#3、Research-Grounded Long-form Content ProductionはRI#4として比較Evidenceを提供する。FoundryConsoleはRI#3のHuman-facing Control Surface / Current Implementationであり、RIそのものではない。Temporal Entity IntegrityはRI#4のCurrent Package / Capabilityであり、RIそのものではない。
 
-Current VectorはCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001 Runtime Capability Calibration`だけが現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
+Current VectorはCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001`〜`FC-CORE-004`の4件が現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
 
 ## 2.1 責務階層
 
 ```mermaid
 flowchart TD
-  H["Human Authority<br/>Purpose / Judgment / Responsibility / Approval"] --> F["Foundry Core<br/>FC-CORE-001 + Core Candidates"]
+  H["Human Authority<br/>Purpose / Judgment / Responsibility / Approval"] --> F["Foundry Core<br/>FC-CORE-001..004 + Core Candidates"]
   F --> R1["RI#1 Article Production<br/>Historical Benchmark"]
   F --> R2["RI#2 Documentation Production"]
   F --> R3["RI#3 Visual Asset Production<br/>FoundryConsole Control Surface"]
@@ -40,7 +40,16 @@ flowchart TD
 
 Human AuthorityはFoundry Control Modelと各Reference Implementationの上位責務である。AI DelegationはHuman Authority Boundaryを越えず、Purposeの設定、最終判断、責任、Approval / Human Gateを代替しない。
 
-`FC-CORE-001 Runtime Capability Calibration`は、Current Model / Runtime / Hardware capabilityを観測・実測し、Evidence-backed Effective Capabilityとして確定し、後続処理へBindingするControl Patternである。Gate、Retry、Validation、Human Decisionを一般概念として取り込むものではない。それらを含むその他の共通Patternは、個別にCore確定したとは扱わない。
+確認済みFoundry Coreは次の4件である。
+
+| Core ID | Capability | Semantic Boundary |
+|---|---|---|
+| `FC-CORE-001` | Runtime Capability Calibration | Current Model / Runtime / Hardware capabilityを観測・実測し、Evidence-backed Effective Capabilityとして確定し、後続処理へBindingする |
+| `FC-CORE-002` | Delegation Contract Binding | 委譲前に必要成果、制約、責任・権限境界、Handoff、失敗条件を識別可能なContractへBindingする |
+| `FC-CORE-003` | Deterministic Technical Gate | Actual Artifact / Runtime StateをMachine-checkable条件で評価し、FAILをTechnical Successとして後段へ流さない |
+| `FC-CORE-004` | Evidence Traceability | Execution、Artifact、Gate、Review、Human DecisionのEvidence identity / BindingとCurrent・Historical・Candidate区別を保存する |
+
+FC-CORE-003はRetry / correction strategy、Human Acceptance、Reviewを含まない。FC-CORE-004はlive progress UI、dashboard、presentation、operational observabilityそのものを含まない。Review Binding Integrityは`CANDIDATE — STRONG`であり、確認済みCoreには含めない。
 
 ## 2.2 Reference Implementationの現在位置
 
@@ -51,7 +60,7 @@ Human AuthorityはFoundry Control Modelと各Reference Implementationの上位�
 | RI#3 — Visual Asset Production | Visual Asset Productionの業務RI。FoundryConsoleはHuman-facing Control Surface / Current Implementation | Visual Asset ProductionのHuman Runtime Evidence |
 | RI#4 — Research-Grounded Long-form Content Production | Research-groundedな長文Content Productionの業務RI。Temporal Entity IntegrityはCurrent Package / Capability | Current CapabilityのValidation Evidence |
 
-RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #4の状態もProject State Transitionを意味しない。FC-CORE-001以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
+RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #4の状態もProject State Transitionを意味しない。FC-CORE-001〜004以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
 
 ## 3. 解決する課題
 

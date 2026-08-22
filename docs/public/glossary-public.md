@@ -199,9 +199,12 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Component | Architecture上で責務を持つ独立要素。 |
 | Data Flow | Component間で受け渡されるデータの流れ。 |
 | Core Candidate | 複数Reference Implementationの比較Evidenceによって再利用可能性を検証中で、まだFoundry Coreへ確定していないControl Pattern。 |
-| Foundry Core | 複数Reference Implementationの比較EvidenceとHuman Decisionを経てCapability単位で正式定義する共通Control Model。FC-CORE-001は確定済みで、その他のPatternはCore Candidateである。 |
+| Foundry Core | 複数Reference Implementationの比較EvidenceとHuman Decisionを経てCapability単位で正式定義する共通Control Model。FC-CORE-001〜FC-CORE-004が確定済みで、その他のPatternはCore Candidateである。 |
 | Foundry Core Extraction | Cross-RI Evidenceから再利用可能なCapabilityを分離し、Human DecisionでFoundry Coreへ正式化するProjectの方向。 |
 | Runtime Capability Calibration | Current Model / Runtime / Hardware capabilityを観測・実測し、Evidence-backed Effective Capabilityとして確定して後続処理へBindingするControl Pattern。FC-CORE-001。 |
+| Delegation Contract Binding | 委譲する仕事を実行前に必要成果、制約、責任・権限境界、Handoff、失敗条件を明示した識別可能なContractへBindingするControl Pattern。FC-CORE-002。 |
+| Deterministic Technical Gate | Actual ArtifactまたはRuntime StateをMachine-checkableな成立条件で評価し、FAILした状態をTechnical Successとして後段へ流さないControl Pattern。FC-CORE-003。 |
+| Evidence Traceability | Execution、Artifact、Gate、Review、Human Decisionを再構成できるEvidence identity / BindingとCurrent・Historical・Candidate区別を保存するControl Pattern。FC-CORE-004。 |
 | Human Authority Boundary | Humanが保持するPurpose、Judgment、Responsibility、Approvalと、AIへ委譲できる責務との境界。 |
 | Human-Directed Foundry | HumanがPurpose、Judgment、Responsibility、Approvalを保持し、Contract、Validation、Review、Evidence、Governanceの下でAIへ業務を委譲するProject Positioning。 |
 | Internal Documentation | Internal Repositoryで管理するDocumentation。Project運用の正本を保持する。 |

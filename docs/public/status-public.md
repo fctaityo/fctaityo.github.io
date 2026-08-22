@@ -18,7 +18,7 @@ Project Stateは`Published`を維持している。RI #1 Article ProductionはHi
 
 RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Productionの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementation、Temporal Entity IntegrityはRI #4のCurrent Package / Capabilityである。
 
-`FC-CORE-001 Runtime Capability Calibration`は最初の確認済みFoundry Core Capabilityである。Website v5はCurrent Presentationであり、Internal Repositoryの正本を代替しない。
+`FC-CORE-001 Runtime Capability Calibration`、`FC-CORE-002 Delegation Contract Binding`、`FC-CORE-003 Deterministic Technical Gate`、`FC-CORE-004 Evidence Traceability`は確認済みFoundry Core Capabilityである。Website v5はCurrent Presentationであり、Internal Repositoryの正本を代替しない。
 
 ## 30秒Current Snapshot
 
@@ -26,11 +26,11 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | ------- | ----------------------------------------------------------------------------------------------- |
 | 現在地 | Project State: `Published`<br>Current Baseline: Active<br>RI #1: Historical Benchmark |
 | 目的 | Cross-RI Evidenceから再利用可能なFoundry Core Capabilityを抽出する |
-| 最近完了 | RI #1〜RI #4の位置付けとFC-CORE-001をCurrent Sourceへ反映 |
-| 残りGate | Public Projection CandidateのHuman / AI Reviewと、承認後のPublication実行 |
-| Blocker | Public Projection Candidateは未承認・未公開 |
-| 次の一歩 | Public Projection CandidateのHuman / AI Complete Review |
-| Human判断 | Current CandidateのSemantic Approvalと、後続Publication実行のAuthorizationを個別に行う |
+| 最近完了 | RI #1〜RI #4の位置付けとFC-CORE-001〜004をCurrent Sourceへ反映 |
+| 残りGate | 追加Core Candidateの比較Evidence確認とHuman Decision |
+| Blocker | なし（Project State `Blocked`ではない） |
+| 次の一歩 | 4-Core confirmed setを基準にFoundry Core Extractionを継続 |
+| Human判断 | FC-CORE-001〜004をConfirmed Coreとして維持し、Review Binding Integrityは`CANDIDATE — STRONG`として継続評価する |
 
 ## Current Baseline
 
@@ -41,7 +41,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | Current Vector | Cross-RI Evidence → Foundry Core Extraction | Current |
 | RI #1 | Article Production / Historical Benchmark | Frozen |
 | RI #2〜RI #4 | Documentation / Visual Asset / Research-Grounded Long-form Content Production | Current Evidence Sources |
-| Foundry Core | FC-CORE-001 confirmed。その他はCore Candidate | Capability-based |
+| Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` | Capability-based |
 | Website v5 | Public Presentation | Current |
 
 内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
@@ -54,7 +54,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
 | RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
 | RI #4 Research-Grounded Long-form Content Production | Temporal Entity IntegrityをCurrent Package / Capabilityとして検証中 |
-| Foundry Core | FC-CORE-001 confirmed。追加CapabilityはCandidate |
+| Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` |
 
 ## Runtime Status
 
@@ -78,7 +78,7 @@ RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。
 | Baseline            | Active                                          |
 | Allowed Next States | Human-authorized Project State Contractに従う      |
 | Next State Gate     | Human Decisionと必要Evidence                      |
-| Snapshot Updated    | `2026-08-21`                                    |
+| Snapshot Updated    | `2026-08-22`                                    |
 
 ### その他の許可Transition
 

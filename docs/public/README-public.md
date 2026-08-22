@@ -20,7 +20,7 @@ Local AI Foundryは現在、4つのReference Implementation（RI）から得たC
 - RI #4 — Research-Grounded Long-form Content Production
   - Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
 - Current Vector — `Cross-RI Evidence → Foundry Core Extraction`
-- Confirmed Foundry Core — `FC-CORE-001 Runtime Capability Calibration`のみ。その他の再利用可能なパターンは引き続きCore Candidateである。
+- Confirmed Foundry Core — `FC-CORE-001 Runtime Capability Calibration`、`FC-CORE-002 Delegation Contract Binding`、`FC-CORE-003 Deterministic Technical Gate`、`FC-CORE-004 Evidence Traceability`。Review Binding Integrityは`CANDIDATE — STRONG`である。
 
 現在地は[Project Status](status-public.md)、構造と責務境界は[Architecture](architecture-public.md)、進行方向は[Roadmap](roadmap-public.md)、用語の正確な意味は[Glossary](glossary-public.md)を参照する。
 
