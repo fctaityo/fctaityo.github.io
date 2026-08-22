@@ -150,7 +150,7 @@
 </div>
 </div>
 </article>
-<div aria-label="RI Guide" class="guide-mascot"><img alt="RI Guide" src="assets/ri1-guide.webp"/><div aria-hidden="true" class="guide-orbit"></div></div><div aria-hidden="true" class="guide-open-dock"><span class="guide-open-label" data-guide-label="">RI#1 GUIDE</span><div class="guide-open-art"><img alt="" src="assets/ri1-guide.webp"/><div class="guide-open-orbit"></div></div><div class="guide-open-status"><small>CURRENT</small><strong data-current-stage="">RUNTIME</strong></div></div>
+<div aria-label="RI Guide" class="guide-mascot"><img alt="RI Guide" src="assets/ri1-guide.webp"/><div aria-hidden="true" class="guide-orbit"></div></div><div aria-hidden="true" class="guide-open-dock"><span class="guide-open-label" data-guide-label="">RI#1 GUIDE</span><div class="guide-open-art"><img alt="" src="assets/ri1-guide.webp"/><div class="guide-open-orbit"></div></div><div class="guide-open-status"><strong data-current-stage="">RUNTIME</strong></div></div>
 <article class="project-line ri2-line" id="ri2-line">
 <div aria-label="RI#2 ドキュメント制作の詳細を開く" class="ri2-rail-row" role="button" tabindex="0">
 <button aria-controls="ri2-telemetry" aria-expanded="false" class="line-toggle" id="ri2-toggle" type="button">

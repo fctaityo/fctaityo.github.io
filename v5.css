@@ -12,6 +12,23 @@
   padding:112px 0 64px!important;
   justify-content:flex-start!important;
 }
+
+/* v5.1 hotfix — open Guide Dock shows the semantic status only. */
+.s13-dashboard .guide-open-status{
+  justify-content:center!important;
+  width:auto!important;
+  text-align:center!important;
+}
+.s13-dashboard .guide-open-status strong{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  line-height:1.35!important;
+}
 .hero.v5-hero .hero-layout{align-content:start}
 .version-beacon.v5-beacon{border-color:rgba(86,240,189,.42)!important;background:linear-gradient(110deg,rgba(8,35,39,.82),rgba(17,22,51,.82))!important;box-shadow:0 0 34px rgba(86,240,189,.08)!important}
 .version-beacon.v5-beacon strong{color:var(--v5-core)!important;text-shadow:0 0 22px rgba(86,240,189,.28)}
