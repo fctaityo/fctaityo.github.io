@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lint paragraph fragmentation in LF long-form NOTE Markdown articles."""
+"""Lint paragraph density in LF long-form NOTE Markdown articles."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ ONE_SENTENCE_RUN_LIMIT = 2
 SHORT_RUN_LIMIT = 2
 SECTION_MIN_PARAGRAPHS_FOR_DENSITY = 4
 SHORT_RATIO_LIMIT = 0.50
+MAX_SENTENCE_LIMIT = 8
 
 
 @dataclass
@@ -169,6 +170,14 @@ def lint_text(text: str, source: str = "<memory>") -> list[str]:
                 f"(<= {SHORT_SENTENCE_LIMIT} sentences and < {SHORT_CHAR_LIMIT} chars each)"
             )
 
+    for paragraph in paragraphs:
+        if paragraph.sentences > MAX_SENTENCE_LIMIT:
+            errors.append(
+                f"{source}:{paragraph.start_line}-{paragraph.end_line}: "
+                f"oversized prose paragraph: {paragraph.sentences} sentences "
+                f"(max {MAX_SENTENCE_LIMIT})"
+            )
+
     sections: dict[str, list[Paragraph]] = {}
     for p in paragraphs:
         sections.setdefault(p.section, []).append(p)
@@ -210,8 +219,13 @@ AIに任せた。
 
 でも壊れた。
 """
+    oversized = """## Oversized
+
+一文目。二文目。三文目。四文目。五文目。六文目。七文目。八文目。九文目。
+"""
     good_errors = lint_text(good, "<self-test-good>")
     bad_errors = lint_text(bad, "<self-test-bad>")
+    oversized_errors = lint_text(oversized, "<self-test-oversized>")
     if good_errors:
         print("SELF-TEST FAIL: good sample was rejected", file=sys.stderr)
         for err in good_errors:
@@ -220,13 +234,16 @@ AIに任せた。
     if not bad_errors:
         print("SELF-TEST FAIL: fragmented sample was not rejected", file=sys.stderr)
         return False
+    if not oversized_errors:
+        print("SELF-TEST FAIL: oversized paragraph was not rejected", file=sys.stderr)
+        return False
     print("SELF-TEST PASS")
     return True
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Detect GPT-style paragraph fragmentation in LF NOTE articles."
+        description="Detect under- and over-segmented paragraph density in LF NOTE articles."
     )
     parser.add_argument("files", nargs="*", help="Markdown files to lint")
     parser.add_argument("--self-test", action="store_true")
