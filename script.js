@@ -87,10 +87,10 @@
 <div aria-hidden="true" class="radar"><i></i><b></b><em></em></div>
 </section>
 </div>
-<div aria-label="Phase B / 実文書検証一覧" class="project-cards reveal">
+<div aria-label="Reference Implementation Current一覧" class="project-cards reveal">
 <button class="project-card active-card" data-open-ri1="" type="button"><span class="project-icon hex">◇</span><span><b><em>RI#1</em> 記事制作</b><small>Article Production / Current</small></span><mark>ACTIVE</mark><i class="card-trace"></i></button>
-<button class="project-card active-card" data-open-ri2="" type="button"><span class="project-icon green">⬡</span><span><b><em>RI#2</em> ドキュメント制作</b><small>Document Transformation /<br>Phase B</small></span><mark>READY</mark><i class="card-trace"></i></button>
-<article class="project-card"><span class="project-icon violet">⬢</span><span><b><em>RI#3</em> 次期Reference Implementation</b><small>Future target</small></span></article>
+<button class="project-card active-card" data-open-ri2="" type="button"><span class="project-icon green">⬡</span><span><b><em>RI#2</em> ドキュメント制作</b><small>Document Transformation /<br>Core Contributor</small></span><mark>VERIFIED</mark><i class="card-trace"></i></button>
+<article class="project-card"><span class="project-icon violet">⬢</span><span><b><em>RI#3</em> 画像資産制作</b><small>Visual Asset Production / Runtime Validated</small></span></article>
 <article class="project-card add"><span class="plus">＋</span><span><b>新しいラインを追加</b><small>Human Decision（人間判断）で開始</small></span></article>
 </div>
 <aside class="visitor-counter reveal" aria-labelledby="visitor-counter-title">
@@ -154,7 +154,7 @@
 <article class="project-line ri2-line" id="ri2-line">
 <div aria-label="RI#2 ドキュメント制作の詳細を開く" class="ri2-rail-row" role="button" tabindex="0">
 <button aria-controls="ri2-telemetry" aria-expanded="false" class="line-toggle" id="ri2-toggle" type="button">
-<span class="line-id"><i>◉</i><b>RI#2</b></span><span class="line-name"><strong>ドキュメント制作</strong><small>Document Transformation</small></span><span class="line-state" data-ri2-overall="">READY</span><span aria-hidden="true" class="chevron">⌄</span>
+<span class="line-id"><i>◉</i><b>RI#2</b></span><span class="line-name"><strong>ドキュメント制作</strong><small>Core Contributor</small></span><span class="line-state" data-ri2-overall="">VERIFIED</span><span aria-hidden="true" class="chevron">⌄</span>
 </button>
 <div aria-label="RI#2 ドキュメント制作: 確定段階" class="stage-rail ri2-stage-rail">
 <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div>
@@ -169,33 +169,33 @@
 <aside class="operator-card boot-item" style="--boot:0">
 <span class="operator-label">PUBLICATION OPERATOR</span>
 <div class="operator-art"><img alt="Foundry Publication Operator" src="assets/ri1-operator.webp"/></div>
-<div class="operator-comment"><small>OPERATOR COMMENT</small><p data-ri2-operator-comment="">Source Binding（Sourceひも付け）からSemantic Review（意味レビュー）まで完了。Public Candidate（公開候補）はArtifact PASS。Publication（公開）は未承認で、現在はHuman Review（人間レビュー）待ち。</p></div>
+<div class="operator-comment"><small>OPERATOR COMMENT</small><p data-ri2-operator-comment="">Source Binding（Sourceひも付け）からSemantic Review（意味レビュー）まで完了。RI#2はCore Contributorとして実装検証済み。Live AcceptanceはPENDING。</p></div>
 </aside>
 <div class="telemetry-main">
 <header class="telemetry-head boot-item" style="--boot:1"><div><p>RI #2 / DOCUMENT TRANSFORMATION</p><h3 id="ri2-telemetry-title">PUBLICATION TELEMETRY</h3></div><div class="projection-badge"><span></span>PUBLIC PROJECTION</div><button aria-label="RI#2管制盤を閉じる" class="panel-close" data-close-ri2="" type="button">×</button></header>
 <div class="status-grid">
-<article class="status-card ready boot-item" style="--boot:2"><small>OVERALL</small><strong data-ri2-overall="">READY</strong></article>
+<article class="status-card ready boot-item" style="--boot:2"><small>OVERALL</small><strong data-ri2-overall="">VERIFIED</strong></article>
 <article class="status-card green boot-item" style="--boot:3"><small>WORKFLOW</small><strong data-ri2-workflow="">PASS</strong></article>
 <article class="status-card green boot-item" style="--boot:4"><small>ARTIFACT</small><strong data-ri2-artifact="">PASS</strong></article>
-<article class="status-card locked boot-item" style="--boot:5"><small>PUBLICATION</small><strong data-ri2-publication="">NOT AUTHORIZED</strong></article>
-<article class="status-card violet boot-item" style="--boot:6"><small>HUMAN REVIEW</small><strong data-ri2-human-gate="">READY</strong></article>
-<article class="status-card cyan boot-item" style="--boot:7"><small>PHASE</small><strong data-ri2-phase="">PHASE B</strong></article>
+<article class="status-card locked boot-item" style="--boot:5"><small>LIVE ACCEPTANCE</small><strong data-ri2-publication="">PENDING</strong></article>
+<article class="status-card violet boot-item" style="--boot:6"><small>HUMAN GATE</small><strong data-ri2-human-gate="">PENDING</strong></article>
+<article class="status-card cyan boot-item" style="--boot:7"><small>PHASE</small><strong data-ri2-phase="">IMPLEMENTATION VERIFIED</strong></article>
 <article class="status-card cyan wide boot-item" style="--boot:8"><small>WORKFLOW MODE</small><strong data-ri2-mode="">SOURCE-PRESERVING</strong><span data-ri2-architecture="">v0.34</span></article>
 </div>
-<div class="pipeline-block boot-item" style="--boot:9"><p class="micro-title">TRANSFORMATION PROGRESSION</p><div class="pipeline"><span class="ok">SOURCE <i>✓</i></span><b>→</b><span class="ok">PLAN <i>✓</i></span><b>→</b><span class="ok">TRANSFORM <i>✓</i></span><b>→</b><span class="ok">REVIEW <i>✓</i></span><b>→</b><span class="next">HUMAN <i>◎</i></span></div></div>
+<div class="pipeline-block boot-item" style="--boot:9"><p class="micro-title">TRANSFORMATION PROGRESSION</p><div class="pipeline"><span class="ok">SOURCE <i>✓</i></span><b>→</b><span class="ok">PLAN <i>✓</i></span><b>→</b><span class="ok">TRANSFORM <i>✓</i></span><b>→</b><span class="ok">REVIEW <i>✓</i></span><b>→</b><span class="next">LIVE ACCEPTANCE <i>◎</i></span></div></div>
 <div class="telemetry-lower">
 <div class="contract-block boot-item" style="--boot:10"><p class="micro-title">TRANSFORMATION CONTRACTS</p><div class="contract-row ri2-contract-row"><span>Source Binding</span><strong data-ri2-source-binding="">PASS</strong></div><div class="contract-row ri2-contract-row"><span>Deterministic Validation</span><strong data-ri2-deterministic="">PASS</strong></div><div class="contract-row ri2-contract-row"><span>Semantic Review</span><strong data-ri2-semantic="">PASS</strong></div></div>
 <div class="evidence-block boot-item" style="--boot:11"><p class="micro-title">EVIDENCE STATUS</p><div aria-hidden="true" class="evidence-ring"><span data-ri2-evidence-binding="">PASS</span></div><ul><li><span>Gate Pass</span><strong data-ri2-gates="">8 / 8</strong></li><li><span>Evidence Files</span><strong data-ri2-evidence-files="">38 / 38</strong></li><li><span>Artifact</span><strong data-ri2-artifact="">PASS</strong></li></ul></div>
 </div>
-<footer class="telemetry-foot boot-item" style="--boot:12"><span>PUBLIC BOUNDARY</span><p>公開可能なPhase B結果のみ表示。Model・Context・内部ID・環境固有情報は投影しない。</p></footer>
+<footer class="telemetry-foot boot-item" style="--boot:12"><span>PUBLIC BOUNDARY</span><p>公開可能なCurrent結果のみ表示。旧Phase B SnapshotはCurrent表示経路から除外する。</p></footer>
 </div>
 </section>
 </div>
 </div>
 </article>
 <article class="project-line other-line"><div class="line-static"><span class="line-id"><i>▽</i><b>WEB</b></span><span class="line-name"><strong>公式HP</strong><small>Website Presentation</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="c"></i><i class="c"></i><i></i><i></i></div></article>
-<article class="project-line other-line"><div class="line-static"><span class="line-id"><i>⬡</i><b>CORE</b></span><span class="line-name"><strong>Foundry Core</strong><small>Core Candidate / Evidence</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="v"></i><i></i><i></i><i></i></div></article>
-<article class="project-line other-line"><div class="line-static"><span class="line-id"><i>✣</i><b>RI#3</b></span><span class="line-name"><strong>次期RI</strong><small>Reference Implementation</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="v"></i><i></i><i></i><i></i><i></i></div></article>
+<article class="project-line other-line"><div class="line-static"><span class="line-id"><i>⬡</i><b>CORE</b></span><span class="line-name"><strong>Foundry Core</strong><small>4-Core Confirmed / Extraction Continues</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="g"></i><i class="v"></i><i></i><i></i><i></i></div></article>
+<article class="project-line other-line"><div class="line-static"><span class="line-id"><i>✣</i><b>RI#3</b></span><span class="line-name"><strong>画像資産制作</strong><small>Runtime Validated / Core Contributor</small></span><span class="chevron">⌄</span></div><div class="mini-rail"><i class="v"></i><i></i><i></i><i></i><i></i></div></article>
 </section>
 </div>
 
@@ -407,7 +407,7 @@ function resolveRi2CurrentIndex(r){
  const artifact=String(r?.artifact||'').trim().toUpperCase();
  const workflow=String(r?.workflow||'').trim().toUpperCase();
  if(publication==='AUTHORIZED'||publication==='PUBLISHED'||publication==='PASS')return 5;
- if(humanGate==='READY'||publication==='NOT AUTHORIZED')return 5;
+ if(humanGate==='READY'||humanGate==='PENDING'||publication==='NOT AUTHORIZED'||publication==='LIVE ACCEPTANCE PENDING')return 5;
  if(artifact==='PASS')return 4;
  if(workflow==='PASS')return 3;
  return 2;
@@ -447,7 +447,7 @@ function bindProjection(DATA){
  if(r.evidence?.binding)setText('[data-ri2-evidence-binding]',r.evidence.binding);
  if(r.evidence?.gates)setText('[data-ri2-gates]',`${r.evidence.gates.passed} / ${r.evidence.gates.total}`);
  if(r.evidence?.files)setText('[data-ri2-evidence-files]',`${r.evidence.files.verified} / ${r.evidence.files.total}`);
- const comment=`Source Binding（Sourceひも付け）からSemantic Review（意味レビュー）まで${r.workflow==='PASS'?'完了':'進行'}。Public Candidate（公開候補）はArtifact ${r.artifact||'UNKNOWN'}。Publication（公開）は${r.publication==='NOT AUTHORIZED'?'未承認':'現在状態 '+r.publication}で、現在はHuman Review（人間レビュー）${r.human_gate==='READY'?'待ち':'確認中'}。`;
+ const comment=`Source Binding（Sourceひも付け）からSemantic Review（意味レビュー）まで${r.workflow==='PASS'?'完了':'進行'}。Artifact ${r.artifact||'UNKNOWN'}、Current Role ${r.current_role||'CORE CONTRIBUTOR'}。Live Acceptanceは${r.publication||'UNKNOWN'}。`;
  setText('[data-ri2-operator-comment]',comment);
  renderRi2Rail(r);
 }
@@ -467,7 +467,7 @@ function openPanel({scroll=true,focusPanel=false}={}){
  board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri1-open','ri2-open','ri-open');
  board.classList.add('ri-open','ri2-open','ri-booting');
  toggle?.setAttribute('aria-expanded','true');reveal?.setAttribute('aria-hidden','false');if(reveal)reveal.inert=false;
- setText('[data-guide-label]','RI#2 GUIDE');setText('[data-current-stage]','HUMAN REVIEW');
+ setText('[data-guide-label]','RI#2 GUIDE');setText('[data-current-stage]','LIVE ACCEPTANCE');
  requestAnimationFrame(()=>requestAnimationFrame(()=>board.classList.add('ri-energized')));
  guideTimer=window.setTimeout(()=>board.classList.add('guide-open-ready'),reduce.matches?0:620);
  bootTimer=window.setTimeout(()=>board.classList.remove('ri-booting'),1250);
@@ -893,8 +893,8 @@ loadProjection();
   const pulseViews = {
     overview: {
       title: 'OVERVIEW', sub: 'FOUNDRY CURRENT', metrics: [
-        ['PROJECT STATE','Published','info'],['MAINLINE','RI#1','ok'],['PARALLEL CURRENT','RI#3','rv'],
-        ['RI#2','READY','ok'],['CORE','CANDIDATE','warn'],['PUBLIC SITE','CURRENT','info']
+        ['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['PARALLEL CURRENT','RI#3 / RI#4','rv'],
+        ['RI#2','VERIFIED','ok'],['CORE','4 CONFIRMED','ok'],['PUBLIC SITE','v5.1','info']
       ]
     },
     ri1: {
@@ -905,8 +905,8 @@ loadProjection();
     },
     ri2: {
       title: 'RI#2', sub: 'DOCUMENT TRANSFORMATION', metrics: [
-        ['OVERALL','READY','ok'],['WORKFLOW','PASS','ok'],['ARTIFACT','PASS','ok'],
-        ['PUBLICATION','NOT AUTHORIZED','warn'],['HUMAN REVIEW','READY','ok'],['PHASE','PHASE B','rv']
+        ['OVERALL','VERIFIED','ok'],['ROLE','CORE CONTRIBUTOR','ok'],['ARTIFACT','PASS','ok'],
+        ['LIVE ACCEPTANCE','PENDING','warn'],['HUMAN GATE','PENDING','warn'],['PHASE','IMPLEMENTATION VERIFIED','rv']
       ]
     },
     ri3: {

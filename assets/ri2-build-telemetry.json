@@ -1,12 +1,13 @@
 {
   "schema_version": "LF-RI2-PUBLIC-PROJECTION-0.1",
   "ri2": {
-    "overall": "READY",
-    "phase": "PHASE B",
+    "overall": "VERIFIED",
+    "phase": "IMPLEMENTATION VERIFIED",
     "workflow": "PASS",
     "artifact": "PASS",
-    "publication": "NOT AUTHORIZED",
-    "human_gate": "READY",
+    "publication": "LIVE ACCEPTANCE PENDING",
+    "human_gate": "PENDING",
+    "current_role": "CORE CONTRIBUTOR",
     "workflow_mode": "SOURCE-PRESERVING",
     "architecture_revision": "v0.34",
     "contracts": {

@@ -1,17 +1,17 @@
-/* Local AI Foundry Official Website v5.0
+/* Local AI Foundry Official Website v5.1
    Visual Recovery / Layout Integrity Hotfix r1
    Loaded after the v4.2 Human-approved S13 dashboard. */
 (() => {
   'use strict';
 
-  const RELEASE = '2026-08-21-v5.0.html';
+  const RELEASE = '2026-08-22-v5.1.html';
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => [...r.querySelectorAll(s)];
   const setText = (s, value, r = document) => qsa(s, r).forEach(el => { el.textContent = value; });
 
   const meta = qs('meta[name="description"]');
-  if (meta) meta.content = 'Local AI Foundry v5.0。RI#1〜RI#4の実証Evidenceを横断し、Human Authority・Contract・Gate・Review・Evidenceなどの共通制御構造をFoundry Coreへ抽出する次フェーズへ。';
-  document.title = 'Local AI Foundry v5.0 — 複数の実証からFoundry Coreへ';
+  if (meta) meta.content = 'Local AI Foundry v5.1。4-Core Public CurrentとWEB / CORE Detail Railを備えたHuman-Directed AI Foundry。';
+  document.title = 'Local AI Foundry v5.1 — 4-Core Public Current Detail Rails';
 
   /* Header: one new navigation category only. */
   const mainNav = qs('.main-nav');
@@ -36,8 +36,8 @@
   if (beacon) {
     beacon.classList.add('v5-beacon');
     beacon.href = `releases/${RELEASE}`;
-    beacon.setAttribute('aria-label', 'Local AI Foundry v5.0 リリース詳細');
-    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.0</strong><em>CROSS-RI CORE EXTRACTION</em><b>詳細 →</b>';
+    beacon.setAttribute('aria-label', 'Local AI Foundry v5.1 リリース詳細');
+    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.1</strong><em>PUBLIC CURRENT DETAIL RAILS</em><b>詳細 →</b>';
   }
   const eyebrow = qs('.hero-copy .eyebrow em');
   if (eyebrow) eyebrow.textContent = '次のベクトル / CORE EXTRACTION';
@@ -48,7 +48,7 @@
   const heroActions = qs('.hero-actions');
   if (heroActions) heroActions.innerHTML = '<a class="button primary" href="#projects">4つの実証を見る ↓</a><a class="button" href="#core-vector">次のベクトルを見る</a><a class="button" href="#proof">公開資料</a>';
   const heroStates = qs('.hero-state-row');
-  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.0</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>Core Extraction</strong></div>';
+  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.1</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>Core Extraction</strong></div>';
   const heroBottom = qs('.hero-bottom-line');
   if (heroBottom) heroBottom.innerHTML = '<span>Reference Implementations</span><i></i><strong>Foundry Coreへ</strong>';
 
@@ -58,7 +58,7 @@
     const h2 = qs('h2', evoHeading);
     const p = qs(':scope > p', evoHeading);
     if (h2) h2.innerHTML = '<span class="title-line">一つのWorkflowから始まった。</span><strong class="title-line">四つの実証が、Coreを見せた。</strong>';
-    if (p) p.textContent = 'RI#1だけでは仮説だったControl Patternを、RI#2〜RI#4の異なる業務とRuntimeで比較できるところまで来た。次は共通部分をFoundry Coreとして抽出する。';
+    if (p) p.textContent = 'RI#1だけでは仮説だったControl Patternを、RI#2〜RI#4の異なる業務とRuntimeで比較し、FC-CORE-001〜004を正式Coreとして確定した。次のCore Candidate評価をCross-RI Evidenceから継続する。';
   }
   const evoPulse = qs('.evolution-pulse');
   if (evoPulse) evoPulse.innerHTML = '<span>ARTICLE</span><i></i><span>DOCUMENT</span><i></i><span>VISUAL</span><i></i><span>RESEARCH</span><i></i><strong>CORE</strong>';
@@ -102,7 +102,7 @@
   }
 
   const pulseViews = {
-    overview: { title:'OVERVIEW', sub:'FOUNDRY v5 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT FRONTIER','RI#4','frontier'],['WEBSITE','v5.0','info']] },
+    overview: { title:'OVERVIEW', sub:'FOUNDRY v5 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT FRONTIER','RI#4','frontier'],['WEBSITE','v5.1','info']] },
     ri1: { title:'RI#1', sub:'ARTICLE PRODUCTION / HISTORICAL', metrics:[['ROLE','FROZEN','frozen'],['PLATFORM','DIFY-CENTERED','info'],['LEGACY','CONTROL ORIGIN','ok'],['RUNTIME SNAPSHOT','PRESERVED','info'],['NEW EXPANSION','NONE','frozen'],['USE','BENCHMARK','frontier']] },
     ri2: { title:'RI#2', sub:'DOCUMENTATION PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['WORKFLOW','VERIFIED','ok'],['CONTROL PLANE','PYTHON','info'],['SOURCE','PRESERVED','ok'],['CORE SIGNAL','RUNTIME CAPABILITY','core'],['STATUS','VERIFIED','ok']] },
     ri3: { title:'RI#3', sub:'VISUAL ASSET PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['LIVE','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],['BLOCKING GATE','20 / 21','ok'],['CORE SIGNAL','GATE ≠ ACCEPTANCE','frontier'],['STATUS','RUNTIME VALIDATED','ok']] },
@@ -298,7 +298,8 @@
     const finalStageRail = label => `<div aria-label="${label}: 確定段階" class="stage-rail operational-stage-rail"><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-node n1 done"><span></span></div><div class="rail-node n2 done"><span></span></div><div class="rail-node n3 done"><span></span></div><div class="rail-node n4 done"><span></span></div><div class="rail-node n5 current"><span class="orb"></span><b class="orb-ring r1"></b><b class="orb-ring r2"></b><b class="orb-ring r3"></b></div><div aria-hidden="true" class="energy-beam"><i></i><b></b><em></em></div></div>`;
     function operationalPanel(kind, facts) {
       const lower = facts.rows.map(([label,value])=>`<div class="contract-row"><span>${label}</span><strong>${value}</strong></div>`).join('');
-      return `<div aria-hidden="true" aria-labelledby="${kind}-telemetry-title" class="telemetry-reveal" id="${kind}-telemetry" inert role="region"><div class="telemetry-reveal-inner"><section class="telemetry-panel ${kind}-telemetry-panel"><div aria-hidden="true" class="panel-grid"></div><div aria-hidden="true" class="panel-noise"></div><div aria-hidden="true" class="panel-scan"></div><div aria-hidden="true" class="edge-trace trace-a"></div><div aria-hidden="true" class="edge-trace trace-b"></div><aside class="operator-card boot-item" style="--boot:0"><span class="operator-label">${facts.operator}</span><div class="operator-art"><img alt="${facts.operator}" src="assets/${facts.image}"/></div><div class="operator-comment"><small>CURRENT SIGNAL</small><p>${facts.comment}</p></div></aside><div class="telemetry-main"><header class="telemetry-head boot-item" style="--boot:1"><div><p>${facts.kicker}</p><h3 id="${kind}-telemetry-title">${facts.title}</h3></div><div class="projection-badge"><span></span>CURRENT</div><button aria-label="${facts.closeLabel}" class="panel-close" data-close-${kind} type="button">×</button></header><div class="status-grid">${facts.cards.map((card,i)=>`<article class="status-card ${card[2]} boot-item" style="--boot:${i+2}"><small>${card[0]}</small><strong>${card[1]}</strong></article>`).join('')}</div><div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">${facts.pipelineTitle}</p><div class="pipeline">${facts.pipeline.map((step,i)=>`${i?'<b>→</b>':''}<span class="${step[1]}">${step[0]} ${step[1]==='ok'?'<i>✓</i>':''}</span>`).join('')}</div></div><div class="telemetry-lower"><div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT FACTS</p>${lower}</div><div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">CURRENTNESS</p><div aria-hidden="true" class="evidence-ring"><span>LIVE</span></div><ul><li><span>Stage</span><strong>確定段階</strong></li><li><span>Presentation</span><strong>CURRENT</strong></li><li><span>Evidence</span><strong>VISIBLE</strong></li></ul></div></div><footer class="telemetry-foot boot-item" style="--boot:11"><span>${facts.footerLabel}</span><p>${facts.footer}</p></footer></div></section></div></div>`;
+      const currentness = (facts.currentness || [['Stage','確定段階'],['Presentation','CURRENT'],['Evidence','VISIBLE']]).map(([label,value])=>`<li><span>${label}</span><strong>${value}</strong></li>`).join('');
+      return `<div aria-hidden="true" aria-labelledby="${kind}-telemetry-title" class="telemetry-reveal" id="${kind}-telemetry" inert role="region"><div class="telemetry-reveal-inner"><section class="telemetry-panel ${kind}-telemetry-panel"><div aria-hidden="true" class="panel-grid"></div><div aria-hidden="true" class="panel-noise"></div><div aria-hidden="true" class="panel-scan"></div><div aria-hidden="true" class="edge-trace trace-a"></div><div aria-hidden="true" class="edge-trace trace-b"></div><aside class="operator-card boot-item" style="--boot:0"><span class="operator-label">${facts.operator}</span><div class="operator-art"><img alt="${facts.operator}" src="assets/${facts.image}"/></div><div class="operator-comment"><small>CURRENT SIGNAL</small><p>${facts.comment}</p></div></aside><div class="telemetry-main"><header class="telemetry-head boot-item" style="--boot:1"><div><p>${facts.kicker}</p><h3 id="${kind}-telemetry-title">${facts.title}</h3></div><div class="projection-badge"><span></span>CURRENT</div><button aria-label="${facts.closeLabel}" class="panel-close" data-close-${kind} type="button">×</button></header><div class="status-grid">${facts.cards.map((card,i)=>`<article class="status-card ${card[2]} boot-item" style="--boot:${i+2}"><small>${card[0]}</small><strong>${card[1]}</strong></article>`).join('')}</div><div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">${facts.pipelineTitle}</p><div class="pipeline">${facts.pipeline.map((step,i)=>`${i?'<b>→</b>':''}<span class="${step[1]}">${step[0]} ${step[1]==='ok'?'<i>✓</i>':''}</span>`).join('')}</div></div><div class="telemetry-lower"><div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT FACTS</p>${lower}</div><div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">CURRENTNESS</p><div aria-hidden="true" class="evidence-ring"><span>LIVE</span></div><ul>${currentness}</ul></div></div><footer class="telemetry-foot boot-item" style="--boot:11"><span>${facts.footerLabel}</span><p>${facts.footer}</p></footer></div></section></div></div>`;
     }
     function promoteOperationalLine(line, kind, facts) {
       if (!line) return null;
@@ -307,7 +308,7 @@
       line.innerHTML=`<div aria-label="${facts.openLabel}" class="operational-rail-row ${kind}-rail-row" role="button" tabindex="0"><button aria-controls="${kind}-telemetry" aria-expanded="false" class="line-toggle" id="${kind}-toggle" type="button"><span class="line-id"><i>${facts.icon}</i><b>${facts.id}</b></span><span class="line-name"><strong>${facts.name}</strong><small>${facts.subtitle}</small></span><span class="line-state">${facts.state}</span><span aria-hidden="true" class="chevron">⌄</span></button>${finalStageRail(facts.id)}</div>${operationalPanel(kind,facts)}`;
       return {line,row:qs(`.${kind}-rail-row`,line),toggle:qs(`#${kind}-toggle`,line),reveal:qs(`#${kind}-telemetry`,line),close:qs(`[data-close-${kind}]`,line),open:false};
     }
-    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.0',subtitle:'Published / 4-Core Public Current',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.0を公開中。Foundry Core 4件のPublic CurrentをHuman-facing Websiteへ反映し、Liveで提供している。',cards:[['VERSION','v5.0','cyan'],['PROJECT','PUBLISHED','green'],['PUBLIC CURRENT','4-CORE','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.0'],['Project State','Published'],['Confirmed Core','FC-CORE-001〜004']],footerLabel:'PUBLIC CURRENT',footer:'4-Core CurrentをWebsite v5.0として公開済み。'});
+    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.1',subtitle:'Published / 4-Core Public Current',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.1を公開中。Foundry Core 4件のPublic CurrentをHuman-facing Websiteへ反映し、Liveで提供している。',cards:[['VERSION','v5.1','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','4-CORE','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.1'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'4-Core CurrentをWebsite v5.1として公開済み。'});
     const core = promoteOperationalLine(coreLine,'core',{id:'CORE',icon:'⬡',name:'Foundry Core',subtitle:'4-Core Confirmed / Extraction Continues',state:'CONFIRMED',openLabel:'CORE Foundry Coreの詳細を開く',closeLabel:'CORE詳細を閉じる',operator:'CORE EXTRACTION OPERATOR',image:'ri-guide.webp',kicker:'CORE / CROSS-RI EXTRACTION',title:'FOUNDRY CORE TELEMETRY',comment:'FC-CORE-001〜004を正式Coreとして確定。Review Binding IntegrityはStrong CandidateとしてEvidence評価を継続する。',cards:[['PHASE 3C','PASS','green'],['CORE SET','001〜004','cyan'],['CORE STATUS','CONFIRMED','green'],['EXTRACTION','CONTINUES','purple']],pipelineTitle:'CORE EXTRACTION',pipeline:[['CROSS-RI','ok'],['EVIDENCE','ok'],['4 CORES','ok'],['EXTRACT','next']],rows:[['Confirmed Core','FC-CORE-001〜004'],['Review Binding Integrity','CANDIDATE — STRONG'],['Current Vector','Foundry Core Extraction']],footerLabel:'EXTRACTION CONTINUES',footer:'4-Core確定後も、Cross-RI Evidenceから次のCore Candidateを継続評価する。'});
     const operational = [web,core].filter(Boolean);
     const closeRiDrawers = () => qsa('#ri1-toggle,#ri2-toggle,#ri3-toggle,#ri4-toggle',root).forEach(toggle=>{if(toggle.getAttribute('aria-expanded')==='true')toggle.click();});
@@ -359,10 +360,10 @@
   /* Current state remains compact and uses the existing panel. */
   const current = qs('#current');
   current?.classList.add('v5-current');
-  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.0へ。</span><strong class="title-line">4つの実証から、</strong><strong class="title-line">Coreを取り出す。</strong>';
+  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.1へ。</span><strong class="title-line">4-Core Currentを、</strong><strong class="title-line">開いて確かめる。</strong>';
   const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#1をHistorical Benchmarkとして凍結し、RI#2〜RI#4で得られたEvidenceを横断する。Websiteの主語も「RI#1の完成」から「Foundry Core Extraction」へ更新した。';
-  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.0更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
-  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.0</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
+  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.1更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
+  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.1</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 
   const coreNav = qs('.main-nav a[href="#core-vector"]');
   const coreSection = qs('#core-vector');
