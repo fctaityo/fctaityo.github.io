@@ -32,9 +32,9 @@
 
 ---
 
-前回、記事制作を止めたあとで「じゃあLocal AI Foundryは何を作るProjectなんだ？」という話を書いた。そこで出した今の答えは、記事でも、画像でも、ドキュメントでもない。**人間がPurposeとResponsibilityを持ったままAIへ仕事を委譲し、その仕事が成立したと言える状態までControlするためのFoundryを作っている。**というものだった。そのために使っているのがReference Implementation、略してRIだ。RI#1はArticle Production、RI#2はDocumentation Production、RI#3はVisual Asset Production、RI#4はResearch-Grounded Long-form Content Production。名前だけ並べると、「四つの製品を順番に作っているProject」にも見える。
+前回、記事制作を止めたあとで「じゃあLocal AI Foundryは何を作るProjectなんだ？」という話を書いた。そこで出した今の答えは、記事でも、画像でも、ドキュメントでもない。**人間がPurposeとResponsibilityを持ったままAIへ仕事を委譲し、その仕事が成立したと言える状態までControlするためのFoundryを作っている**。というものだった。そのために使っているのがReference Implementation、略してRIだ。RI#1はArticle Production、RI#2はDocumentation Production、RI#3はVisual Asset Production、RI#4はResearch-Grounded Long-form Content Production。名前だけ並べると、「四つの製品を順番に作っているProject」にも見える。
 
-でも、今のワシらの使い方は違う。**Reference Implementationは完成品ではない。**ここを取り違えると、Local AI Foundryが何をやっているのかが、かなり分かりにくくなる。
+でも、今のワシらの使い方は違う。**Reference Implementationは完成品ではない**。ここを取り違えると、Local AI Foundryが何をやっているのかが、かなり分かりにくくなる。
 
 ## 1. 完成させることが目的だと思っていた
 
@@ -42,9 +42,9 @@
 
 そうやって一つの仕組みを完成へ近づけていけば、Projectも前へ進むと思っていた。これは別に間違いではない。特定の業務を実際に動かせるところまで作らなければ、机上のArchitectureだけが増えていく。だからReference Implementationには、ちゃんとImplementationが必要だし、RuntimeもEvidenceも必要になる。
 
-ただ、途中から一つの問題が出てきた。**RI#1を完成させることと、Local AI Foundryそのものを育てることが、同じではなくなった。**記事制作にしか必要ない機能をどこまで増やすのか。記事固有のWorkflowを磨くことが、Foundry全体の次の問いに本当に必要なのか。
+ただ、途中から一つの問題が出てきた。**RI#1を完成させることと、Local AI Foundryそのものを育てることが、同じではなくなった**。記事制作にしか必要ない機能をどこまで増やすのか。記事固有のWorkflowを磨くことが、Foundry全体の次の問いに本当に必要なのか。
 
-逆に、記事制作で見つけたContractやGateの考え方は、別の仕事へ持っていっても残るのか。そこを区別しないと、Foundryを作っているつもりが、いつの間にか巨大な記事生成製品を作るProjectへ戻ってしまう。そこでRIの見方が変わった。**完成させるためだけに作るのではなく、別の仕事でも使えるControlを見つけるために作る。**この視点が入ったことで、RI#1を最後まで完遂しないという判断も成立するようになった。
+逆に、記事制作で見つけたContractやGateの考え方は、別の仕事へ持っていっても残るのか。そこを区別しないと、Foundryを作っているつもりが、いつの間にか巨大な記事生成製品を作るProjectへ戻ってしまう。そこでRIの見方が変わった。**完成させるためだけに作るのではなく、別の仕事でも使えるControlを見つけるために作る**。この視点が入ったことで、RI#1を最後まで完遂しないという判断も成立するようになった。
 
 ## 2. RI#1は、未完了のまま価値を残した
 
@@ -52,7 +52,7 @@ RI#1 Article Productionは、Fresh Formal RV-01を実行しないまま**FROZEN 
 
 「完成していない」「最後のRuntime Acceptanceまで行っていない」と言われれば、その通りだからだ。ところが、Foundry Core ExtractionのEvidence Sourceとして見ると話が変わる。RI#1には、Contractを定義しただけではExecution Pointまで意味が届かないこと、Humanが決めた値を下流で再選択できるとBindingが壊れること、Repositoryが正しくてもPublished StateやRuntimeが同じとは限らないこと、Machineが知っているCountやThresholdをLLMへ再推定させるとControlが崩れることなど、大量のEvidenceが残った。
 
-Fresh RVを最後まで通していなくても、その途中で見つかった問題まで消えるわけではない。むしろ、**どこで壊れ、何を直し、何がまだ未確認なのかを正直に残しているから、次のRIと比較できる。**だからFreezeはFailureの言い換えではないし、未完了を成功扱いすることでもない。
+Fresh RVを最後まで通していなくても、その途中で見つかった問題まで消えるわけではない。むしろ、**どこで壊れ、何を直し、何がまだ未確認なのかを正直に残しているから、次のRIと比較できる**。だからFreezeはFailureの言い換えではないし、未完了を成功扱いすることでもない。
 
 ```text
 FROZEN
@@ -92,7 +92,7 @@ Research-Grounded Long-form
 
 が、どう繰り返し現れるのかを見る。ある問いについて必要なEvidenceが取れたなら、そのRIはすでに比較材料として働いている。すべてのAcceptanceを終えてからでなければ一切学べない、というものではない。ここはかなり重要だった。
 
-**RIは全部同じFinish Lineへ向かう競走ではない。**それぞれ違う仕事を使って、Foundryの成立条件を照らすためのEvidence Sourceでもある。
+**RIは全部同じFinish Lineへ向かう競走ではない**。それぞれ違う仕事を使って、Foundryの成立条件を照らすためのEvidence Sourceでもある。
 
 ## 4. RIが答えるのは「製品として完成したか」ではない
 
@@ -100,7 +100,7 @@ Research-Grounded Long-form
 
 Research-Grounded Long-formなら、検索結果を取れたことと、Currentで正しいEntityを根拠として文章へBindingできたことは別になる。Article Productionでは、Humanが決めたTest InputやPublished IdentityがExecution Pointまで正しく届いているかが問題になった。成果物はまるで違う。なのに、仕事を成立させようとすると、何度も似た種類のControlが現れる。
 
-だからRIで一番見たいのは、完成画面の美しさではない。**その業務固有の実装を剥がしたあとにも、何が残るのか。**そこにFoundry Core Candidateが見えてくる。
+だからRIで一番見たいのは、完成画面の美しさではない。**その業務固有の実装を剥がしたあとにも、何が残るのか**。そこにFoundry Core Candidateが見えてくる。
 
 ## 5. 個別実装をCoreへコピペしない
 
@@ -126,7 +126,7 @@ Evidence-backed Effective Capabilityを決定する
 Downstream ProcessingへBindingする
 ```
 
-というControl Structureだった。仕事、Model、Runtimeが変わっても残せる形まで削って初めて、Foundry Coreとして検討する意味が出てくる。Reference Implementationは、Coreの完成品を作る場所ではない。**Coreへ持っていけるものと、RIに置いていくものを見分ける場所でもある。**
+というControl Structureだった。仕事、Model、Runtimeが変わっても残せる形まで削って初めて、Foundry Coreとして検討する意味が出てくる。Reference Implementationは、Coreの完成品を作る場所ではない。**Coreへ持っていけるものと、RIに置いていくものを見分ける場所でもある**。
 
 ## 6. 4つのConfirmed Coreは、完成品から生まれたわけではない
 
@@ -152,7 +152,7 @@ RI#2はLive AcceptanceがまだPending。RI#3はProduction Acceptanceへ到達�
 
 Delegationする仕事には、実行前に必要成果や制約、責任・権限境界、Handoff条件、失敗条件をBindingしておく必要がある。Machineで判定できるTechnical Boundaryでは、Actual ArtifactやRuntime StateをMachine-checkableな条件で評価し、FAILをTechnical Successとして後段へ流してはいけない。Execution、Artifact、Gate、Review、Human Decisionを後から再構成できるように、Evidence identityとBindingを残さなければならない。こうしたRuleは、記事だけ、文書だけ、画像だけの都合では説明しにくくなった。
 
-だからCoreへ上がった。**完成品からCoreを切り出したのではない。複数の未完成を含む実証から、仕事を越えて残ったControlを切り出した。**今のLocal AI Foundryらしさが一番出ているのは、たぶんここだと思う。
+だからCoreへ上がった。**完成品からCoreを切り出したのではない。複数の未完成を含む実証から、仕事を越えて残ったControlを切り出した**。今のLocal AI Foundryらしさが一番出ているのは、たぶんここだと思う。
 
 ## 7. Candidateを勝手にCoreへ昇格させない
 
@@ -206,8 +206,8 @@ Evidence + Human Decision
 Confirmed Foundry Core
 ```
 
-だから今のワシにとって、Reference Implementationは完成品ではない。**Evidenceを作る仕事場だ。**完成していないRIにも価値がある。FreezeしたRIにも価値がある。
+だから今のワシにとって、Reference Implementationは完成品ではない。**Evidenceを作る仕事場だ**。完成していないRIにも価値がある。FreezeしたRIにも価値がある。
 
 Acceptanceへ届かなかったRunにも、何が届かなかったのかというEvidenceが残る。大事なのは、それを成功へ書き換えず、失敗として捨てず、次の仕事と比較できる形で残すことだ。RI#1からRI#4まで、成果物は全部違う。では実際に、仕事を変えたのに「同じところで壊れた」と言えるのはどこなのか。
 
-次はそこを、もっと具体的に見ていく。**Season 3 第3話「別の仕事でも、同じところで壊れた」へ続く。**
+次はそこを、もっと具体的に見ていく。**Season 3 第3話「別の仕事でも、同じところで壊れた」へ続く**。
