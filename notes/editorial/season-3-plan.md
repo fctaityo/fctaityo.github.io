@@ -2,6 +2,18 @@
 
 Status: `CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
 
+## Writing / Delivery Gate
+
+Season 3の記事を新規作成・修正する場合は、[`article-style-contract.md`](article-style-contract.md)をCurrent Writing Contractとして先に確認する。
+
+完成前に次のParagraph Gateを実行し、`PASS`しない記事をHumanへ完成版として渡さない。
+
+```text
+python scripts/note_paragraph_lint.py <article.md>
+```
+
+Humanへ渡すRepository反映物は、Rootの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従い、GitHub Web Uploadへそのまま投入できる完成済み全文ファイルのWeb Drop-in Packageとする。Installer、Patch適用、手作業Merge、dot / hidden pathを標準Deliveryへ持ち込まない。
+
 ## Season 3：AIに仕事を任せる仕組みを作る — Reference ImplementationからFoundry Coreへ
 
 Local AI Foundryは、Article Productionだけを完成させるProjectから、
