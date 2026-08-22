@@ -4,7 +4,9 @@
 - **Season2 第07話：Canonical Sourceを失った日**
 
 ### 関連記事はコチラ👇
-- S2-06：Human Decisionは多ければ安全になるわけではない
+- [S2-01：Configurationはコードではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-01_Configuration%E3%81%AF%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-05：「最新」はCurrentではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-05_%E3%80%8C%E6%9C%80%E6%96%B0%E3%80%8D%E3%81%AFCurrent%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-08：「作った」「反映した」「Published」は全部別](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-08_%E3%80%8C%E4%BD%9C%E3%81%A3%E3%81%9F%E3%80%8D%E3%80%8C%E5%8F%8D%E6%98%A0%E3%81%97%E3%81%9F%E3%80%8D%E3%80%8CPublished%E3%80%8D%E3%81%AF%E5%85%A8%E9%83%A8%E5%88%A5.md)
 
 ---
 

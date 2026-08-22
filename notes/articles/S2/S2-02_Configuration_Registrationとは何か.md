@@ -4,8 +4,9 @@
 - **Season2 第02話：Configuration Registrationとは何か**
 
 ### 関連記事はコチラ👇
-- Season1（01〜09）：壊れないAI Workflowを設計する
-- S2-01：Configurationはコードではない
+- [S2-01：Configurationはコードではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-01_Configuration%E3%81%AF%E3%82%B3%E3%83%BC%E3%83%89%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-03：Auditは犯人探しではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-03_Audit%E3%81%AF%E7%8A%AF%E4%BA%BA%E6%8E%A2%E3%81%97%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84_%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E5%8F%8D%E6%98%A0%E7%89%88.md)
+- [S2-06：Human Decisionは多ければ安全になるわけではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-06_Human%2520Decision%E3%81%AF%E5%A4%9A%E3%81%91%E3%82%8C%E3%81%B0%E5%AE%89%E5%85%A8%E3%81%AB%E3%81%AA%E3%82%8B%E3%82%8F%E3%81%91%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
 
 ---
 

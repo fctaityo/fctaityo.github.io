@@ -4,7 +4,9 @@
 - **Season2 第04話：Current Snapshotは進捗表ではない**
 
 ### 関連記事はコチラ👇
-- S2-03：Auditは犯人探しではない
+- [S2-03：Auditは犯人探しではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-03_Audit%E3%81%AF%E7%8A%AF%E4%BA%BA%E6%8E%A2%E3%81%97%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84_%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E5%8F%8D%E6%98%A0%E7%89%88.md)
+- [S2-05：「最新」はCurrentではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-05_%E3%80%8C%E6%9C%80%E6%96%B0%E3%80%8D%E3%81%AFCurrent%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-07：Canonical Sourceを失った日](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-07_Canonical%2520Source%E3%82%92%E5%A4%B1%E3%81%A3%E3%81%9F%E6%97%A5.md)
 
 ---
 

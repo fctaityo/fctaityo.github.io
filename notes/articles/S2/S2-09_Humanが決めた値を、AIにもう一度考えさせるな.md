@@ -4,7 +4,9 @@
 - **Season2 第09話：Humanが決めた値を、AIにもう一度考えさせるな**
 
 ### 関連記事はコチラ👇
-- S2-08：「作った」「反映した」「Published」は全部別
+- [S2-06：Human Decisionは多ければ安全になるわけではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-06_Human%2520Decision%E3%81%AF%E5%A4%9A%E3%81%91%E3%82%8C%E3%81%B0%E5%AE%89%E5%85%A8%E3%81%AB%E3%81%AA%E3%82%8B%E3%82%8F%E3%81%91%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-10：文字数はLLMに数えさせるな（笑）](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-10_%E6%96%87%E5%AD%97%E6%95%B0%E3%81%AFLLM%E3%81%AB%E6%95%B0%E3%81%88%E3%81%95%E3%81%9B%E3%82%8B%E3%81%AA%EF%BC%88%E7%AC%91%EF%BC%89.md)
+- [S2-11：Publishしても、実行するまで分からない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-11_Publish%E3%81%97%E3%81%A6%E3%82%82%E3%80%81%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%BE%E3%81%A7%E5%88%86%E3%81%8B%E3%82%89%E3%81%AA%E3%81%84.md)
 
 ---
 

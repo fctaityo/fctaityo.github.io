@@ -4,7 +4,9 @@
 - **Season2 第11話：Publishしても、実行するまで分からない**
 
 ### 関連記事はコチラ👇
-- S2-10：文字数はLLMに数えさせるな（笑）
+- [S2-08：「作った」「反映した」「Published」は全部別](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-08_%E3%80%8C%E4%BD%9C%E3%81%A3%E3%81%9F%E3%80%8D%E3%80%8C%E5%8F%8D%E6%98%A0%E3%81%97%E3%81%9F%E3%80%8D%E3%80%8CPublished%E3%80%8D%E3%81%AF%E5%85%A8%E9%83%A8%E5%88%A5.md)
+- [S2-09：Humanが決めた値を、AIにもう一度考えさせるな](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-09_Human%E3%81%8C%E6%B1%BA%E3%82%81%E3%81%9F%E5%80%A4%E3%82%92%E3%80%81AI%E3%81%AB%E3%82%82%E3%81%86%E4%B8%80%E5%BA%A6%E8%80%83%E3%81%88%E3%81%95%E3%81%9B%E3%82%8B%E3%81%AA.md)
+- [S2-12：止めることも、運用である](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-12_%E6%AD%A2%E3%82%81%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%80%81%E9%81%8B%E7%94%A8%E3%81%A7%E3%81%82%E3%82%8B.md)
 
 ---
 

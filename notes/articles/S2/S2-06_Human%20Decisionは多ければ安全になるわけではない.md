@@ -4,7 +4,9 @@
 - **Season2 第06話：Human Decisionは多ければ安全になるわけではない**
 
 ### 関連記事はコチラ👇
-- S2-05：「最新」はCurrentではない
+- [S2-05：「最新」はCurrentではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-05_%E3%80%8C%E6%9C%80%E6%96%B0%E3%80%8D%E3%81%AFCurrent%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-09：Humanが決めた値を、AIにもう一度考えさせるな](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-09_Human%E3%81%8C%E6%B1%BA%E3%82%81%E3%81%9F%E5%80%A4%E3%82%92%E3%80%81AI%E3%81%AB%E3%82%82%E3%81%86%E4%B8%80%E5%BA%A6%E8%80%83%E3%81%88%E3%81%95%E3%81%9B%E3%82%8B%E3%81%AA.md)
+- [S2-12：止めることも、運用である](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-12_%E6%AD%A2%E3%82%81%E3%82%8B%E3%81%93%E3%81%A8%E3%82%82%E3%80%81%E9%81%8B%E7%94%A8%E3%81%A7%E3%81%82%E3%82%8B.md)
 
 ---
 

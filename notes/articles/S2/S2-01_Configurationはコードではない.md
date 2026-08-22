@@ -4,8 +4,9 @@
 - **Season2 第01話：Configurationはコードではない**
 
 ### 関連記事はコチラ👇
-- Season1（01〜09）：壊れないAI Workflowを設計する
-- 07 すべて直した。それでも終わらなかった。（副題：Configuration Managementという最後の壁）
+- [S2-02：Configuration Registrationとは何か](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-02_Configuration_Registration%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B.md)
+- [S2-07：Canonical Sourceを失った日](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-07_Canonical%2520Source%E3%82%92%E5%A4%B1%E3%81%A3%E3%81%9F%E6%97%A5.md)
+- [S2-08：「作った」「反映した」「Published」は全部別](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-08_%E3%80%8C%E4%BD%9C%E3%81%A3%E3%81%9F%E3%80%8D%E3%80%8C%E5%8F%8D%E6%98%A0%E3%81%97%E3%81%9F%E3%80%8D%E3%80%8CPublished%E3%80%8D%E3%81%AF%E5%85%A8%E9%83%A8%E5%88%A5.md)
 
 ---
 

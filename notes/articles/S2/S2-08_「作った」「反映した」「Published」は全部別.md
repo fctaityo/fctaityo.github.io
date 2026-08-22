@@ -4,7 +4,9 @@
 - **Season2 第08話：「作った」「反映した」「Published」は全部別**
 
 ### 関連記事はコチラ👇
-- S2-07：Canonical Sourceを失った日
+- [S2-07：Canonical Sourceを失った日](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-07_Canonical%2520Source%E3%82%92%E5%A4%B1%E3%81%A3%E3%81%9F%E6%97%A5.md)
+- [S2-05：「最新」はCurrentではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-05_%E3%80%8C%E6%9C%80%E6%96%B0%E3%80%8D%E3%81%AFCurrent%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-11：Publishしても、実行するまで分からない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-11_Publish%E3%81%97%E3%81%A6%E3%82%82%E3%80%81%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%BE%E3%81%A7%E5%88%86%E3%81%8B%E3%82%89%E3%81%AA%E3%81%84.md)
 
 ---
 

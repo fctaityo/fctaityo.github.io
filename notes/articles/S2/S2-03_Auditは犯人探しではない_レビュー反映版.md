@@ -4,9 +4,9 @@
 - **Season2 第03話：Auditは犯人探しではない**
 
 ### 関連記事はコチラ👇
-- Season1（01〜09）：壊れないAI Workflowを設計する
-- S2-01：Configurationはコードではない
-- S2-02：Configuration Registrationとは何か
+- [S2-02：Configuration Registrationとは何か](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-02_Configuration_Registration%E3%81%A8%E3%81%AF%E4%BD%95%E3%81%8B.md)
+- [S2-04：Current Snapshotは進捗表ではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-04_Current%20Snapshot%E3%81%AF%E9%80%B2%E6%8D%97%E8%A1%A8%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
+- [S2-05：「最新」はCurrentではない](https://github.com/fctaityo/fctaityo.github.io/blob/main/notes/articles/S2/S2-05_%E3%80%8C%E6%9C%80%E6%96%B0%E3%80%8D%E3%81%AFCurrent%E3%81%A7%E3%81%AF%E3%81%AA%E3%81%84.md)
 
 ---
 
