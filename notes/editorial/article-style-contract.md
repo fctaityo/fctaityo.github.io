@@ -55,6 +55,26 @@ python scripts/note_paragraph_lint.py <article.md>
 
 Machine Gateは文章表現を自動修正しない。検出対象は「細切れ段落への退化」と「巨大一段落への退化」であり、意味上の段落境界はHuman / Writerが修正する。
 
+### Fail-closed Execution
+
+記事ファイルを指定してGateを実行した場合、Linter自身のRegression Self-testを**必ず先に自動実行**する。Self-testを省略して記事だけをPASSさせる経路を設けない。
+
+対象記事を指定しない通常実行は成功扱いにしない。Self-testだけを明示的に行う場合のみ、`--self-test`を使用する。
+
+### Required Gate Receipt
+
+完成版としてHumanへ渡すメッセージには、Machine Gateが実際に対象とした完成ファイルを識別できるよう、少なくとも次の出力を提示する。
+
+```text
+SELF-TEST PASS
+PASS <article.md> sha256=<SHA-256>
+NOTE ARTICLE GATE PASS files=1
+```
+
+**Gate Receiptが提示されていない成果物は、記事本文が見た目上正常でも`DELIVERY READY`として扱わない。**
+
+SHA-256は「Gateを通した内容」と「Humanへ渡した内容」をBindingするための識別子であり、Gate後に本文を変更した場合は必ず再実行する。
+
 ## Blocking Conditions
 
 次はBlockingとする。
@@ -64,6 +84,8 @@ Machine Gateは文章表現を自動修正しない。検出対象は「細切�
 3. 同一見出し内で短段落が支配的となり、細切れ構成へ退化している。
 4. 通常本文の1段落が9文以上になり、意味単位が巨大一段落へ潰れている。
 5. Linter自体のRegression Self-testがFAILする。
+6. Machine Gateの対象記事が指定されていない。
+7. Humanへ渡す完成版とGate ReceiptのSHA-256が一致しない、またはReceiptが存在しない。
 
 `##`だけでなく`###`以下の小見出しも独立した意味区間として扱う。小見出しをまたいで別論点の短段落を誤って連結判定しない。
 
@@ -76,13 +98,15 @@ Current Article / Season Planを読む
 ↓
 記事を書く・修正する
 ↓
-Paragraph Lint
+Paragraph Lint（Self-test自動実行）
 ↓
 FAILなら段落だけを意味単位で再構成
 ↓
 再Lint
 ↓
-PASS
+PASS + SHA-256 Receipt
+↓
+Gate後の本文変更なし
 ↓
 Full-file Delivery Contractに従って完成ファイルをHumanへ渡す
 ```

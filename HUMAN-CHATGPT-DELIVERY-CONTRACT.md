@@ -42,6 +42,8 @@ Human + ChatGPTからRepository反映物を渡す場合、次を必須とする�
 8. GitHub Web Uploadを標準TransportとするPackageには、dot / hidden pathを含めない。
 9. GitHub Web Upload画面で対象Fileがhidden扱いされる構成をCommit-ready Packageとして渡さない。
 10. Humanへ別途Application Stepを要求しない。
+11. Domain-specific Machine Gateが定義されているArtifactは、**完成版そのものに対してGateを実行し、Human-facing DeliveryへGate Receiptを提示する。**
+12. Gate ReceiptがArtifactのHash / Digestを出力する場合、ReceiptとHumanへ渡す完成版のDigestが一致しなければCommit-readyとして扱わない。
 
 ## Web Drop-in Compatibility Gate
 
@@ -72,6 +74,7 @@ Humanが明示的に要求した場合を除き、次の形式でRepository反�
 - `payload/`等のWrapper Directoryを経由してから再配置させる
 - Commit前に別の生成工程を要求する
 - GitHub Web UploadでhiddenになるPathを通常Packageに入れる
+- Required Machine Gateを実行せず、またはGate ReceiptなしでMachine-gated Artifactを完成版として渡す
 
 Validation ScriptやLint ScriptをRepository自体の機能として追加することはできる。
 ただし、それらは**成果物を作り変えるApplication Stepではなく、完成済み成果物を検証するGate**として扱う。
@@ -100,6 +103,9 @@ Humanへ渡す前にHuman + ChatGPT側で次を完了する。
 - Scope Preservation確認
 - 対象Fileが完成済み全文であることの確認
 - 必要なDomain-specific Lint / Test
+- Domain-specific Gate Receipt確認
+- GateがDigestを出力する場合は完成版とのDigest一致確認
+- Gate後に対象Artifactが変更されていないことの確認
 - Delivery PackageのPath検査
 - Wrapper / Extra File不存在確認
 - dot / hidden path不存在確認
@@ -140,6 +146,10 @@ Current Source based
 Requested Scope only
 +
 Complete Final Files
++
+Required Domain Gate PASS
++
+Gate Receipt bound to Final Artifact
 +
 Repo-relative Web Drop-in Layout
 +

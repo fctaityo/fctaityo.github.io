@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import sys
 from dataclasses import dataclass
@@ -219,13 +220,25 @@ AIに任せた。
 
 でも壊れた。
 """
+    barrage = """## Barrage
+
+一文目。
+
+二文目。
+
+三文目。
+
+四文目。
+"""
     oversized = """## Oversized
 
 一文目。二文目。三文目。四文目。五文目。六文目。七文目。八文目。九文目。
 """
     good_errors = lint_text(good, "<self-test-good>")
     bad_errors = lint_text(bad, "<self-test-bad>")
+    barrage_errors = lint_text(barrage, "<self-test-barrage>")
     oversized_errors = lint_text(oversized, "<self-test-oversized>")
+
     if good_errors:
         print("SELF-TEST FAIL: good sample was rejected", file=sys.stderr)
         for err in good_errors:
@@ -234,11 +247,23 @@ AIに任せた。
     if not bad_errors:
         print("SELF-TEST FAIL: fragmented sample was not rejected", file=sys.stderr)
         return False
+    if not barrage_errors:
+        print("SELF-TEST FAIL: one-sentence barrage was not rejected", file=sys.stderr)
+        return False
     if not oversized_errors:
         print("SELF-TEST FAIL: oversized paragraph was not rejected", file=sys.stderr)
         return False
+
     print("SELF-TEST PASS")
     return True
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def main() -> int:
@@ -246,22 +271,38 @@ def main() -> int:
         description="Detect under- and over-segmented paragraph density in LF NOTE articles."
     )
     parser.add_argument("files", nargs="*", help="Markdown files to lint")
-    parser.add_argument("--self-test", action="store_true")
+    parser.add_argument(
+        "--self-test",
+        action="store_true",
+        help="Run only/explicitly the regression self-test. File lint always runs it automatically.",
+    )
     args = parser.parse_args()
 
-    ok = True
-    if args.self_test:
-        ok = self_test() and ok
+    if not args.files and not args.self_test:
+        parser.error("article.md is required (or use --self-test)")
+
+    # Fail-closed: every real article gate validates the linter itself first.
+    ok = self_test()
 
     if not args.files:
         return 0 if ok else 1
 
+    if not ok:
+        print("NOTE ARTICLE GATE FAIL: linter self-test failed", file=sys.stderr)
+        return 1
+
+    passed: list[tuple[Path, str]] = []
     for raw in args.files:
         path = Path(raw)
         if not path.exists():
             print(f"FAIL {path}: file not found", file=sys.stderr)
             ok = False
             continue
+        if not path.is_file():
+            print(f"FAIL {path}: not a file", file=sys.stderr)
+            ok = False
+            continue
+
         text = path.read_text(encoding="utf-8")
         errors = lint_text(text, str(path))
         if errors:
@@ -270,9 +311,16 @@ def main() -> int:
                 print(f"  {err}")
             ok = False
         else:
-            print(f"PASS {path}")
+            digest = _sha256(path)
+            passed.append((path, digest))
+            print(f"PASS {path} sha256={digest}")
 
-    return 0 if ok else 1
+    if ok:
+        print(f"NOTE ARTICLE GATE PASS files={len(passed)}")
+        return 0
+
+    print("NOTE ARTICLE GATE FAIL", file=sys.stderr)
+    return 1
 
 
 if __name__ == "__main__":
