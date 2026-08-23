@@ -8,7 +8,7 @@ Local AI Foundryの長文NOTE記事で、LLM由来の短文縦連打・過剰改
 
 このContractは「読みやすそうだから改行する」運用ではなく、**意味のまとまりが変わった時だけ段落を分ける**ことを要求する。
 
-Repositoryへ渡す成果物形式は、Rootの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従う。
+Repositoryへ渡す成果物形式は、Repository共通Contractの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従う。
 
 ## Canonical Rule
 

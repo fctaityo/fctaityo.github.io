@@ -12,7 +12,7 @@ Season 3の記事を新規作成・修正する場合は、[`article-style-contr
 python scripts/note_paragraph_lint.py <article.md>
 ```
 
-Humanへ渡すRepository反映物は、Rootの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従い、GitHub Web Uploadへそのまま投入できる完成済み全文ファイルのWeb Drop-in Packageとする。Installer、Patch適用、手作業Merge、dot / hidden pathを標準Deliveryへ持ち込まない。
+Humanへ渡すRepository反映物は、Repository共通Contractの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従い、GitHub Web Uploadへそのまま投入できる完成済み全文ファイルのWeb Drop-in Packageとする。Installer、Patch適用、手作業Merge、dot / hidden pathを標準Deliveryへ持ち込まない。
 
 ## Season 3：AIに仕事を任せる仕組みを作る — Reference ImplementationからFoundry Coreへ
 
