@@ -19,7 +19,7 @@ Internal Repository固有Path、Working Evidence、Private Artifact、Configurat
 
 Local AI Foundryは、人間がPurpose、Judgment、Responsibility、Approvalを保持し、明示した責務境界の内側でAIへ業務を委譲するHuman-Directed Foundryである。Contract、DTO / Handoff、Validation、Gate、Review、EvidenceおよびHuman Gateによって、Workflow完走ではなく成果物の成立を制御する。
 
-Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmarkとして保存する。Documentation ProductionはRI#2、Visual Asset ProductionはRI#3、Research-Grounded Long-form Content ProductionはRI#4として比較Evidenceを提供する。FoundryConsoleはRI#3のHuman-facing Control Surface / Current Implementationであり、RIそのものではない。Temporal Entity IntegrityはRI#4のCurrent Package / Capabilityであり、RIそのものではない。
+Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmarkとして保存する。Documentation ProductionはRI#2、Visual Asset ProductionはRI#3、Research-Grounded Long-form Content ProductionはRI#4、Foundry Control PlaneはRI#5として比較Evidenceを提供する。FoundryConsoleはRI#3のHuman-facing Control Surface / Current Implementationであり、RIそのものではない。
 
 Current VectorはCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001`〜`FC-CORE-004`の4件が現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
 
@@ -32,6 +32,7 @@ flowchart TD
   F --> R2["RI#2 Documentation Production"]
   F --> R3["RI#3 Visual Asset Production<br/>FoundryConsole Control Surface"]
   F --> R4["RI#4 Research-Grounded Long-form Content<br/>Temporal Entity Integrity"]
+  F --> R5["RI#5 Foundry Control Plane<br/>Campaign / Evidence / Intervention"]
   R1 --> I["Infrastructure / Runtime / Tooling"]
   R2 --> I
   R3 --> I
@@ -59,8 +60,9 @@ FC-CORE-003はRetry / correction strategy、Human Acceptance、Reviewを含ま�
 | RI#2 — Documentation Production | Documentationを対象にControl Patternを実証する業務RI | 比較Evidenceを保持し、継続評価する |
 | RI#3 — Visual Asset Production | Visual Asset Productionの業務RI。FoundryConsoleはHuman-facing Control Surface / Current Implementation | Visual Asset ProductionのHuman Runtime Evidence |
 | RI#4 — Research-Grounded Long-form Content Production | Research-groundedな長文Content Productionの業務RI。Temporal Entity IntegrityはCurrent Package / Capability | Current CapabilityのValidation Evidence |
+| RI#5 — Foundry Control Plane | Producer RIのEvidence Authorityを保持したままCampaign横断制御を担う | Collect / Bind / Monitor / Compare / Project Evidence |
 
-RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #4の状態もProject State Transitionを意味しない。FC-CORE-001〜004以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
+RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #5の状態もProject State Transitionを意味しない。FC-CORE-001〜004以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
 
 ## 3. 解決する課題
 

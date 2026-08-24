@@ -58,7 +58,7 @@
     const h2 = qs('h2', evoHeading);
     const p = qs(':scope > p', evoHeading);
     if (h2) h2.innerHTML = '<span class="title-line">一つのWorkflowから始まった。</span><strong class="title-line">四つの実証が、Coreを見せた。</strong>';
-    if (p) p.textContent = 'RI#1だけでは仮説だったControl Patternを、RI#2〜RI#4の異なる業務とRuntimeで比較し、FC-CORE-001〜004を正式Coreとして確定した。次のCore Candidate評価をCross-RI Evidenceから継続する。';
+    if (p) p.textContent = 'RI#1だけでは仮説だったControl Patternを、RI#2〜RI#5の異なる業務とRuntimeで比較し、FC-CORE-001〜004を正式Coreとして確定した。次のCore Candidate評価をCross-RI Evidenceから継続する。';
   }
   const evoPulse = qs('.evolution-pulse');
   if (evoPulse) evoPulse.innerHTML = '<span>ARTICLE</span><i></i><span>DOCUMENT</span><i></i><span>VISUAL</span><i></i><span>RESEARCH</span><i></i><strong>CORE</strong>';
@@ -96,17 +96,18 @@
       const title = qs('h1', heading);
       const copy = qs('.section-copy', heading);
       if (kicker) kicker.innerHTML = '04 / 実証プロジェクト <span>REFERENCE IMPLEMENTATIONS / CROSS-RI</span>';
-      if (title) title.innerHTML = '<span>RI#1からRI#4へ。</span><strong>4つの実証を、Coreへ束ねる。</strong>';
-      if (copy) copy.textContent = 'v4.2までに作り込んだReference Telemetryをそのまま使い、RI#1〜RI#4を同じ管制盤で比較する。RI#1はHistorical Benchmarkへ凍結し、RI#2〜RI#4のEvidenceをFoundry Coreへ接続する。';
+      if (title) title.innerHTML = '<span>RI#1からRI#5へ。</span><strong>実証Evidenceを、Coreへ束ねる。</strong>';
+      if (copy) copy.textContent = 'Reference Telemetryを使い、RI#1〜RI#5を同じ管制盤で比較する。RI#1はHistorical Benchmarkへ凍結し、RI#2〜RI#5のEvidenceをFoundry Coreへ接続する。';
     }
   }
 
   const pulseViews = {
-    overview: { title:'OVERVIEW', sub:'FOUNDRY v5 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT FRONTIER','RI#4','frontier'],['WEBSITE','v5.1','info']] },
+    overview: { title:'OVERVIEW', sub:'FOUNDRY v5 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT FRONTIER','RI#4 v0.55','frontier'],['CONTROL PLANE','RI#5 v0.52','info']] },
     ri1: { title:'RI#1', sub:'ARTICLE PRODUCTION / HISTORICAL', metrics:[['ROLE','FROZEN','frozen'],['PLATFORM','DIFY-CENTERED','info'],['LEGACY','CONTROL ORIGIN','ok'],['RUNTIME SNAPSHOT','PRESERVED','info'],['NEW EXPANSION','NONE','frozen'],['USE','BENCHMARK','frontier']] },
     ri2: { title:'RI#2', sub:'DOCUMENTATION PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['WORKFLOW','VERIFIED','ok'],['CONTROL PLANE','PYTHON','info'],['SOURCE','PRESERVED','ok'],['CORE SIGNAL','RUNTIME CAPABILITY','core'],['STATUS','VERIFIED','ok']] },
     ri3: { title:'RI#3', sub:'VISUAL ASSET PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['LIVE','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],['BLOCKING GATE','20 / 21','ok'],['CORE SIGNAL','GATE ≠ ACCEPTANCE','frontier'],['STATUS','RUNTIME VALIDATED','ok']] },
-    ri4: { title:'RI#4', sub:'RESEARCH-GROUNDED LONG-FORM', metrics:[['ROLE','CURRENT FRONTIER','frontier'],['PIPELINE','BRING-UP LOOP','ok'],['RESEARCH','LIVE','ok'],['REVIEW','INTEGRITY','core'],['TEMPORAL','ENTITY GATE','core'],['STATUS','ACTIVE VALIDATION','frontier']] }
+    ri4: { title:'RI#4', sub:'RESEARCH-GROUNDED LONG-FORM / v0.55', metrics:[['RESEARCH RECALL','RUNTIME VALIDATED','info'],['QUALITY','IMPROVED','ok'],['STABILITY','REVIEW REQUIRED','frontier'],['ACCEPTANCE','NOT REACHED','frozen'],['RUNTIME','v0.55','info'],['EVIDENCE','CURRENT','core']] },
+    ri5: { title:'RI#5', sub:'FOUNDRY CONTROL PLANE / v0.52', metrics:[['ROLE','CONTROL PLANE','info'],['CAMPAIGN','COMPLETED','ok'],['EVIDENCE','BOUND','core'],['REPLAY','CONFIRMED','ok'],['FOCUS_LAST','DEFECT OPEN','frontier'],['AUTHORITY','PRODUCER RI','info']] }
   };
 
   function renderPulse(view) {
@@ -134,6 +135,7 @@
             <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-v5-pulse-view="ri2">RI#2</button>
             <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-v5-pulse-view="ri3">RI#3</button>
             <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-v5-pulse-view="ri4">RI#4</button>
+            <button class="lf-pulse-tab" type="button" role="tab" aria-selected="false" data-v5-pulse-view="ri5">RI#5</button>
           </div>
         </div>
         <div class="lf-pulse-metrics" data-v5-pulse-metrics data-pulse-metrics></div>
@@ -187,6 +189,15 @@
       add?.replaceWith(ri4Card);
     }
     ri4Card?.addEventListener('click', () => renderPulse('ri4'));
+    if (!qs('[data-open-ri5]', projectCards)) {
+      const ri5Card = document.createElement('button');
+      ri5Card.type = 'button';
+      ri5Card.className = 'project-card active-card';
+      ri5Card.dataset.openRi5 = '';
+      ri5Card.innerHTML = '<span class="project-icon">◇</span><span><b><em>RI#5</em> Control Plane</b><small>Campaign / Evidence /<br>Active Validation</small></span><mark>ACTIVE</mark><i class="card-trace"></i>';
+      projectCards.appendChild(ri5Card);
+      ri5Card.addEventListener('click', () => { renderPulse('ri5'); qs('#ri5-toggle',root)?.click(); });
+    }
   }
 
   if (board && root) {
@@ -250,7 +261,7 @@
                 <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT CONTROL CONTRACTS</p><div class="contract-row"><span>Task Fulfillment</span><strong>GATED</strong></div><div class="contract-row"><span>Review Integrity</span><strong>GATED</strong></div><div class="contract-row"><span>Temporal Entity Integrity</span><strong>GATED</strong></div></div>
                 <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE MODE</p><div aria-hidden="true" class="evidence-ring"><span>LOOP</span></div><ul><li><span>Quality Gate</span><strong>PASS / FAIL VISIBLE</strong></li><li><span>Bring-up</span><strong>NON-BLOCKING</strong></li><li><span>Human Review</span><strong>REQUIRED</strong></li></ul></div>
               </div>
-              <footer class="telemetry-foot boot-item" style="--boot:11"><span>CURRENT FRONTIER</span><p>「生成できたか」だけでなく、依頼・Source・時期・Review判定が成立しているかをEvidenceで見る。</p></footer>
+              <footer class="telemetry-foot boot-item" style="--boot:11"><span>QUALITY IMPROVEMENT CONFIRMED</span><p>Research Recall調整による改善を実測で確認。Execution Stability Reviewを残し、Production Acceptanceへ昇格しない。</p></footer>
             </div>
           </section></div>
         </div>`;
@@ -308,12 +319,15 @@
       line.innerHTML=`<div aria-label="${facts.openLabel}" class="operational-rail-row ${kind}-rail-row" role="button" tabindex="0"><button aria-controls="${kind}-telemetry" aria-expanded="false" class="line-toggle" id="${kind}-toggle" type="button"><span class="line-id"><i>${facts.icon}</i><b>${facts.id}</b></span><span class="line-name"><strong>${facts.name}</strong><small>${facts.subtitle}</small></span><span class="line-state">${facts.state}</span><span aria-hidden="true" class="chevron">⌄</span></button>${finalStageRail(facts.id)}</div>${operationalPanel(kind,facts)}`;
       return {line,row:qs(`.${kind}-rail-row`,line),toggle:qs(`#${kind}-toggle`,line),reveal:qs(`#${kind}-telemetry`,line),close:qs(`[data-close-${kind}]`,line),open:false};
     }
+    const ri5Line = document.createElement('article');
+    (qs('.ri4-line',board) || coreLine || webLine)?.insertAdjacentElement('afterend',ri5Line);
+    const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Foundry Control Plane',subtitle:'v0.52 / Execution Stability Review',state:'ACTIVE',openLabel:'RI#5 Foundry Control Planeの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / FOUNDRY CONTROL PLANE',title:'CAMPAIGN TELEMETRY',comment:'Producer RIのEvidence Authorityを保持し、Campaign EvidenceをCollect / Bind / Monitor / Compare / Projectする。',cards:[['RUNTIME','v0.52','cyan'],['CAMPAIGN','COMPLETED','green'],['QUALITY','IMPROVED','green'],['STABILITY','REVIEW REQUIRED','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['BIND','ok'],['MONITOR','ok'],['REVIEW','next']],rows:[['Research Recall','RUNTIME VALIDATED'],['Quality','IMPROVEMENT CONFIRMED'],['FOCUS_LAST','DEFECT OPEN']],currentness:[['Replay','CONFIRMED'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'EXECUTION STABILITY REVIEW',footer:'品質改善は確認済み。Execution Stabilityの原因Reviewを残し、Production Acceptanceへ昇格しない。'});
     const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.1',subtitle:'Published / 4-Core Public Current',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.1を公開中。Foundry Core 4件のPublic CurrentをHuman-facing Websiteへ反映し、Liveで提供している。',cards:[['VERSION','v5.1','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','4-CORE','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.1'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'4-Core CurrentをWebsite v5.1として公開済み。'});
     const core = promoteOperationalLine(coreLine,'core',{id:'CORE',icon:'⬡',name:'Foundry Core',subtitle:'4-Core Confirmed / Extraction Continues',state:'CONFIRMED',openLabel:'CORE Foundry Coreの詳細を開く',closeLabel:'CORE詳細を閉じる',operator:'CORE EXTRACTION OPERATOR',image:'ri-guide.webp',kicker:'CORE / CROSS-RI EXTRACTION',title:'FOUNDRY CORE TELEMETRY',comment:'FC-CORE-001〜004を正式Coreとして確定。Review Binding IntegrityはStrong CandidateとしてEvidence評価を継続する。',cards:[['PHASE 3C','PASS','green'],['CORE SET','001〜004','cyan'],['CORE STATUS','CONFIRMED','green'],['EXTRACTION','CONTINUES','purple']],pipelineTitle:'CORE EXTRACTION',pipeline:[['CROSS-RI','ok'],['EVIDENCE','ok'],['4 CORES','ok'],['EXTRACT','next']],rows:[['Confirmed Core','FC-CORE-001〜004'],['Review Binding Integrity','CANDIDATE — STRONG'],['Current Vector','Foundry Core Extraction']],footerLabel:'EXTRACTION CONTINUES',footer:'4-Core確定後も、Cross-RI Evidenceから次のCore Candidateを継続評価する。'});
-    const operational = [web,core].filter(Boolean);
+    const operational = [ri5,web,core].filter(Boolean);
     const closeRiDrawers = () => qsa('#ri1-toggle,#ri2-toggle,#ri3-toggle,#ri4-toggle',root).forEach(toggle=>{if(toggle.getAttribute('aria-expanded')==='true')toggle.click();});
     function closeOperational(item,{focus=true,preserveBoard=false}={}) { if(!item?.open)return; item.open=false; board.classList.remove(`${item.line.id.replace('-line','')}-open`); if(!preserveBoard){board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri-open');} item.toggle.setAttribute('aria-expanded','false'); item.reveal.setAttribute('aria-hidden','true'); item.reveal.inert=true; if(focus)window.setTimeout(()=>item.toggle.focus({preventScroll:true}),reduce.matches?0:300); }
-    function openOperational(item) { if(!item||item.open)return; operational.filter(other=>other!==item).forEach(other=>closeOperational(other,{focus:false,preserveBoard:true})); closeRiDrawers(); item.open=true; const kind=item.line.id.replace('-line',''); board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri1-open','ri2-open','ri3-open','ri4-open','web-open','core-open','ri-open'); board.classList.add('ri-open',`${kind}-open`,'ri-booting'); item.toggle.setAttribute('aria-expanded','true'); item.reveal.setAttribute('aria-hidden','false'); item.reveal.inert=false; setText('[data-guide-label]',kind==='web'?'WEB GUIDE':'CORE GUIDE',root); setText('[data-current-stage]',kind==='web'?'LIVE':'CORE EXTRACTION',root); requestAnimationFrame(()=>requestAnimationFrame(()=>board.classList.add('ri-energized'))); window.setTimeout(()=>board.classList.remove('ri-booting'),1250); document.dispatchEvent(new CustomEvent(`lf:${kind}-opened`)); window.setTimeout(()=>window.scrollTo({top:item.row.getBoundingClientRect().top+window.scrollY-96,behavior:reduce.matches?'auto':'smooth'}),90); }
+    function openOperational(item) { if(!item||item.open)return; operational.filter(other=>other!==item).forEach(other=>closeOperational(other,{focus:false,preserveBoard:true})); closeRiDrawers(); item.open=true; const kind=item.line.id.replace('-line',''); board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri1-open','ri2-open','ri3-open','ri4-open','ri5-open','web-open','core-open','ri-open'); board.classList.add('ri-open',`${kind}-open`,'ri-booting'); item.toggle.setAttribute('aria-expanded','true'); item.reveal.setAttribute('aria-hidden','false'); item.reveal.inert=false; const guides={ri5:['RI#5 GUIDE','STABILITY REVIEW'],web:['WEB GUIDE','LIVE'],core:['CORE GUIDE','CORE EXTRACTION']}; setText('[data-guide-label]',guides[kind][0],root); setText('[data-current-stage]',guides[kind][1],root); requestAnimationFrame(()=>requestAnimationFrame(()=>board.classList.add('ri-energized'))); window.setTimeout(()=>board.classList.remove('ri-booting'),1250); renderPulse(kind==='ri5'?'ri5':'overview'); document.dispatchEvent(new CustomEvent(`lf:${kind}-opened`)); window.setTimeout(()=>window.scrollTo({top:item.row.getBoundingClientRect().top+window.scrollY-96,behavior:reduce.matches?'auto':'smooth'}),90); }
     operational.forEach(item=>{item.toggle.addEventListener('click',e=>{e.stopPropagation();item.open?closeOperational(item,{focus:false}):openOperational(item);});item.toggle.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();item.open?closeOperational(item,{focus:false}):openOperational(item);}});item.row.addEventListener('click',e=>{if(e.target.closest('.telemetry-reveal'))return;item.open?closeOperational(item,{focus:false}):openOperational(item);});item.row.addEventListener('keydown',e=>{if(e.target===item.row&&(e.key==='Enter'||e.key===' ')){e.preventDefault();item.open?closeOperational(item,{focus:false}):openOperational(item);}});item.close.addEventListener('click',e=>{e.stopPropagation();closeOperational(item,{focus:true});});});
     ['ri1','ri2','ri3','ri4'].forEach(id=>document.addEventListener(`lf:${id}-opened`,()=>operational.forEach(item=>closeOperational(item,{focus:false,preserveBoard:true}))));
     document.addEventListener('keydown',e=>{if(e.key==='Escape'){const active=operational.find(item=>item.open);if(active){e.preventDefault();closeOperational(active,{focus:true});}}});
@@ -361,7 +375,7 @@
   const current = qs('#current');
   current?.classList.add('v5-current');
   const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.1へ。</span><strong class="title-line">4-Core Currentを、</strong><strong class="title-line">開いて確かめる。</strong>';
-  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#1をHistorical Benchmarkとして凍結し、RI#2〜RI#4で得られたEvidenceを横断する。Websiteの主語も「RI#1の完成」から「Foundry Core Extraction」へ更新した。';
+  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#1をHistorical Benchmarkとして凍結し、RI#2〜RI#5で得られたEvidenceを横断する。RI#4は品質改善確認済み、RI#5はExecution Stability Reviewを継続する。';
   const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.1更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
   const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.1</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 
