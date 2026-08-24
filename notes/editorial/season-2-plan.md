@@ -1,6 +1,6 @@
 # Local AI Foundry 開発ログ — Season 2 Plan
 
-Status: `CLOSURE / 12 NEXT`
+Status: `ARTICLE BODY COMPLETE / 01〜12`
 
 ## Season 2：壊れない仕組みをどう運用し続けるか
 
@@ -22,9 +22,10 @@ Formal Test Case、Retry、Published Workflow、Canonical Launcher、Human Gate�
 
 ## Current Position
 
-01〜11の記事本文がRepository上に存在する。
+01〜12の記事本文がRepository上に存在する。
 
-現在の次執筆対象は **12 止めることも、運用である**。
+Season 2の記事本文はRepository上で01〜12まで揃っている。
+NOTE上の公開状態、公開日時、最終表示はNOTE側を正本とし、このPlanning Artifactから推定しない。
 
 当初は、Retry Correction後のCurrent Candidateに対するFresh Formal RV-01を実行し、
 そのCurrent Runtime Evidenceを得てからSeason 2の最終構成をFIXする想定だった。
@@ -64,8 +65,9 @@ Current Purposeが変わった時に「続けない」と判断することも�
 12 止めることも、運用である
 ```
 
-未執筆記事の題名とScopeは、Project Evidenceが増えた場合に再評価できる。
-ただし、前後記事の責務を重複させず、各記事で一つの主要な問いへ到達することを優先する。
+記事本文の題名とScopeは、Repository上のActual Article BodyをCurrent Sourceとして扱う。
+Project Evidenceが増えた場合でも、Historical Article Bodyを勝手に書き換えず、
+必要な再評価はPlanning / Backlog / 後続Seasonで行う。
 
 ---
 
@@ -406,7 +408,8 @@ Current Purposeが変わった時に「続けない」と判断することも�
 ### 12 止めることも、運用である
 
 * Current Status：
-  * Season 2 Final / Next Writing Target
+  * Article Body Exists
+  * Season 2 Final
 * Current Evidence State：
   * RI #1 Article Productionは`FROZEN / HISTORICAL BENCHMARK`。
   * Fresh Formal RV-01は`NOT EXECUTED`。

@@ -28,11 +28,10 @@ Source Blob SHAは `2e32696b04adfc765b418d61d1132b3ea936ebd7`。
 
 ### Season 2
 
-`CLOSURE / 12 NEXT`
+`ARTICLE BODY COMPLETE / 01〜12`
 
-現在の次執筆対象：
-
-**12 止めることも、運用である**
+Repository上では01〜12の記事本文が存在する。
+NOTE上の公開状態・公開日時・最終表示はNOTE側を正本とする。
 
 [Season 2 Plan](editorial/season-2-plan.md)
 
@@ -48,7 +47,19 @@ Working Direction：
 Review Binding Integrityは`CANDIDATE — STRONG`であり、
 Foundry Core Extractionは次CandidateのEvidence Assessmentへ継続している。
 
+Season 3では、無料読者向けの開発物語を途中で欠損させず、**Story Closure（物語の完結）は無料**とする。
+実機開発から得た再現可能なImplementation Knowledge、具体Parameter、Threshold、Template、実務ArtifactはPaid Content候補として保護する。
+
+Canonical Principle：
+
+**結果は無料。再現方法が有料。**
+
+詳細なFree / Paid境界、各話の商品候補、Paid Artifactの扱いはSeason 3 PlanをCanonical Planning Artifactとし、
+全記事共通のEditorial BoundaryはPaid Content Value Protection Contractに従う。
+
 [Season 3 Plan](editorial/season-3-plan.md)
+
+[Paid Content Value Protection Contract](editorial/paid-content-value-protection-contract.md)
 
 ### Season 4
 

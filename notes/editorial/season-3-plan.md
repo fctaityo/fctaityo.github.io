@@ -6,6 +6,9 @@ Status: `CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
 
 Season 3の記事を新規作成・修正する場合は、[`article-style-contract.md`](article-style-contract.md)をCurrent Writing Contractとして先に確認する。
 
+Free / Paid境界、Paid Content候補、Paid Artifactを扱う場合は、
+[`paid-content-value-protection-contract.md`](paid-content-value-protection-contract.md)をCurrent Editorial Boundary Contractとして先に確認する。
+
 完成前に次のParagraph Gateを実行し、`PASS`しない記事をHumanへ完成版として渡さない。
 
 ```text
@@ -23,6 +26,124 @@ Local AI Foundryは、Article Productionだけを完成させるProjectから、
 Phase 3C Human Adoptionは`TERMINAL / PASS`。
 FC-CORE-001〜004はConfirmed Coreとなり、
 Foundry Core Extractionは次CandidateのEvidence Assessmentへ継続している。
+
+## Free / Paid Editorial Principle
+
+Season 3の有料化は、無料読者から開発物語の結末を取り上げるために行わない。
+
+Canonical Principle：
+
+**結果は無料。再現方法が有料。**
+
+補助原則：
+
+**Story Closureは無料。Implementation Depthは有料。**
+
+無料本文だけで、少なくとも次を理解できる状態を維持する。
+
+* 何を作ろうとしたのか。
+* 何が起きたのか。
+* どこで壊れたのか。
+* 何を発見したのか。
+* 何を判断したのか。
+* 最終的にどうなったのか。
+* 次に何が課題として残ったのか。
+
+有料部分は「結末の続き」ではなく、同じ問題を自分の環境で再現・検証・回避・転用したい読者向けの**Practical Layer（実務層）**として設計する。
+
+Paid候補には、具体Parameter、Threshold、Retry条件、比較条件、Gate条件、Calibration方法、Template、Checklist、Matrix、Sanitized Design Artifact等を含める。
+
+Internal Artifactをそのまま販売しない。
+販売用添付資料はPublication Reviewを通した`Paid Public Edition`として作成し、Private情報、Credential、内部識別子、不要なRepository Path、公開不要な未確定情報等を除去する。
+
+## Season 3 Free / Paid Working Map
+
+以下はCurrent Working Planであり、Evidence増加とHuman Editorial Decisionにより変更できる。
+`有料主力回`は記事全体を壁の向こうへ置く意味ではなく、**無料のStory Closure + 有料Practical Layer**を強く持つ回を意味する。
+
+| 話 | タイトル | 基本 | Paid Product / Artifact Candidate |
+| --- | --- | --- | --- |
+| 01 | 記事を作らないなら、何を作るの？ | 無料 | なし |
+| 02 | Reference Implementationは完成品ではない | 無料 | なし |
+| 03 | 別の仕事でも、同じところで壊れた | 無料 | なし |
+| 04 | AIに任せる前に、実行環境を測れ | 無料維持 | 将来のRuntime Calibration実践編を別商品化可能 |
+| 05 | Gateを通った。でも、人間はOKを出さなかった | 無料 + 有料 | Gate / Human Acceptance設計資料 |
+| 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | Human-facing Control Surface設計資料 |
+| 07 | 検索できても、正しい記事になるとは限らない | 無料 + 有料 / 有料主力回 | Research Quality改善パック |
+| 08 | Difyもn8nもComfyUIも、Foundryそのものではない | 無料 | なし。思想を広く見せる |
+| 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix |
+| 10 | AIごとに、得意な仕事を分ければいい | 無料 + 有料 | Model / Role Assignment設計資料 |
+| 11 | やり方を決めすぎない。成立条件を決める | 無料 + 有料 / 有料主力回 | Contract / Gate Template Pack |
+| 12 | Foundry Coreとは何か | 無料フィナーレ | 詳細BlueprintをSeason 3 Bundle候補とする |
+
+## Season 3 Paid Artifact Working Catalog
+
+Current Candidate：
+
+* Runtime Calibration Practice Pack
+* Technical Gate / Human Acceptance Design Sheet
+* Human-facing Control Surface Design Guide
+* Research Quality Calibration Pack
+* Cross-RI Evidence Matrix
+* AI Delegation / Model Assignment Matrix
+* Delegation Contract Starter Kit
+* Foundry Core Implementation Blueprint
+* Season 3 Design Pack / Bundle
+
+商品名、価格、販売単位、添付FormatはHuman Editorial Decisionで決定する。
+Working Candidateを販売確定商品として扱わない。
+
+## Paid Boundary Review
+
+Season 3の記事をHumanへ完成版として渡す前に、Paragraph Gateとは別に次をReviewする。
+
+```text
+Fact Accuracy
+↓
+Publication Boundary
+↓
+Paid Content Value Protection
+↓
+Free Story Closure
+↓
+Free / Paid Boundary Decision
+↓
+Paid Artifact Candidate Review
+↓
+Article Style / Paragraph Gate
+```
+
+判断の目安：
+
+### FREE
+
+* 開発物語
+* 発生した問題
+* 結果
+* 学び
+* 設計原則
+* Architecture上の意味
+* 次の課題
+
+### PAID CANDIDATE
+
+* 再現可能な具体Parameter
+* Threshold
+* Retry / Recovery条件
+* Context / Runtime tuning
+* Gateの具体成立条件
+* Before / Afterの詳細比較条件
+* 実務Template
+* Checklist
+* Matrix
+* 導入手順
+* Sanitized Design Artifact
+* 失敗回避の具体Recipe
+
+### NEVER PUBLIC AS-IS
+
+有料ゾーンであっても、Internal Artifactを無加工で公開しない。
+Credential、Secret、Private Artifact、公開禁止情報、不要な内部識別子、個人情報、Security-sensitive情報等は販売対象にしない。
 
 ## Current Reference Implementations
 
