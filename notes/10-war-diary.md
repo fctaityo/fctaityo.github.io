@@ -18,6 +18,11 @@ Bug Zoo・ADR・Hall of Fame・NOTE記事になる前段階の一次記録とし
 
 ## 2026-08
 
+### 2026-08-24
+
+* [WD-20260824-001 RI#4 Search Recall改善とRI#5 Campaign Control Planeが実戦へ入った](war-diary/WD-20260824-001-ri4-search-recall-and-ri5-control-plane-campaign.md)
+  RI#4 Research Qualityの主要FAIL連鎖をSource Recall不足まで遡り、Search Depth `4 → 8`を単独Candidateとして切り出した。最初の変更はConfigだけが8でRuntime実行経路が4のままだったため、Initial / Recovery双方の実効値を8へ修正。旧10RUN `2 PASS / 8 FAIL / 0 FATAL`をDepth 4 Baselineとして固定し、Depth 8は再測定中として分離した。同時にRI#5 v0.52がCampaign Loop、Gate Matrix、Evidence Intake / Export、Human InterventionをControl Planeとして運転し、単発FATAL後もCampaignを継続できることをEvidenceで確認。`FOCUS_LAST`のWarning Target Binding不完全も既知Defectとして分離した。
+
 ### 2026-08-21
 
 * [WD-20260821-001 RI #1を止め、Cross-RI Evidenceへ進んだ](war-diary/WD-20260821-001-ri1-freeze-cross-ri-foundry-core-transition.md)

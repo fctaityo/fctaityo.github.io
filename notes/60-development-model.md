@@ -46,3 +46,8 @@ Seasonをまたいで育つ長期的な開発思想、Human-AI Responsibility Bo
 
 * [DM-20260821-003 RI #1 Freeze / Cross-RI Evidence / Foundry Core Transition](development-model/DM-20260821-003-ri1-freeze-cross-ri-foundry-core-transition.md)  
   RI #1を`FROZEN / HISTORICAL BENCHMARK`として止めた後、RI #2〜RI #4の比較Evidenceから共通Control Structureを抽出するCurrent Vectorへ移った経緯を整理する。Reference Implementationを完成品の数ではなくEvidence Sourceとして扱い、Confirmed CoreとCore Candidateを分離する。`FC-CORE-001 Runtime Capability Calibration`を最初のConfirmed Foundry Coreとして位置付け、Human + ChatGPT / CODEXの実運用上の役割分担とHandoff成立もCurrent Operating Evidenceとして記録する。StatusはWorking Model / Transition Note / Not Architecture SSOT。
+
+## Control Plane / Evidence Authority
+
+* [DM-20260824-004 Control PlaneのEvidence Authority分離とContext Binding](development-model/DM-20260824-004-control-plane-evidence-authority-and-context-binding.md)  
+  RI#5 Campaign Control Planeの実運用Evidenceから、Producer RIがEvidence Authorityを保持したままControl PlaneがCollect / Bind / Monitor / Compare / Projectする責務境界、単一RunのFAIL / FATALとCampaign継続性の分離、Human Intervention ActionをTrigger EvidenceへBindingする必要性を整理する。RI#4 Search Depth 8 Campaignは測定途中であり、成功率改善を先取りせずWorking Modelとして扱う。

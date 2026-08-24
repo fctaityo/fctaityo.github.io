@@ -47,6 +47,9 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
 
 ## Review / Evidence / Artifact
 
+- [BZ-20260824-025 Human InterventionがWarning Contextではなく直前RunへBindingされる](bug-zoo/BZ-20260824-025-human-action-bound-to-last-run-instead-of-warning-context.md)  
+  Human Intervention Taskが示した対象と、クリック時にActionが参照する対象が同一EvidenceへBindingされておらず、`FOCUS_LAST`がWarningを発生させたScenario Familyではなく直前Completed Run Familyを採用する。
+
 - [BZ-20260810-018 Correction ArtifactでSemantic Reviewが再起動する](bug-zoo/BZ-20260810-018-correction-reopens-semantic-review.md)  
   Review後のCorrection Artifactを新しいEvidence Setとして扱い、Semantic ReviewとFinding探索が繰り返し再開されてCommitへ収束できなくなる。
 
@@ -63,6 +66,9 @@ War Diaryが出来事を時系列で記録するのに対し、Bug Zooは再発�
   決定的なfixture成功を、非決定的な実LLM成功と同一視した。
 
 ## Retry / Runtime / Transport
+
+- [BZ-20260824-024 Config上のSearch DepthをRuntime直書き値が上書きする](bug-zoo/BZ-20260824-024-configured-search-depth-shadowed-by-hardcoded-runtime-limit.md)  
+  Configを`4 → 8`へ変更してもExecution Path側の`4`直書きが有効なままで、設定上のCurrent値とRuntime Effective Valueが一致しなかった。
 
 - [BZ-20260814-022 機械が知っている事実をLLMに推定させる](bug-zoo/BZ-20260814-022-machine-fact-redelegated-to-llm.md)  
   CodeやGateが正確に計測できる文字数、範囲、超過量等をLLMへ再推定させ、Deterministic ControlとSemantic Generationの責務を混在させる。
