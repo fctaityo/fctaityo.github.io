@@ -16,7 +16,7 @@ Internal Publication Review RegistryおよびPublication Reflection Register（P
 
 Project Stateは`Published`を維持している。RI #1 Article ProductionはHistorical Benchmarkとして保存され、現在のProject方向はCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。
 
-RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Production、RI #5 Foundry Control Planeの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementationである。RI #4 Current Runtimeはv0.55、RI #5 Current Runtimeはv0.52である。
+RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Production、RI #5 Foundry Control Planeの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementationである。RI #4 Current Candidateはv0.59、RI #5 Current Candidateはv0.66である。
 
 `FC-CORE-001 Runtime Capability Calibration`、`FC-CORE-002 Delegation Contract Binding`、`FC-CORE-003 Deterministic Technical Gate`、`FC-CORE-004 Evidence Traceability`は確認済みFoundry Core Capabilityである。Website v5はCurrent Presentationであり、Internal Repositoryの正本を代替しない。
 
@@ -26,11 +26,11 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | ------- | ----------------------------------------------------------------------------------------------- |
 | 現在地 | Project State: `Published`<br>Current Baseline: Active<br>RI #1: Historical Benchmark |
 | 目的 | Cross-RI Evidenceから再利用可能なFoundry Core Capabilityを抽出する |
-| 最近完了 | RI #4のResearch Recall調整をRuntime検証し、実測で品質改善を確認。Execution Stabilityは追加Review対象として分離 |
-| 残りGate | 追加Core Candidateの比較Evidence確認とHuman Decision |
+| 最近完了 | RI #4 / RI #5のCurrent CandidateをEvidenceへBindingし、実測した品質改善とHuman Intervention Replayを確認 |
+| 残りGate | Search Intent Semantic Preservation、Performance Closure、Production Acceptanceの別Human Decision |
 | Blocker | なし（Project State `Blocked`ではない） |
-| 次の一歩 | 4-Core confirmed setを基準にFoundry Core Extractionを継続 |
-| Human判断 | FC-CORE-001〜004をConfirmed Coreとして維持し、Review Binding Integrityは`CANDIDATE — STRONG`として継続評価する |
+| 次の一歩 | Search Intent Semantic PreservationとPerformance Closureを追加Evidenceで確認し、4-Core confirmed setを基準にFoundry Core Extractionを継続 |
+| Human判断 | FC-CORE-001〜004をConfirmed Coreとして維持する。RI #4 / RI #5のProduction Acceptanceは未到達 |
 
 ## Current Baseline
 
@@ -42,7 +42,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 | Article Production / Historical Benchmark | Frozen |
 | RI #2〜RI #5 | Documentation / Visual Asset / Research-Grounded Long-form Content / Foundry Control Plane | Current Evidence Sources |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` | Capability-based |
-| Website v5 | Public Presentation | Current |
+| Website v5.2 | Public Presentation | Current |
 
 内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
 
@@ -53,13 +53,13 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 Article Production | `FROZEN / HISTORICAL BENCHMARK` |
 | RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
 | RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
-| RI #4 Research-Grounded Long-form Content Production | Temporal Entity IntegrityをCurrent Package / Capabilityとして検証中 |
-| RI #5 Foundry Control Plane | v0.52でProducer EvidenceをCollect / Bind / Monitor / Compare / Project |
+| RI #4 Research-Grounded Long-form Content Production | Current Candidate v0.59。品質改善を確認し、Search Intent Semantic PreservationとPerformance Closureを継続評価中 |
+| RI #5 Foundry Control Plane | Current Candidate v0.66。Producer EvidenceをCollect / Bind / Monitor / Compare / Projectし、Human Intervention Replayを確認済み |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` |
 
 ## Runtime Status
 
-RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。RI #4 v0.55 / RI #5 v0.52ではResearch Recallの調整をRuntime検証し、実測で品質改善を確認した。一方でExecution Stabilityには追加Reviewが必要であり、Production Acceptanceには未到達である。本Public Currentization自体は新しいRuntime実行を意味しない。
+RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。RI #4 v0.59 / RI #5 v0.66のCurrent CandidateではResearch Recallの調整をRuntime検証し、実測で品質改善を確認した。一方、Search Intent Semantic PreservationとPerformance Closureは`OPEN`であり、Production Acceptanceには未到達である。本Public Currentization自体は新しいRuntime実行を意味しない。
 
 | 確認項目 | 公開情報 | 確認状態 |
 |---|---|---|
@@ -79,7 +79,7 @@ RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。
 | Baseline            | Active                                          |
 | Allowed Next States | Human-authorized Project State Contractに従う      |
 | Next State Gate     | Human Decisionと必要Evidence                      |
-| Snapshot Updated    | `2026-08-22`                                    |
+| Snapshot Updated    | `2026-08-26`                                    |
 
 ### その他の許可Transition
 

@@ -1,17 +1,17 @@
-/* Local AI Foundry Official Website v5.1
+/* Local AI Foundry Official Website v5.2
    Visual Recovery / Layout Integrity Hotfix r1
    Loaded after the v4.2 Human-approved S13 dashboard. */
 (() => {
   'use strict';
 
-  const RELEASE = '2026-08-22-v5.1.html';
+  const RELEASE = '2026-08-26-v5.2.html';
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => [...r.querySelectorAll(s)];
   const setText = (s, value, r = document) => qsa(s, r).forEach(el => { el.textContent = value; });
 
   const meta = qs('meta[name="description"]');
-  if (meta) meta.content = 'Local AI Foundry v5.1。4-Core Public CurrentとWEB / CORE Detail Railを備えたHuman-Directed AI Foundry。';
-  document.title = 'Local AI Foundry v5.1 — 4-Core Public Current Detail Rails';
+  if (meta) meta.content = 'Local AI Foundry v5.2。RI#4 v0.59 / RI#5 v0.66のCurrent CandidateをPublic-safeに反映したHuman-Directed AI Foundry。';
+  document.title = 'Local AI Foundry v5.2 — RI#4 / RI#5 Current Candidates';
 
   /* Header: one new navigation category only. */
   const mainNav = qs('.main-nav');
@@ -36,8 +36,8 @@
   if (beacon) {
     beacon.classList.add('v5-beacon');
     beacon.href = `releases/${RELEASE}`;
-    beacon.setAttribute('aria-label', 'Local AI Foundry v5.1 リリース詳細');
-    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.1</strong><em>PUBLIC CURRENT DETAIL RAILS</em><b>詳細 →</b>';
+    beacon.setAttribute('aria-label', 'Local AI Foundry v5.2 リリース詳細');
+    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.2</strong><em>RI#4 / RI#5 CURRENT</em><b>詳細 →</b>';
   }
   const eyebrow = qs('.hero-copy .eyebrow em');
   if (eyebrow) eyebrow.textContent = '次のベクトル / CORE EXTRACTION';
@@ -48,7 +48,7 @@
   const heroActions = qs('.hero-actions');
   if (heroActions) heroActions.innerHTML = '<a class="button primary" href="#projects">4つの実証を見る ↓</a><a class="button" href="#core-vector">次のベクトルを見る</a><a class="button" href="#proof">公開資料</a>';
   const heroStates = qs('.hero-state-row');
-  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.1</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>Core Extraction</strong></div>';
+  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.2</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>Core Extraction</strong></div>';
   const heroBottom = qs('.hero-bottom-line');
   if (heroBottom) heroBottom.innerHTML = '<span>Reference Implementations</span><i></i><strong>Foundry Coreへ</strong>';
 
@@ -102,12 +102,12 @@
   }
 
   const pulseViews = {
-    overview: { title:'OVERVIEW', sub:'FOUNDRY v5 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT FRONTIER','RI#4 v0.55','frontier'],['CONTROL PLANE','RI#5 v0.52','info']] },
+    overview: { title:'OVERVIEW', sub:'FOUNDRY v5.2 / CROSS-RI', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['FROZEN','RI#1','frozen'],['CORE CONTRIBUTORS','RI#2 / RI#3','ok'],['CURRENT CANDIDATE','RI#4 v0.59','frontier'],['CONTROL PLANE','RI#5 v0.66','info']] },
     ri1: { title:'RI#1', sub:'ARTICLE PRODUCTION / HISTORICAL', metrics:[['ROLE','FROZEN','frozen'],['PLATFORM','DIFY-CENTERED','info'],['LEGACY','CONTROL ORIGIN','ok'],['RUNTIME SNAPSHOT','PRESERVED','info'],['NEW EXPANSION','NONE','frozen'],['USE','BENCHMARK','frontier']] },
     ri2: { title:'RI#2', sub:'DOCUMENTATION PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['WORKFLOW','VERIFIED','ok'],['CONTROL PLANE','PYTHON','info'],['SOURCE','PRESERVED','ok'],['CORE SIGNAL','RUNTIME CAPABILITY','core'],['STATUS','VERIFIED','ok']] },
     ri3: { title:'RI#3', sub:'VISUAL ASSET PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['LIVE','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],['BLOCKING GATE','20 / 21','ok'],['CORE SIGNAL','GATE ≠ ACCEPTANCE','frontier'],['STATUS','RUNTIME VALIDATED','ok']] },
-    ri4: { title:'RI#4', sub:'RESEARCH-GROUNDED LONG-FORM / v0.55', metrics:[['RESEARCH RECALL','RUNTIME VALIDATED','info'],['QUALITY','IMPROVED','ok'],['STABILITY','REVIEW REQUIRED','frontier'],['ACCEPTANCE','NOT REACHED','frozen'],['RUNTIME','v0.55','info'],['EVIDENCE','CURRENT','core']] },
-    ri5: { title:'RI#5', sub:'FOUNDRY CONTROL PLANE / v0.52', metrics:[['ROLE','CONTROL PLANE','info'],['CAMPAIGN','COMPLETED','ok'],['EVIDENCE','BOUND','core'],['REPLAY','CONFIRMED','ok'],['FOCUS_LAST','DEFECT OPEN','frontier'],['AUTHORITY','PRODUCER RI','info']] }
+    ri4: { title:'RI#4', sub:'RESEARCH-GROUNDED LONG-FORM / v0.59', metrics:[['RESEARCH RECALL','RUNTIME VALIDATED','info'],['QUALITY','IMPROVED','ok'],['SEARCH INTENT','OPEN','frontier'],['ACCEPTANCE','NOT REACHED','frozen'],['RUNTIME','v0.59','info'],['PERFORMANCE','OPEN','core']] },
+    ri5: { title:'RI#5', sub:'FOUNDRY CONTROL PLANE / v0.66', metrics:[['ROLE','CONTROL PLANE','info'],['CANDIDATE','BOUND','ok'],['EVIDENCE','BOUND','core'],['REPLAY','CONFIRMED','ok'],['SEARCH INTENT','OPEN','frontier'],['AUTHORITY','PRODUCER RI','info']] }
   };
 
   function renderPulse(view) {
@@ -234,7 +234,7 @@
       ri4.innerHTML = `
         <div aria-label="RI#4 Research-Grounded Long-formの詳細を開く" class="ri4-rail-row" role="button" tabindex="0">
           <button aria-controls="ri4-telemetry" aria-expanded="false" class="line-toggle" id="ri4-toggle" type="button">
-            <span class="line-id"><i>◎</i><b>RI#4</b></span><span class="line-name"><strong>Research Long-form</strong><small>Research-Grounded / Current Frontier</small></span><span class="line-state">ACTIVE</span><span aria-hidden="true" class="chevron">⌄</span>
+            <span class="line-id"><i>◎</i><b>RI#4</b></span><span class="line-name"><strong>Research Long-form</strong><small>v0.59 / Semantic + Performance Review</small></span><span class="line-state">ACTIVE</span><span aria-hidden="true" class="chevron">⌄</span>
           </button>
           <div aria-label="RI#4 Research-Grounded Long-form: 実証段階" class="stage-rail ri4-stage-rail">
             <div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment done"></div><div class="rail-segment current"></div><div class="rail-segment"></div>
@@ -249,19 +249,19 @@
             <div class="telemetry-main">
               <header class="telemetry-head boot-item" style="--boot:1"><div><p>RI #4 / RESEARCH-GROUNDED LONG-FORM</p><h3 id="ri4-telemetry-title">RESEARCH TELEMETRY</h3></div><div class="projection-badge"><span></span>HUMAN + CHATGPT CURRENT</div><button aria-label="RI#4管制盤を閉じる" class="panel-close" data-close-ri4 type="button">×</button></header>
               <div class="status-grid">
-                <article class="status-card v5-frontier boot-item" style="--boot:2"><small>CURRENT ROLE</small><strong>CURRENT FRONTIER</strong></article>
-                <article class="status-card green boot-item" style="--boot:3"><small>PIPELINE</small><strong>END-TO-END</strong></article>
-                <article class="status-card green boot-item" style="--boot:4"><small>SAMPLE LOOP</small><strong>ACTIVE</strong></article>
-                <article class="status-card v5-frontier boot-item" style="--boot:5"><small>REVIEW INTEGRITY</small><strong>ACTIVE</strong></article>
-                <article class="status-card v5-frontier boot-item" style="--boot:6"><small>TEMPORAL ENTITY</small><strong>GATED</strong></article>
-                <article class="status-card v5-amber boot-item" style="--boot:7"><small>PRODUCTION ACCEPTANCE</small><strong>PENDING</strong></article>
+                <article class="status-card v5-frontier boot-item" style="--boot:2"><small>CURRENT CANDIDATE</small><strong>v0.59</strong></article>
+                <article class="status-card green boot-item" style="--boot:3"><small>QUALITY</small><strong>IMPROVED</strong></article>
+                <article class="status-card green boot-item" style="--boot:4"><small>RESEARCH RECALL</small><strong>VALIDATED</strong></article>
+                <article class="status-card v5-frontier boot-item" style="--boot:5"><small>SEARCH INTENT</small><strong>OPEN</strong></article>
+                <article class="status-card v5-frontier boot-item" style="--boot:6"><small>PERFORMANCE</small><strong>OPEN</strong></article>
+                <article class="status-card v5-amber boot-item" style="--boot:7"><small>PRODUCTION ACCEPTANCE</small><strong>NOT REACHED</strong></article>
               </div>
               <div class="pipeline-block boot-item" style="--boot:8"><p class="micro-title">RESEARCH-GROUNDED PROGRESSION</p><div class="pipeline"><span class="ok">SEARCH <i>✓</i></span><b>→</b><span class="ok">PLAN <i>✓</i></span><b>→</b><span class="ok">WRITE <i>✓</i></span><b>→</b><span class="next">REVIEW <i>◎</i></span><b>→</b><span class="pending">ACCEPTANCE</span></div></div>
               <div class="telemetry-lower">
-                <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT CONTROL CONTRACTS</p><div class="contract-row"><span>Task Fulfillment</span><strong>GATED</strong></div><div class="contract-row"><span>Review Integrity</span><strong>GATED</strong></div><div class="contract-row"><span>Temporal Entity Integrity</span><strong>GATED</strong></div></div>
-                <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE MODE</p><div aria-hidden="true" class="evidence-ring"><span>LOOP</span></div><ul><li><span>Quality Gate</span><strong>PASS / FAIL VISIBLE</strong></li><li><span>Bring-up</span><strong>NON-BLOCKING</strong></li><li><span>Human Review</span><strong>REQUIRED</strong></li></ul></div>
+                <div class="contract-block boot-item" style="--boot:9"><p class="micro-title">CURRENT CONTROL CONTRACTS</p><div class="contract-row"><span>Task Fulfillment</span><strong>GATED</strong></div><div class="contract-row"><span>Search Intent</span><strong>PRESERVATION OPEN</strong></div><div class="contract-row"><span>Performance</span><strong>CLOSURE OPEN</strong></div></div>
+                <div class="evidence-block boot-item" style="--boot:10"><p class="micro-title">EVIDENCE MODE</p><div aria-hidden="true" class="evidence-ring"><span>LOOP</span></div><ul><li><span>Quality</span><strong>IMPROVEMENT CONFIRMED</strong></li><li><span>Current Candidate</span><strong>v0.59</strong></li><li><span>Acceptance</span><strong>NOT REACHED</strong></li></ul></div>
               </div>
-              <footer class="telemetry-foot boot-item" style="--boot:11"><span>QUALITY IMPROVEMENT CONFIRMED</span><p>Research Recall調整による改善を実測で確認。Execution Stability Reviewを残し、Production Acceptanceへ昇格しない。</p></footer>
+              <footer class="telemetry-foot boot-item" style="--boot:11"><span>QUALITY IMPROVEMENT CONFIRMED</span><p>Research Recall調整による改善を実測で確認。Search Intent Semantic PreservationとPerformance Closureを残し、Production Acceptanceへ昇格しない。</p></footer>
             </div>
           </section></div>
         </div>`;
@@ -327,8 +327,8 @@
     }
     const ri5Line = document.createElement('article');
     (qs('.ri4-line',board) || coreLine || webLine)?.insertAdjacentElement('afterend',ri5Line);
-    const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Foundry Control Plane',subtitle:'v0.52 / Execution Stability Review',state:'ACTIVE',openLabel:'RI#5 Foundry Control Planeの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / FOUNDRY CONTROL PLANE',title:'CAMPAIGN TELEMETRY',comment:'Producer RIのEvidence Authorityを保持し、Campaign EvidenceをCollect / Bind / Monitor / Compare / Projectする。',cards:[['RUNTIME','v0.52','cyan'],['CAMPAIGN','COMPLETED','green'],['QUALITY','IMPROVED','green'],['STABILITY','REVIEW REQUIRED','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['BIND','ok'],['MONITOR','ok'],['REVIEW','next']],rows:[['Research Recall','RUNTIME VALIDATED'],['Quality','IMPROVEMENT CONFIRMED'],['FOCUS_LAST','DEFECT OPEN']],currentness:[['Replay','CONFIRMED'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'EXECUTION STABILITY REVIEW',footer:'品質改善は確認済み。Execution Stabilityの原因Reviewを残し、Production Acceptanceへ昇格しない。'});
-    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.1',subtitle:'Published / 4-Core Public Current',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.1を公開中。Foundry Core 4件のPublic CurrentをHuman-facing Websiteへ反映し、Liveで提供している。',cards:[['VERSION','v5.1','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','4-CORE','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.1'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'4-Core CurrentをWebsite v5.1として公開済み。'});
+    const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Foundry Control Plane',subtitle:'v0.66 / Semantic + Performance Review',state:'ACTIVE',openLabel:'RI#5 Foundry Control Planeの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / FOUNDRY CONTROL PLANE',title:'CAMPAIGN TELEMETRY',comment:'Current Candidate v0.66。Producer RIのEvidence Authorityを保持し、Campaign EvidenceをCollect / Bind / Monitor / Compare / Projectする。',cards:[['RUNTIME','v0.66','cyan'],['REPLAY','CONFIRMED','green'],['QUALITY','IMPROVED','green'],['PERFORMANCE','OPEN','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['BIND','ok'],['MONITOR','ok'],['REVIEW','next']],rows:[['Research Recall','RUNTIME VALIDATED'],['Search Intent','PRESERVATION OPEN'],['Performance','CLOSURE OPEN']],currentness:[['Replay','CONFIRMED'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'CURRENT CANDIDATE',footer:'品質改善とReplay動作は確認済み。Search Intent Semantic PreservationとPerformance Closureを残し、Production Acceptanceへ昇格しない。'});
+    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.2',subtitle:'Published / RI#4 + RI#5 Current',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.2を公開中。RI#4 / RI#5 Current CandidateをPublic-safeに反映し、Liveで提供している。',cards:[['VERSION','v5.2','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','RI#4 / RI#5','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.2'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'RI#4 v0.59 / RI#5 v0.66 CurrentをWebsite v5.2として公開。'});
     const core = promoteOperationalLine(coreLine,'core',{id:'CORE',icon:'⬡',name:'Foundry Core',subtitle:'4-Core Confirmed / Extraction Continues',state:'CONFIRMED',openLabel:'CORE Foundry Coreの詳細を開く',closeLabel:'CORE詳細を閉じる',operator:'CORE EXTRACTION OPERATOR',image:'ri-guide.webp',kicker:'CORE / CROSS-RI EXTRACTION',title:'FOUNDRY CORE TELEMETRY',comment:'FC-CORE-001〜004を正式Coreとして確定。Review Binding IntegrityはStrong CandidateとしてEvidence評価を継続する。',cards:[['PHASE 3C','PASS','green'],['CORE SET','001〜004','cyan'],['CORE STATUS','CONFIRMED','green'],['EXTRACTION','CONTINUES','purple']],pipelineTitle:'CORE EXTRACTION',pipeline:[['CROSS-RI','ok'],['EVIDENCE','ok'],['4 CORES','ok'],['EXTRACT','next']],rows:[['Confirmed Core','FC-CORE-001〜004'],['Review Binding Integrity','CANDIDATE — STRONG'],['Current Vector','Foundry Core Extraction']],footerLabel:'EXTRACTION CONTINUES',footer:'4-Core確定後も、Cross-RI Evidenceから次のCore Candidateを継続評価する。'});
     const operational = [ri5,web,core].filter(Boolean);
     function closeOperational(item,{focus=true,preserveBoard=false}={}) { if(!item?.open)return; item.open=false; board.classList.remove(`${item.line.id.replace('-line','')}-open`); if(!preserveBoard){board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri-open');} item.toggle.setAttribute('aria-expanded','false'); item.reveal.setAttribute('aria-hidden','true'); item.reveal.inert=true; if(focus)window.setTimeout(()=>item.toggle.focus({preventScroll:true}),reduce.matches?0:300); }
@@ -384,10 +384,10 @@
   /* Current state remains compact and uses the existing panel. */
   const current = qs('#current');
   current?.classList.add('v5-current');
-  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.1へ。</span><strong class="title-line">4-Core Currentを、</strong><strong class="title-line">開いて確かめる。</strong>';
-  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#1をHistorical Benchmarkとして凍結し、RI#2〜RI#5で得られたEvidenceを横断する。RI#4は品質改善確認済み、RI#5はExecution Stability Reviewを継続する。';
-  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.1更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
-  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.1</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
+  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.2へ。</span><strong class="title-line">Current Candidateを、</strong><strong class="title-line">公開境界内で確かめる。</strong>';
+  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#4 v0.59 / RI#5 v0.66をCurrent Candidateとして公開。品質改善は確認済みだが、Search Intent Semantic PreservationとPerformance ClosureはOPENで、Production Acceptanceには未到達。';
+  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.2更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
+  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.2</strong></article><article><span>Current Vector</span><strong>Foundry Core Extraction</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 
   const coreNav = qs('.main-nav a[href="#core-vector"]');
   const coreSection = qs('#core-vector');
