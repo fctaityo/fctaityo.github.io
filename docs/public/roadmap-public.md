@@ -106,8 +106,8 @@ FC-CORE-001〜004 confirmed / additional extraction continues
 | RI#1 Article Production | Historical BenchmarkとしてEvidenceを保存し、Article固有責務と再利用可能なPatternを区別する |
 | RI#2 Documentation Production | Documentationという異なる業務領域でControl Patternを実証し、RI間比較に必要なEvidenceを蓄積する |
 | RI#3 Visual Asset Production | Visual Asset Productionで比較Evidenceを蓄積する。FoundryConsoleはControl Surface / Current Implementationとして扱う |
-| RI#4 Research-Grounded Long-form Content Production | Research-groundedな長文制作で比較Evidenceを蓄積する。Temporal Entity IntegrityはCurrent Package / Capabilityとして扱う |
-| RI#5 Foundry Control Plane | Producer RIのEvidence Authorityを保持し、Campaign EvidenceをCollect / Bind / Monitor / Compare / Projectする |
+| RI#4 Research-Grounded Long-form Content Production | v0.64 Current CandidateでStructured selection / Quality Gateの比較Evidenceを蓄積する |
+| RI#5 Foundry Control Plane | v0.99 / LF-EKB v0.3 Current CandidateでEvidence Explorer / Human Interventionを検証する |
 | Core Candidate | Review Binding Integrityは`CANDIDATE — STRONG`。その他の未採用Patternとともに、RI間で再現性、責務境界、失敗制御、Evidenceを比較検証する |
 | Foundry Core | Capability単位の比較EvidenceとHuman Decisionによって段階的に定義する。FC-CORE-001 Runtime Capability Calibration、FC-CORE-002 Delegation Contract Binding、FC-CORE-003 Deterministic Technical Gate、FC-CORE-004 Evidence Traceabilityは確認済みで、追加抽出を継続する |
 
