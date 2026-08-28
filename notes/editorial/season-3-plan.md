@@ -68,7 +68,7 @@ Internal Artifactをそのまま販売しない。
 | 03 | 別の仕事でも、同じところで壊れた | 無料 | なし |
 | 04 | AIに任せる前に、実行環境を測れ | 無料維持 | 将来のRuntime Calibration実践編を別商品化可能 |
 | 05 | Gateを通った。でも、人間はOKを出さなかった | 無料 + 有料 | Gate / Human Acceptance設計資料 |
-| 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | Human-facing Control Surface設計資料 |
+| 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | AIの裏側を見せない Human-facing Control Surface Design Pack（販売確定 / 1,980円） |
 | 07 | 検索できても、正しい記事になるとは限らない | 無料 + 有料 / 有料主力回 | Research Quality改善パック |
 | 08 | Difyもn8nもComfyUIも、Foundryそのものではない | 無料 | なし。思想を広く見せる |
 | 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix |
@@ -78,11 +78,11 @@ Internal Artifactをそのまま販売しない。
 
 ## Season 3 Paid Artifact Working Catalog
 
-Current Candidate：
+Current Candidate / Human-decided Product：
 
 * Runtime Calibration Practice Pack
 * Technical Gate / Human Acceptance Design Sheet
-* Human-facing Control Surface Design Guide
+* AIの裏側を見せない Human-facing Control Surface Design Pack（S3-06 / Human Editorial Decision済み / 1,980円）
 * Research Quality Calibration Pack
 * Cross-RI Evidence Matrix
 * AI Delegation / Model Assignment Matrix
