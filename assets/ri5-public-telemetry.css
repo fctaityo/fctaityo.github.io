@@ -1,0 +1,165 @@
+/* LF / RI#5 Public Live Telemetry — Phase 1
+   Additive only. The Human-accepted Current hero grid remains authoritative. */
+
+.hero-right-stack{
+  grid-column:2!important;
+  grid-row:2!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-auto-columns:minmax(0,1fr)!important;
+  gap:14px;
+  min-width:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  align-self:start;
+}
+
+/* Current CSS binds .hero-art to hero grid column 2.
+   Once nested in the right stack, force it back to stack column 1. */
+.hero-right-stack>.hero-art{
+  grid-column:1!important;
+  grid-row:auto!important;
+  margin:0!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+.hero-right-stack>.ri5-live-top{
+  grid-column:1!important;
+  grid-row:auto!important;
+  width:100%!important;
+  min-width:0!important;
+}
+.hero-right-stack .hero-art-frame{min-height:0!important}
+.hero-right-stack .hero-art-frame img{display:block}
+
+.ri5-live-top{
+  position:relative;
+  z-index:5;
+  padding:13px;
+  border:1px solid rgba(69,220,255,.34);
+  border-radius:16px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(158,132,255,.09),transparent 34%),
+    linear-gradient(180deg,rgba(6,22,36,.985),rgba(5,15,27,.985));
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.012),0 16px 46px rgba(0,0,0,.18);
+}
+.ri5-live-top::before{
+  content:"";
+  position:absolute;inset:0;pointer-events:none;opacity:.13;
+  background-image:
+    linear-gradient(rgba(69,220,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(69,220,255,.06) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,#000,transparent 88%);
+}
+.ri5-live-head,.ri5-metric-grid,.ri5-latest{position:relative}
+.ri5-live-head{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  margin-bottom:9px;
+}
+.ri5-live-title{
+  display:flex;align-items:center;gap:7px;
+  color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.07em;
+}
+.ri5-live-dot{
+  display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 0 0 rgba(87,241,168,.45);
+  animation:ri5LivePulse 1.8s infinite;
+}
+.ri5-live-dot.small{width:7px;height:7px}
+.ri5-live-sync{
+  display:flex;align-items:center;gap:7px;
+  color:#6f879d;font-size:8px;
+}
+.ri5-live-sync strong{color:#a4bacb;font-weight:700}
+.ri5-live-sync em{
+  font-style:normal;padding:3px 7px;border:1px solid rgba(87,241,168,.38);
+  border-radius:999px;color:var(--green);font-size:7px;font-weight:900;letter-spacing:.05em;
+}
+.ri5-metric-grid{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;
+}
+.ri5-metric{
+  min-width:0;padding:8px 9px;border:1px solid rgba(128,177,220,.17);
+  border-top:2px solid rgba(69,220,255,.7);border-radius:9px;background:rgba(3,13,23,.72);
+}
+.ri5-metric small,.ri5-metric strong{display:block}
+.ri5-metric small{
+  font-size:7px;color:#7891a7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ri5-metric strong{margin-top:3px;font-size:21px;line-height:1;font-variant-numeric:tabular-nums}
+.ri5-metric i{
+  display:block;height:8px;margin-top:6px;border-bottom:1px solid currentColor;
+  clip-path:polygon(0 70%,12% 50%,22% 67%,35% 35%,48% 55%,60% 31%,74% 47%,87% 17%,100% 38%,100% 100%,0 100%);
+  background:currentColor;opacity:.55;
+}
+.ri5-metric.pass{border-top-color:var(--green);color:var(--green)}
+.ri5-metric.fail,.ri5-metric.fatal{border-top-color:#ff5964;color:#ff5964}
+.ri5-metric.artifacts{border-top-color:var(--cyan);color:var(--cyan)}
+.ri5-metric small{color:#7891a7}
+
+.ri5-latest{
+  margin-top:8px;padding:8px 9px;border:1px solid rgba(69,220,255,.24);
+  border-radius:10px;background:rgba(4,15,26,.72);
+}
+.ri5-latest-heading{
+  display:flex;align-items:center;gap:6px;color:var(--cyan);font-size:9px;letter-spacing:.08em;
+}
+.ri5-latest-grid{
+  display:grid;grid-template-columns:1.18fr repeat(3,.85fr);gap:0;margin-top:5px;
+}
+.ri5-latest-grid>div{
+  min-width:0;padding:5px 8px;border-left:1px solid rgba(128,177,220,.13);
+}
+.ri5-latest-grid .run-number{
+  grid-row:span 2;border-left:0;display:flex;align-items:center;
+}
+.ri5-latest-grid .run-number strong{font-size:21px}
+.ri5-latest-grid small,.ri5-latest-grid strong{display:block}
+.ri5-latest-grid small{font-size:6px;color:#668096}
+.ri5-latest-grid strong{
+  margin-top:2px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ri5-latest-grid .timestamp{grid-column:3 / 5}
+.ri5-latest-grid .ok{color:var(--green)}
+.ri5-latest-grid #ri5LatestOutcome{color:#ff5964}
+.ri5-latest-grid #ri5LatestArtifactGate{color:var(--orange)}
+.ri5-latest-grid #ri5LatestDuration{color:var(--cyan)}
+.ri5-reason{
+  margin-top:5px;padding:5px 7px;border:1px solid rgba(128,177,220,.12);
+  border-radius:6px;color:#7891a6;font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+@keyframes ri5LivePulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(87,241,168,.42)}
+  50%{box-shadow:0 0 0 6px rgba(87,241,168,0)}
+}
+
+@media(max-width:1180px){
+  .hero-right-stack{
+    grid-column:1!important;
+    grid-row:3!important;
+    margin-top:10px;
+    width:min(900px,100%)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .hero-right-stack>.hero-art{
+    grid-column:1!important;
+    grid-row:auto!important;
+  }
+}
+@media(max-width:760px){
+  .ri5-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ri5-metric.artifacts{grid-column:1 / -1}
+  .ri5-live-head{display:grid}
+  .ri5-live-sync{flex-wrap:wrap}
+  .ri5-latest-grid{grid-template-columns:1fr 1fr}
+  .ri5-latest-grid .run-number{grid-row:auto}
+  .ri5-latest-grid .timestamp{grid-column:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .ri5-live-dot{animation:none}
+}
