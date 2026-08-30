@@ -1,6 +1,6 @@
 {
   "schema_version": "LF-RI5-PUBLIC-TELEMETRY-1.0",
-  "updated_at": "2026-08-31T03:29:51+09:00",
+  "updated_at": "2026-08-31T03:49:48+09:00",
   "summary": {
     "total_runs": 236,
     "pass": 101,
@@ -21,10 +21,5 @@
     "status": "SYNCED",
     "label": "PUBLIC SNAPSHOT",
     "trigger": "FC_STARTUP_SYNC"
-  },
-  "source": {
-    "status": "VALID",
-    "canonical": true,
-    "read_mode": "READ_ONLY"
   }
 }
