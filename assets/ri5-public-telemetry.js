@@ -6,8 +6,9 @@
   const number = (value) => Number(value ?? 0).toLocaleString("ja-JP");
 
   function formatJst(value){
+    if (value === null || value === undefined || String(value).trim() === "") return "NOT AVAILABLE";
     const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "—";
+    if (Number.isNaN(date.getTime())) return "NOT AVAILABLE";
     return new Intl.DateTimeFormat("ja-JP",{
       year:"numeric",month:"2-digit",day:"2-digit",
       hour:"2-digit",minute:"2-digit",second:"2-digit",
@@ -40,7 +41,8 @@
     $("ri5LatestArtifactGate").textContent = latest.artifact_gate || "—";
     $("ri5LatestDuration").textContent = Number.isFinite(Number(latest.duration_sec))
       ? `${Number(latest.duration_sec).toFixed(1)}s` : "—";
-    $("ri5LatestTimestamp").textContent = `${formatJst(latest.finished_at)} JST`;
+    const finishedAt = formatJst(latest.finished_at);
+    $("ri5LatestTimestamp").textContent = finishedAt === "NOT AVAILABLE" ? finishedAt : `${finishedAt} JST`;
     $("ri5LatestReason").textContent = latest.reason || "—";
 
     const publication = data.publication || {};
@@ -67,9 +69,14 @@
     }
   }
 
-  if (document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", load, {once:true});
-  }else{
-    load();
+  if (typeof module !== "undefined" && module.exports){
+    module.exports = {formatJst};
+  }
+  if (typeof document !== "undefined"){
+    if (document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", load, {once:true});
+    }else{
+      load();
+    }
   }
 })();
