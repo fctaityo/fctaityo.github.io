@@ -67,9 +67,9 @@ Internal Artifactをそのまま販売しない。
 | 02 | Reference Implementationは完成品ではない | 無料 | なし |
 | 03 | 別の仕事でも、同じところで壊れた | 無料 | なし |
 | 04 | AIに任せる前に、実行環境を測れ | 無料維持 | 将来のRuntime Calibration実践編を別商品化可能 |
-| 05 | Gateを通った。でも、人間はOKを出さなかった | 無料 + 有料 | AIにどこまで任せる？ Human Check Design Pack（販売中 / 1,480円） |
-| 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | AIの裏側を見せない Human-facing Control Surface Design Pack（販売中 / 1,980円） |
-| 07 | 検索できても、正しい記事になるとは限らない | 無料 + 有料 / 有料主力回 | Research Quality改善パック |
+| 05 | Gateを通った。でも、人間はOKを出さなかった | 無料 + 有料 | AIにどこまで任せる？ Human Check Design Pack（販売中 / 1,480円 / 5点セット） |
+| 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | AIの裏側を見せない Human-facing Control Surface Design Pack（販売中 / 1,980円 / 5点セット） |
+| 07 | 検索できても、正しい記事になるとは限らない | 無料 + 有料 / 有料主力回 | AI検索を鵜呑みにしない Research Quality Design Pack（商品完成 / 2,480円 / 5点セット） |
 | 08 | Difyもn8nもComfyUIも、Foundryそのものではない | 無料 | なし。思想を広く見せる |
 | 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix |
 | 10 | AIごとに、得意な仕事を分ければいい | 無料 + 有料 | Model / Role Assignment設計資料 |
@@ -81,9 +81,9 @@ Internal Artifactをそのまま販売しない。
 Current Candidate / Human-decided Product：
 
 * Runtime Calibration Practice Pack
-* AIにどこまで任せる？ Human Check Design Pack（S3-05 / 販売中 / 1,480円）
-* AIの裏側を見せない Human-facing Control Surface Design Pack（S3-06 / 販売中 / 1,980円）
-* Research Quality Calibration Pack
+* AIにどこまで任せる？ Human Check Design Pack（S3-05 / 販売中 / 1,480円 / 5点セット）
+* AIの裏側を見せない Human-facing Control Surface Design Pack（S3-06 / 販売中 / 1,980円 / 5点セット）
+* AI検索を鵜呑みにしない Research Quality Design Pack（S3-07 / 商品完成 / 2,480円 / 5点セット）
 * Cross-RI Evidence Matrix
 * AI Delegation / Model Assignment Matrix
 * Delegation Contract Starter Kit
