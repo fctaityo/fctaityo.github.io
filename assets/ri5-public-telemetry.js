@@ -2,8 +2,24 @@
   "use strict";
 
   const DATA_PATH = "assets/ri5-public-telemetry.json";
+  const STYLE_PATH = "assets/ri5-public-telemetry.css?build=20260901.1";
   const $ = (id) => document.getElementById(id);
   const number = (value) => Number(value ?? 0).toLocaleString("ja-JP");
+
+  function ensureTelemetryStyles(){
+    if (typeof document === "undefined") return;
+    const href = new URL(STYLE_PATH, document.baseURI).href;
+    const existing = document.querySelector('link[rel="stylesheet"][href*="ri5-public-telemetry.css"]');
+    if (existing){
+      if (existing.href !== href) existing.href = href;
+      return;
+    }
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    link.id = "ri5TelemetryStyles";
+    document.head.appendChild(link);
+  }
 
   function formatJst(value){
     if (value === null || value === undefined || String(value).trim() === "") return "NOT AVAILABLE";
@@ -54,6 +70,7 @@
   }
 
   async function load(){
+    ensureTelemetryStyles();
     try{
       const response = await fetch(DATA_PATH,{cache:"no-store"});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -73,6 +90,7 @@
     module.exports = {formatJst};
   }
   if (typeof document !== "undefined"){
+    ensureTelemetryStyles();
     if (document.readyState === "loading"){
       document.addEventListener("DOMContentLoaded", load, {once:true});
     }else{
