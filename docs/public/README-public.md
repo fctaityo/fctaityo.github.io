@@ -17,9 +17,10 @@ Local AI Foundryは現在、5つのReference Implementation（RI）を扱い、A
 - RI #2 — Documentation Production
 - RI #3 — Visual Asset Production
   - FoundryConsoleはHuman-facing Control Surface / Current Implementationであり、RI #3そのものの名称ではない。
-- RI #4 — Research-Grounded Long-form Content Production
+- RI #4 — Research-Grounded Long-form Production
   - Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
-- RI #5 — Foundry Control Plane / Evidence Foundation
+- RI #5 — Evidence Foundation
+  - Evidenceの記録・追跡・改善支援を担うFoundry Control Planeである。
 - Current Vector — `RI #5 Evidence Foundation → RI #4 Evidence-driven Runtime Hardening`
 - Confirmed Foundry Core — `FC-CORE-001 Runtime Capability Calibration`、`FC-CORE-002 Delegation Contract Binding`、`FC-CORE-003 Deterministic Technical Gate`、`FC-CORE-004 Evidence Traceability`。Review Binding Integrityは`CANDIDATE — STRONG`である。
 

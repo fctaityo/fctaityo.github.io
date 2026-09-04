@@ -16,7 +16,7 @@ Internal Publication Review RegistryおよびPublication Reflection Register（P
 
 Project Stateは`Published`を維持している。RI #5はActual Human RuntimeでEvidenceの収集・Gate・Articleまでの追跡性を確認し、Evidence Foundationのマイルストーンへ到達した。現在の主戦場は、この基盤上でRI #4を実打鍵し、Evidence-drivenに品質改善する段階である。
 
-RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Production、RI #5 Foundry Control Planeの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementationである。RI #4 Current Candidateはv0.71、RI #5 Current Candidateはv1.0.2（LF-EKB v0.3）である。
+RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Production、RI #5 Evidence Foundationの比較Evidenceを扱う。RI #5はEvidenceの記録・追跡・改善支援を担うFoundry Control Planeである。FoundryConsoleはRI #3のControl Surface / Current Implementationである。RI #4 Current Candidateはv0.71、RI #5 Current Candidateはv1.0.2（LF-EKB v0.3）である。
 
 `FC-CORE-001 Runtime Capability Calibration`、`FC-CORE-002 Delegation Contract Binding`、`FC-CORE-003 Deterministic Technical Gate`、`FC-CORE-004 Evidence Traceability`は確認済みFoundry Core Capabilityである。Website v5はCurrent Presentationであり、Internal Repositoryの正本を代替しない。
 
@@ -40,7 +40,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | Active Baseline | Current Project Baseline | Active |
 | Current Vector | RI #5 Evidence Foundation → RI #4 Evidence-driven Runtime Hardening | Current |
 | RI #1 | Article Production / Historical Benchmark | Frozen |
-| RI #2〜RI #5 | Documentation / Visual Asset / Research-Grounded Long-form Content / Foundry Control Plane | Current Evidence Sources |
+| RI #2〜RI #5 | Documentation Production / Visual Asset Production / Research-Grounded Long-form Production / Evidence Foundation | Current Evidence Sources |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` | Capability-based |
 | Website v5.3 | Public Presentation | Current |
 
@@ -53,8 +53,8 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 Article Production | `FROZEN / HISTORICAL BENCHMARK` |
 | RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
 | RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
-| RI #4 Research-Grounded Long-form Content Production | Current Candidate v0.71。Actual Human Runtimeで記事生成まで完走。Unsupported Claim / Inference-Evaluation / Artifact Gate境界を改善課題として継続 |
-| RI #5 Foundry Control Plane | Current Candidate v1.0.2 / LF-EKB v0.3。端末HOLD lifecycle修正とActual Human RuntimeのEvidence traceabilityを確認し、Evidence Foundationマイルストーンへ到達 |
+| RI #4 Research-Grounded Long-form Production | Current Candidate v0.71。Actual Human Runtimeで記事生成まで完走。Unsupported Claim / Inference-Evaluation / Artifact Gate境界を改善課題として継続 |
+| RI #5 Evidence Foundation | Current Candidate v1.0.2 / LF-EKB v0.3。Foundry Control Planeとして端末HOLD lifecycle修正とActual Human RuntimeのEvidence traceabilityを確認し、Evidence Foundationマイルストーンへ到達 |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` |
 
 ## Runtime Status
