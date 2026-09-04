@@ -10,7 +10,7 @@
   const setText = (s, value, r = document) => qsa(s, r).forEach(el => { el.textContent = value; });
 
   const meta = qs('meta[name="description"]');
-  if (meta) meta.content = 'Local AI Foundry v5.3。RI#5 Evidence FoundationのHuman Runtime確認とRI#4 Evidence-driven改善への移行をPublic-safeに反映。';
+  if (meta) meta.content = 'Local AI Foundry v5.3。RI#5 Evidence Foundationの実機確認を経て、RI#4のEvidence-driven改善フェーズへ移行。';
   document.title = 'Local AI Foundry v5.3 — RI#5 Evidence Foundation / RI#4 Hardening';
 
   /* Header: one new navigation category only. */
@@ -107,7 +107,7 @@
     ri2: { title:'RI#2', sub:'DOCUMENTATION PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['WORKFLOW','VERIFIED','ok'],['CONTROL PLANE','PYTHON','info'],['SOURCE','PRESERVED','ok'],['CORE SIGNAL','RUNTIME CAPABILITY','core'],['STATUS','VERIFIED','ok']] },
     ri3: { title:'RI#3', sub:'VISUAL ASSET PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['LIVE','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],['BLOCKING GATE','20 / 21','ok'],['CORE SIGNAL','GATE ≠ ACCEPTANCE','frontier'],['STATUS','RUNTIME VALIDATED','ok']] },
     ri4: { title:'RI#4', sub:'RESEARCH-GROUNDED LONG-FORM / v0.71', metrics:[['STRUCTURED SELECTION','BOUND','info'],['QUALITY GATE','BOUND','ok'],['ARTICLE QUALITY','FINDING OPEN','frontier'],['ACCEPTANCE','NOT REACHED','frozen'],['CANDIDATE','v0.71','info'],['RUNTIME','1 CASE COMPLETE','core']] },
-    ri5: { title:'RI#5', sub:'FOUNDRY CONTROL PLANE / v1.0.2', metrics:[['ROLE','EVIDENCE FOUNDATION','info'],['LF-EKB','v0.3','ok'],['TERMINAL HOLD','FIX VERIFIED','core'],['EVIDENCE TRACE','CONFIRMED','ok'],['HUMAN RUNTIME','1 CASE COMPLETE','frontier'],['AUTHORITY','PRODUCER RI','info']] }
+    ri5: { title:'RI#5', sub:'EVIDENCE FOUNDATION / v1.0.2', metrics:[['ROLE','FOUNDRY CONTROL PLANE','info'],['LF-EKB','v0.3','ok'],['TERMINAL HOLD','FIX VERIFIED','core'],['EVIDENCE TRACE','CONFIRMED','ok'],['HUMAN RUNTIME','1 CASE COMPLETE','frontier'],['AUTHORITY','PRODUCER RI','info']] }
   };
 
   function renderPulse(view) {
@@ -194,7 +194,7 @@
       ri5Card.type = 'button';
       ri5Card.className = 'project-card active-card';
       ri5Card.dataset.openRi5 = '';
-      ri5Card.innerHTML = '<span class="project-icon">◇</span><span><b><em>RI#5</em> Control Plane</b><small>Campaign / Evidence /<br>Active Validation</small></span><mark>ACTIVE</mark><i class="card-trace"></i>';
+      ri5Card.innerHTML = '<span class="project-icon">◇</span><span><b><em>RI#5</em> Evidence Foundation</b><small>Foundry Control Plane /<br>Protected Base</small></span><mark>ACTIVE</mark><i class="card-trace"></i>';
       projectCards.appendChild(ri5Card);
       ri5Card.addEventListener('click', () => { renderPulse('ri5'); qs('#ri5-toggle',root)?.click(); });
     }
@@ -327,7 +327,7 @@
     }
     const ri5Line = document.createElement('article');
     (qs('.ri4-line',board) || coreLine || webLine)?.insertAdjacentElement('afterend',ri5Line);
-    const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Foundry Control Plane',subtitle:'v1.0.2 / LF-EKB v0.3 / Evidence Foundation',state:'ACTIVE',openLabel:'RI#5 Foundry Control Planeの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / FOUNDRY CONTROL PLANE',title:'CAMPAIGN TELEMETRY',comment:'Actual Human RuntimeでTerminal HOLD lifecycle修正とEnd-to-end Evidence traceabilityを確認。Producer RIのEvidence Authorityを保持する。',cards:[['CANDIDATE','v1.0.2','cyan'],['LF-EKB','v0.3','green'],['TERMINAL HOLD','FIX VERIFIED','green'],['HUMAN RUNTIME','COMPLETE','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['DIAGNOSE','ok'],['VERIFY','ok'],['HARDEN RI#4','next']],rows:[['Terminal HOLD Lifecycle','FIX VERIFIED'],['Evidence Traceability','CONFIRMED'],['Human Runtime','1 CASE COMPLETE']],currentness:[['Foundation','MILESTONE'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'EVIDENCE FOUNDATION',footer:'Actual Human Runtimeの追跡性を確認。次はRI#4の記事品質FindingをEvidence-drivenに改善し、Production Acceptanceは別判断とする。'});
+    const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Evidence Foundation',subtitle:'v1.0.2 / LF-EKB v0.3 / Protected Base',state:'ACTIVE',openLabel:'RI#5 Evidence Foundationの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / EVIDENCE FOUNDATION',title:'CAMPAIGN TELEMETRY',comment:'実機確認でTerminal HOLD lifecycle修正とEnd-to-end Evidence traceabilityを確認。Foundry Control PlaneとしてProducer RIのEvidence Authorityを保持する。',cards:[['CANDIDATE','v1.0.2','cyan'],['LF-EKB','v0.3','green'],['TERMINAL HOLD','FIX VERIFIED','green'],['HUMAN RUNTIME','COMPLETE','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['DIAGNOSE','ok'],['VERIFY','ok'],['HARDEN RI#4','next']],rows:[['Terminal HOLD Lifecycle','FIX VERIFIED'],['Evidence Traceability','CONFIRMED'],['Human Runtime','1 CASE COMPLETE']],currentness:[['Foundation','MILESTONE'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'EVIDENCE FOUNDATION',footer:'実機確認で追跡性を確認。次はRI#4の記事品質FindingをEvidence-drivenに改善し、Production Acceptanceは未到達のまま。'});
     const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.3',subtitle:'Published / RI#5 Foundation + RI#4 Hardening',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.3を公開中。RI#5 Evidence FoundationとRI#4 Evidence-driven改善への移行をPublic-safeに反映する。',cards:[['VERSION','v5.3','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','RI#5 → RI#4','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.3'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'RI#5 Evidence FoundationとRI#4 Runtime HardeningをWebsite v5.3として公開。'});
     const core = promoteOperationalLine(coreLine,'core',{id:'CORE',icon:'⬡',name:'Foundry Core',subtitle:'4-Core Confirmed / Extraction Continues',state:'CONFIRMED',openLabel:'CORE Foundry Coreの詳細を開く',closeLabel:'CORE詳細を閉じる',operator:'CORE EXTRACTION OPERATOR',image:'ri-guide.webp',kicker:'CORE / CROSS-RI EXTRACTION',title:'FOUNDRY CORE TELEMETRY',comment:'FC-CORE-001〜004を正式Coreとして確定。Review Binding IntegrityはStrong CandidateとしてEvidence評価を継続する。',cards:[['PHASE 3C','PASS','green'],['CORE SET','001〜004','cyan'],['CORE STATUS','CONFIRMED','green'],['EXTRACTION','CONTINUES','purple']],pipelineTitle:'CORE EXTRACTION',pipeline:[['CROSS-RI','ok'],['EVIDENCE','ok'],['4 CORES','ok'],['EXTRACT','next']],rows:[['Confirmed Core','FC-CORE-001〜004'],['Review Binding Integrity','CANDIDATE — STRONG'],['Current Vector','Foundry Core Extraction']],footerLabel:'EXTRACTION CONTINUES',footer:'4-Core確定後も、Cross-RI Evidenceから次のCore Candidateを継続評価する。'});
     const operational = [ri5,web,core].filter(Boolean);
@@ -385,7 +385,7 @@
   const current = qs('#current');
   current?.classList.add('v5-current');
   const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.3へ。</span><strong class="title-line">Evidence基盤から、</strong><strong class="title-line">実打鍵の改善へ。</strong>';
-  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#5 Evidence FoundationのActual Human Runtimeを確認。RI#4の記事品質Findingを次の改善対象とし、Production Acceptanceには昇格しない。';
+  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#5 v1.0.2 / LF-EKB v0.3を実機で確認し、Evidence Foundationの節目へ到達。次はRI#4の記事品質FindingをEvidence-drivenに改善する。Production Acceptanceは未到達のまま。';
   const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.3更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
   const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.3</strong></article><article><span>Current Vector</span><strong>RI#4 Evidence-driven Hardening</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 

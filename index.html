@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050914">
-<meta name="description" content="Local AI Foundry v5.3。RI#5 Evidence FoundationのHuman Runtime確認とRI#4 Evidence-driven改善への移行をPublic-safeに反映。">
+<meta name="description" content="Local AI Foundry v5.3。RI#5 Evidence Foundationの実機確認を経て、RI#4のEvidence-driven改善フェーズへ移行。">
 <title>Local AI Foundry v5.3 — RI#5 Evidence Foundation / RI#4 Hardening</title>
 <link rel="stylesheet" href="styles.css?v=4.1">
 <link rel="stylesheet" href="v5.css?build=20260822.2">
@@ -746,30 +746,30 @@
         <article class="ri-card ri-active">
           <div class="ri-head"><span class="ri-no">RI#2</span><b>CORE CONTRIBUTOR</b></div>
           <p class="ri-kana">ドキュメント制作 / DOCUMENTATION PRODUCTION</p>
-          <h3>別の業務で、同じ制御が必要か。</h3>
-          <p>Internal文書とPublication RuleからPublic候補を生成し、Review・Correction・Consistency・Evidenceを経てHuman Gateまで進める実証。</p>
+          <h3>文書制作でも、同じ制御が成立するか。</h3>
+          <p>Internal文書とPublication RuleからPublic候補を生成し、Review・Correction・Consistency・Evidenceを経て公開判断まで進める実証。</p>
           <div class="ri-meta"><span>Python Runner</span><span>Ollama</span><span>Human Gate</span></div>
         </article>
 
         <article class="ri-card ri-next">
           <div class="ri-head"><span class="ri-no">RI#3</span><b>RUNTIME VALIDATED</b></div>
           <p class="ri-kana">Visual Asset Production / VISUAL</p>
-          <h3>Visual Domainで制御境界を実証。</h3>
-          <p>FoundryConsoleをHuman-facing Control Surfaceとして、ComfyUIによるVisual Asset Productionを実証した。</p>
+          <h3>Visual制作でも、制御境界を実証。</h3>
+          <p>FoundryConsoleをHuman-facing Control Surfaceとして、ComfyUIによるVisual Asset Productionの実行・確認・受け入れ境界を実証した。</p>
           <div class="ri-meta"><span>FoundryConsole</span><span>ComfyUI</span><span>Human Acceptance</span></div>
         </article>
 
         <article class="ri-card ri-next">
-          <div class="ri-head"><span class="ri-no">RI#5</span><b>CONTROL PLANE</b></div>
-          <p class="ri-kana">Foundry Control Plane</p>
-          <h3>複数RunをCampaignとして観測する。</h3>
-          <p>v1.0.2 / LF-EKB v0.3でProducer RIのEvidence Authorityを保持し、Session Log diagnosticsとCampaign livenessをCurrent CandidateへBindingした。</p>
-          <div class="ri-meta"><span>Campaign</span><span>Evidence Binding</span><span>Human Intervention</span></div>
+          <div class="ri-head"><span class="ri-no">RI#5</span><b>EVIDENCE FOUNDATION</b></div>
+          <p class="ri-kana">Evidence Foundation / Foundry Control Plane</p>
+          <h3>実行・判断・失敗をEvidenceとして残す。</h3>
+          <p>v1.0.2 / LF-EKB v0.3で、Producer RIの実行からSource・生成・Review・Gateまでを追跡可能なEvidenceとして記録し、RI群の改善を支える基盤として実機確認した。</p>
+          <div class="ri-meta"><span>Evidence Traceability</span><span>Campaign</span><span>LF-EKB</span></div>
         </article>
 
         <article class="ri-card ri-next">
           <div class="ri-head"><span class="ri-no">RI#4</span><b>CURRENT FRONTIER</b></div>
-          <p class="ri-kana">Research-Grounded Long-form Content Production</p>
+          <p class="ri-kana">Research-Grounded Long-form Production</p>
           <h3>Researchと長文制作の整合を検証。</h3>
           <p>v0.71をRI#5 Evidence Foundation上で実打鍵。記事品質FindingをEvidence-drivenに改善する。</p>
           <div class="ri-meta"><span>Research</span><span>Long-form</span><span>Temporal Entity</span></div>
@@ -858,8 +858,8 @@
         </div>
 
         <div class="project-rail future">
-          <div class="rail-title"><b>RI#5</b><span>Foundry Control Plane</span><em>v1.0.2 / LF-EKB v0.3 / Runtime Review</em></div>
-          <div class="rail-track" aria-label="RI#5 Foundry Control Plane: 実証段階">
+          <div class="rail-title"><b>RI#5</b><span>Evidence Foundation</span><em>v1.0.2 / LF-EKB v0.3 / Protected Base</em></div>
+          <div class="rail-track" aria-label="RI#5 Evidence Foundation: 実証段階">
             <i class="done"></i><i class="done"></i><i class="done"></i><i class="current"></i><i></i>
           </div>
         </div>
@@ -902,7 +902,7 @@
       <div class="current-copy reveal">
         <p class="kicker">06 / 現在地 <span>CURRENT STATE</span></p>
         <h2 class="fixed-editorial-title current-editorial-title"><span class="title-line">v5.3へ。</span><strong class="title-line">Evidence基盤から、</strong><strong class="title-line">実打鍵の改善へ。</strong></h2>
-        <p>RI#5 v1.0.2 / LF-EKB v0.3のActual Human Runtimeを確認し、Evidence Foundationの節目へ到達。RI#4の記事品質Findingを次の改善対象とし、Production Acceptanceには昇格しない。</p>
+        <p>RI#5 v1.0.2 / LF-EKB v0.3を実機で確認し、Evidence Foundationの節目へ到達。次はRI#4の記事品質FindingをEvidence-drivenに改善する。Production Acceptanceは未到達のまま。</p>
         <div class="current-actions"><a class="button compact primary" href="releases/2026-09-04-v5.3.html">v5.3更新内容</a><a class="button compact" href="#projects">実証を見る</a><a class="button compact" href="releases/index.html">更新履歴</a></div>
       </div>
       <div class="status-panel reveal">
