@@ -1,6 +1,6 @@
 # Local AI Foundry 開発ログ — Season 3 Plan
 
-Status: `CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
+Status: `COMPLETE / SEASON CLOSED`
 
 ## Writing / Delivery Gate
 
@@ -25,8 +25,9 @@ Local AI Foundryは、Article Productionだけを完成させるProjectから、
 
 Phase 3C Human Adoptionは`TERMINAL / PASS`。
 FC-CORE-001〜004はConfirmed Core。
-Current ProjectはRI #5 Evidence FoundationをProtected Baseとして、
-RI #4 Evidence-Driven Runtime Hardeningへ進んでいる。
+Season 3の記事本文はS3-01〜S3-12まで完了した。
+Current Project自体はRI #5 Evidence FoundationをProtected Baseとして、
+RI #4 Evidence-Driven Runtime Hardeningを継続している。
 
 ## Free / Paid Editorial Principle
 
@@ -57,9 +58,9 @@ Paid候補には、具体Parameter、Threshold、Retry条件、比較条件、Ga
 Internal Artifactをそのまま販売しない。
 販売用添付資料はPublication Reviewを通した`Paid Public Edition`として作成し、Private情報、Credential、内部識別子、不要なRepository Path、公開不要な未確定情報等を除去する。
 
-## Season 3 Free / Paid Working Map
+## Season 3 Free / Paid Final Map
 
-以下はCurrent Working Planであり、Evidence増加とHuman Editorial Decisionにより変更できる。
+Season 3完了時点のFinal Editorial Mapを以下に残す。
 `有料主力回`は記事全体を壁の向こうへ置く意味ではなく、**無料のStory Closure + 有料Practical Layer**を強く持つ回を意味する。
 
 | 話 | タイトル | 基本 | Paid Product / Artifact Candidate |
@@ -74,12 +75,12 @@ Internal Artifactをそのまま販売しない。
 | 08 | Difyもn8nもComfyUIも、Foundryそのものではない | 無料 | なし。思想を広く見せる |
 | 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix Design Pack（商品完成 / 2,980円） |
 | 10 | AIごとに、得意な仕事を分ければいい | 無料 + 有料 | AIに仕事を割り当てる Model / Role Assignment Design Pack（商品完成 / 3,480円 / 5点セット） |
-| 11 | やり方を決めすぎない。成立条件を決める | 無料 + 有料 / 有料主力回 | Contract / Gate Template Pack |
-| 12 | Foundry Coreとは何か | 無料フィナーレ | 詳細BlueprintをSeason 3 Bundle候補とする |
+| 11 | やり方を決めすぎない。成立条件を決める | 無料 + 有料 / 有料主力回 | AIに仕事を任せるための Contract / Gate Design Pack（商品完成 / 4,480円 / 7点セット） |
+| 12 | Foundry Coreとは何か | 無料フィナーレ | なし |
 
-## Season 3 Paid Artifact Working Catalog
+## Season 3 Paid Artifact Final Catalog
 
-Current Candidate / Human-decided Product：
+Season 3完了時点のHuman-decided Product / Remaining Candidate：
 
 * Runtime Calibration Practice Pack
 * AIにどこまで任せる？ Human Check Design Pack（S3-05 / 販売中 / 1,480円 / 5点セット）
@@ -87,9 +88,9 @@ Current Candidate / Human-decided Product：
 * AI検索を鵜呑みにしない Research Quality Design Pack（S3-07 / 商品完成 / 2,480円 / 5点セット）
 * Cross-RI Evidence Matrix Design Pack（S3-09 / 商品完成 / 2,980円）
 * AIに仕事を割り当てる Model / Role Assignment Design Pack（S3-10 / 商品完成 / 3,480円 / 5点セット）
-* Delegation Contract Starter Kit（S3-11 Candidate）
-* Foundry Core Implementation Blueprint（S3-12 Candidate）
-* Season 3 Design Pack / Bundle（Candidate）
+* AIに仕事を任せるための Contract / Gate Design Pack（S3-11 / 商品完成 / 4,480円 / 7点セット）
+* Foundry Core Implementation Blueprint（Post-Season Candidate / 未販売）
+* Season 3 Design Pack / Bundle（Post-Season Candidate / 未販売）
 
 商品名、価格、販売単位、添付FormatはHuman Editorial Decisionで決定する。
 Human Decision済み商品とWorking Candidateを区別し、Working Candidateを販売確定商品として扱わない。
@@ -267,9 +268,9 @@ Season 3をRI #1からRI #5までの単純な開発日誌にはしない。
 * Automationそのものを目的にしない
 * Human-directed ≠ Human-operated
 
-## Working Outline
+## Final Outline
 
-以下はEvidenceの増加に応じて変更できるWorking Outlineであり、題名・順序は未FIXとする。
+Season 3は以下の12話で完結した。
 
 ```text
 01 記事を作らないなら、何を作るの？
@@ -286,7 +287,7 @@ Season 3をRI #1からRI #5までの単純な開発日誌にはしない。
 12 Foundry Coreとは何か
 ```
 
-## 到達候補
+## Season 3到達点
 
 * RI固有Implementationと再利用可能なControl Structureを分離する。
 * Technical Gate PASSとHuman Acceptanceを分離する。
@@ -296,7 +297,7 @@ Season 3をRI #1からRI #5までの単純な開発日誌にはしない。
 * Dify、n8n、Ollama、ComfyUI、Search等をFoundryそのものと決め打ちせず、交換可能なAdapter / Processing Planeとして扱えるか検証する。
 * Humanが全Stepを操作しなくても、Authority Boundaryと成立条件を保ったままAIへ仕事を委譲できるOperating Modelを検証する。
 
-## 昇格・構成更新条件
+## Post-Season継続条件
 
 * Season 2を`止めることも、運用である`まで実Evidenceで閉じる。
 * RI #1〜RI #5の比較Evidenceを複数のControl Patternについて整理する。

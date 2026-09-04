@@ -37,24 +37,23 @@ NOTE上の公開状態・公開日時・最終表示はNOTE側を正本とする
 
 ### Season 3
 
-`CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
+`COMPLETE / SEASON CLOSED / 01〜12`
 
-Working Direction：
+Final Direction：
 
 **AIに仕事を任せる仕組みを作る — Reference ImplementationからFoundry Coreへ**
 
-現在のProject Evidenceでは、FC-CORE-001〜004がConfirmed Core。
-Review Binding Integrityは`CANDIDATE — STRONG`であり、
-Foundry Core Extractionは次CandidateのEvidence Assessmentへ継続している。
+S3-01〜S3-12の記事本文は完了した。Season 3の到達点としてFC-CORE-001〜004をConfirmed Coreとして整理し、
+Review Binding Integrityは`CANDIDATE — STRONG`のままPost-Seasonへ継続する。
 
-Season 3では、無料読者向けの開発物語を途中で欠損させず、**Story Closure（物語の完結）は無料**とする。
-実機開発から得た再現可能なImplementation Knowledge、具体Parameter、Threshold、Template、実務ArtifactはPaid Content候補として保護する。
+Season 3は、無料読者向けの開発物語を途中で欠損させず、**Story Closure（物語の完結）は無料**という原則で完結した。
+Paid Practical LayerはS3-05 / 06 / 07 / 09 / 10 / 11で商品化し、S3-12は無料フィナーレとして閉じた。
 
 Canonical Principle：
 
 **結果は無料。再現方法が有料。**
 
-詳細なFree / Paid境界、各話の商品候補、Paid Artifactの扱いはSeason 3 PlanをCanonical Planning Artifactとし、
+詳細なFree / Paid境界、各話の商品状態、Paid Artifactの扱いはSeason 3 PlanをSeason Closure Recordとし、
 全記事共通のEditorial BoundaryはPaid Content Value Protection Contractに従う。
 
 [Season 3 Plan](editorial/season-3-plan.md)
@@ -63,7 +62,7 @@ Canonical Principle：
 
 ### Season 4
 
-`CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
+`CURRENT EDITORIAL NEXT / WORKING PLAN / STRUCTURE NOT FROZEN`
 
 Working Direction：
 
