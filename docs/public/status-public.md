@@ -14,7 +14,7 @@ Internal Publication Review RegistryおよびPublication Reflection Register（P
 
 ## 現在地（要約）
 
-Project Stateは`Published`を維持している。RI #1 Article ProductionはHistorical Benchmarkとして保存され、現在のProject方向はCross-RI EvidenceからFoundry Core Capabilityを抽出する段階へ移行している。
+Project Stateは`Published`を維持している。RI #5はActual Human RuntimeでEvidenceの収集・Gate・Articleまでの追跡性を確認し、Evidence Foundationのマイルストーンへ到達した。現在の主戦場は、この基盤上でRI #4を実打鍵し、Evidence-drivenに品質改善する段階である。
 
 RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-Grounded Long-form Content Production、RI #5 Foundry Control Planeの比較Evidenceを扱う。FoundryConsoleはRI #3のControl Surface / Current Implementationである。RI #4 Current Candidateはv0.71、RI #5 Current Candidateはv1.0.2（LF-EKB v0.3）である。
 
@@ -25,11 +25,11 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | 確認項目    | 現在値                                                                                             |
 | ------- | ----------------------------------------------------------------------------------------------- |
 | 現在地 | Project State: `Published`<br>Current Baseline: Active<br>RI #1: Historical Benchmark |
-| 目的 | Cross-RI Evidenceから再利用可能なFoundry Core Capabilityを抽出する |
-| 最近完了 | RI #5のSession Log root-cause completenessとCampaign heartbeat livenessをMachine検証し、Current CandidateへBinding |
-| 残りGate | Current CandidateのHuman Runtime Verification、残存Semantic / Editorial findings、Production Acceptanceの別Human Decision |
+| 目的 | RI #5 Evidence Foundation上でRI #4を実打鍵し、Evidence-drivenに品質改善する |
+| 最近完了 | RI #5のActual Human Runtimeで端末HOLD lifecycle修正とEvidence traceabilityを確認 |
+| 残りGate | RI #4の記事品質で観測されたUnsupported Claim / Inference-Evaluation / Artifact Gate境界の改善、Production Acceptanceの別Human Decision |
 | Blocker | なし（Project State `Blocked`ではない） |
-| 次の一歩 | Current CandidateをHuman Runtime Evidenceで確認し、4-Core confirmed setを基準にFoundry Core Extractionを継続 |
+| 次の一歩 | RI #5上でRI #4を継続実打鍵し、記事品質FindingをEvidence-drivenに改修する |
 | Human判断 | FC-CORE-001〜004をConfirmed Coreとして維持する。RI #4 / RI #5のProduction Acceptanceは未到達 |
 
 ## Current Baseline
@@ -38,11 +38,11 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 |---|---|---|
 | Project State | `Published` | Unchanged |
 | Active Baseline | Current Project Baseline | Active |
-| Current Vector | Cross-RI Evidence → Foundry Core Extraction | Current |
+| Current Vector | RI #5 Evidence Foundation → RI #4 Evidence-driven Runtime Hardening | Current |
 | RI #1 | Article Production / Historical Benchmark | Frozen |
 | RI #2〜RI #5 | Documentation / Visual Asset / Research-Grounded Long-form Content / Foundry Control Plane | Current Evidence Sources |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` | Capability-based |
-| Website v5.2 | Public Presentation | Current |
+| Website v5.3 | Public Presentation | Current |
 
 内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
 
@@ -53,33 +53,33 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 Article Production | `FROZEN / HISTORICAL BENCHMARK` |
 | RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
 | RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
-| RI #4 Research-Grounded Long-form Content Production | Current Candidate v0.71。Structured selectionとQuality GateをCurrent CandidateへBindingし、Human Runtime Verificationを継続 |
-| RI #5 Foundry Control Plane | Current Candidate v1.0.2 / LF-EKB v0.3。Session Log diagnosticsとCampaign livenessをMachine Closureし、Human Runtime Verificationは未完了 |
+| RI #4 Research-Grounded Long-form Content Production | Current Candidate v0.71。Actual Human Runtimeで記事生成まで完走。Unsupported Claim / Inference-Evaluation / Artifact Gate境界を改善課題として継続 |
+| RI #5 Foundry Control Plane | Current Candidate v1.0.2 / LF-EKB v0.3。端末HOLD lifecycle修正とActual Human RuntimeのEvidence traceabilityを確認し、Evidence Foundationマイルストーンへ到達 |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` |
 
 ## Runtime Status
 
-RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。RI #4 v0.71 / RI #5 v1.0.2のCurrent Candidateでは品質Gate、Evidence diagnostics、Campaign livenessを拡張し、Human Runtime Verificationを次の境界としている。Production Acceptanceには未到達である。本Public Currentization自体は新しいRuntime実行を意味しない。
+RI #1のRuntime EvidenceはHistorical Benchmarkとして保存されている。RI #4 v0.71 / RI #5 v1.0.2ではActual Human Runtimeを1件完走し、RI #5 Evidence Foundationの追跡性を確認した。一方、記事品質にはUnsupported Claim / Inference-Evaluation / Artifact Gate境界のFindingが残る。Production Acceptanceには未到達であり、今回の実績確認から自動昇格しない。
 
 | 確認項目 | 公開情報 | 確認状態 |
 |---|---|---|
 | RI #1 Runtime | Historical Evidence | Frozen |
-| Current Publication Work | Documentation Projection / Review | Runtime対象外 |
+| RI #4 / RI #5 Actual Human Runtime | End-to-end evidence traceability | Confirmed (1 case) |
 | Project Runtime Acceptance | Publicationによる変更なし | Unchanged |
 
 ## Transition Information
 
-> **公開Current Snapshot:** Project Stateは`Published`であり、Current VectorはFoundry Core Extractionである。
+> **公開Current Snapshot:** Project Stateは`Published`であり、Current VectorはRI #5 Evidence FoundationからRI #4 Evidence-driven Runtime Hardeningへ移行している。
 
 | 確認項目                | 現在値                                             |
 | ------------------- | ----------------------------------------------- |
-| Current Phase       | Cross-RI Evidence / Foundry Core Extraction     |
+| Current Phase       | RI #4 Evidence-driven Runtime Hardening         |
 | Project State       | `Published`                                     |
 | Transition Evidence | Internal Repositoryで管理                          |
 | Baseline            | Active                                          |
 | Allowed Next States | Human-authorized Project State Contractに従う      |
 | Next State Gate     | Human Decisionと必要Evidence                      |
-| Snapshot Updated    | `2026-08-26`                                    |
+| Snapshot Updated    | `2026-09-04`                                    |
 
 ### その他の許可Transition
 
