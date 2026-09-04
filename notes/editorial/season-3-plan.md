@@ -24,8 +24,9 @@ Local AI Foundryは、Article Productionだけを完成させるProjectから、
 そこから再利用可能なControl Structureを抽出・検証する段階へ進んだ。
 
 Phase 3C Human Adoptionは`TERMINAL / PASS`。
-FC-CORE-001〜004はConfirmed Coreとなり、
-Foundry Core Extractionは次CandidateのEvidence Assessmentへ継続している。
+FC-CORE-001〜004はConfirmed Core。
+Current ProjectはRI #5 Evidence FoundationをProtected Baseとして、
+RI #4 Evidence-Driven Runtime Hardeningへ進んでいる。
 
 ## Free / Paid Editorial Principle
 
@@ -71,8 +72,8 @@ Internal Artifactをそのまま販売しない。
 | 06 | 画面を作ったら、AIの裏側を見なくて済んだ | 無料 + 有料 | AIの裏側を見せない Human-facing Control Surface Design Pack（販売中 / 1,980円 / 5点セット） |
 | 07 | 検索できても、正しい記事になるとは限らない | 無料 + 有料 / 有料主力回 | AI検索を鵜呑みにしない Research Quality Design Pack（商品完成 / 2,480円 / 5点セット） |
 | 08 | Difyもn8nもComfyUIも、Foundryそのものではない | 無料 | なし。思想を広く見せる |
-| 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix |
-| 10 | AIごとに、得意な仕事を分ければいい | 無料 + 有料 | Model / Role Assignment設計資料 |
+| 09 | 共通していたものだけをCoreへ持っていく | 無料 + 有料 | Cross-RI Evidence Matrix Design Pack（商品完成 / 2,980円） |
+| 10 | AIごとに、得意な仕事を分ければいい | 無料 + 有料 | AIに仕事を割り当てる Model / Role Assignment Design Pack（商品完成 / 3,480円 / 5点セット） |
 | 11 | やり方を決めすぎない。成立条件を決める | 無料 + 有料 / 有料主力回 | Contract / Gate Template Pack |
 | 12 | Foundry Coreとは何か | 無料フィナーレ | 詳細BlueprintをSeason 3 Bundle候補とする |
 
@@ -84,14 +85,14 @@ Current Candidate / Human-decided Product：
 * AIにどこまで任せる？ Human Check Design Pack（S3-05 / 販売中 / 1,480円 / 5点セット）
 * AIの裏側を見せない Human-facing Control Surface Design Pack（S3-06 / 販売中 / 1,980円 / 5点セット）
 * AI検索を鵜呑みにしない Research Quality Design Pack（S3-07 / 商品完成 / 2,480円 / 5点セット）
-* Cross-RI Evidence Matrix
-* AI Delegation / Model Assignment Matrix
-* Delegation Contract Starter Kit
-* Foundry Core Implementation Blueprint
-* Season 3 Design Pack / Bundle
+* Cross-RI Evidence Matrix Design Pack（S3-09 / 商品完成 / 2,980円）
+* AIに仕事を割り当てる Model / Role Assignment Design Pack（S3-10 / 商品完成 / 3,480円 / 5点セット）
+* Delegation Contract Starter Kit（S3-11 Candidate）
+* Foundry Core Implementation Blueprint（S3-12 Candidate）
+* Season 3 Design Pack / Bundle（Candidate）
 
 商品名、価格、販売単位、添付FormatはHuman Editorial Decisionで決定する。
-Working Candidateを販売確定商品として扱わない。
+Human Decision済み商品とWorking Candidateを区別し、Working Candidateを販売確定商品として扱わない。
 
 ## Paid Boundary Review
 
@@ -157,17 +158,24 @@ Credential、Secret、Private Artifact、公開禁止情報、不要な内部識
   * FoundryConsoleはHuman-facing Control Surface / Current Implementationであり、RI #3そのものの名称ではない。
   * Production Acceptanceは`NOT REACHED`
 * RI #4 — Research-Grounded Long-form Content Production
-  * `ACTIVE VALIDATION / CURRENT FRONTIER`
-  * Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
+  * `ACTIVE VALIDATION / EVIDENCE-DRIVEN RUNTIME HARDENING`
+  * Current Candidate `v0.71`
+  * AQC01-01 correction regression-bound / Actual re-run required
+  * Production Acceptanceは`NOT REACHED`
+* RI #5 — Evidence Foundation
+  * `EVIDENCE FOUNDATION MILESTONE / PROTECTED BASE`
+  * Current Candidate `v1.0.2 / LF-EKB v0.3`
+  * Actual Human RuntimeでEvidence Foundation milestone reached
+  * Production Acceptanceは`NOT REACHED`
 
 ## Current Vector
 
 ```text
-Cross-RI Evidence
+RI #5 EVIDENCE FOUNDATION
 →
-Foundry Core Extraction
+RI #4 EVIDENCE-DRIVEN RUNTIME HARDENING
 →
-Next Candidate Evidence Assessment / Human Decision Preparation
+ARTICLE QUALITY BASELINE
 ```
 
 ## Confirmed Foundry Core
@@ -210,7 +218,7 @@ RI #4のReview Binding sub-artifact locator等、
 
 RIはEvidence Generatorであり、各RI固有の実装をそのままCoreへ持ち込まない。
 
-Season 3をRI #1からRI #4までの単純な開発日誌にはしない。
+Season 3をRI #1からRI #5までの単純な開発日誌にはしない。
 各RIの具体Evidenceを使いながら、
 再利用可能なDelegation / Controlの問いへ到達する構成を優先する。
 
@@ -291,7 +299,7 @@ Season 3をRI #1からRI #4までの単純な開発日誌にはしない。
 ## 昇格・構成更新条件
 
 * Season 2を`止めることも、運用である`まで実Evidenceで閉じる。
-* RI #1〜RI #4の比較Evidenceを複数のControl Patternについて整理する。
+* RI #1〜RI #5の比較Evidenceを複数のControl Patternについて整理する。
 * Confirmed CoreとCore Candidateの違いをEvidence付きで説明する。
 * 一つのRIだけで観測されたPatternをCoreへ先取り昇格しない。
 * Human Authority Boundary、Technical Gate / Human Acceptance、Evidence / Observability等が異なる業務でどう現れるか比較する。

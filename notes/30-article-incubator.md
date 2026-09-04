@@ -63,9 +63,17 @@ Canonical Principle：
 
 ### Season 4
 
-`LONG-RANGE WORKING DIRECTION / NOT FIXED`
+`CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
 
-Continuous Assuranceを長期候補として保持する。
+Working Direction：
+
+**Operational Learning / Continuous Assurance — 任せた結果から学び、壊さず、次の実行を良くする**
+
+Season 4はSeason 3商品を必須Dependencyにしない。
+各Paid Productは単体で最初のDoneまで到達でき、Season 3 Artifactを持つ場合のみOptional Inputとして再利用できる設計を採る。
+
+Current ProjectではRI #5 Evidence FoundationをProtected Baseとして、RI #4 Evidence-Driven Runtime Hardeningへ進んでいる。
+Season 4はこのActual Evidenceを基礎に、Failure Pattern、Evidence-to-Knowledge、Anti-Regression、Recovery、Baseline Protection、Continuous AssuranceをWorking Themeとして育てる。
 
 [Season 4 Working Plan](editorial/season-4-working-plan.md)
 
