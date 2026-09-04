@@ -9,10 +9,6 @@
   const qsa = (s, r = document) => [...r.querySelectorAll(s)];
   const setText = (s, value, r = document) => qsa(s, r).forEach(el => { el.textContent = value; });
 
-  const meta = qs('meta[name="description"]');
-  if (meta) meta.content = 'Local AI Foundry v5.3。RI#5 Evidence Foundationの実機確認を経て、RI#4のEvidence-driven改善フェーズへ移行。';
-  document.title = 'Local AI Foundry v5.3 — RI#5 Evidence Foundation / RI#4 Hardening';
-
   /* Header: one new navigation category only. */
   const mainNav = qs('.main-nav');
   if (mainNav && !qs('a[href="#core-vector"]', mainNav)) {
