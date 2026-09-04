@@ -37,6 +37,7 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | 用語 | 定義 |
 |------|------|
 | Active Work | 現在実施中のInitiative、Checkpoint、Next Actionを管理するCurrent Work Snapshot。 |
+| Article Quality Baseline | Source-boundなRuntime Evidenceと品質軸、Failure Family、Regressionから確立するRI #4の品質基準。 |
 | Current Reference | 現在有効なProject固有用語を保持する唯一のReference。 |
 | Current Snapshot | Projectの現在地を30秒以内で把握するためのCurrent Status。 |
 | Decision Log | ADRへ昇格しない小規模判断を保存する文書。 |
@@ -44,6 +45,8 @@ Documentation、Publication、Governance、Project State、WorkflowおよびArch
 | Documentation Information Architecture | Documentation全体の責務、Directory構成、Navigation、移動規則を定義する正本。 |
 | Documentation Navigation | 利用者を正本文書へ導くNavigation構造。 |
 | Documentation Synchronization | Documentation間のCurrent Stateを同期する作業。 |
+| Evidence-Driven Hardening | Actual Runtime Evidenceから構造的原因、修正、Regression、再打鍵を結ぶ品質改善方式。 |
+| Failure Family | 複数のFindingに共通する構造的原因を単位として管理し、Regressionで閉じる分類。 |
 | Historical Artifact | Current Stateではなく履歴・証跡・時点情報を保持するArtifact。 |
 | Navigation | DocumentationやArchitecture間の導線。READMEを起点として正本へ到達する仕組み。 |
 | README | Documentation全体へのNavigation入口。 |

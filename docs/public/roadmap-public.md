@@ -87,6 +87,9 @@ FC-CORE-001〜004 confirmed / additional extraction continues
       │
       ▼
 RI#5 Evidence Foundation上のRI#4 Evidence-driven Runtime Hardening
+      │
+      ▼
+Article Quality Baseline → RI#4 Production Candidate eligibility
 ```
 
 ## 5.2 Evolution Stages

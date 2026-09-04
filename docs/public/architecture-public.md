@@ -23,6 +23,8 @@ Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmar
 
 Current Vectorは、Actual Human Runtimeで確認したRI #5 Evidence Foundationを基盤に、RI #4をEvidence-drivenに実打鍵・改善する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001`〜`FC-CORE-004`の4件が現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
 
+RI #4のArticle Quality Hardeningは既存production pipelineへ新しいstageを足さず、Runtime EvidenceからFinding、構造的Failure Family、Correction、Regression、Closureを結ぶ開発統制として機能する。RI #5はEvidence authority / protected baseを維持し、次の公開マイルストーンはArticle Quality Baselineである。
+
 ## 2.1 責務階層
 
 ```mermaid
@@ -59,7 +61,7 @@ FC-CORE-003はRetry / correction strategy、Human Acceptance、Reviewを含ま�
 | RI#1 — Article Production | `FROZEN / HISTORICAL BENCHMARK`として実装と実行Evidenceを保存する | Article Production ArchitectureとHistorical Evidence |
 | RI#2 — Documentation Production | Documentationを対象にControl Patternを実証する業務RI | 比較Evidenceを保持し、継続評価する |
 | RI#3 — Visual Asset Production | Visual Asset Productionの業務RI。FoundryConsoleはHuman-facing Control Surface / Current Implementation | Visual Asset ProductionのHuman Runtime Evidence |
-| RI#4 — Research-Grounded Long-form Production | Research-groundedな長文Content Productionの業務RI。Current Candidate v0.71 | Actual Human Runtimeと記事品質Findingを用いたEvidence-driven改善 |
+| RI#4 — Research-Grounded Long-form Production | Research-groundedな長文Content Productionの業務RI。Current Candidate v0.71 | AQC-01 ready / Article Quality Baseline not established / Evidence-driven hardening |
 | RI#5 — Evidence Foundation | Producer RIの実行・判断・失敗をEvidenceとして記録・追跡し、改善を支えるFoundry Control Plane。Current Candidate v1.0.2 / LF-EKB v0.3 | Actual Human Runtimeで確認済みのEvidence Foundation / Terminal HOLD lifecycle / Current Evidence projection |
 
 RI #1の凍結はEvidenceの破棄やAccepted化を意味しない。RI #2〜RI #5の状態もProject State Transitionを意味しない。FC-CORE-001〜004以外のCore CandidateをFoundry Coreに確定する場合は、別のHuman Decisionを必要とする。
