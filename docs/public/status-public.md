@@ -25,11 +25,11 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | 確認項目    | 現在値                                                                                             |
 | ------- | ----------------------------------------------------------------------------------------------- |
 | 現在地 | Project State: `Published`<br>Current Baseline: Active<br>RI #1: Historical Benchmark |
-| 目的 | AQC01-01で確定したFailure Family correctionを再打鍵し、RI #4 Article Quality BaselineをEvidence-drivenに確立する |
+| 目的 | AQC01-01再RUNで確定したSource Specificity / Genre Authority / Editorial Value correctionを再打鍵し、RI #4 Article Quality BaselineをEvidence-drivenに確立する |
 | 最近完了 | RI #5のActual Human Runtimeで端末HOLD lifecycle修正とEvidence traceabilityを確認 |
 | 残りGate | RI #4の記事品質で観測されたUnsupported Claim / Inference-Evaluation / Artifact Gate境界の改善、Production Acceptanceの別Human Decision |
 | Blocker | なし（Project State `Blocked`ではない） |
-| 次の一歩 | Corrected CandidateでAQC01-01を再実行し、Actual非再現後にAQC01-02へ進む |
+| 次の一歩 | 第二Corrected CandidateでAQC01-01を再実行し、Actual確認後にAQC01-02へ進む |
 | Human判断 | FC-CORE-001〜004をConfirmed Coreとして維持する。RI #4 / RI #5のProduction Acceptanceは未到達 |
 
 ## Current Baseline
@@ -53,7 +53,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 Article Production | `FROZEN / HISTORICAL BENCHMARK` |
 | RI #2 Documentation Production | 比較Evidenceを提供するCurrent RI |
 | RI #3 Visual Asset Production | FoundryConsoleをControl Surface / Current Implementationとして検証中 |
-| RI #4 Research-Grounded Long-form Production | Current Candidate v0.71。AQC01-01で品質Gateによる正常拒止とReview分類Findingを分離し、Correction / Regressionを完了。Actual再実行待ち |
+| RI #4 Research-Grounded Long-form Production | Current Candidate v0.71。AQC01-01再RUNでFF-AG-001 / FF-SQ-001をClosureし、第二Editorial Correction / Regressionを完了。Actual再実行待ち |
 | RI #5 Evidence Foundation | Current Candidate v1.0.2 / LF-EKB v0.3。Foundry Control Planeとして端末HOLD lifecycle修正とActual Human RuntimeのEvidence traceabilityを確認し、Evidence Foundationマイルストーンへ到達 |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` |
 
