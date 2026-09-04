@@ -1,26 +1,26 @@
 {
   "schema_version": "LF-RI5-PUBLIC-TELEMETRY-1.0",
-  "updated_at": "2026-09-05T07:17:29+09:00",
+  "updated_at": "2026-09-05T07:19:19+09:00",
   "summary": {
-    "total_runs": 268,
+    "total_runs": 269,
     "pass": 113,
     "fail": 112,
-    "fatal": 43,
-    "indexed_artifacts": 5180
+    "fatal": 44,
+    "indexed_artifacts": 5188
   },
   "latest_run": {
     "run_index": 1,
     "lifecycle": "COMPLETE",
-    "result": "FAIL",
-    "artifact_gate": "FAIL",
-    "duration_sec": 175.3,
-    "finished_at": "2026-09-04T22:01:35.482852+00:00",
-    "reason": "Root FAIL: UNCLASSIFIED / Source 30 / Family CROSS_LANGUAGE_ENTITY"
+    "result": "FATAL",
+    "artifact_gate": "NOT OBSERVED",
+    "duration_sec": 69.8,
+    "finished_at": "2026-09-04T22:19:19.096740+00:00",
+    "reason": "Root FATAL: UNCLASSIFIED / Family TECHNICAL_EXPLAINER"
   },
   "publication": {
     "status": "SYNCED",
     "label": "PUBLIC SNAPSHOT",
-    "trigger": "FC_STARTUP_SYNC"
+    "trigger": "POST_EVIDENCE_FINALIZE_SYNC"
   },
   "source": {
     "status": "VALID",
