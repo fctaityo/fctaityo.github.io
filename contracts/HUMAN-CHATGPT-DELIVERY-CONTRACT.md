@@ -95,6 +95,8 @@ Current Source unavailable
 
 Historical Snapshot、Memory、会話履歴からCurrent File全文を推測して作らない。
 
+Accepted Baselineの参照が要求されるArtifactでは、Contractの確認だけで作業を開始しない。NOTE記事、Paid Visual、Slides、Practical Manual、Cheat Sheet、Workbook連携物は、対応するActual Human Accepted Artifactを少なくとも1件開き、Semantic / Structural / Visual / Runtime BaselineとProduction Bindingを混同しない。Domain Contractがより多いBaseline参照数を要求する場合はそれに従う。
+
 ## Pre-delivery Verification
 
 Humanへ渡す前にHuman + ChatGPT側で次を完了する。

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "authority": "MACHINE_PROJECTION_OF_HUMAN_ACCEPTED_ARTICLES",
+  "canonical_entry": "notes/editorial/note-publication-contract.md",
+  "series": {
+    "S4": {
+      "status": "CURRENT",
+      "baseline_status": "HUMAN_ACCEPTED",
+      "baseline_article": "notes/articles/S4/S4-02_ログを残しただけでは、経験にはならない.md",
+      "corroborating_articles": [
+        "notes/articles/S4/S4-01_AIは、前回の失敗を覚えていなかった.md"
+      ],
+      "required_blocks": [
+        "h1_title",
+        "article_identity",
+        "series_navigation",
+        "toc",
+        "horizontal_separation",
+        "numbered_sections"
+      ],
+      "ending_policy": "NEXT_PREVIEW_OR_HUMAN_ACCEPTED_VARIANT",
+      "paid_policy": "PRESERVE_SERIES_STRUCTURE_AND_ADD_PAID_LAYER"
+    }
+  }
+}

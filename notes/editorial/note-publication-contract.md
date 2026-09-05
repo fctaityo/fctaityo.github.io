@@ -34,6 +34,26 @@ Current依存の記述を含む記事は、Human handoffの直前にCurrent Gate
 - Current Season Plan: Season内のテーマ、順序、候補を管理し、Project Currentや公開済み状態を確定しない。
 - [Human + ChatGPT Delivery Contract](../../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md): Repositoryへ渡す完成ファイルとHandoff形式を規定する。
 
+## Series structural continuity
+
+同一Seriesの新規記事は、Current Season Planと同一Seriesの直近の`HUMAN ACCEPTED`記事を必ず実際に開き、後者をStructural Baselineとして扱う。Contractだけを読んで開始してはならない。偶然のVariationをFormatと誤認しないよう、同一Seasonのもう1本のAccepted Articleも確認する。Paid記事では直近のAccepted Paid Articleがあれば併せて確認する。Season初回では前Season最終話、新Season Plan、Series共通Baselineを確認する。
+
+Humanの明示的なEditorial Decisionがない限り、Navigation、記事identity、目次、区切り、番号付きSection、関連記事導線、次回予告またはHuman Acceptedな終了Variationを省略・変更しない。Generic Blog / Generic NOTE / Generic Markdown Templateはこれらを上書きしない。Authority順は次とする。
+
+```text
+Human Explicit Instruction
+→ Current Contract
+→ Human Accepted Series Structural Baseline
+→ Current Season Plan
+→ Generic Writing Heuristic
+```
+
+Series Format変更はHuman Editorial Decisionである。変更時はChange Scope、対象Series、理由、新Baseline、過去記事へのretrofit有無を明示し、通常の本文修正へ黙って混ぜない。Human Accepted FormatはMachine Defaultより上位であり、Machine PASSはFormatのHuman Acceptanceを意味しない。Humanが新FormatをAcceptedした場合のみ、CurrentizationとMachine Projection更新により新Baselineへ昇格できる。
+
+Paid BoundaryはSeries Structureを置き換える理由にならない。Paid記事も通常のSeries StructureとFree Story Closureを維持し、Paid Practical Layerを追加要素として結合する。Season初回・最終回のVariationはAccepted BaselineまたはHuman Decisionに従う。単発記事へ別SeriesのFormatを強制しない。
+
+[`series-structure-baseline.json`](series-structure-baseline.json)はMachineがBaselineと必須blockを解決するためのProjectionであり、Human Accepted Articleと二重正本にはならない。ProjectionのBaselineが存在しない、Acceptedでない、またはActual Artifactの構造と矛盾する場合はfail-closedとする。
+
 ## Publication boundary
 
 公開記事へ秘密、個人情報、非公開Repository情報、credential、内部限定URLを含めない。公開可能性がCanonical Sourceから確定できない情報は公開本文へ出さない。Free / Paidの価値境界はPaid Content Value Protection Contractへ委譲する。
@@ -46,5 +66,4 @@ Human handoffおよびRepository反映の直前に、完成ファイルへ次を
 python scripts/note_publication_lint.py <article.md>
 ```
 
-このGateはParagraph Gateを内包し、禁止表記を検査し、対象ファイルのSHA-256をReceiptへ出す。対象省略、Self-test失敗、Paragraph Gate失敗、禁止表記、Gate後のhash変更はfail-closedとする。文章や意味を自動修正せず、Fact Source AuthorityやStatusの意味判断をStatic Gateだけで代替しない。
-
+このGateはParagraph Gateを内包し、禁止表記とSeries Structure Regressionを検査し、対象ファイルのSHA-256をReceiptへ出す。Series対象ではBaseline ProjectionとActual Accepted Artifactの両方を確認する。対象省略、Self-test失敗、Paragraph Gate失敗、禁止表記、Structure Regression、Gate後のhash変更はfail-closedとする。文章や意味を自動修正せず、Fact Source Authority、Status、Editorial DecisionをStatic Gateだけで代替しない。

@@ -11,6 +11,7 @@ Local AI Foundryの長文NOTE記事で、LLM由来の短文縦連打・過剰改
 Repositoryへ渡す成果物形式は、Repository共通Contractの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従う。
 
 NOTE Publication全体のAuthority、Current Fact、表記、Status、URLおよび最終Static Gateは上位の[`NOTE Publication Contract`](note-publication-contract.md)に従う。本Contractの責務はParagraph Densityに限定する。
+同一Seriesの記事ではActual Accepted ArticleをStructural Baselineとして参照する。Navigation、目次、番号付きSection等のSeries Structureの責務はNOTE Publication Contractへ委譲し、Paragraph規則やGeneric Templateで上書きしない。
 
 ## Canonical Rule
 
@@ -94,7 +95,7 @@ SHA-256は「Gateを通した内容」と「Humanへ渡した内容」をBinding
 ## Required Workflow
 
 ```text
-Current Article / Season Planを読む
+Current Season Plan + 同一SeriesのActual Accepted Structural Baselineを読む
 ↓
 本Contractを読む
 ↓

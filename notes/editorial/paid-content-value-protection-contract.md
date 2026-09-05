@@ -3,6 +3,7 @@
 Status: `CURRENT / HUMAN-EDITORIAL-GATED`
 
 NOTE Publication全体の共通入口は[`NOTE Publication Contract`](note-publication-contract.md)とし、本Contractの責務はFree / Paid / Private境界に限定する。
+Paid Boundaryは同一SeriesのAccepted Structural Baselineを省略・置換する根拠にならない。通常のSeries StructureとFree Story Closureを維持し、Paid Practical Layerをその後の追加要素として扱う。
 
 ## Purpose
 
