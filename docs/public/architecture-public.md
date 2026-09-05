@@ -23,7 +23,7 @@ Article ProductionはReference Implementation #1（RI#1）のHistorical Benchmar
 
 Current Vectorは、Actual Human Runtimeで確認したRI #5 Evidence Foundationを基盤に、RI #4をEvidence-drivenに実打鍵・改善する段階へ移行している。Foundry CoreはCapability単位でHuman Decisionにより確定し、`FC-CORE-001`〜`FC-CORE-004`の4件が現在確認済みである。その他の再利用可能なPatternはCore Candidateのままである。
 
-RI #4のArticle Quality Hardeningは既存production pipelineへ新しいstageを足さず、Runtime EvidenceからFinding、構造的Failure Family、Correction、Regression、Closureを結ぶ開発統制として機能する。AQC01-01再RUNではFF-AG-001 / FF-SQ-001をActual Closureし、Source Specificity、Genre / Evidence Authority、分解可能なEditorial Value、AQC制御変数を第二CorrectionへBindingした。RI #5はEvidence authority / protected baseを維持し、次の公開マイルストーンはArticle Quality Baselineである。
+RI #4のArticle Quality HardeningはRuntime EvidenceからFinding、Correction、Regression、Closureを結ぶ開発統制である。AQC01-01のHuman semantic reviewによりFF-AG-001を再OPEN。Semantic Acceptance Architecture / ContractをFormal化したが、Runtime実装は未開始であり、実装・検証・同期前のHuman再突入は行わない。RI #5はEvidence authority / protected baseを維持し、Article Quality BaselineとProduction Acceptanceは未到達である。
 
 ## 2.1 責務階層
 
