@@ -1,10 +1,10 @@
-/* Local AI Foundry Official Website v5.3
+/* Local AI Foundry Official Website v5.4
    Visual Recovery / Layout Integrity Hotfix r1
    Loaded after the v4.2 Human-approved S13 dashboard. */
 (() => {
   'use strict';
 
-  const RELEASE = '2026-09-04-v5.3.html';
+  const RELEASE = '2026-09-06-v5.4.html';
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => [...r.querySelectorAll(s)];
   const setText = (s, value, r = document) => qsa(s, r).forEach(el => { el.textContent = value; });
@@ -32,8 +32,8 @@
   if (beacon) {
     beacon.classList.add('v5-beacon');
     beacon.href = `releases/${RELEASE}`;
-    beacon.setAttribute('aria-label', 'Local AI Foundry v5.3 リリース詳細');
-    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.3</strong><em>RI#5 FOUNDATION / RI#4 HARDENING</em><b>詳細 →</b>';
+    beacon.setAttribute('aria-label', 'Local AI Foundry v5.4 リリース詳細');
+    beacon.innerHTML = '<span>CURRENT VERSION</span><strong>v5.4</strong><em>DETERMINISTIC BOUNDARY</em><b>詳細 →</b>';
   }
   const eyebrow = qs('.hero-copy .eyebrow em');
   if (eyebrow) eyebrow.textContent = '次のベクトル / CORE EXTRACTION';
@@ -44,7 +44,7 @@
   const heroActions = qs('.hero-actions');
   if (heroActions) heroActions.innerHTML = '<a class="button primary" href="#projects">4つの実証を見る ↓</a><a class="button" href="#core-vector">次のベクトルを見る</a><a class="button" href="#proof">公開資料</a>';
   const heroStates = qs('.hero-state-row');
-  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.3</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>RI#4 Hardening</strong></div>';
+  if (heroStates) heroStates.innerHTML = '<div class="state-chip"><span>プロジェクト状態</span><strong>Published</strong></div><div class="state-chip accent"><span>現在の公式HP</span><strong>v5.4</strong></div><div class="state-chip v5-vector"><span>CURRENT VECTOR</span><strong>RI#4 Hardening</strong></div>';
   const heroBottom = qs('.hero-bottom-line');
   if (heroBottom) heroBottom.innerHTML = '<span>Reference Implementations</span><i></i><strong>Foundry Coreへ</strong>';
 
@@ -98,7 +98,7 @@
   }
 
   const pulseViews = {
-    overview: { title:'OVERVIEW', sub:'FOUNDRY v5.3 / EVIDENCE-DRIVEN', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','RI#4 HARDENING','core'],['FROZEN','RI#1','frozen'],['EVIDENCE FOUNDATION','RI#5 VERIFIED','ok'],['CURRENT CANDIDATE','RI#4 v0.71','frontier'],['CONTROL PLANE','RI#5 v1.0.2','info']] },
+    overview: { title:'OVERVIEW', sub:'FOUNDRY v5.4 / DETERMINISTIC BOUNDARY', metrics:[['PROJECT STATE','Published','info'],['CURRENT VECTOR','RI#4 HARDENING','core'],['FROZEN','RI#1','frozen'],['EVIDENCE FOUNDATION','RI#5 VERIFIED','ok'],['CURRENT CANDIDATE','RI#4 v0.71','frontier'],['CONTROL PLANE','RI#5 v1.0.2','info']] },
     ri1: { title:'RI#1', sub:'ARTICLE PRODUCTION / HISTORICAL', metrics:[['ROLE','FROZEN','frozen'],['PLATFORM','DIFY-CENTERED','info'],['LEGACY','CONTROL ORIGIN','ok'],['RUNTIME SNAPSHOT','PRESERVED','info'],['NEW EXPANSION','NONE','frozen'],['USE','BENCHMARK','frontier']] },
     ri2: { title:'RI#2', sub:'DOCUMENTATION PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['WORKFLOW','VERIFIED','ok'],['CONTROL PLANE','PYTHON','info'],['SOURCE','PRESERVED','ok'],['CORE SIGNAL','RUNTIME CAPABILITY','core'],['STATUS','VERIFIED','ok']] },
     ri3: { title:'RI#3', sub:'VISUAL ASSET PRODUCTION', metrics:[['ROLE','CORE CONTRIBUTOR','ok'],['LIVE','EXECUTED','ok'],['EVIDENCE','21 JOBS','ok'],['BLOCKING GATE','20 / 21','ok'],['CORE SIGNAL','GATE ≠ ACCEPTANCE','frontier'],['STATUS','RUNTIME VALIDATED','ok']] },
@@ -324,7 +324,7 @@
     const ri5Line = document.createElement('article');
     (qs('.ri4-line',board) || coreLine || webLine)?.insertAdjacentElement('afterend',ri5Line);
     const ri5 = promoteOperationalLine(ri5Line,'ri5',{id:'RI#5',icon:'◇',name:'Evidence Foundation',subtitle:'v1.0.2 / LF-EKB v0.3 / Protected Base',state:'ACTIVE',openLabel:'RI#5 Evidence Foundationの詳細を開く',closeLabel:'RI#5詳細を閉じる',operator:'CONTROL PLANE OPERATOR',image:'ri1-operator.webp',kicker:'RI #5 / EVIDENCE FOUNDATION',title:'CAMPAIGN TELEMETRY',comment:'実機確認でTerminal HOLD lifecycle修正とEnd-to-end Evidence traceabilityを確認。Foundry Control PlaneとしてProducer RIのEvidence Authorityを保持する。',cards:[['CANDIDATE','v1.0.2','cyan'],['LF-EKB','v0.3','green'],['TERMINAL HOLD','FIX VERIFIED','green'],['HUMAN RUNTIME','COMPLETE','purple']],pipelineTitle:'EVIDENCE CONTROL',pipeline:[['COLLECT','ok'],['DIAGNOSE','ok'],['VERIFY','ok'],['HARDEN RI#4','next']],rows:[['Terminal HOLD Lifecycle','FIX VERIFIED'],['Evidence Traceability','CONFIRMED'],['Human Runtime','1 CASE COMPLETE']],currentness:[['Foundation','MILESTONE'],['Authority','PRODUCER RI'],['Acceptance','NOT REACHED']],footerLabel:'EVIDENCE FOUNDATION',footer:'実機確認で追跡性を確認。次はRI#4の記事品質FindingをEvidence-drivenに改善し、Production Acceptanceは未到達のまま。'});
-    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.3',subtitle:'Published / RI#5 Foundation + RI#4 Hardening',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.3を公開中。RI#5 Evidence FoundationとRI#4 Evidence-driven改善への移行をPublic-safeに反映する。',cards:[['VERSION','v5.3','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','RI#5 → RI#4','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.3'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'RI#5 Evidence FoundationとRI#4 Runtime HardeningをWebsite v5.3として公開。'});
+    const web = promoteOperationalLine(webLine,'web',{id:'WEB',icon:'▽',name:'公式HP v5.4',subtitle:'Published / Deterministic Boundary Showcase',state:'LIVE',openLabel:'WEB 公式HPの詳細を開く',closeLabel:'WEB詳細を閉じる',operator:'WEBSITE OPERATOR',image:'ri1-operator.webp',kicker:'WEB / HUMAN-FACING PUBLICATION',title:'WEBSITE TELEMETRY',comment:'v5.4を公開中。意味の自由とMachine-owned Control Planeの境界をPublic-safeに提示する。',cards:[['VERSION','v5.4','cyan'],['PUBLICATION','PUBLISHED','green'],['PUBLIC CURRENT','BOUNDARY SHOWCASE','purple'],['SERVICE','LIVE','green']],pipelineTitle:'PUBLICATION FLOW',pipeline:[['SOURCE','ok'],['PROJECTION','ok'],['GITHUB','ok'],['LIVE','ok']],rows:[['Current Version','v5.4'],['Publication','Published'],['Confirmed Core','FC-CORE-001〜004']],currentness:[['Release','PUBLISHED'],['Presentation','CURRENT'],['Read-Back','VERIFIED']],footerLabel:'PUBLIC CURRENT',footer:'Deterministic Boundary ShowcaseをWebsite v5.4として公開。'});
     const core = promoteOperationalLine(coreLine,'core',{id:'CORE',icon:'⬡',name:'Foundry Core',subtitle:'4-Core Confirmed / Extraction Continues',state:'CONFIRMED',openLabel:'CORE Foundry Coreの詳細を開く',closeLabel:'CORE詳細を閉じる',operator:'CORE EXTRACTION OPERATOR',image:'ri-guide.webp',kicker:'CORE / CROSS-RI EXTRACTION',title:'FOUNDRY CORE TELEMETRY',comment:'FC-CORE-001〜004を正式Coreとして確定。Review Binding IntegrityはStrong CandidateとしてEvidence評価を継続する。',cards:[['PHASE 3C','PASS','green'],['CORE SET','001〜004','cyan'],['CORE STATUS','CONFIRMED','green'],['EXTRACTION','CONTINUES','purple']],pipelineTitle:'CORE EXTRACTION',pipeline:[['CROSS-RI','ok'],['EVIDENCE','ok'],['4 CORES','ok'],['EXTRACT','next']],rows:[['Confirmed Core','FC-CORE-001〜004'],['Review Binding Integrity','CANDIDATE — STRONG'],['Current Vector','Foundry Core Extraction']],footerLabel:'EXTRACTION CONTINUES',footer:'4-Core確定後も、Cross-RI Evidenceから次のCore Candidateを継続評価する。'});
     const operational = [ri5,web,core].filter(Boolean);
     function closeOperational(item,{focus=true,preserveBoard=false}={}) { if(!item?.open)return; item.open=false; board.classList.remove(`${item.line.id.replace('-line','')}-open`); if(!preserveBoard){board.classList.remove('guide-open-ready','ri-energized','ri-booting','ri-open');} item.toggle.setAttribute('aria-expanded','false'); item.reveal.setAttribute('aria-hidden','true'); item.reveal.inert=true; if(focus)window.setTimeout(()=>item.toggle.focus({preventScroll:true}),reduce.matches?0:300); }
@@ -380,10 +380,10 @@
   /* Current state remains compact and uses the existing panel. */
   const current = qs('#current');
   current?.classList.add('v5-current');
-  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.3へ。</span><strong class="title-line">Evidence基盤から、</strong><strong class="title-line">実打鍵の改善へ。</strong>';
-  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='RI#5 v1.0.2 / LF-EKB v0.3を実機で確認し、Evidence Foundationの節目へ到達。次はRI#4の記事品質FindingをEvidence-drivenに改善する。Production Acceptanceは未到達のまま。';
-  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.3更新内容</a><a class="button compact" href="#core-vector">次のベクトル</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
-  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.3</strong></article><article><span>Current Vector</span><strong>RI#4 Evidence-driven Hardening</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
+  const currentTitle = qs('#current h2'); if(currentTitle)currentTitle.innerHTML='<span class="title-line">v5.4へ。</span><strong class="title-line">意味は自由。</strong><strong class="title-line">境界は厳格。</strong>';
+  const currentCopy = qs('#current .current-copy > p:not(.kicker)'); if(currentCopy)currentCopy.textContent='Deterministic Boundary Showcaseを公開。RI#4 / RI#5のCurrent StateとProduction境界は変更せず、観測済みFailureからSemantic PlaneとMachine-owned Control Planeの責務を辿れるようにした。';
+  const actions = qs('#current .current-actions'); if(actions)actions.innerHTML=`<a class="button compact primary" href="releases/${RELEASE}">v5.4更新内容</a><a class="button compact" href="docs/public/deterministic-boundary-showcase.md">Showcase</a><a class="button compact" href="releases/index.html">更新履歴</a>`;
+  const status = qs('#current .status-panel'); if(status)status.innerHTML='<article><span>プロジェクト状態</span><strong class="ok">Published</strong></article><article><span>現在の公式HP</span><strong class="accent-text">v5.4</strong></article><article><span>Current Vector</span><strong>RI#4 Evidence-driven Hardening</strong></article><article><span>Confirmed Core</span><strong>FC-CORE-001〜004</strong></article>';
 
   const coreNav = qs('.main-nav a[href="#core-vector"]');
   const coreSection = qs('#core-vector');

@@ -31,6 +31,7 @@ Local AI Foundryは現在、5つのReference Implementation（RI）を扱い、A
 
 * [Project Status](status-public.md): 公開可能な範囲で現在地と次の主要Gateを確認する
 * [Architecture](architecture-public.md): システム全体の構造と責務境界を確認する
+* [Deterministic Boundary Showcase](deterministic-boundary-showcase.md): Semantic PlaneとMachine-owned Control Planeの境界を、観測済みFailureから確認する
 * [Roadmap](roadmap-public.md): RI EvidenceとEvidence-driven改善の進行方向を確認する
 * [基本原則](principles-public.md): Local AI Foundryの設計思想を確認する
 * [Glossary](glossary-public.md): Local AI Foundryで使用するProject固有用語を確認する

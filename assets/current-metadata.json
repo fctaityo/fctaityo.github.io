@@ -1,9 +1,9 @@
 {
-  "version": "v5.3",
+  "version": "v5.4",
   "url": "https://fctaityo.github.io/",
-  "title": "Local AI Foundry v5.3 — RI#5 Evidence Foundation / RI#4 Hardening",
-  "description": "Local AI Foundry v5.3。RI#5 Evidence Foundationの実機確認を経て、RI#4のEvidence-driven改善フェーズへ移行。",
-  "social_description": "RI#5 Evidence Foundationを保護。RI#4 AQC01-01 Semantic AcceptanceはMachine Closure済みで、Human ReentryはFresh Human GO待ち。Article Quality BaselineとProduction Acceptanceは未到達。",
+  "title": "Local AI Foundry v5.4 — Deterministic Boundary Showcase",
+  "description": "Local AI Foundry v5.4。LLMのSemantic PlaneとMachine-owned Control Planeの境界を、観測済みFailureから公開。",
+  "social_description": "意味は自由、構造は厳格。Machineが知る事実を再推定させず、回復した違反を観測から消さないDeterministic Boundary Showcase。",
   "image": "https://fctaityo.github.io/assets/hero-foundry.webp",
   "image_alt": "Local AI Foundry — Human-directed AI control architecture",
   "og_type": "website",

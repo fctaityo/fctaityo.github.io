@@ -42,7 +42,7 @@ RI #2 Documentation Production、RI #3 Visual Asset Production、RI #4 Research-
 | RI #1 | Article Production / Historical Benchmark | Frozen |
 | RI #2〜RI #5 | Documentation Production / Visual Asset Production / Research-Grounded Long-form Production / Evidence Foundation | Current Evidence Sources |
 | Foundry Core | FC-CORE-001〜004 confirmed。Review Binding Integrityは`CANDIDATE — STRONG` | Capability-based |
-| Website v5.3 | Public Presentation | Current |
+| Website v5.4 | Public Presentation | Current |
 
 内部のBaseline ID、Commit SHA、Workflow Hash、App ID、Workflow ID、Revision識別子および環境固有情報は公開版では掲載しない。
 

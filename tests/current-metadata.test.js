@@ -15,7 +15,7 @@ test('crawler metadata is complete, unique, and Current', () => {
     const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     assert.equal((html.match(new RegExp(`(?:property|name)="${escaped}"`, 'g')) || []).length, 1);
   }
-  assert.ok(meta.title.includes('v5.3'));
+  assert.ok(meta.title.includes('v5.4'));
   assert.ok(!meta.title.includes('v5.2'));
   assert.ok(fs.existsSync(path.join(root, 'assets/hero-foundry.webp')));
   assert.ok(!fs.readFileSync(path.join(root, 'v5.js'), 'utf8').includes('document.title'));

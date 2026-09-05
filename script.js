@@ -894,7 +894,7 @@ loadProjection();
     overview: {
       title: 'OVERVIEW', sub: 'FOUNDRY CURRENT', metrics: [
         ['PROJECT STATE','Published','info'],['CURRENT VECTOR','CORE EXTRACTION','core'],['PARALLEL CURRENT','RI#3 / RI#4','rv'],
-        ['RI#2','VERIFIED','ok'],['CORE','4 CONFIRMED','ok'],['PUBLIC SITE','v5.3','info']
+        ['RI#2','VERIFIED','ok'],['CORE','4 CONFIRMED','ok'],['PUBLIC SITE','v5.4','info']
       ]
     },
     ri1: {
