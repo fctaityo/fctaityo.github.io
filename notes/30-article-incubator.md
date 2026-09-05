@@ -71,10 +71,12 @@ Working Direction：
 Season 4はSeason 3商品を必須Dependencyにしない。
 各Paid Productは単体で最初のDoneまで到達でき、Season 3 Artifactを持つ場合のみOptional Inputとして再利用できる設計を採る。
 
-Current ProjectではRI #5 Evidence FoundationをProtected Baseとして、RI #4 Evidence-Driven Runtime Hardeningへ進んでいる。
+Current ProjectではRI#5 Evidence FoundationをProtected Baseとして、RI#4 Evidence-Driven Runtime Hardeningへ進んでいる。
 Season 4はこのActual Evidenceを基礎に、Failure Pattern、Evidence-to-Knowledge、Anti-Regression、Recovery、Baseline Protection、Continuous AssuranceをWorking Themeとして育てる。
 
 [Season 4 Working Plan](editorial/season-4-working-plan.md)
+
+NOTE記事の執筆、レビュー、Human handoff、Publicationは共通入口の[NOTE Publication Contract](editorial/note-publication-contract.md)に従う。
 
 ## Cross-Season Backlog
 

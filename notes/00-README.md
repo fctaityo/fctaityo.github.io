@@ -32,8 +32,9 @@ docs/ に残るのは「決まったこと」。 notes/
   - [Season 3 Plan](editorial/season-3-plan.md)
   - [Season 4 Working Plan](editorial/season-4-working-plan.md)
   - [Cross-Season Backlog](editorial/cross-season-backlog.md)
+  - [NOTE Publication Contract](editorial/note-publication-contract.md)
   - [NOTE Long-form Article Style Contract](editorial/article-style-contract.md)
-- [Human + ChatGPT Full-file Delivery Contract](../HUMAN-CHATGPT-DELIVERY-CONTRACT.md)  
+- [Human + ChatGPT Full-file Delivery Contract](../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md)
   Human + ChatGPTからRepositoryへ反映する成果物は、完成済み全文ファイルのWeb Drop-in Packageとして渡す。
 - [Configuration Management Notes](40-configuration-management.md)  
   正本、差分、同期、検証、反映完了条件など、既存成果物を安全に変更するための運用知識を整理する。

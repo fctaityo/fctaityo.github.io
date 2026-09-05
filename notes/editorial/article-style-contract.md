@@ -10,6 +10,8 @@ Local AI Foundryの長文NOTE記事で、LLM由来の短文縦連打・過剰改
 
 Repositoryへ渡す成果物形式は、Repository共通Contractの[`HUMAN-CHATGPT-DELIVERY-CONTRACT.md`](../../contracts/HUMAN-CHATGPT-DELIVERY-CONTRACT.md)に従う。
 
+NOTE Publication全体のAuthority、Current Fact、表記、Status、URLおよび最終Static Gateは上位の[`NOTE Publication Contract`](note-publication-contract.md)に従う。本Contractの責務はParagraph Densityに限定する。
+
 ## Canonical Rule
 
 ```text

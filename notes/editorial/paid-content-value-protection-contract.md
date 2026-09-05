@@ -2,6 +2,8 @@
 
 Status: `CURRENT / HUMAN-EDITORIAL-GATED`
 
+NOTE Publication全体の共通入口は[`NOTE Publication Contract`](note-publication-contract.md)とし、本Contractの責務はFree / Paid / Private境界に限定する。
+
 ## Purpose
 
 Local AI FoundryのNOTE記事で、無料読者が開発物語と結果を最後まで理解できる状態を保ちながら、

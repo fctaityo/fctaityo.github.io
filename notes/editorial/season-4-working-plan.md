@@ -2,6 +2,8 @@
 
 Status: `CURRENT WORKING PLAN / STRUCTURE NOT FROZEN`
 
+NOTE Publicationの共通規約は[`NOTE Publication Contract`](note-publication-contract.md)に従う。本PlanはSeason 4のテーマ、順序、候補を管理し、Project Currentや公開済み状態を確定しない。
+
 ## Season 4構想：Operational Learning / Continuous Assurance
 
 Season 4は、Season 3で設計したDelegation / Control Structureを前提条件として要求する続編ではない。
@@ -13,7 +15,7 @@ Continuous AssuranceはSeason 4の一要素として保持し、Evaluation / Reg
 
 ## Current Project Basis
 
-Current Projectは、RI #5 Evidence FoundationをProtected Baseとして、RI #4 Evidence-Driven Runtime Hardeningへ進んでいる。
+Current Projectは、RI#5 Evidence FoundationをProtected Baseとして、RI#4 Evidence-Driven Runtime Hardeningへ進んでいる。
 Season 4はこのActual Evidenceを基礎にするが、未成立の将来機能や独自理論を先に完成したものとして書かない。
 
 Currentで観測できている主要な接続候補：
@@ -199,7 +201,7 @@ Backlog Candidateは、面白そうという理由だけでWorking Outlineへ先
 
 Season 4を正式シリーズとして固定する前に、少なくとも次を確認する。
 
-* RI #4 / RI #5を含むActual Runtime / Outcome / Evidenceの蓄積がある。
+* RI#4 / RI#5を含むActual Runtime / Outcome / Evidenceの蓄積がある。
 * 複数RunのTraceとOutcomeを比較できる。
 * Failure / Regression / Recoveryのうち複数について実Project Evidenceが存在する。
 * EvidenceからKnowledge、またはKnowledgeから次回ExecutionへのBindingについてActual事例が存在する。
