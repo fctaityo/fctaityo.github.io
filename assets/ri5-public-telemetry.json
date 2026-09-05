@@ -1,10 +1,10 @@
 {
   "schema_version": "LF-RI5-PUBLIC-TELEMETRY-1.0",
-  "updated_at": "2026-09-05T12:09:20+09:00",
+  "updated_at": "2026-09-05T12:09:48+09:00",
   "summary": {
     "total_runs": 271,
     "pass": 114,
-    "fail": 113,
+    "fail": 112,
     "fatal": 44,
     "indexed_artifacts": 5242
   },
