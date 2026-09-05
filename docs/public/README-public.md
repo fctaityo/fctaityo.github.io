@@ -19,7 +19,7 @@ Local AI Foundryは現在、5つのReference Implementation（RI）を扱い、A
   - FoundryConsoleはHuman-facing Control Surface / Current Implementationであり、RI #3そのものの名称ではない。
 - RI #4 — Research-Grounded Long-form Production
   - Temporal Entity IntegrityはCurrent Package / Capabilityであり、RI #4そのものの名称ではない。
-  - AQC01-01はHuman semantic review未受入。FF-AG-001再OPEN、Semantic Acceptance Architecture / Contract Formal化済み、Runtime実装未開始。実装・検証・同期前のHuman再突入は行わない。
+  - Semantic Acceptance v13はMachine Closure済み。AQC01-01はHuman semantic review未受入で、Human Reentryは`READY / PENDING FRESH HUMAN GO`。AQC01-02は未開始。
 - RI #5 — Evidence Foundation
   - Evidenceの記録・追跡・改善支援を担うFoundry Control Planeである。
 - Current Vector — `RI #5 Evidence Foundation → RI #4 Evidence-driven Runtime Hardening`

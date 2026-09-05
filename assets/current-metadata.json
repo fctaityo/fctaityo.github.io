@@ -3,7 +3,7 @@
   "url": "https://fctaityo.github.io/",
   "title": "Local AI Foundry v5.3 — RI#5 Evidence Foundation / RI#4 Hardening",
   "description": "Local AI Foundry v5.3。RI#5 Evidence Foundationの実機確認を経て、RI#4のEvidence-driven改善フェーズへ移行。",
-  "social_description": "RI#5 Evidence Foundationを保護。RI#4 AQC01-01のSemantic Acceptance ArchitectureをFormal化し、Runtime実装・検証待ち。Article Quality BaselineとProduction Acceptanceは未到達。",
+  "social_description": "RI#5 Evidence Foundationを保護。RI#4 AQC01-01 Semantic AcceptanceはMachine Closure済みで、Human ReentryはFresh Human GO待ち。Article Quality BaselineとProduction Acceptanceは未到達。",
   "image": "https://fctaityo.github.io/assets/hero-foundry.webp",
   "image_alt": "Local AI Foundry — Human-directed AI control architecture",
   "og_type": "website",
