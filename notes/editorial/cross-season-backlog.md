@@ -235,6 +235,175 @@ Season Planへ移しても、元Evidenceや未成立条件を消さない。
   * Public Documentationへ公開可能なIA文書と事例を選別する。
   * Season 2本編、独立記事、公式HPの思想コンテンツのどこへ配置するか再評価する。
 
+### 「起動した」は、誰のRuntimeなのか
+
+* Evidence Intake：
+  * AQC01-01 Human Runtime収束過程で、同一Build IDの既存RI5 RuntimeがMachine startup evidenceとして誤って受理され得る問題を確認した。
+  * Review / Smokeがpre-existing FoundryConsole Runtimeを再利用・停止してはいけないというnon-interference責務がBlocking Findingとして明示された。
+  * V23R4ではRUN-1 / RUN-2のActual launcher、health、runtime identity、owned stopまで成立した一方、foreign Runtimeのownership判定がFormal SmokeでOPENとなった。
+  * V23R5ではActual `.cmd` wrapperのPowerShell終了コード伝播と、foreign rejection reasonのMachine Evidence強化へ進んでいる。
+* 核となる問い：
+  * ServiceがhealthyでBuild IDが一致していても、なぜ「今回起動したRuntime」とは限らないのか。
+* 扱うテーマ：
+  * Runtime Identity
+  * Process Ownership
+  * Canonical Root Binding
+  * Runtime Workspace Binding
+  * PID / Launch Token
+  * Existing Runtime Detection
+  * Exit Code Propagation
+  * Non-interference
+* 記事の到達点候補：
+  * `healthy`はService状態を示すだけで、実行AuthorityやOwnershipを証明しない。
+  * 同一Build IDはCompatibilityの手掛かりにはなっても、今回のDeployment / Workspace / Processの所有証明にはならない。
+  * Runtimeを停止・再利用できる条件は、IdentityとOwnershipを分けて明示的にbindする必要がある。
+* 接続候補：
+  * Season 4-09 Recovery / Re-run
+  * Season 4-10 Baseline / Regression
+  * Foundry Core：Deterministic Technical Gate / Evidence Traceability
+* 昇格条件：
+  * AQC01-01 Machine Closure後にBF-15 / BF-16の最終closure evidenceを確定する。
+  * Human Runtimeの有無とMachine ownership evidenceを混同せず、公開可能な事実だけを抽出する。
+
+### テストが通っても、Actual launcherは壊れていた
+
+* Evidence Intake：
+  * V22のFormal `FC_NO_RUN_STARTUP_SMOKE`は`python -B -m ri5.server`を直接起動し、Actual `START-RI5.cmd → start-ri5.ps1`経路を通っていなかった。
+  * Formal SmokeがPASSしていても、Windows Actual launcherではRI4 external runtime copyのlong-path failureが発生した。
+  * 後続ではActual launcherをFormal Gateへbindし、RUN-1 / RUN-2の同一deployment retryまで検証対象へ拡張した。
+  * V23R3ではRI5 serverがhealthyでもlauncher terminalが返らず、Machine capture方式の問題までActual pathで発見された。
+* 核となる問い：
+  * 「代表的な内部処理をテストした」ことと、「本番の入口を検証した」ことはなぜ同じではないのか。
+* 扱うテーマ：
+  * Execution Provenance
+  * Actual Launcher Binding
+  * Integration Gate
+  * Formal Smoke
+  * Retry Safety
+  * Windows Process / Handle Behavior
+* 記事の到達点候補：
+  * 内部serverが正しく動くことは、Actual launcherが正しいことを保証しない。
+  * Release Gateは本番で使うCaller / Trigger / Endpoint / Workspaceへbindされて初めて実行経路を証明できる。
+  * Test Doubleや近似経路が必要な場合も、それをActual pathのEvidenceとして代用しない。
+* 接続候補：
+  * Season 4-05 Anti-Regression
+  * Season 4-10 Baseline & Regression
+  * Runtime Execution Path Provenance
+* 昇格条件：
+  * AQC01-01 closure後にV22〜V23系列のFinding chainを正本Evidenceから再構成する。
+  * 単なる「テスト不足」ではなく、Execution Provenanceの一般則として説明する。
+
+### CanonicalをRuntime Rootにしてはいけない
+
+* Evidence Intake：
+  * V21ではPre-Human PASS後のFoundryConsole startupだけでCanonical deployment配下へPID、log、Evidence、run-meta等のmutable artifactが生成された。
+  * Human RUN未実行でも同じdeploymentがpristineではなくなり、retry-safeなMachine / Human reentryを阻害した。
+  * 後続ではCanonical packageをruntime executable sourceとして維持しつつ、mutable Runtime WorkspaceとRI4 runtime copyをpackage外へ分離した。
+* 核となる問い：
+  * 実行可能なCanonical Sourceを、そのままmutable Runtime Rootとして使うと何が壊れるのか。
+* 扱うテーマ：
+  * Canonical Source
+  * Mutable Runtime State
+  * Runtime Workspace
+  * Evidence Root
+  * Pristine Deployment
+  * Retry Safety
+  * Package Integrity
+* 記事の到達点候補：
+  * 「実行できる場所」と「実行中に変わる場所」は同じである必要がない。
+  * Canonical packageのIntegrityとRuntimeの可変性を両立するには、Source AuthorityとRuntime State Authorityを分離する。
+  * Human RUNを消費しないMachine validationでもCanonicalを汚さないことがretry-safeの成立条件になる。
+* 接続候補：
+  * Season 4-06 Current / Historical Boundary
+  * Season 4-09 Recovery / Re-run
+  * Hashが合ってもEvidenceは壊れる
+* 昇格条件：
+  * External Runtime Workspace化後のFinal closure evidenceを確定する。
+  * Canonical immutabilityとEvidence persistenceを同一責務として混同しない。
+
+### Machine TestがHuman Runtimeを殺した日
+
+* Evidence Intake：
+  * AQC01-01 Strict Review中、既に起動していたRI5 / FoundryConsoleをReview側がsame-build Runtimeとして利用し、その後のretry検証前に停止した事例が発生した。
+  * Human FC RUN自体は消費していなかったが、Machine ReviewがHuman側Runtimeへ介入できる境界欠落が露出した。
+  * 以後、pre-existing Runtimeはstartup evidenceとして再利用せず、Machine test自身がspawnしOwnershipを証明できるprocessだけをshutdown対象とする契約へ強化した。
+* 核となる問い：
+  * Machine Verificationは、なぜ「検証対象を見つけた」だけで停止・再利用する権限を持たないのか。
+* 扱うテーマ：
+  * Machine / Human Authority Boundary
+  * Process Ownership
+  * Non-interference
+  * Test Isolation
+  * Runtime Provenance
+  * Human Runtime Protection
+* 記事の到達点候補：
+  * Machine testの権限は「観測できるもの」ではなく「自分が所有を証明できるもの」に限定する。
+  * Verificationの自動化はHuman Runtimeへの介入権限を自動的に付与しない。
+  * Isolationはテスト精度だけでなく、Human側の実行Authorityを守るためのControlでもある。
+* 接続候補：
+  * Season 3 Human / Machine BoundaryのPost-Season実Evidence
+  * Season 4-09 Recovery / Re-run
+  * Foundry Core：Delegation Contract Binding / Deterministic Technical Gate
+* 昇格条件：
+  * BF-16のFinal closure evidenceを確定する。
+  * 個別事故の晒し話ではなく、Machine Verification Authorityの一般原則へ昇格できること。
+
+### タイムアウトを伸ばしてもTerminalは証明できない
+
+* Evidence Intake：
+  * V23R2ではFormal Smokeが300秒outer timeoutで停止した。
+  * 内部はRUN×2、health、identity、stop、foreign-runtime検証を逐次実行し、個別bounded timeoutの理論合計がouter timeoutを上回り得る設計だった。
+  * V23R3ではphase単位のBEGIN / END / TIMEOUT / TERMINAL Evidenceと、内部最大budgetより大きいouter boundを導入した。
+  * さらに実機ではserver healthy後もlauncher terminalが返らない別原因が露出し、「時間を伸ばす」だけではRoot Cause Closureにならないことを確認した。
+* 核となる問い：
+  * Timeout値を大きくすれば、なぜ長時間処理の信頼性が上がるとは限らないのか。
+* 扱うテーマ：
+  * Timeout Budget
+  * Phase Evidence
+  * Terminal State
+  * Fail-closed
+  * Partial Diagnostic Evidence
+  * Observability
+* 記事の到達点候補：
+  * Timeoutは待ち時間ではなく、各phaseがどこまで責任を持つかを表すControlである。
+  * Outer timeoutは内部bounded phaseの最大budgetと整合しなければ、正常処理を途中で殺す。
+  * 長いtimeoutより、どのphaseまで到達したかを残すTerminal Evidenceの方がRoot Cause特定に効く。
+* 接続候補：
+  * Season 4-09 Workflow Recovery
+  * Season 4-10 Baseline & Regression
+  * Runtime Observability
+* 昇格条件：
+  * V23R3以降のFinal closure結果を追加し、単なる数値調整ではないControl Designとして整理する。
+
+### Windowsでは「短いPath」すらConfigurationだった
+
+* Evidence Intake：
+  * RI4 historical corpusのlong filenameをexternal Runtime WorkspaceへcopyするActual Windows startupでpath-length failureが発生した。
+  * 回帰テスト側でもfixture rootが長すぎて製品コードへ到達できないFailureが発生した。
+  * `%LOCALAPPDATA%\LF5T`をshort rootと仮定したV23R1でも、packaged Windows / AppContainer redirectにより実resolved pathが長くなった。
+  * 後続では「特定Environment Variableは短い」という仮定を捨て、実resolved pathからpath budgetを計算するfixtureへ変更した。
+* 核となる問い：
+  * OS上の「普通の場所」を前提にしただけで、なぜMachine Gateそのものが環境依存になるのか。
+* 扱うテーマ：
+  * Windows Path Length
+  * AppContainer Redirect
+  * Resolved Path
+  * Environment Assumption
+  * Platform Drift
+  * Test Fixture Design
+  * Configuration Boundary
+* 記事の到達点候補：
+  * Environment Variableの名前ではなく、Actual resolved valueをEvidenceとして扱う。
+  * Test Fixtureは製品Failureを再現するための道具であり、Fixture自身がPlatform前提で先に壊れてはいけない。
+  * Platform / Sandbox / Packaging環境の差は、Application外部の偶然ではなくRelease Configurationの一部になり得る。
+* 接続候補：
+  * Difyのバージョンアップで契約が壊れた日
+  * Season 4-05 Anti-Regression
+  * Season 4-06 Current / Historical Boundary
+* 昇格条件：
+  * Windows Actual closure後に、製品側long-path protectionとtest fixture側path-budget protectionを分離して整理する。
+  * Windows固有Tipsではなく、Environment AssumptionをGate化する一般論として説明できること。
+
 ---
 
 ## 統合済み候補
