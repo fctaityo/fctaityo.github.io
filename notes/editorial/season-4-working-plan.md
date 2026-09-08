@@ -129,6 +129,42 @@ S3 Artifact available
 4. 関連するSeason 3記事へのリンクをPublication時に実URLで掲載する。
 5. 存在しない記事URLや未公開Artifactへのリンクを先に作らない。
 
+## Current Editorial Progress
+
+Repository上ではS4-01〜S4-04の記事本文が存在する。
+NOTE上の公開状態・公開日時・最終表示はNOTE側を正本とする。
+
+S4-03「成功より、失敗の方が役に立った」は記事本文とPaid Practical Layerを作成済み。
+商品は**Failure Pattern Ledger Pack**、5点セット、販売価格は**1,480円**。
+First Doneは`1 Failure → 1 reusable Pattern → Next Run Check`。
+
+S4-04「Evidenceを、次の実行へ戻す」は記事本文とPaid Practical Layerを作成済み。
+商品は**Evidence-to-Knowledge Operations Pack**としてHuman Product Decision済みで、販売価格は**2,980円**。
+
+論理構成は7点：
+
+1. README
+2. 紹介スライド
+3. 実践手順書
+4. Evidence-to-Knowledge Operations Workbook
+5. Knowledge Candidate Registry
+6. Promotion Decision Matrix
+7. 1枚チートシート
+
+First Done：
+
+```text
+1 Evidence Set / Failure Pattern
+→ 1 Knowledge Candidate
+→ 1 Next Execution Use Plan
+```
+
+S4-04の責務はEvidence / PatternをKnowledge Candidateへ変換し、次のExecutionで使う場所まで決めること。
+自動学習、自動Formal Knowledge昇格、自動Runtime Binding、Anti-Regression Gate実装はS4-04へ含めない。
+
+次のEditorial対象はS4-05「同じ失敗を二度させない」。
+S4-04のKnowledge Candidate / Next Use境界を維持したまま、Known Failure / KnowledgeをAnti-Regression Controlへ接続する。
+
 ## Working Outline
 
 以下はCurrent Working Outlineであり、Actual EvidenceとHuman Editorial Decisionにより変更できる。
@@ -137,8 +173,8 @@ S3 Artifact available
 | --- | --- | --- | --- |
 | 01 | AIは、前回の失敗を覚えていなかった | 無料 | なし |
 | 02 | ログを残しただけでは、経験にはならない | 無料 | なし |
-| 03 | 成功より、失敗の方が役に立った | 無料 + 有料 | Failure Pattern Ledger Pack |
-| 04 | Evidenceを、次の実行へ戻す | 無料 + 有料 / 有料主力候補 | Evidence-to-Knowledge Operations Pack |
+| 03 | 成功より、失敗の方が役に立った | 無料 + 有料 / 記事・商材完成 | Failure Pattern Ledger Pack / 5点 / 1,480円 |
+| 04 | Evidenceを、次の実行へ戻す | 無料 + 有料 / 記事・商材完成 | Evidence-to-Knowledge Operations Pack / 7点 / 2,980円 |
 | 05 | 同じ失敗を二度させない | 無料 + 有料 / 有料主力候補 | Anti-Regression Design / Operations Pack |
 | 06 | 過去の正解も、今は正解とは限らない | 無料 | なし / Current-Historical境界をStoryで閉じる |
 | 07 | AIの記憶を、そのまま信用しない | 無料 + 有料 | Formal Knowledge Boundary Pack |
@@ -151,9 +187,10 @@ S3 Artifact available
 ## Paid Artifact Working Catalog
 
 Current Candidate。商品名、価格、販売単位、添付FormatはHuman Editorial Decisionで確定する。
+S4-04のみHuman Product Decision済みとして下記を確定記録する。
 
-* Failure Pattern Ledger Pack
-* Evidence-to-Knowledge Operations Pack
+* **Failure Pattern Ledger Pack — S4-03 / 5点 / 1,480円 / 完成**
+* **Evidence-to-Knowledge Operations Pack — S4-04 / 7点 / 2,980円 / FINAL CANDIDATE**
 * Anti-Regression Design / Operations Pack
 * Formal Knowledge Boundary Pack
 * Workflow Recovery Playbook

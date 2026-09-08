@@ -62,11 +62,34 @@ Canonical Principle：
 
 ### Season 4
 
-`CURRENT EDITORIAL NEXT / WORKING PLAN / STRUCTURE NOT FROZEN`
+`S4-01〜04 ARTICLE BODY COMPLETE / NEXT: S4-05 / WORKING PLAN`
 
 Working Direction：
 
 **Operational Learning / Continuous Assurance — 任せた結果から学び、壊さず、次の実行を良くする**
+
+Repository上ではS4-01〜S4-04の記事本文が存在する。
+
+S4-03「成功より、失敗の方が役に立った」は、Failureを再利用可能なPatternへ変換するStoryとPaid Practical Layerを形成した。
+商品は**Failure Pattern Ledger Pack**。5点セット、販売価格1,480円。
+First Doneは
+`1 Failure → 1 reusable Pattern → Next Run Check`
+まで到達すること。
+
+S4-04「Evidenceを、次の実行へ戻す」は、Evidence / Failure PatternをKnowledge Candidateへ変換し、
+Next Execution Use Planまで戻すStoryとPaid Practical Layerを形成した。
+
+S4-04の商品は**Evidence-to-Knowledge Operations Pack**としてHuman Product Decision済み。
+7点セット、販売価格2,980円。単体でFirst Done
+`1 Evidence Set / Failure Pattern → 1 Knowledge Candidate → 1 Next Execution Use Plan`
+まで到達できる構成とする。
+
+NOTE上の公開状態・公開日時・最終表示はNOTE側を正本とする。
+
+次のEditorial対象はS4-05「同じ失敗を二度させない」。
+S4-04で作ったKnowledge Candidate / Next Useの境界を保ち、
+S4-05ではKnown Failure / KnowledgeをAnti-Regression Controlへ接続する。
+S4-04へAnti-Regression実装を逆流させない。
 
 Season 4はSeason 3商品を必須Dependencyにしない。
 各Paid Productは単体で最初のDoneまで到達でき、Season 3 Artifactを持つ場合のみOptional Inputとして再利用できる設計を採る。
