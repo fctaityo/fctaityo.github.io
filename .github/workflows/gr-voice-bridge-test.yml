@@ -1,0 +1,24 @@
+name: GR Voice Bridge Transport Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/gr-voice-bridge-test.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  transport-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create transport probe
+        run: |
+          mkdir -p out
+          printf 'GAL_RUSH_VOICE_BRIDGE_OK\n' > out/probe.txt
+      - name: Upload transport probe
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-voice-bridge-probe
+          path: out/probe.txt
+          retention-days: 1
