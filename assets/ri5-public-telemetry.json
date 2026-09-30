@@ -1,12 +1,12 @@
 {
   "schema_version": "LF-RI5-PUBLIC-TELEMETRY-1.0",
-  "updated_at": "2026-09-29T22:19:52+09:00",
+  "updated_at": "2026-09-30T11:54:32+09:00",
   "summary": {
     "total_runs": 286,
     "pass": 114,
     "fail": 125,
     "fatal": 47,
-    "indexed_artifacts": 5479
+    "indexed_artifacts": 5496
   },
   "latest_run": {
     "run_index": 1,
@@ -20,7 +20,7 @@
   "publication": {
     "status": "SYNCED",
     "label": "PUBLIC SNAPSHOT",
-    "trigger": "POST_EVIDENCE_FINALIZE_SYNC"
+    "trigger": "FC_STARTUP_SYNC"
   },
   "source": {
     "status": "VALID",
