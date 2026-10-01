@@ -1,4 +1,4 @@
-name: GR Voice Bridge Transport Test
+name: GR Awakening Voice Transport V263
 
 on:
   push:
@@ -9,21 +9,25 @@ permissions:
   contents: read
 
 jobs:
-  transport-voice:
+  transport-voices:
     runs-on: ubuntu-latest
     steps:
-      - name: Download generated voice 001
+      - name: Download regenerated awakening voices
         run: |
+          set -euo pipefail
           mkdir -p out
-          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/18f4d358-cdc1-47fe-b3db-9495119b49d0.mp3'
-          test -s out/001.mp3
-          file out/001.mp3
-          sha256sum out/001.mp3 > out/001.sha256
-      - name: Upload voice artifact
+          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/cb763a35-aea5-4b22-a828-418664e02c4c.mp3'
+          curl --fail --location --retry 3 --output out/003.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/5ff85a46-f4b5-40ae-81f9-5e7346c8df69.mp3'
+          curl --fail --location --retry 3 --output out/004.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/ab3cc7a6-f087-41f6-902b-fb867828aba7.mp3'
+          curl --fail --location --retry 3 --output out/005.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/d3790ac9-32f4-4e58-87ff-4768e08b3349.mp3'
+          curl --fail --location --retry 3 --output out/006.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/af23e9af-3c56-450f-b345-90947f1319d1.mp3'
+          for f in out/*.mp3; do test -s "$f"; file "$f"; done
+          sha256sum out/*.mp3 > out/SHA256SUMS.txt
+      - name: Upload regenerated voices
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-001
+          name: gr-awakening-voices-v263
           path: |
-            out/001.mp3
-            out/001.sha256
+            out/*.mp3
+            out/SHA256SUMS.txt
           retention-days: 1
