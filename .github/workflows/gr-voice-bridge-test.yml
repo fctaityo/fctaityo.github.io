@@ -12,7 +12,7 @@ jobs:
   transport-voice:
     runs-on: ubuntu-latest
     steps:
-      - name: Download V276 awakening voices 066-085
+      - name: Download V276 awakening voice previews 066-085
         shell: bash
         run: |
           set -euo pipefail
@@ -20,45 +20,35 @@ jobs:
           download() {
             no="$1"
             url="$2"
-            echo "Downloading ${no}"
-            for attempt in $(seq 1 18); do
-              if curl --fail --location --connect-timeout 20 --max-time 180 --retry 3 --retry-all-errors --retry-delay 3 --output "out/${no}.mp3.tmp" "$url"; then
-                if test -s "out/${no}.mp3.tmp" && file "out/${no}.mp3.tmp" | grep -Eiq 'audio|MPEG|MP3'; then
-                  mv "out/${no}.mp3.tmp" "out/${no}.mp3"
-                  return 0
-                fi
-              fi
-              rm -f "out/${no}.mp3.tmp"
-              sleep 10
-            done
-            echo "FAILED ${no}" >&2
-            return 1
+            curl --fail --location --retry 3 --retry-all-errors --output "out/${no}.mp3" "$url"
+            test -s "out/${no}.mp3"
+            file "out/${no}.mp3" | grep -Eiq 'MPEG|MP3|Audio'
           }
-          download 066 'https://www.aidocmaker.com/g0/audio?name=f128969d004c44409cb27e475e157dc2'
-          download 067 'https://www.aidocmaker.com/g0/audio?name=f2c08401d7c24e798b6e5aecd8603f99'
-          download 068 'https://www.aidocmaker.com/g0/audio?name=adb4102d681843a8be3329ac29f28334'
-          download 069 'https://www.aidocmaker.com/g0/audio?name=5848859a5baf4efc97796cd667969fed'
-          download 070 'https://www.aidocmaker.com/g0/audio?name=74e83e7f661e45209f261ca5c5c5eaba'
-          download 071 'https://www.aidocmaker.com/g0/audio?name=cda01798373443ccac0421f978541f01'
-          download 072 'https://www.aidocmaker.com/g0/audio?name=437eb603e8e146928edd3b8b093a94c8'
-          download 073 'https://www.aidocmaker.com/g0/audio?name=b1c4c2b343b64b96b3f56ad2bf858936'
-          download 074 'https://www.aidocmaker.com/g0/audio?name=79b7f78ad2dc4e3d992cae65144bcfa8'
-          download 075 'https://www.aidocmaker.com/g0/audio?name=e988149b8045490e81f6e93ae740fa69'
-          download 076 'https://www.aidocmaker.com/g0/audio?name=4e5df731ae5c434bb1c1228899484d40'
-          download 077 'https://www.aidocmaker.com/g0/audio?name=541eb8a5c4594f0e9a199bf5832b2263'
-          download 078 'https://www.aidocmaker.com/g0/audio?name=fbbdc9694638488f8f79e1c1ce33366e'
-          download 079 'https://www.aidocmaker.com/g0/audio?name=673d6f6346824d2098926a2119d9493f'
-          download 080 'https://www.aidocmaker.com/g0/audio?name=bb214921189942b382e4df8a95af27f8'
-          download 081 'https://www.aidocmaker.com/g0/audio?name=a9e803f1b8614c0ea210b4e4762c2c15'
-          download 082 'https://www.aidocmaker.com/g0/audio?name=e8d899a85b3247f7a59275fda50917ea'
-          download 083 'https://www.aidocmaker.com/g0/audio?name=2b86db055f90454395e907477923ce28'
-          download 084 'https://www.aidocmaker.com/g0/audio?name=f500471b25464eebbe5c171665165698'
-          download 085 'https://www.aidocmaker.com/g0/audio?name=7a4d75b70fbb4624af79b98b56e632da'
+          download 066 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/168dc9b9-f5f4-48a6-8541-5f35e976ef53.mp3'
+          download 067 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/188db80c-bb9c-4d8e-93a3-d10cb1556ff0.mp3'
+          download 068 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/b8eb659d-87f8-4556-9fb1-84b41f56ff74.mp3'
+          download 069 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/c3bda44b-be27-4e8c-8df1-662180ac504f.mp3'
+          download 070 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/84b27d6b-9d65-47a4-95de-af5733206c87.mp3'
+          download 071 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/2976e3ef-d394-42b9-ac82-6212cead3e0b.mp3'
+          download 072 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/38a35ead-7ffe-4099-9b14-de92bab259b8.mp3'
+          download 073 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f17b46bb-d867-43e5-a737-945d88cca3ea.mp3'
+          download 074 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/ea3ad13f-88c3-4dff-868c-8eebc465d676.mp3'
+          download 075 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8c977429-9c98-42e7-9574-52a7b6df6cb2.mp3'
+          download 076 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/cf04074b-6d81-457e-8e1c-5793ae7d425a.mp3'
+          download 077 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a71d76e5-2d60-4cc3-81f7-5e4e9e8f35f7.mp3'
+          download 078 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f24cf821-0414-4d56-a034-ae90167125ed.mp3'
+          download 079 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/609db248-77bc-463c-a925-1e00b8977cee.mp3'
+          download 080 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/4452fe44-aef3-4457-af2f-7c4862cf1106.mp3'
+          download 081 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/27f0cfa6-85fa-43e2-bfc0-b093c4917017.mp3'
+          download 082 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/293f725a-ef6d-4e62-b088-1c8bcc6715ed.mp3'
+          download 083 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/48c565fe-3c05-4fd0-8ddb-98b64261448e.mp3'
+          download 084 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/9fee8469-4f1d-4ab0-b963-d310a23769f9.mp3'
+          download 085 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8aa9a05c-8528-4ac4-8406-c00f9a81e226.mp3'
           sha256sum out/*.mp3 > out/SHA256SUMS.txt
           file out/*.mp3
       - name: Upload V276 voice artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-v276-066-085
+          name: gr-awakening-voice-v276-066-085-direct
           path: out/
           retention-days: 1
