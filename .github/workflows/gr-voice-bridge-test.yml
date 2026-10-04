@@ -12,33 +12,18 @@ jobs:
   transport-voice:
     runs-on: ubuntu-latest
     steps:
-      - name: Download generated voice 166-185
+      - name: Download generated voice 001
         run: |
           mkdir -p out
-          curl --fail --location --retry 3 -o out/166.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/21c92e2a-d853-4fcb-ba0e-08b4f3a8071d.mp3'
-          curl --fail --location --retry 3 -o out/167.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/61542a02-e730-4da3-9cd2-a3cc3f0d6ffb.mp3'
-          curl --fail --location --retry 3 -o out/168.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a908d614-1f97-4677-ad35-68f3e2f2eb90.mp3'
-          curl --fail --location --retry 3 -o out/169.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/042947bd-45f6-4f88-8d67-874b85f3d2d7.mp3'
-          curl --fail --location --retry 3 -o out/170.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/15da1367-666d-4ddc-89fd-4563d8c30154.mp3'
-          curl --fail --location --retry 3 -o out/171.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/6dbc9cab-e636-4ef6-8469-b96ca9804027.mp3'
-          curl --fail --location --retry 3 -o out/172.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/34713fd5-1158-4988-b648-7a65c7eb2ea6.mp3'
-          curl --fail --location --retry 3 -o out/173.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f91ce905-221e-465b-bdaf-9cbefd6f33d4.mp3'
-          curl --fail --location --retry 3 -o out/174.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/5f34db94-b653-444a-9ae2-ff250f5d14d0.mp3'
-          curl --fail --location --retry 3 -o out/175.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a64e107e-4c4e-4d77-a9ee-e980d7da86b9.mp3'
-          curl --fail --location --retry 3 -o out/176.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/9809968a-5c73-48c0-8f21-e4d85b647f1b.mp3'
-          curl --fail --location --retry 3 -o out/177.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/00ec3e3d-231e-4e89-a068-edbcd5d62c5a.mp3'
-          curl --fail --location --retry 3 -o out/178.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/b758088c-e5a5-44b3-8cd8-abf7dfc35e55.mp3'
-          curl --fail --location --retry 3 -o out/179.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/2fec9fca-758d-44e6-becd-9e16380cb343.mp3'
-          curl --fail --location --retry 3 -o out/180.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/6b13dabd-295a-4bc3-ba2f-8cd10680996e.mp3'
-          curl --fail --location --retry 3 -o out/181.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/98a66980-379b-41f5-a2e5-8acf851c656e.mp3'
-          curl --fail --location --retry 3 -o out/182.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/20741f63-2c8c-46d9-b867-c7856a1f3f6e.mp3'
-          curl --fail --location --retry 3 -o out/183.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/96e70b61-a38f-4125-b6bb-85a6a8d7ee57.mp3'
-          curl --fail --location --retry 3 -o out/184.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f20343b2-d167-4eef-b242-df51f90b2a67.mp3'
-          curl --fail --location --retry 3 -o out/185.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8df110ae-150a-4a62-aa39-da5595ebbd78.mp3'
-          for f in out/*.mp3; do test -s "$f"; done
+          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/18f4d358-cdc1-47fe-b3db-9495119b49d0.mp3'
+          test -s out/001.mp3
+          file out/001.mp3
+          sha256sum out/001.mp3 > out/001.sha256
       - name: Upload voice artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-v282-166-185
-          path: out/*.mp3
+          name: gr-awakening-voice-001
+          path: |
+            out/001.mp3
+            out/001.sha256
           retention-days: 1
