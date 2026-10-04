@@ -22,17 +22,18 @@ jobs:
           curl --fail --location --retry 5 --output tmp/voice_chunks/04.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/738e68cf-d841-49d6-b25d-5e069b0cd295.mp3'
           curl --fail --location --retry 5 --output tmp/voice_chunks/05.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/e818dd5a-0fd5-4181-8e16-413b9060008a.mp3'
           for f in tmp/voice_chunks/*.mp3; do test -s "$f"; file "$f"; done
-      - name: Assemble narration without ffmpeg
+      - name: Assemble and split narration
         run: |
           cat tmp/voice_chunks/01.mp3 tmp/voice_chunks/02.mp3 tmp/voice_chunks/03.mp3 tmp/voice_chunks/04.mp3 tmp/voice_chunks/05.mp3 > tmp/taicho_diary_ep1_narration.mp3
           test -s tmp/taicho_diary_ep1_narration.mp3
-          file tmp/taicho_diary_ep1_narration.mp3
-          wc -c tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_diary_ep1_narration.size.txt
           sha256sum tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_diary_ep1_narration.sha256
-      - name: Commit bridged narration
+          rm -f tmp/taicho_diary_ep1_narration.part.*
+          split -b 700000 -d -a 2 tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.part.
+          ls -lh tmp/taicho_diary_ep1_narration.part.*
+      - name: Commit bridged narration parts
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -f tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.sha256 tmp/taicho_diary_ep1_narration.size.txt
-          git commit -m 'chore: assemble Taicho Diary episode 1 narration'
+          git add -f tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.sha256 tmp/taicho_diary_ep1_narration.part.*
+          git commit -m 'chore: split Taicho Diary episode 1 narration for bridge'
           git push
