@@ -22,16 +22,17 @@ jobs:
           curl --fail --location --retry 5 --output tmp/voice_chunks/04.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/738e68cf-d841-49d6-b25d-5e069b0cd295.mp3'
           curl --fail --location --retry 5 --output tmp/voice_chunks/05.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/e818dd5a-0fd5-4181-8e16-413b9060008a.mp3'
           for f in tmp/voice_chunks/*.mp3; do test -s "$f"; file "$f"; done
-      - name: Assemble narration
+      - name: Assemble narration without ffmpeg
         run: |
-          printf "file '%s'\n" "$GITHUB_WORKSPACE/tmp/voice_chunks/01.mp3" "$GITHUB_WORKSPACE/tmp/voice_chunks/02.mp3" "$GITHUB_WORKSPACE/tmp/voice_chunks/03.mp3" "$GITHUB_WORKSPACE/tmp/voice_chunks/04.mp3" "$GITHUB_WORKSPACE/tmp/voice_chunks/05.mp3" > tmp/voice_chunks/list.txt
-          ffmpeg -y -f concat -safe 0 -i tmp/voice_chunks/list.txt -af loudnorm=I=-16:LRA=7:TP=-1.5 -codec:a libmp3lame -b:a 192k tmp/taicho_diary_ep1_narration.mp3
-          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 tmp/taicho_diary_ep1_narration.mp3 | tee tmp/taicho_diary_ep1_narration.duration.txt
+          cat tmp/voice_chunks/01.mp3 tmp/voice_chunks/02.mp3 tmp/voice_chunks/03.mp3 tmp/voice_chunks/04.mp3 tmp/voice_chunks/05.mp3 > tmp/taicho_diary_ep1_narration.mp3
+          test -s tmp/taicho_diary_ep1_narration.mp3
+          file tmp/taicho_diary_ep1_narration.mp3
+          wc -c tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_diary_ep1_narration.size.txt
           sha256sum tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_diary_ep1_narration.sha256
       - name: Commit bridged narration
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -f tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.sha256 tmp/taicho_diary_ep1_narration.duration.txt
+          git add -f tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.sha256 tmp/taicho_diary_ep1_narration.size.txt
           git commit -m 'chore: assemble Taicho Diary episode 1 narration'
           git push
