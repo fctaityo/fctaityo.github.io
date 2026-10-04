@@ -1,4 +1,4 @@
-name: GR Voice Bridge V283 186-205
+name: GR Voice Bridge Transport Test
 
 on:
   push:
@@ -12,51 +12,18 @@ jobs:
   transport-voice:
     runs-on: ubuntu-latest
     steps:
-      - name: Download generated voices
-        shell: bash
+      - name: Download generated voice 001
         run: |
-          set -euo pipefail
           mkdir -p out
-          download_one() {
-            local no="$1" url="$2"
-            for i in $(seq 1 30); do
-              if curl --fail --location --retry 2 --max-time 30 --output "out/${no}.mp3.tmp" "$url" && test -s "out/${no}.mp3.tmp"; then
-                mv "out/${no}.mp3.tmp" "out/${no}.mp3"
-                return 0
-              fi
-              rm -f "out/${no}.mp3.tmp"
-              sleep 10
-            done
-            echo "failed $no" >&2
-            return 1
-          }
-          download_one 186 'https://www.aidocmaker.com/g0/audio?name=6d88797f4a3c4d008a02d465ef126245'
-          download_one 187 'https://www.aidocmaker.com/g0/audio?name=59c874bbc31e46cebf2d6b2ce3d7df81'
-          download_one 188 'https://www.aidocmaker.com/g0/audio?name=3fa71ee49e29480ebc29dc9366eb6bc1'
-          download_one 189 'https://www.aidocmaker.com/g0/audio?name=8a671535cd534c38b4e1fa30ef6389de'
-          download_one 190 'https://www.aidocmaker.com/g0/audio?name=48160c40587e4e69a1bb73df2364867a'
-          download_one 191 'https://www.aidocmaker.com/g0/audio?name=6d950ed70d2e4ae5974bcc3435d09893'
-          download_one 192 'https://www.aidocmaker.com/g0/audio?name=418010a5a61d4712a3e5721f78065180'
-          download_one 193 'https://www.aidocmaker.com/g0/audio?name=e87ef91733c749fea20cd3f8ca1ca5f3'
-          download_one 194 'https://www.aidocmaker.com/g0/audio?name=e8bacf47bed447d8b9c1fdf1c3c82edd'
-          download_one 195 'https://www.aidocmaker.com/g0/audio?name=51e32438dbcf4963a25b6d60bf2d9e59'
-          download_one 196 'https://www.aidocmaker.com/g0/audio?name=7c15a5c7b763494b97ea3619ddffab4c'
-          download_one 197 'https://www.aidocmaker.com/g0/audio?name=e2c4760602684009a62e9e4ecb9bdad6'
-          download_one 198 'https://www.aidocmaker.com/g0/audio?name=4ab1e79b05634674ad499bf2d89cd09f'
-          download_one 199 'https://www.aidocmaker.com/g0/audio?name=75301a3ed70940b98e082d9994e1bf15'
-          download_one 200 'https://www.aidocmaker.com/g0/audio?name=a7e077416d504a0f8837e8bcc4109697'
-          download_one 201 'https://www.aidocmaker.com/g0/audio?name=0ab156b563d24e65b58c566d4f54914f'
-          download_one 202 'https://www.aidocmaker.com/g0/audio?name=2a9d6ae38e3a4590ad007d82dd4f5df8'
-          download_one 203 'https://www.aidocmaker.com/g0/audio?name=ca147281a3d643588534242b1832bd34'
-          download_one 204 'https://www.aidocmaker.com/g0/audio?name=39f313f8fe65494aa31aaa7bf4dbe74a'
-          download_one 205 'https://www.aidocmaker.com/g0/audio?name=8444eba2e4494c188bfa39caeeeade0f'
-          file out/*.mp3
-          sha256sum out/*.mp3 > out/SHA256SUMS.txt
+          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/18f4d358-cdc1-47fe-b3db-9495119b49d0.mp3'
+          test -s out/001.mp3
+          file out/001.mp3
+          sha256sum out/001.mp3 > out/001.sha256
       - name: Upload voice artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-v283-186-205
+          name: gr-awakening-voice-001
           path: |
-            out/*.mp3
-            out/SHA256SUMS.txt
+            out/001.mp3
+            out/001.sha256
           retention-days: 1
