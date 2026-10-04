@@ -12,18 +12,34 @@ jobs:
   transport-voice:
     runs-on: ubuntu-latest
     steps:
-      - name: Download generated voice 001
+      - name: Download generated voices 106-125
         run: |
           mkdir -p out
-          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/18f4d358-cdc1-47fe-b3db-9495119b49d0.mp3'
-          test -s out/001.mp3
-          file out/001.mp3
-          sha256sum out/001.mp3 > out/001.sha256
+          curl --fail --location --retry 3 --output out/106.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a85775aa-6869-4221-8296-af188ddc01d5.mp3'
+          curl --fail --location --retry 3 --output out/107.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/8c20cf93-7c9c-48bc-8c5b-4c5084e33756.mp3'
+          curl --fail --location --retry 3 --output out/108.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/2c5a938b-ccfd-4258-a7e1-73634ae0cbb4.mp3'
+          curl --fail --location --retry 3 --output out/109.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/3c81fcd3-2356-409c-bf1b-03081bed58c0.mp3'
+          curl --fail --location --retry 3 --output out/110.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/670766b2-9255-46f8-ade5-fa4786decbec.mp3'
+          curl --fail --location --retry 3 --output out/111.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/b5e08a01-67be-4a57-a10f-003e3b91dacb.mp3'
+          curl --fail --location --retry 3 --output out/112.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/d0addd8a-d17a-456b-b34e-634af1b11b38.mp3'
+          curl --fail --location --retry 3 --output out/113.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/6e845d41-d0bb-479a-8217-82e64b1058be.mp3'
+          curl --fail --location --retry 3 --output out/114.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a739de1b-d3ff-4760-b278-5db4164f2898.mp3'
+          curl --fail --location --retry 3 --output out/115.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/55c69d8d-2944-4e01-ad36-f081fa7b12e9.mp3'
+          curl --fail --location --retry 3 --output out/116.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/048807ff-fd88-4818-9336-13506dc407ac.mp3'
+          curl --fail --location --retry 3 --output out/117.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/383fa808-c504-4e1b-8641-1a6cb18bbfe1.mp3'
+          curl --fail --location --retry 3 --output out/118.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/591d594e-ef46-4bdd-876b-1b92ceef69dd.mp3'
+          curl --fail --location --retry 3 --output out/119.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/f67c798c-974d-486f-967e-7a48b08c6bfa.mp3'
+          curl --fail --location --retry 3 --output out/120.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/1bed15c3-f894-44a8-b050-5de1ff2a8c9c.mp3'
+          curl --fail --location --retry 3 --output out/121.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/aa8b5282-de09-4fb3-8357-dbde5457e107.mp3'
+          curl --fail --location --retry 3 --output out/122.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/87b4098d-d0db-43b0-9a9d-b5ab9fe8fcf0.mp3'
+          curl --fail --location --retry 3 --output out/123.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a2460979-061f-436a-94ec-66fbaefa3f87.mp3'
+          curl --fail --location --retry 3 --output out/124.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/38a2e3a9-eb96-4e42-8e39-6decd6b84197.mp3'
+          curl --fail --location --retry 3 --output out/125.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/da9f6839-938b-48cb-828c-724bc86a81d4.mp3'
+          file out/*.mp3
+          for f in out/*.mp3; do test -s "$f"; done
       - name: Upload voice artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-001
-          path: |
-            out/001.mp3
-            out/001.sha256
+          name: gr-awakening-voice-v278-106-125
+          path: out/*.mp3
           retention-days: 1
