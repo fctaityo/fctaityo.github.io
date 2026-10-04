@@ -1,0 +1,42 @@
+name: temp-taicho-audio-export
+
+on:
+  push:
+    paths:
+      - '.github/workflows/temp-taicho-audio-export.yml'
+      - 'tmp/temp-taicho-audio-export.trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export narration as small text chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf tmp/taicho_audio_export
+          mkdir -p tmp/taicho_audio_export
+          split -b 60000 -d -a 3 tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_audio_export/raw.
+          for f in tmp/taicho_audio_export/raw.*; do
+            base64 -w0 "$f" > "$f.b64"
+            rm "$f"
+          done
+          sha256sum tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_audio_export/source.sha256
+          wc -c tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_audio_export/source.size.txt
+      - name: Commit exported chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tmp/taicho_audio_export
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'temp: export taicho narration chunks'
+          git push
