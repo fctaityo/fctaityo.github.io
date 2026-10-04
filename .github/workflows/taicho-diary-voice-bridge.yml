@@ -1,0 +1,29 @@
+name: Taicho Diary Voice Bridge
+
+on:
+  push:
+    paths:
+      - '.github/workflows/taicho-diary-voice-bridge.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bridge-voice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download full narration
+        run: |
+          mkdir -p tmp
+          curl --fail --location --retry 5 --output tmp/taicho_diary_ep1_narration.mp3 'https://www.aidocmaker.com/g0/audio?name=0b4df5a43f6340f79e5ebd7456011eb3'
+          test -s tmp/taicho_diary_ep1_narration.mp3
+          file tmp/taicho_diary_ep1_narration.mp3
+          sha256sum tmp/taicho_diary_ep1_narration.mp3 > tmp/taicho_diary_ep1_narration.sha256
+      - name: Commit bridged narration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tmp/taicho_diary_ep1_narration.mp3 tmp/taicho_diary_ep1_narration.sha256
+          git commit -m 'chore: bridge Taicho Diary episode 1 narration'
+          git push
