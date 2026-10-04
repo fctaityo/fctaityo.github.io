@@ -1,29 +1,28 @@
-name: temp-taicho-audio-export
+name: temp-taicho-audio-cleanup
 
 on:
   push:
     paths:
       - '.github/workflows/temp-taicho-audio-export.yml'
-  workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  export:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify narration
+      - name: Remove temporary audio bridge artifacts
         shell: bash
         run: |
           set -euo pipefail
-          test -s tmp/taicho_diary_ep1_narration.mp3
-          sha256sum tmp/taicho_diary_ep1_narration.mp3
-          wc -c tmp/taicho_diary_ep1_narration.mp3
-      - name: Upload narration artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: taicho-diary-ep1-narration
-          path: tmp/taicho_diary_ep1_narration.mp3
-          if-no-files-found: error
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git rm -rf tmp/taicho_audio_export || true
+          git rm -f .github/workflows/temp-taicho-audio-export.yml || true
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m 'cleanup: remove temporary taicho audio export bridge'
+          git push
