@@ -1,4 +1,4 @@
-name: GR Voice Bridge Transport Test
+name: GR Voice Preset Compare
 
 on:
   push:
@@ -9,21 +9,20 @@ permissions:
   contents: read
 
 jobs:
-  transport-voice:
+  compare:
     runs-on: ubuntu-latest
     steps:
-      - name: Download generated voice 001
+      - name: Download preset previews
         run: |
+          set -euo pipefail
           mkdir -p out
-          curl --fail --location --retry 3 --output out/001.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/18f4d358-cdc1-47fe-b3db-9495119b49d0.mp3'
-          test -s out/001.mp3
-          file out/001.mp3
-          sha256sum out/001.mp3 > out/001.sha256
-      - name: Upload voice artifact
+          curl --fail --location --retry 3 --output out/fancy.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/4bcf371e-fdc5-4b72-badc-eee2331b2e4c.mp3'
+          curl --fail --location --retry 3 --output out/delicate.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/749eb302-71e2-46fd-be71-23b7b691dd81.mp3'
+          curl --fail --location --retry 3 --output out/clear.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/0507ab51-894c-4705-8d3e-b7b32783afef.mp3'
+          for f in out/*.mp3; do test -s "$f"; file "$f"; done
+      - name: Upload compare artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gr-awakening-voice-001
-          path: |
-            out/001.mp3
-            out/001.sha256
+          name: gr-awakening-voice-preset-compare
+          path: out/
           retention-days: 1
