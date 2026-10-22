@@ -1,4 +1,4 @@
-name: GR V429 Crisp Voice Byte Probe
+name: GR V429 Voice Batch 70 Transport
 on:
   push:
     branches: [gr-awakening-v429-voice-transport-20261023]
@@ -6,21 +6,47 @@ on:
 permissions:
   contents: read
 jobs:
-  probe:
+  download:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
-      - name: Recover MP3 directly from public preview
+      - uses: actions/checkout@v4
+      - name: Recover and verify 70 authentic crisp voice MP3s
+        shell: bash
         run: |
-          mkdir -p out
-          curl --fail --location --retry 3 --max-time 60 --output out/246.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a9ff1b9f-5b0f-4dcd-9fe8-afa1ab7a2cfd.mp3'
-          file out/246.mp3
-          test $(wc -c < out/246.mp3) -gt 5000
-          file out/246.mp3
-          sha256sum out/246.mp3
-      - name: Upload MP3
+          python3 - <<'PY'
+          import concurrent.futures, hashlib, json, pathlib, time, urllib.request
+          mapping=json.load(open('tools/gr-v429-voice-preview-urls.json',encoding='utf8'))
+          assert set(mapping)==set(map(str,range(246,316))), 'missing or extra voice IDs'
+          dest=pathlib.Path('out')
+          dest.mkdir(exist_ok=True)
+          def work(item):
+              n,url=item
+              assert url.startswith('https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/')
+              error=None
+              for attempt in range(4):
+                  try:
+                      with urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent':'GR-Voice-Recovery/1.0'}),timeout=40) as resp:
+                          b=resp.read()
+                      if len(b)<5000 or not (b.startswith(b'ID3') or (b[0]==0xff and (b[1]&0xe0)==0xe0)):
+                          raise ValueError('not an MP3 or too short')
+                      (dest/(n+'.mp3')).write_bytes(b)
+                      return n, hashlib.sha256(b).hexdigest(),len(b)
+                  except Exception as e:
+                      error=e
+                      time.sleep(0.7*(attempt+1))
+              raise RuntimeError(str(n)+': '+str(error))
+          with concurrent.futures.ThreadPoolExecutor(max_workers=7) as pool:
+              results=sorted(pool.map(work,mapping.items()),key=lambda x:int(x[0]))
+          with open(dest/'SOURCE_SHA256.txt','w') as fp:
+              for n,sha,size in results: fp.write(sha+'  '+n+'.mp3\n')
+          with open(dest/'SOURCE_COUNTS.json','w') as fp:
+              json.dump({'count':len(results),'total_bytes':sum(x[2] for x in results),'min_bytes':min(x[2] for x in results)},fp)
+          print('GR V429 70/70 MP3 files OK',sum(x[2] for x in results),'bytes')
+          PY
+      - name: Upload all 70 source voices
         uses: actions/upload-artifact@v4
         with:
-          name: gr-v429-crisp-source-246
-          path: out/246.mp3
+          name: gr-v429-crisp-source-246-315
+          path: out/
           retention-days: 1
