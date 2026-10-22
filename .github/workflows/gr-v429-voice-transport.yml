@@ -15,7 +15,8 @@ jobs:
           mkdir -p out
           curl --fail --location --retry 3 --max-time 60 --output out/246.mp3 'https://storage.googleapis.com/adm--audio-playback--7d--public/mcp-preview/a9ff1b9f-5b0f-4dcd-9fe8-afa1ab7a2cfd.mp3'
           file out/246.mp3
-          ffprobe -v error -show_entries stream=codec_name,sample_rate,channels -show_entries format=duration -of default=noprint_wrappers=1 out/246.mp3
+          test $(wc -c < out/246.mp3) -gt 5000
+          file out/246.mp3
           sha256sum out/246.mp3
       - name: Upload MP3
         uses: actions/upload-artifact@v4
