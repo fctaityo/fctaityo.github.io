@@ -1,0 +1,38 @@
+name: GR V429 Crisp Voice Transport Test
+on:
+  push:
+    branches: [gr-awakening-v429-voice-transport-20261023]
+    paths: ['.github/workflows/gr-v429-voice-transport.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe generated audio URLs
+        shell: bash
+        run: |
+          set -eu
+          mkdir -p out
+          URLS=(
+          'https://www.aidocmaker.com/g0/audio?name=97cd355589ae43059826c0254e8279ff'
+          'https://www.aidocmaker.com/g0/audio?name=ab1531c7b128459fb89f288ef7ffbd90'
+          'https://www.aidocmaker.com/g0/audio?name=ad487530ca524b44b18452f5ab46cf30'
+          )
+          N=246
+          for URL in "${URLS[@]}"; do
+            echo "Audio $N: downloading"
+            CODE=$(curl -sS -L --max-time 30 --retry 2 -o "out/$N.bin" -w '%{http_code}' "$URL" || true)
+            echo "Status $N: $CODE"
+            file "out/$N.bin" || true
+            wc -c "out/$N.bin" || true
+            ffprobe -v error -show_entries format=format_name,duration -of default=noprint_wrappers=1 "out/$N.bin" || true
+            N=$((N + 1))
+          done
+      - name: Archive downloaded candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: gr-v429-voice-transport-probe
+          path: out/
+          retention-days: 1
